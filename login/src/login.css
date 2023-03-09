@@ -1,0 +1,152 @@
+.Login {
+  display: flex;
+}
+button {
+  color: rgb(41, 33, 33);
+  font-size: 16px; /* Change to desired font size */
+  cursor: pointer;
+  margin-right: 10px;
+}
+.username, .password {
+  font-family: 'Titillium Web', sans-serif;
+  width: 300px;
+  border: none;
+  margin-top: 30px;
+  height: 45px; /* Adjust the height as needed */
+  border-radius: 15px;
+  background-color: #D4DCDF;
+  font-weight: 300;
+  line-height: 35px; /* Set the same value as the height */
+}
+.username {
+  margin-top: 20px;
+
+}
+
+.password {
+  margin-bottom: 20px;
+}
+.Signins{
+  padding-top: 50px; /* adjust this value to move the container down */
+  background-color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+.Signin.info {
+  padding-top: 50px; /* adjust this value to move the container down */
+  background-color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 20px; 
+  margin-left: 80px;
+}
+
+#myImage {
+  background-image: url("./Signin.png");
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 115vh;
+}
+
+.remember-me-label {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  height: 5vh;
+  margin-left: 10px;
+  font-size: 14px;
+
+}
+
+.remember-me-checkbox {
+  display: none;
+  
+}
+
+.checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-right: 10px;
+  background-color: #D4DCDF;
+}
+
+.checkmark:after {
+  content: "";
+  display: none;
+  background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-checkmark-128.png");
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  margin: 2px;
+}
+
+.remember-me-checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+
+.forgotpass {
+  font-family: 'Titillium Web', sans-serif;
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  margin-top: 10px;
+  cursor: pointer;
+  
+}
+.create_account {
+  font-family: 'Titillium Web', sans-serif;
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-align: center; /* added to center link text */
+}
+
+.log_but {
+  display: inline-block;
+  width: 250px;
+  font-family: 'Titillium Web', sans-serif;
+  height: 25px;
+  background-color: #050400;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+}
+
+
+.noAccount {
+  font-size: 12px;
+}
+.signUp {
+  color: #010100;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+
+}
+
+
