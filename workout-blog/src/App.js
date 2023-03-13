@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 import './App.css';
 import downloadImage from './download.jpg';
 
+=======
+import logo from './logo.svg';
+import React from 'react';
+import './App.css';
+import Home_Page from './Home_Page';
+>>>>>>> homepage
 function App() {
   function handleSignIn() {
     const username = document.getElementById('username').value;
@@ -18,6 +25,7 @@ function App() {
   }// temp link
 
   return (
+<<<<<<< HEAD
     <div className="App">
       <img id="myImage" src={downloadImage} alt="Login Image"/>
       <div className="Sign in">
@@ -32,6 +40,10 @@ function App() {
         <button onClick={forgotPass}>Forgot your password?</button>
         <button onClick={createAccount}>Dont have an Account? Create one!</button>      
         </div>
+=======
+    <div className='container-fluid'>
+      <Home_Page />
+>>>>>>> homepage
     </div>
   );
 }
