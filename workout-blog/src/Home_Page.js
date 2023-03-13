@@ -20,7 +20,7 @@ function Home_Page(){
                 </div>
             </nav>
             <div class="card col-8 ml-auto mr-auto">
-                <img src = {image}/>
+                <img src = {image}/> 
             </div>
             
         </div>
