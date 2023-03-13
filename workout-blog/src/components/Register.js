@@ -18,23 +18,24 @@ const Register = (props) =>{
     
   
     const registerUser = async (name, email, password, confirmPassword) => {
-        console.log(name)
-        console.log(email)
-        console.log(password)
-       if(name){
-            axios({
-                method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
-                headers: {}, 
-                data: {
-                username: "name", 
-                email:"email",
-                password: "password",
+    //     console.log(name)
+    //     console.log(email)
+    //     console.log(password)
+    //    if(name){
+    //         axios({
+    //             method: 'post',
+    //             url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
+    //             headers: {}, 
+    //             data: {
+    //             username: "name", 
+    //             email:"email",
+    //             password: "password",
                 
-                }
-            })
-            console.log("done")
-       }
+    //             }
+    //         })
+    //         console.log("done")
+    //    }
+       
       
 
     };
@@ -42,7 +43,7 @@ const Register = (props) =>{
 
 
     return (
-        <Fragment>
+        <div class="bg">
             
             <div class="accountwrap">
                 <div class="sign">Sign Up</div>
@@ -53,7 +54,6 @@ const Register = (props) =>{
                                     onChange={event => {
                                     setName(event.target.value)
                                     }} required />
-
                     </div>
                     <div class='emailbox'>
                         <input type="text"
@@ -91,13 +91,13 @@ const Register = (props) =>{
                         </button>
                     </div>
                     <div class="col">
-                       <div class="row">Already have an account?&nbsp; <div class="signin">Sign In</div></div>
+                       <div class="row">Already have an account?&nbsp; <div class="signin" >Sign In</div></div>
                        
                     </div>
                     
-                </div>
-        </Fragment>
-      )
+            </div>
+        </div>
+      );
     
     
 }
