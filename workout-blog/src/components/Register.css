@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300&display=swap');
+ 
+.bg {
+    background-image: url("./images/sports.jpg");
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 1920px;
+
+}
+
+.accountwrap{
+    align-items: center;
+    position: absolute;
+    height: 100vh;
+    width: 600px;
+    margin-left: 68.7%;
+    background-color: white;
+    
+} 
+
+.sign{
+    margin-top: 50px;
+    margin-left: 250px;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 80px;
+}
+.name, .email, .password, .cpassword {
+    font-family: 'Titillium Web', sans-serif;
+    margin-left: 180px;
+    width: 300px;
+    border: none;
+    margin-top: 30px;
+    height: 45px;
+    border-radius: 15px;
+    background-color: #D4DCDF;
+    font-weight: 300;
+
+}
+
+::placeholder{
+    padding-left: 2px;
+
+}
+
+input{
+    padding-left: 20px;
+
+}
+
+.signup{
+    font-family: 'Titillium Web', sans-serif;
+    margin-left: 180px;
+    width: 300px;
+    border: none;
+    margin-top: 30px;
+    height: 45px;
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+
+}
+
+.signin{
+    font-weight: 400;
+}
+.row{
+    margin-top: 10px;
+    margin-left: 170px;
+    font-weight: 300;
+}
