@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Login from '/Users/erictomiello/Desktop/School code/442 code/Connect_log_sign/workout-blog/src/login/login.js';
+import Login from '/Users/erictomiello/Desktop/School code/442 code/project_s23-group/workout-blog/src/login/login.js';
 import Register from './components/Register';
 import './App.css';
 
