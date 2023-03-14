@@ -91,7 +91,8 @@ const Register = (props) =>{
                         </button>
                     </div>
                     <div class="col">
-                       <div class="row">Already have an account?&nbsp; <div class="signin" >Sign In</div></div>
+                       <div class="row">Already have an account?&nbsp; <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In
+                   </button>
                        
                     </div>
                     
