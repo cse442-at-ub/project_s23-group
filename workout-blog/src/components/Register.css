@@ -5,12 +5,13 @@ html, body {
     overflow-x: hidden;
   }
  
-@media only screen and (min-width: 992px) {
+@media only screen and (min-width: 1201px) {
     .bg {
         background-image: url("./images/sports.jpg");
         background-repeat: no-repeat;
+        background-size: cover;
         height: 100vh;
-        width: 1920px;
+        width: 100vw;
     
     }
     
@@ -18,8 +19,8 @@ html, body {
         align-items: center;
         position: absolute;
         height: 100vh;
-        width: 600px;
-        margin-left: 68.7%;
+        width: 800px;
+        margin-left: 70%;
         background-color: white;
         
     } 
@@ -110,6 +111,8 @@ html, body {
     
     .signin{
         font-weight: 400;
+        border: none;
+        background-color: transparent;
     }
     .row{
         margin-top: 10px;
@@ -119,52 +122,135 @@ html, body {
     
 }
 
-@media only screen and (max-width: 600px) {
-    .bg {
-        background-image: url("./images/sports.jpg");
-        background-repeat: no-repeat;
-        /* background-size: cover; */
-        background-position: 30% 25%;
-        height: 100vh;
-        width: 100vw;
-        position: absolute;
-        z-index: 0;
-        
-    
-    }
+
+
+@media only screen and (min-width: 601px)and (max-width: 1200px) {
     .accountwrap{
-        align-items: center;
-        position: absolute;
+        position: relative;
         height: 100vh;
-        width: 60%;
-        margin-left: 40%;
+        width: 100%;
         background-color: white;
         z-index: 10;
     } 
 
-     .sign{
+      .sign{
         margin-top: 50px;
-        margin-left: 25%;
+        text-align: center;
+        width: 100vw;
         font-weight: bold;
         font-size: 32px;
         margin-bottom: 60px;
         
     }
+
+
     
     .bg .name{
         margin-left: 10%;
-        width:170px;
-        height: 35px;
+        width:80%;
+        height: 50px;
         font-family: 'Titillium Web', sans-serif;
         border: none;
         border-radius: 12px;
         background-color: #D4DCDF;
         font-weight: 300;
     }
+    
     .bg .email{
         margin-left: 10%;
         margin-top: 5%;
-        width:170px;
+        width:80%;
+        height: 50px;
+        font-family: 'Titillium Web', sans-serif;
+        border: none;
+        border-radius: 12px;
+        background-color: #D4DCDF;
+        font-weight: 300;
+    }
+   
+    .bg .password{
+        margin-left: 10%;
+        margin-top: 5%;
+        width:80%;
+        height: 50px;
+        font-family: 'Titillium Web', sans-serif;
+        border: none;
+        border-radius: 12px;
+        background-color: #D4DCDF;
+        font-weight: 300;
+    }
+    .bg .cpassword{
+        margin-left: 10%;
+        margin-top: 5%;
+        width:80%;
+        height: 50px;
+        font-family: 'Titillium Web', sans-serif;
+        border: none;
+        border-radius: 12px;
+        background-color: #D4DCDF;
+        font-weight: 300;
+    }
+    
+
+    .bg input{
+        padding-left: 20px;
+    
+    }
+
+    .signup{
+        margin-left: 10%;
+        margin-top: 5%;
+        width:80%;
+        height: 50px;
+        font-family: 'Titillium Web', sans-serif;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        background-color: black;
+        font-weight: 300;
+    
+    }
+    
+    .signin{
+        font-weight: 400;
+        border: none;
+        background-color: transparent;
+    }
+    .row{
+        margin-top: 10px;
+        margin-left: 7%;
+        font-weight: 300;
+    } 
+
+
+
+}
+
+@media only screen and (max-width: 600px) {
+   
+    .accountwrap{
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        background-color: white;
+        z-index: 10;
+    } 
+
+      .sign{
+        margin-top: 50px;
+        text-align: center;
+        width: 100vw;
+        font-weight: bold;
+        font-size: 32px;
+        margin-bottom: 60px;
+        
+    }
+
+
+    
+    .bg .name{
+        margin-left: 10%;
+        width:80%;
         height: 35px;
         font-family: 'Titillium Web', sans-serif;
         border: none;
@@ -172,10 +258,23 @@ html, body {
         background-color: #D4DCDF;
         font-weight: 300;
     }
+    
+    .bg .email{
+        margin-left: 10%;
+        margin-top: 5%;
+        width:80%;
+        height: 35px;
+        font-family: 'Titillium Web', sans-serif;
+        border: none;
+        border-radius: 12px;
+        background-color: #D4DCDF;
+        font-weight: 300;
+    }
+   
     .bg .password{
         margin-left: 10%;
         margin-top: 5%;
-        width:170px;
+        width:80%;
         height: 35px;
         font-family: 'Titillium Web', sans-serif;
         border: none;
@@ -186,7 +285,7 @@ html, body {
     .bg .cpassword{
         margin-left: 10%;
         margin-top: 5%;
-        width:170px;
+        width:80%;
         height: 35px;
         font-family: 'Titillium Web', sans-serif;
         border: none;
@@ -204,7 +303,7 @@ html, body {
     .signup{
         margin-left: 10%;
         margin-top: 5%;
-        width:170px;
+        width:80%;
         height: 35px;
         font-family: 'Titillium Web', sans-serif;
         border: none;
@@ -220,8 +319,8 @@ html, body {
     }
     .row{
         margin-top: 10px;
-        margin-left: 10px;
+        margin-left: 7%;
         font-weight: 300;
-    }
+    } 
 
 }

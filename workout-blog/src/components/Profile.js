@@ -21,7 +21,7 @@ const Profile = (props) =>{
                         
                         </div>
                     
-                        <div class = "name">John Smith</div>
+                        <div class = "name">John John</div>
                             <div class="desc" >
                             
                             Looking for new gym partners!
