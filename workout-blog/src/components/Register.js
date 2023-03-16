@@ -46,6 +46,7 @@ const Register = (props) =>{
 
     return (
         <div class="bg">
+            <div class='home' onClick={() => props.onFormSwitch('home')}/>   
             
             <div class="accountwrap">
                 <div class="sign">Sign Up</div>

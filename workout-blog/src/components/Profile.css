@@ -31,20 +31,20 @@
       
     }
   
-    /* .headers{
+    .headers{
       padding-top: 20px;
       position: relative;
       width: 100vw;
       z-index: 100;
     }
   
-    .home{
-      height: 50px;
-      width: 50px;
+    .bg2 .home{
+      height: 40px;
+      width: 40px;
       margin-left: 1%;
     }
   
-    .follow{
+    /* .follow{
       height: 50px;
       width: 150px;
       border-radius: 10px;
@@ -300,7 +300,7 @@
       z-index: 10;
     }
   
-    /* .headers{
+     .headers{
       padding-top: 5%;
       position: relative;
       z-index: 100;
@@ -311,7 +311,7 @@
       width: 5%;
       margin-left: 3%;
     }
-  
+  /*
     .follow{
       height: 5%;
       width: 15%;

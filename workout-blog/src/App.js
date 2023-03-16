@@ -20,6 +20,9 @@ function App() {
   } else if (form === 'profile') {
     content = <Profile onFormSwitch={handleFormSwitch} />;
   } 
+  else if (form === 'home') {
+    content = <Home onFormSwitch={handleFormSwitch} />;
+  } 
   else {
     content = <Home onFormSwitch={handleFormSwitch} />;
   }
