@@ -3,34 +3,28 @@
 @media only screen and (min-width: 901px) {
   html, body {
   
- 
+    
     overflow-x: hidden;
   }
   
   
   .bg2{
+    
     background-color: rgba(27,27,27,1);
-    z-index: 0;
-    
-    
+   
   }
-  .bg2::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-size:cover;
-      background-position: center; 
-      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
-      margin: auto;
-      background-repeat: no-repeat;
-      width: 100vw;
-      height: 100vh;
-      
-    }
-  
+  .bg2abs{
+    position: absolute;
+    background-size:cover;
+    background-position: center; 
+    /* background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url('./images/matcha.jpg'); */
+    margin: auto;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+  }
+ 
     .headers{
       padding-top: 20px;
       position: relative;
@@ -273,32 +267,27 @@
 @media only screen and (max-width: 900px) {
   html, body {
   
- 
+    background-color: rgba(27,27,27,1);
     overflow-x: hidden;
   }
   
   .bg2{
+    
     background-color: rgba(27,27,27,1);
-    z-index: 0;
-    
-    
+   
   }
-  .bg2::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-size: fill;
-      background-position: center; 
-      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
-      margin: auto;
-      background-repeat: no-repeat;
-      width: 100vw;
-      height: 100vh;
-      z-index: 10;
-    }
+  .bg2abs{
+    position: absolute;
+    background-size:cover;
+    background-position: center; 
+    background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url('./images/matcha.jpg');
+    margin: auto;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+  }
+ 
   
      .headers{
       padding-top: 5%;
