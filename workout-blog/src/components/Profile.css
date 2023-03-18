@@ -1,0 +1,502 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300&display=swap');
+
+@media only screen and (min-width: 992px) {
+  html, body {
+  
+ 
+    overflow-x: hidden;
+  }
+  
+  .bg2{
+    background-color: rgba(27,27,27,1);
+    z-index: 0;
+    
+    
+  }
+  .bg2::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size:cover;
+      background-position: center; 
+      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
+      margin: auto;
+      background-repeat: no-repeat;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+    }
+  
+    .headers{
+      padding-top: 20px;
+      position: relative;
+      z-index: 100;
+    }
+  
+    .home{
+      height: 50px;
+      width: 50px;
+      margin-left: 1%;
+    }
+  
+    .follow{
+      height: 50px;
+      width: 150px;
+      border-radius: 10px;
+      margin-left: 76%;
+      border-color: transparent;
+      font-size: 24px;
+      margin-top: auto;
+    }
+    .message{
+      height: 50px;
+      width: 150px;
+      border-radius: 10px;
+      border-color: transparent;
+      font-size: 24px;
+      
+    }
+  
+    .settings{
+      height: 50px;
+      width: 50px;
+      margin-top: -10px;
+    }
+  
+     .imgbox{
+      padding-top: 3%;
+      padding-left: 47%;
+      position: relative;
+      width: 1920px;
+      z-index: 100;
+    }
+  
+    .profile{
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  
+  
+  
+  .bg2 .name{
+    font-family: 'Titillium Web', sans-serif;
+    background: transparent;
+    font-weight: 400;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 44.9%;
+    height: 50px;
+    width: fit-content;
+    position: relative;
+    z-index: 100;
+    font-size: 54px;
+  }
+  
+  
+  .desc{
+    white-space: pre-line;
+    margin-top: 1.5%;
+    margin-left: 44%;
+    text-align: center;
+    color: aliceblue;
+    position: relative;
+    width: 300px;
+    height: fit-content;
+    font-size: 24px;
+    z-index: 100;
+    background-color: transparent;
+  }
+  
+  
+  
+  .buttons{
+    height: 105px;
+    width: 1550px;
+    z-index: 100;
+    margin-top: 1%;
+    margin-left: 12%;
+    border-radius: 20px;
+    background-color: #242424;
+    position: relative;
+  }
+  
+ 
+  .postwrap{
+    justify-content: center;
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    font-size: 30px;
+    padding-top: 10px;
+    margin-left: 2.7%;
+  }
+  
+  .post{
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    padding-left: 2.7%;
+  }
+  
+  .postbutton{
+    position: absolute;
+    color: gray;
+    text-align: center;
+    width: fit-content;
+    
+    font-weight: 1;
+  }
+  
+  .followingwrap{
+    justify-content: center;
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    font-size: 30px;
+    padding-top: 10px;
+    margin-left: 35%;
+  }
+  
+  .following{
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+   
+    margin-left: 40%;
+  }
+  
+  .followingbutton{
+    position: absolute;
+    color: gray;
+    text-align: center;
+    width: fit-content;
+    
+    font-weight: 1;
+  }
+  .followerwrap{
+    justify-content: center;
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    font-size: 30px;
+    padding-top: 10px;
+    margin-left: 40%;
+  }
+  
+  .follower{
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    
+    margin-left: 40%;
+  }
+  
+  .followerbutton{
+    position: absolute;
+    color: gray;
+    text-align: center;
+    width: fit-content;
+    
+    font-weight: 1;
+  }
+  .timeline{
+    font-family: 'Titillium Web', sans-serif;
+    background: transparent;
+    font-weight: 400;
+    color: aliceblue;
+    text-align: center;
+    
+    margin-left: 45.1%;
+    height: 70px;
+    width: fit-content;
+    position: relative;
+    z-index: 100;
+    font-size: 65px;
+  }
+  
+  .gallery{
+    position: relative;
+    z-index: 100;
+    background-color: transparent;
+    width: 1550px;
+    margin-top: 60px;
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+  
+  .gallery img{
+    height: 500px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 300px;
+    object-fit: cover;
+    
+  }
+  
+
+
+}
+
+@media only screen and (max-width: 600px) {
+  html, body {
+  
+ 
+    overflow-x: hidden;
+  }
+  
+  .bg2{
+    background-color: rgba(27,27,27,1);
+    z-index: 0;
+    
+    
+  }
+  .bg2::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: fill;
+      background-position: center; 
+      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
+      margin: auto;
+      background-repeat: no-repeat;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+    }
+  
+      .headers{
+      padding-top: 5%;
+      position: relative;
+      z-index: 100;
+    }
+  
+    .home{
+      height: 5%;
+      width: 5%;
+      margin-left: 3%;
+    }
+  
+    .follow{
+      height: 5%;
+      width: 15%;
+      border-radius: 10px;
+      margin-left: 50%;
+      border-color: transparent;
+      font-size: 12px;
+      margin-top: auto;
+    }
+    .message{
+      height: 5%;
+      width: 15%;
+      border-radius: 10px;
+      border-color: transparent;
+      font-size: 12px;
+      margin-top: auto;
+      
+    }
+  
+    .settings{
+      height: 5%;
+      width: 5%;
+      
+    }
+  
+     .imgbox{
+      padding-top: 15%;
+      padding-left: 42%;
+      position: relative;
+      width: 100vw;
+      z-index: 100;
+    }
+  
+    .profile{
+      border-radius: 50%;
+      width: 75px;
+      height: 75px;
+      object-fit: cover;
+    } 
+  
+  
+ 
+  .bg2 .name{
+    font-family: 'Titillium Web', sans-serif;
+    background: transparent;
+    font-weight: 400;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 0px;
+    margin-left: 35%;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    z-index: 100;
+    font-size: 32px;
+  }
+   
+  
+  .desc{
+    white-space: pre-line;
+    margin-top: 1%;
+    margin-left: 14%;
+    text-align: center;
+    color: aliceblue;
+    position: relative;
+    width: 300px;
+    height: fit-content;
+    font-size: 12px;
+    z-index: 100;
+    background-color: transparent;
+  }
+  
+  
+  
+  .buttons{
+    height: 60px;
+    width: 300px;
+    z-index: 100;
+    margin-top: 3%;
+    margin-left: 14%;
+    border-radius: 20px;
+    background-color: #242424;
+    position: relative;
+  }
+  
+
+  .postwrap{
+    
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    font-size: 12px;
+    padding-top: 10px;
+    margin-left: 2.7%;
+  }
+  
+  .post{
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    
+    padding-left: 2.7%;
+  }
+  
+  .postbutton{
+    position: absolute;
+    color: gray;
+    text-align: center;
+    width: fit-content;
+   
+    font-weight: 1;
+  }
+  
+  .followingwrap{
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    font-size: 12px;
+    padding-top: 10px;
+    margin-left: 18%;
+  }
+  
+  .following{
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+
+    margin-left: 50%;
+  }
+  
+  .followingbutton{
+    position: absolute;
+    color: gray;
+    text-align: center;
+    width: fit-content;
+    font-weight: 1;
+  }
+  .followerwrap{
+    background-color: transparent;
+    border-color: transparent;
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    height: fit-content;
+    font-size: 12px;
+    padding-top: 10px;
+    margin-left: 21%;
+  }
+  
+  .follower{
+    color: aliceblue;
+    font-weight: 400;
+    width: fit-content;
+    margin-left: 40%;
+  }
+  
+  .followerbutton{
+    position: absolute;
+    color: gray;
+    text-align: center;
+    width: fit-content;
+    font-weight: 1;
+  }
+  
+  .timeline{
+    font-family: 'Titillium Web', sans-serif;
+    background: transparent;
+    font-weight: 400;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 1%;
+    margin-left: 37%;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    z-index: 100;
+    font-size: 32px;
+  }
+  
+  .gallery{
+    position: relative;
+    z-index: 100;
+    background-color: transparent;
+    width: 300px;
+    margin-top: 1%;
+    margin-left: 14.7%;
+    margin-right: 14.7%;
+  }
+  
+  .gallery img{
+    height: 150px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 80px;
+    object-fit: cover;
+    
+  }
+
+  
+}
