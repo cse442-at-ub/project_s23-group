@@ -27,6 +27,8 @@ function Login(props) {
         })
         .then((response) => {
           console.log(response);
+          props.onFormSwitch('homepage')
+
         }, (error) => {
           console.log(error);
         });
@@ -87,9 +89,3 @@ function Login(props) {
 
 
 export default Login;
-
-
-
-
-
-
