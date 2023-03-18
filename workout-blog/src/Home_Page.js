@@ -1,10 +1,8 @@
 import React from "react";
 import image from "./Image/cbum.jpg"
 import './Home_Page.css'
-import { useState, useEffect, useRef } from 'react';
 
-
-const Home_Page = (props) => {
+function Home_Page(){
     return (
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light col-12">
@@ -14,15 +12,15 @@ const Home_Page = (props) => {
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('profile')}>Profile</a>
+                        <a class="nav-item nav-link" href="#">Profile</a>
                         <a class="nav-item nav-link" href="#">Post</a>
-                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('register')}>Sign up</a>
-                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('login')}>Sign in</a>
-                        </div>
+                        <a class="nav-item nav-link" href="#">Sign Up</a>
+                        <a class="nav-item nav-link" href="#">Sign In</a>
+                    </div>
                 </div>
             </nav>
             <div class="card col-8 ml-auto mr-auto">
-                <img src = {image}/>
+                <img src = {image}/> 
             </div>
             
         </div>
@@ -32,4 +30,3 @@ const Home_Page = (props) => {
 
 
 export default Home_Page;
-

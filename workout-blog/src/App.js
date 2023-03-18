@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Login from './components/login';
 import Register from './components/Register';
 import Home from './components/Home_Page';
+import Profile from './components/Profile';
 import './App.css';
 
 function App() {
@@ -16,7 +17,10 @@ function App() {
     content = <Login onFormSwitch={handleFormSwitch} />;
   } else if (form === 'register') {
     content = <Register onFormSwitch={handleFormSwitch} />;
-  } else {
+  }else if (form === 'profile') {
+    content = <Profile onFormSwitch={handleFormSwitch} />;
+  }
+  else {
     content = <Home onFormSwitch={handleFormSwitch} />;
   }
 
