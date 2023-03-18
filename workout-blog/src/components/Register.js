@@ -11,8 +11,11 @@ const Register = (props) =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
+    const [error, setError] = useState(false)
 
-
+    useEffect(() => {
+        
+      }, [error]);
 
     
     
@@ -21,6 +24,7 @@ const Register = (props) =>{
         console.log(name)
         console.log(email)
         console.log(password)
+
         var bodyFormData = new FormData();
         if(name&&email&&password&&confirmPassword &&(password===confirmPassword)){
             
@@ -34,9 +38,12 @@ const Register = (props) =>{
                 headers: {}, 
                 data: bodyFormData
             })
+            setError(false)
+            props.onFormSwitch('home')
             console.log("done")
         }
         else{
+            setError(true)
             console.log("missing field or password does not match")
         }
 
@@ -95,8 +102,11 @@ const Register = (props) =>{
                     </div>
                     <div class="col">
                        <div class="row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In
-                   </button>
-                       </div>
+                        </button>
+                    </div>
+                       {error && (<div class="row" id='error'>
+                       Incomplete fields or password does not match.
+                        </div>)}
                     </div>
                     
             </div>

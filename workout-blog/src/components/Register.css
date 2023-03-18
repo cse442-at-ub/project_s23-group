@@ -126,12 +126,17 @@ html, body {
         border: none;
         background-color: transparent;
     }
-    .row{
+    .bg .row{
         margin-top: 10px;
         margin-left: 170px;
         font-weight: 300;
     }
-    
+    #error{
+        font-size: large;
+        z-index: 10;
+        color: red;
+    }
+
 }
 
 
@@ -239,7 +244,7 @@ html, body {
         border: none;
         background-color: transparent;
     }
-    .row{
+    .bg .row{
         margin-top: 10px;
         margin-left: 7%;
         font-weight: 300;
@@ -352,7 +357,7 @@ html, body {
         border: none;
         background-color: transparent;
     }
-    .row{
+    .bg .row{
         margin-top: 10px;
         margin-left: 7%;
         font-weight: 300;
