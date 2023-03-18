@@ -13,27 +13,32 @@ const Register = (props) =>{
     const [confirmPassword, setconfirmPassword] = useState('')
 
 
+
+    
+    
   
     const registerUser = async (name, email, password, confirmPassword) => {
         console.log(name)
         console.log(email)
         console.log(password)
-       if(name){
+        var bodyFormData = new FormData();
+        if(name&&email&&password&&confirmPassword &&(password===confirmPassword)){
+            
+            bodyFormData.append("name", name)
+            bodyFormData.append("email",email)
+            bodyFormData.append("password",password)
+       
             axios({
                 method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
+                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register2.php",
                 headers: {}, 
-                data: {
-                username: "name", 
-                email:"email",
-                password: "password",
-                
-                }
+                data: bodyFormData
             })
             console.log("done")
-       }
-       
-      
+        }
+        else{
+            console.log("missing field or password does not match")
+        }
 
     };
 
@@ -41,6 +46,7 @@ const Register = (props) =>{
 
     return (
         <div class="bg">
+            <div class='home' onClick={() => props.onFormSwitch('home')}/>   
             
             <div class="accountwrap">
                 <div class="sign">Sign Up</div>
@@ -88,7 +94,7 @@ const Register = (props) =>{
                         </button>
                     </div>
                     <div class="col">
-                       <div class="row">Already have an account?&nbsp; <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In
+                       <div class="row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In
                    </button>
                        </div>
                     </div>
