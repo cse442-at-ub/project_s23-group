@@ -46,6 +46,8 @@ function Login(props) {
 
   return (
     <div className="Login">
+       <div class='home' onClick={() => props.onFormSwitch('home')}/>   
+  
       <img id="myImage" src={downloadImage} alt="Login Image"/>
      
       <div className="Signin info">
