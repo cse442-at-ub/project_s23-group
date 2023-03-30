@@ -12,7 +12,7 @@ const Register = (props) =>{
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
 
-
+    
 
     
     
@@ -86,18 +86,18 @@ const Register = (props) =>{
 
                     </div>
                     
-                    <div>
-                        <button 
-                        class="signup"
-                        onClick={() => registerUser(name,email,password,confirmPassword)}
-                        >Sign Up
-                        </button>
+                    <div className="submitbox">
+                        
+                            <button 
+                            class="signup"
+                            onClick={() => registerUser(name,email,password,confirmPassword)}
+                            >Sign Up
+                            </button>
+                        
                     </div>
-                    <div class="col">
-                       <div class="row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In
-                   </button>
-                       </div>
-                    </div>
+                        <div class="col">
+                            <div class="row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
+                        </div>
                     
             </div>
         </div>
