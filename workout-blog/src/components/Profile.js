@@ -10,10 +10,10 @@ const Profile = (props) =>{
     return(
         <div class="bg2">
                         <div class="headers">
-                            <img class='home' onclick="openImg()" src={require("./images/home.png")}  />
-                            <button class='follow'>Follow</button>
+                            <img class='home' onClick={() => props.onFormSwitch('home')} src={require("./images/home.png")}  />
+                            {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button>
-                            <img class='settings' onclick={()=>{console.log("home")}} src={require("./images/settings.png")} />
+                            <img class='settings' onclick={()=>{console.log("home")}} src={require("./images/settings.png")} /> */}
                         </div>
                         <div class="imgbox">
                             
@@ -21,10 +21,10 @@ const Profile = (props) =>{
                         
                         </div>
                     
-                        <div class = "name">John Smith</div>
+                        <div class = "name">Mock User</div>
                             <div class="desc" >
                             
-                            Looking for new gym partners!
+                            Mock Bio
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Login from '/Users/erictomiello/Desktop/School code/442 code/project_s23-group/workout-blog/src/login/login.js';
+import Login from './login/login.js';
 import Register from './components/Register';
 import Home from './home/Home_Page';
+import Profile from './components/Profile';
 import './App.css';
 
 function App() {
@@ -16,7 +17,13 @@ function App() {
     content = <Login onFormSwitch={handleFormSwitch} />;
   } else if (form === 'register') {
     content = <Register onFormSwitch={handleFormSwitch} />;
-  } else {
+  } else if (form === 'profile') {
+    content = <Profile onFormSwitch={handleFormSwitch} />;
+  } 
+  else if (form === 'home') {
+    content = <Home onFormSwitch={handleFormSwitch} />;
+  } 
+  else {
     content = <Home onFormSwitch={handleFormSwitch} />;
   }
 

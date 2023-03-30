@@ -12,31 +12,33 @@ const Register = (props) =>{
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
 
-    useEffect(() => {
-        registerUser("1","2","3","4")
-      }, [])
+    
+
+    
     
   
     const registerUser = async (name, email, password, confirmPassword) => {
-    //     console.log(name)
-    //     console.log(email)
-    //     console.log(password)
-    //    if(name){
-    //         axios({
-    //             method: 'post',
-    //             url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
-    //             headers: {}, 
-    //             data: {
-    //             username: "name", 
-    //             email:"email",
-    //             password: "password",
-                
-    //             }
-    //         })
-    //         console.log("done")
-    //    }
+        console.log(name)
+        console.log(email)
+        console.log(password)
+        var bodyFormData = new FormData();
+        if(name&&email&&password&&confirmPassword &&(password===confirmPassword)){
+            
+            bodyFormData.append("name", name)
+            bodyFormData.append("email",email)
+            bodyFormData.append("password",password)
        
-      
+            axios({
+                method: 'post',
+                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register2.php",
+                headers: {}, 
+                data: bodyFormData
+            })
+            console.log("done")
+        }
+        else{
+            console.log("missing field or password does not match")
+        }
 
     };
 
@@ -44,6 +46,7 @@ const Register = (props) =>{
 
     return (
         <div class="bg">
+            <div class='home' onClick={() => props.onFormSwitch('home')}/>   
             
             <div class="accountwrap">
                 <div class="sign">Sign Up</div>
@@ -60,7 +63,7 @@ const Register = (props) =>{
                                     placeholder="Email"
                                     class="email" 
                                     onChange={event => {
-                                    setName(event.target.value)
+                                    setEmail(event.target.value)
                                     }} required />
 
                     </div>
@@ -69,7 +72,7 @@ const Register = (props) =>{
                                     placeholder="Password"
                                     class="password" 
                                     onChange={event => {
-                                    setName(event.target.value)
+                                    setPassword(event.target.value)
                                     }} required />
 
                     </div>
@@ -78,23 +81,23 @@ const Register = (props) =>{
                                     placeholder="Confirm password"
                                     class="cpassword" 
                                     onChange={event => {
-                                    setName(event.target.value)
+                                    setconfirmPassword(event.target.value)
                                     }} required />
 
                     </div>
                     
-                    <div>
-                        <button 
-                        class="signup"
-                        onClick={() => registerUser(name,email,password,confirmPassword)}
-                        >Sign Up
-                        </button>
+                    <div className="submitbox">
+                        
+                            <button 
+                            class="signup"
+                            onClick={() => registerUser(name,email,password,confirmPassword)}
+                            >Sign Up
+                            </button>
+                        
                     </div>
-                    <div class="col">
-                       <div class="row">Already have an account?&nbsp; <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In
-                   </button>
-                       </div>
-                    </div>
+                        <div class="col">
+                            <div class="row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
+                        </div>
                     
             </div>
         </div>
