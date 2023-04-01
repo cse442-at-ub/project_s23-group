@@ -2,7 +2,7 @@
   "name": "workout-blog",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/main/",
+  "homepage": "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/ericTest/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

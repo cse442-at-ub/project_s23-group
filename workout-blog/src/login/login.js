@@ -1,30 +1,50 @@
 import { logDOM } from '@testing-library/react';
 import './login.css';
 import downloadImage from './Signin.png';
-import { useState } from 'react';
-
+import React,{Fragment}  from 'react';
+import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 
 function Login(props) {
   
-  const [user,setUser] = useState('');
-  const [pass,setPass] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPass] = useState('');
+    
+  const loginUser = async (email, password) => {
+    console.log(email)
+    console.log(password)
+    var bodyFormData = new FormData();
+    if(email&&password){
 
-  function handleSignIn() {
-    // Add code here to handle the sign-in action using the username and password values
-    window.location.href = "https://ublearns.buffalo.edu/?new_loc=%2Fultra%2Finstitution-page";
-  }//temp link
-  function forgotPass() {
-    window.location.href = "https://ublearns.buffalo.edu/?new_loc=%2Fultra%2Finstitution-page";
-  }// temp link
-  function createAccount() {
-    window.location.href = "https://ublearns.buffalo.edu/?new_loc=%2Fultra%2Finstitution-page";
-  }// temp link
-  function log_button() {
-    window.location.href = "https://ublearns.buffalo.edu/?new_loc=%2Fultra%2Finstitution-page";
-  }// temp link
+        bodyFormData.append("email",email)
+        bodyFormData.append("password",password)
+
+        axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/login.php",
+          headers: {}, 
+          data: bodyFormData
+        })
+        .then((response) => {
+          console.log(response);
+          props.onFormSwitch('homepage')
+
+        }, (error) => {
+          console.log(error);
+        });
+        
+  }
+}
+
+
+
+
+  
 
   return (
     <div className="Login">
+    <div class='home' onClick={() => props.onFormSwitch('home')}/>   
+
       <img id="myImage" src={downloadImage} alt="Login Image"/>
      
       <div className="Signin info">
@@ -33,20 +53,25 @@ function Login(props) {
           <input type="text"
             placeholder='Username'
             class='username'
+            onChange={event => {
+              setEmail(event.target.value)
+              }} required 
             />
         </div>
         <div class='passwords'>
           <input type="password"
             placeholder='Password'
             class='password'
-            />
+            onChange={event => {
+              setPass(event.target.value)
+              }} required />
         </div>
         <div>
         </div> 
-        <a href="#" class="log_but" onClick={log_button} >Sign in</a>  
+        <a href="#" class="log_but"onClick={() => loginUser(email,password)}>Sign in</a>  
 
         <div class="login-box"> 
-  <a href="#" class="forgotpass" onClick={forgotPass}>Forgot your password?</a>  
+{/*  <a href="#" class="forgotpass" onClick={forgotPass}>Forgot your password?</a>  */}
   <label for="remember-me-checkbox" class="remember-me-label">
     <input type="checkbox" id="remember-me-checkbox" class="remember-me-checkbox"/>
     <span class="checkmark"></span>
@@ -63,9 +88,3 @@ function Login(props) {
 
 
 export default Login;
-
-
-
-
-
-
