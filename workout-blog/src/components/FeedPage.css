@@ -16,8 +16,8 @@
 .post-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  /* justify-content: space-between; */
+  padding: 5px;
   background-color: #ffffff;
   color: #000000;
 }
@@ -33,6 +33,7 @@
 .post-author-name {
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
 }
 
 .post-body {
@@ -85,7 +86,7 @@
 }
 
 .post-description {
-  padding: 10px;
+  padding: 5px;
   font-size: 16px;
   line-height: 1.5;
 }

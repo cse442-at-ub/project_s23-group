@@ -27,18 +27,19 @@ function FeedPage() {
           <img src={image} alt="post author" className="post-author-avatar" />
           <div className="post-author-name">Username</div>
         </div>
+        <div className="post-description">
+          Title
+        </div>
         <div className="post-body">
           <img src={postBody} alt="post image" className="post-image" />
         </div>
         <div className="post-actions">
           <button className="like-button" onClick={handleLike}>{likes} Likes</button>
-          <button className="comment-button">Comment</button>
+          {/* <button className="comment-button">Comment</button> */}
           <button className="share-button">Share</button>
         </div>
-        <div className="post-description">
-          Hello there
-        </div>
-        <div className="comments-section">
+        
+        {/* <div className="comments-section">
           <ul className="comment-list">
             {comments.map((comment, index) => (
               <li key={index} className="comment">{comment}</li>
@@ -48,7 +49,7 @@ function FeedPage() {
             <input type="text" name="comment" placeholder="Add a comment..." />
             <button type="submit">Post</button>
           </form>
-        </div>
+        </div> */}
       </div>
 
       {/*Post 2*/}
