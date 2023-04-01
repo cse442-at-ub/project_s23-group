@@ -5,42 +5,6 @@ import postBody from "./images/tennis.jpg"
 
 
 function FeedPage() {
-  // return (
-  //   <div className="feed">
-  //     {/* Post 1 */}
-  //     <div className="post">
-  //       <div className="post-header">
-  //         <img src="./images/box.png" alt="post author" className="post-author-avatar" />
-  //         <div className="post-author-name">User1</div>
-  //       </div>
-  //       <div className="post-body">
-  //         <img src={image} alt="post image" className="post-image" />
-  //       </div>
-  //       <div className="post-actions">
-  //         <button className="like-button">120 Likes</button>
-  //         <button className="comment-button">Comment</button>
-  //         <button className="share-button">Share</button>
-  //       </div>
-  //     </div>
-
-  //     {/* Post 2 */}
-  //     <div className="post">
-  //       <div className="post-header">
-  //         <img src="post-author-avatar.jpg" alt="post author" className="post-author-avatar" />
-  //         <div className="post-author-name">User2</div>
-  //       </div>
-  //       <div className="post-body">
-  //         <img src="post-image.jpg" alt="post image" className="post-image" />
-  //       </div>
-  //       <div className="post-actions">
-  //         <button className="like-button">80 Like</button>
-  //         <button className="comment-button">Comment</button>
-  //         <button className="share-button">Share</button>
-  //       </div>
-  //     </div>
-
-  //     {/* Add more posts here */}
-  //   </div>
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   
