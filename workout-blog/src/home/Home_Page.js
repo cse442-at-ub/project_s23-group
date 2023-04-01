@@ -1,7 +1,9 @@
 import React from "react";
 import image from "./Image/cbum.jpg"
 import './Home_Page.css'
+import Posts from "../components/FeedPage";
 import { useState, useEffect, useRef } from 'react';
+import FeedPage from "../components/FeedPage";
 
 
 const Home_Page = (props) => {
@@ -14,7 +16,7 @@ const Home_Page = (props) => {
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-item nav-link" href="#">Profile</a>
+                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('profile')}>Profile</a>
                         <a class="nav-item nav-link" href="#">Post</a>
                         <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('register')}>Sign up</a>
                         <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('login')}>Sign in</a>
@@ -24,9 +26,21 @@ const Home_Page = (props) => {
             <div class="card col-8 ml-auto mr-auto">
                 <img src = {image}/>
             </div>
+
+            <FeedPage/>
+
             
+
+            
+
+
+
         </div>
+
+        
+        
     );
+        
 
 }
 
