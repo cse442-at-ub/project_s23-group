@@ -26,10 +26,11 @@ function Login(props) {
           data: bodyFormData
         })
         .then((response) => {
+          console.log("shouldnt be error ")
           console.log(response);
           props.onFormSwitch('homepage')
-
         }, (error) => {
+          console.log("error")
           console.log(error);
         });
         
@@ -37,9 +38,6 @@ function Login(props) {
 }
 
 
-  function forgotPass() {
-    window.location.href = "https://ublearns.buffalo.edu/?new_loc=%2Fultra%2Finstitution-page";
-  }// temp link
 
 
   
@@ -74,7 +72,7 @@ function Login(props) {
         <a href="#" class="log_but"onClick={() => loginUser(email,password)}>Sign in</a>  
 
         <div class="login-box"> 
-  <a href="#" class="forgotpass" onClick={forgotPass}>Forgot your password?</a>  
+{/*  <a href="#" class="forgotpass" onClick={forgotPass}>Forgot your password?</a>  */}
   <label for="remember-me-checkbox" class="remember-me-label">
     <input type="checkbox" id="remember-me-checkbox" class="remember-me-checkbox"/>
     <span class="checkmark"></span>
