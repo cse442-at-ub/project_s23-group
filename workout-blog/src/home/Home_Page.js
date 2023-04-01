@@ -1,8 +1,9 @@
 import React from "react";
 import image from "./Image/cbum.jpg"
 import './Home_Page.css'
-import Posts from "../components/Posts";
+import Posts from "../components/FeedPage";
 import { useState, useEffect, useRef } from 'react';
+import FeedPage from "../components/FeedPage";
 
 
 const Home_Page = (props) => {
@@ -26,15 +27,17 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
+            <FeedPage/>
+
             
 
-            <div>
-                <Posts />
-            </div>
+            
 
 
 
         </div>
+
+        
         
     );
         
