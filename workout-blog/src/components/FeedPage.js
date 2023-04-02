@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './FeedPage.css';
-import image from "../Image/cbum.jpg"
+import image from "./images/cbum.jpg"
 import postBody from "./images/tennis.jpg"
 
 
