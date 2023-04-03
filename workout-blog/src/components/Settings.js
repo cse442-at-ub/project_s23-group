@@ -17,14 +17,25 @@ const Settings = (props) =>{
 
     const updateSettings = (bio, profile, background) =>{
         var formData = new FormData();
+        formData.append("id", 14);
         formData.append("bio", bio);
-        formData.append("profile", profile);
+        formData.append("pfp", profile);
         formData.append("background", background);
-        axios.put('profile.php', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+        axios({
+          method: 'put',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profile.php",
+          headers: {'Content-Type': 'multipart/form-data'}, 
+          data: formData
         })
+        .then((response) => {
+          console.log(response);
+          
+
+        }, (error) => {
+          console.log(error);
+        });
+
+      console.log("Success")
     }
     
     return(
