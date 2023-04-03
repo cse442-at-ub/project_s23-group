@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
+import Timeline from './Timeline.js'
 
 
 const Profile = (props) =>{
@@ -65,6 +66,7 @@ const Profile = (props) =>{
                         <img  src={require("./images/tennis.jpg")} />
                         <img  src={require("./images/weights2.jpg")} />
                         </div>
+                        <Timeline/>
                   
                         
 
