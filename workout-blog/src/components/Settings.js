@@ -20,7 +20,7 @@ const Settings = (props) =>{
         formData.append("bio", bio);
         formData.append("profile", profile);
         formData.append("background", background);
-        axios.put('upload_file', formData, {
+        axios.put('profile.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -29,7 +29,7 @@ const Settings = (props) =>{
     
     return(
     <div className="bg3">
-        
+        <div onClick={() => props.onFormSwitch('profile')}> Back </div>   
         <div className="biobox">
         <input type="text"
             placeholder="Update Bio"
@@ -63,7 +63,9 @@ const Settings = (props) =>{
       />
       </div>
 
-      <button>Done</button>
+      <button 
+      onClick={() => updateSettings(bio,profile,background)}>
+        Done</button>
 
     </div>
         )

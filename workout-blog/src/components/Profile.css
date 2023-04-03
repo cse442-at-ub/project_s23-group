@@ -3,29 +3,35 @@
 @media only screen and (min-width: 901px) {
   html, body {
   
-    
-    /* overflow-x: hidden; */
+ 
+    overflow-x: hidden;
   }
   
   
   .bg2{
-    
     background-color: rgba(27,27,27,1);
-   
+    z-index: 0;
+    
+    
   }
-  .bg2abs{
-    position: absolute;
-    background-size:cover;
-    background-position: center; 
-    /* background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url('./images/matcha.jpg'); */
-    margin: auto;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
-  }
- 
-    .headers{
+  .bg2::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size:cover;
+      background-position: center; 
+      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
+      margin: auto;
+      background-repeat: no-repeat;
+      width: 100vw;
+      height: 100vh;
+      
+    }
+  
+    .bg2 .headers{
       padding-top: 20px;
       position: relative;
       width: 100vw;
@@ -62,7 +68,7 @@
       margin-top: -10px;
     } */
   
-     .imgbox{
+    .bg2 .imgbox{
       position: relative;
       margin-left: 10px;
       display: flex;
@@ -71,7 +77,7 @@
       z-index: 100;
     }
   
-    .profile{
+    .bg2 .profile{
       border-radius: 50%;
       width: 150px;
       height: 150px;
@@ -99,7 +105,7 @@
   }
   
   
-  .desc{
+  .bg2 .desc{
     display: flex;
     justify-content: center;
     margin-top: 1.5%;
@@ -114,7 +120,7 @@
     background-color: transparent;
   }
   
-  .timeline{
+  .bg2 .timeline{
     font-family: 'Titillium Web', sans-serif;
     background: transparent;
     font-weight: 400;
@@ -131,7 +137,7 @@
   }
   
   
-  .buttons{
+  .bg2 .buttons{
     height: 105px;
     z-index: 100;
     margin-top: 1%;
@@ -146,7 +152,7 @@
   }
   
  
-  .postwrap{
+  .bg2 .postwrap{
 
     background-color: transparent;
     border-color: transparent;
@@ -159,14 +165,14 @@
     padding-top: 10px;
   }
   
-  .post{
+  .bg2 .post{
     color: aliceblue;
     font-weight: 400;
     width: fit-content;
     
   }
   
-  .postbutton{
+  .bg2 .postbutton{
     position: absolute;
     color: gray;
     text-align: center;
@@ -175,7 +181,7 @@
     font-weight: 1;
   }
   
-  .followingwrap{
+  .bg2 .followingwrap{
     justify-content: center;
     background-color: transparent;
     border-color: transparent;
@@ -188,7 +194,7 @@
     
   }
   
-  .following{
+  .bg2 .following{
     color: aliceblue;
     font-weight: 400;
     width: fit-content;
@@ -196,7 +202,7 @@
     margin-left: 40%;
   }
   
-  .followingbutton{
+  .bg2 .followingbutton{
     position: absolute;
     color: gray;
     text-align: center;
@@ -204,7 +210,7 @@
     
     font-weight: 1;
   }
-  .followerwrap{
+  .bg2 .followerwrap{
     
     background-color: transparent;
     border-color: transparent;
@@ -218,7 +224,7 @@
     
   }
   
-  .follower{
+  .bg2 .follower{
     color: aliceblue;
     font-weight: 400;
     width: fit-content;
@@ -226,7 +232,7 @@
     margin-left: 40%;
   }
   
-  .followerbutton{
+  .bg2 .followerbutton{
     position: absolute;
     color: gray;
     text-align: center;
@@ -235,7 +241,7 @@
     font-weight: 1;
   }
 
-  .gallery{
+  .bg2 .gallery{
     position: relative;
     z-index: 100;
     background-color: transparent;
@@ -250,7 +256,7 @@
     
   }
   
-  .gallery img{
+  .bg2 .gallery img{
     height: 500px;
     margin-top: 10px;
     margin-left: 10px;
@@ -267,35 +273,40 @@
 @media only screen and (max-width: 900px) {
   html, body {
   
-    background-color: rgba(27,27,27,1);
+ 
     overflow-x: hidden;
   }
   
   .bg2{
-    
     background-color: rgba(27,27,27,1);
-   
+    z-index: 0;
+    
+    
   }
-  .bg2abs{
-    position: absolute;
-    background-size:cover;
-    background-position: center; 
-    background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url('./images/matcha.jpg');
-    margin: auto;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
-  }
- 
+  .bg2::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-size: fill;
+      background-position: center; 
+      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
+      margin: auto;
+      background-repeat: no-repeat;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+    }
   
-     .headers{
+    .bg2 .headers{
       padding-top: 5%;
       position: relative;
       z-index: 100;
     }
   
-    .home{
+    .bg2  .home{
       height: 5%;
       width: 5%;
       margin-left: 3%;
@@ -326,7 +337,7 @@
       
     } */
   
-     .imgbox{
+    .bg2 .imgbox{
       position: relative;
       margin-left: 10px;
       display: flex;
@@ -336,7 +347,7 @@
      
     }
   
-    .profile{
+    .bg2 .profile{
       border-radius: 50%;
       width: 75px;
       height: 75px;
@@ -364,7 +375,7 @@
   }
    
   
-  .desc{
+  .bg2 .desc{
     white-space: pre-line;
     margin-top: 1%;
     display: flex;
@@ -382,7 +393,7 @@
   
   
   
-  .buttons{
+  .bg2 .buttons{
     height: 60px;
     width: 70vw;
     z-index: 100;
@@ -397,7 +408,7 @@
   }
   
 
-  .postwrap{
+  .bg2 .postwrap{
     
     background-color: transparent;
     border-color: transparent;
@@ -410,7 +421,7 @@
     margin-left: -2%;
   }
   
-  .post{
+  .bg2 .post{
     color: aliceblue;
     font-weight: 400;
     width: fit-content;
@@ -418,7 +429,7 @@
     
   }
   
-  .postbutton{
+  .bg2 .postbutton{
     position: absolute;
     color: gray;
     text-align: center;
@@ -427,7 +438,7 @@
     font-weight: 1;
   }
   
-  .followingwrap{
+  .bg2 .followingwrap{
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -439,7 +450,7 @@
     
   }
   
-  .following{
+  .bg2 .following{
     color: aliceblue;
     font-weight: 400;
     width: fit-content;
@@ -447,14 +458,14 @@
     
   }
   
-  .followingbutton{
+  .bg2 .followingbutton{
     position: absolute;
     color: gray;
     text-align: center;
     width: fit-content;
     font-weight: 1;
   }
-  .followerwrap{
+  .bg2 .followerwrap{
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -466,14 +477,14 @@
     
   }
   
-  .follower{
+  .bg2 .follower{
     color: aliceblue;
     font-weight: 400;
     width: fit-content;
     
   }
   
-  .followerbutton{
+  .bg2 .followerbutton{
     position: absolute;
     color: gray;
     text-align: center;
@@ -481,7 +492,7 @@
     font-weight: 1;
   }
   
-  .timeline{
+  .bg2 .timeline{
     font-family: 'Titillium Web', sans-serif;
     display: flex;
     justify-content: center;
@@ -498,7 +509,7 @@
     font-size: 32px;
   }
   
-  .gallery{
+  .bg2 .gallery{
     
     position: relative;
     z-index: 100;
@@ -511,7 +522,7 @@
   justify-content: flex-start;
   }
   
-  .gallery img{
+  .bg2 .gallery img{
     height: 150px;
     margin-top: 10px;
     margin-left: 10px;
@@ -522,4 +533,3 @@
 
   
 }
-

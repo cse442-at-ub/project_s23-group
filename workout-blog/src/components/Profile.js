@@ -1,20 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
-import matcha from './images/matcha.jpg'
+
 
 const Profile = (props) =>{
-   let dynamicBackground = {
-        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url(${matcha})`
-   }
-  
+   
+    
 
     return(
-        <div class="bg2"> <div className="bg2abs" style={dynamicBackground}/> 
+        <div class="bg2">
                         <div class="headers">
                             <img class='home' onClick={() => props.onFormSwitch('home')} src={require("./images/home.png")}  />
-                            <button class='follow'>Follow</button>
-                            <button class='message'>Message</button>
+                            {/* <button class='follow'>Follow</button>
+                            <button class='message'>Message</button> */}
                             <img class='settings' onClick={() => props.onFormSwitch('settings')} src={require("./images/settings.png")} />
                         </div>
                         <div class="imgbox">
@@ -23,10 +21,10 @@ const Profile = (props) =>{
                         
                         </div>
                     
-                        <div class = "name">John John</div>
+                        <div class = "name">Mock User</div>
                             <div class="desc" >
                             
-                            Looking for new gym partners!
+                            Mock Bio
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>
@@ -69,7 +67,7 @@ const Profile = (props) =>{
                         </div>
                   
                         
-                       
+
             
         </div>
 

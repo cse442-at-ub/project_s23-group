@@ -15,7 +15,7 @@ if(empty(trim($username))){
 */
 
 if(isset($email) && isset($username) && isset($password)){
-    makeNewUser($email, $username, $password);
+    makeNewUser($email, $username, password_hash($password,PASSWORD_DEFAULT));
 }
 
 ?>

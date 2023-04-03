@@ -1,7 +1,9 @@
 import React from "react";
-import image from "./Image/cbum.jpg"
+import image from "./images/cbum.jpg"
 import './Home_Page.css'
+import Posts from "../components/FeedPage";
 import { useState, useEffect, useRef } from 'react';
+import FeedPage from "../components/FeedPage";
 
 
 const Home_Page = (props) => {
@@ -24,9 +26,21 @@ const Home_Page = (props) => {
             <div class="card col-8 ml-auto mr-auto">
                 <img src = {image}/>
             </div>
+
+            <FeedPage/>
+
             
+
+            
+
+
+
         </div>
+
+        
+        
     );
+        
 
 }
 
