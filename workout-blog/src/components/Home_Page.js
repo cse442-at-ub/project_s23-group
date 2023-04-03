@@ -1,5 +1,5 @@
 import React from "react";
-import image from "./Image/cbum.jpg"
+import image from "./images/cbum.jpg"
 import './Home_Page.css'
 import Posts from "../components/FeedPage";
 import { useState, useEffect, useRef } from 'react';
