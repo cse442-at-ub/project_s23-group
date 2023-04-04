@@ -23,10 +23,7 @@ const Profile = (props) =>{
                         </div>
                     
                         <div class = "name">Mock User</div>
-                            <div class="desc" >
-                            
-                            Mock Bio
-                        </div>
+                            <div class="desc" ></div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>
                                 <div className="post">
@@ -56,15 +53,6 @@ const Profile = (props) =>{
                         </div>
                         <div className="timeline">
                             Timeline
-                        </div>
-                        <div className='gallery'>
-                        <img  src={require("./images/bike.jpg")} />
-                        <img  src={require("./images/basketball.jpg")} />
-                        <img  src={require("./images/weights.jpg")} />
-                        <img  src={require("./images/box.jpg")} />
-                        <img  src={require("./images/run.jpg")} />
-                        <img  src={require("./images/tennis.jpg")} />
-                        <img  src={require("./images/weights2.jpg")} />
                         </div>
                         <Timeline/>
                   

@@ -101,10 +101,10 @@ const Register = (props) =>{
                         
                     </div>
                         <div class="col">
-                            <div class="row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
+                            <div class="srow">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
                         </div>
                         
-                            {error && (<div class="row" id='error'>
+                            {error && (<div class="srow" id='error'>
                         Incomplete fields or password does not match.
                             </div>)}
                         

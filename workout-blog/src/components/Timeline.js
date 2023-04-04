@@ -5,11 +5,10 @@ import "./Timeline.css"
 
 const Timeline = (props) => {
     return (
-        <div>
-            <div id="timeline">Timeline</div>
-            <div className="Gallery">
-                <FeedPage/>
-            </div>
+        <div class = "gallery container-fluid row">
+            <FeedPage class ="col-sm-4 "/>
+            <FeedPage class ="col-sm-4 "/>
+            <FeedPage class ="col-sm-4 "/>
         </div>
     );
         

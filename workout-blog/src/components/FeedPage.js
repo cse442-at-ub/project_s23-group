@@ -51,37 +51,8 @@ function FeedPage() {
           </form>
         </div> */}
       </div>
-
-      {/*Post 2*/}
-      {/* <div className="post">
-        <div className="post-header">
-          <img src="post-author-avatar.jpg" alt="post author" className="post-author-avatar" />
-          <div className="post-author-name">Post Author</div>
-        </div>
-        <div className="post-body">
-          <img src="post-image.jpg" alt="post image" className="post-image" />
-        </div>
-        <div className="post-actions">
-          <button className="like-button" onClick={handleLike2}>{likes} Likes</button>
-          <button className="comment-button">Comment</button>
-          <button className="share-button">Share</button>
-        </div>
-        <div className="post-description">
-          I'm here
-          </div>
-        <div className="comments-section">
-          <ul className="comment-list">
-            {comments.map((comment, index) => (
-              <li key={index} className="comment">{comment}</li>
-            ))}
-          </ul>
-          <form className="comment-form" onSubmit={handleComment}>
-            <input type="text" name="comment" placeholder="Add a comment..." />
-            <button type="submit">Post</button>
-          </form>
-        </div>
-      </div> */}
     </div>
+
   );
 }
 
