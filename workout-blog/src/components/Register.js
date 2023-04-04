@@ -101,7 +101,7 @@ const Register = (props) =>{
                         
                     </div>
                         <div class="col">
-                            <div class="srow">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
+                            <div class="srow row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
                         </div>
                         
                             {error && (<div class="srow row" id='error'>

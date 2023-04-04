@@ -27,7 +27,9 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
-            <FeedPage/>
+            <div class="container-fluid">
+                <FeedPage/>
+            </div>
 
             
 
