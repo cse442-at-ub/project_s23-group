@@ -15,15 +15,13 @@ const Settings = (props) =>{
       }, [profile,background]);
     
 
-    const updateSettings = (bio, profile, background) =>{
+    const uploadServerImages = (profile, background) =>{
         var formData = new FormData();
-        formData.append("id", 14);
-        formData.append("bio", bio);
         formData.append("pfp", profile);
         formData.append("background", background);
         axios({
-          method: 'put',
-          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profile.php",
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileServer.php",
           headers: {'Content-Type': 'multipart/form-data'}, 
           data: formData
         })
@@ -35,8 +33,31 @@ const Settings = (props) =>{
           console.log(error);
         });
 
-      console.log("Success")
+      
     }
+
+    const updateDB = (bio, profile, background) =>{
+      var formData = new FormData();
+      formData.append("id", 14);
+      formData.append("bio", bio);
+      formData.append("pfp", profile);
+      formData.append("background", background);
+      axios({
+        method: 'put',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileDB.php",
+        headers: {'Content-Type': 'multipart/form-data'}, 
+        data: formData
+      })
+      .then((response) => {
+        console.log(response);
+        
+
+      }, (error) => {
+        console.log(error);
+      });
+
+    console.log("Success")
+  }
     
     return(
     <div className="bg3">
@@ -75,7 +96,12 @@ const Settings = (props) =>{
       </div>
 
       <button 
-      onClick={() => updateSettings(bio,profile,background)}>
+      onClick={() => {
+        uploadServerImages(profile,background)
+        props.onFormSwitch('profile')
+
+
+      }}>
         Done</button>
 
     </div>

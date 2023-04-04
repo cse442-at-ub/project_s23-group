@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
-import matcha from './images/matcha.jpg'
+import matcha from './images/weights.jpg'
 
 const Profile = (props) =>{
     let dynamicBackground = {
