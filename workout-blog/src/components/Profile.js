@@ -10,6 +10,7 @@ const Profile = (props) => {
         { id: 1, name: 'Mock User 1', profilePic: require('./images/profilepic.jpg') },
         { id: 2, name: 'Mock User 2', profilePic: require('./images/profilepic.jpg') },
         { id: 3, name: 'Mock User 3', profilePic: require('./images/profilepic.jpg') },
+        { id: 4, name: 'Mock User 4', profilePic: require('./images/profilepic.jpg') },
     ]);
 
     const [followers, setFollowers] = useState([
