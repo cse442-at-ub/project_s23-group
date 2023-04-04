@@ -23,7 +23,9 @@ const Profile = (props) =>{
                         </div>
                     
                         <div class = "name">Mock User</div>
-                            <div class="desc" ></div>
+                            <div class="desc" >
+                            
+                        </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>
                                 <div className="post">

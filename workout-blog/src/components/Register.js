@@ -104,7 +104,7 @@ const Register = (props) =>{
                             <div class="srow">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
                         </div>
                         
-                            {error && (<div class="srow" id='error'>
+                            {error && (<div class="srow row" id='error'>
                         Incomplete fields or password does not match.
                             </div>)}
                         

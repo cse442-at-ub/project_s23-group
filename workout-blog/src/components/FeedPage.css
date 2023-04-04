@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-.post {
+.feed .post {
   width: 30%;
   margin: 3%;
   background-color: #ffffff;
