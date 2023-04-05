@@ -1,17 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Settings.css'
+import {
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+
 
 //userid - background- profilepic - status
 const Settings = (props) =>{
-    
+
+    const navigate = useNavigate()
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState(null);
     const [background, setBackground] = useState(null);
+    // const [profileName, setProfileName] = useState('');
+    // const [backgroundName, setBackgroundName] = useState('');
 
     useEffect(() => {
-        console.log(profile)
-        console.log(background)
+   
       }, [profile,background]);
     
 
@@ -26,8 +34,8 @@ const Settings = (props) =>{
           data: formData
         })
         .then((response) => {
-          console.log(response);
-          
+
+          updateDB(bio,response.data[0],response.data[1])
 
         }, (error) => {
           console.log(error);
@@ -36,12 +44,13 @@ const Settings = (props) =>{
       
     }
 
-    const updateDB = (id,bio, profile, background) =>{
+    const updateDB = (bio, profileName, backgroundName) =>{
       var formData = new FormData();
-      formData.append("id", 14);
+      formData.append("id", parseInt(sessionStorage.getItem("id")));
+      formData.append("username", sessionStorage.getItem("name"));
       formData.append("bio", bio);
-      formData.append("pfp", profile);
-      formData.append("background", background);
+      formData.append("pfp",profileName);
+      formData.append("background",backgroundName);
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileDB.php",
@@ -61,7 +70,7 @@ const Settings = (props) =>{
     
     return(
     <div className="bg3">
-        <div onClick={() => props.onFormSwitch('profile')}> Back </div>   
+        <div onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile", { replace: true })}> Back </div>   
         <div className="biobox">
         <input type="text"
             placeholder="Update Bio"
@@ -80,6 +89,7 @@ const Settings = (props) =>{
         onChange={(event) => {
         
           setProfile(event.target.files[0]);
+          
         }}
       />
       </div>
@@ -91,6 +101,7 @@ const Settings = (props) =>{
         onChange={(event) => {
         
           setBackground(event.target.files[0]);
+          
         }}
       />
       </div>
@@ -98,7 +109,7 @@ const Settings = (props) =>{
       <button 
       onClick={() => {
         uploadServerImages(profile,background)
-        props.onFormSwitch('profile')
+        // navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile")
 
 
       }}>

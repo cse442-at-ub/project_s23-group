@@ -44,6 +44,8 @@ const Register = (props) =>{
               })
               .then((response) => {
                 console.log(response);
+                sessionStorage.setItem("id", response.data[0])
+                sessionStorage.setItem("name", response.data[2])
                 navigate("/CSE442-542/2023-Spring/cse-442w/test2/", { replace: true })
       
               }, (error) => {
