@@ -14,42 +14,80 @@ const Profile = (props) =>{
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState('');
     const [background, setBackground] = useState('');
+    
+   
+
+
 
     useEffect(() => {
-        console.log(sessionStorage.getItem("bio"))
-        console.log(sessionStorage.getItem("pfp"))
-        console.log(sessionStorage.getItem("background"))
 
 
         if((sessionStorage.getItem("bio") != null) && (sessionStorage.getItem("pfp")!= null) && (sessionStorage.getItem("background")!= null)){
+            console.log("1")
             setBio(sessionStorage.getItem("bio"))
             setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
             setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
-
+            
         
+        }
+        else if ((sessionStorage.getItem("bio") == null) && (sessionStorage.getItem("pfp")== null) && (sessionStorage.getItem("background")== null)){
+            setBio("Go to settings to change info")
+            setProfile(staticProfile)
+            setBackground(staticBackground)
+            console.log("2")
+            getImages()
+            
+            
         }
         else{
             setBio("Go to settings to change info")
             setProfile(staticProfile)
             setBackground(staticBackground)
-
-           
         }
-    }, [bio, profile, background]);
+    }, []);
 
+    const getImages = () =>{
+        var formData = new FormData();
+        formData.append("id", parseInt(sessionStorage.getItem("id")));
+    
+        axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+          headers: {}, 
+          data: formData
+        })
+        .then((response) => {
+          console.log(response);
+          sessionStorage.setItem("bio",response.data[2])
+          sessionStorage.setItem("background",response.data[3])
+          sessionStorage.setItem("pfp",response.data[4])
 
+        setBio(sessionStorage.getItem("bio"))
+        setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
+        setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+        
+        
+        }, (error) => {
+          console.log(error);
+        });
+  
+      console.log("Success")
+    }
 
  
-
-
-    let dynamicBackground = {
-        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url(${background})`
+let dynamicBackground = {
+        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("${background}")`
+        
+        //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
    }
+
+   console.log(dynamicBackground)
+
+   
+   
    const navigate = useNavigate()
 
-   function isEmpty(value) {
-    return (value == null || (typeof value === "string" && value.trim().length === 0));
-  }
+   
 
     return(
         <div class="bg2">

@@ -35,10 +35,13 @@ const Settings = (props) =>{
         })
         .then((response) => {
           sessionStorage.setItem("bio", bio)
-          sessionStorage.setItem("pfp", response.data[1])
-          sessionStorage.setItem("background", response.data[0])
+          sessionStorage.setItem("pfp", response.data[0])
+          sessionStorage.setItem("background", response.data[1])
           
-          updateDB(bio,response.data[1],response.data[0])
+          console.log("checking")
+          console.log(response.data[0] + "is pfp")
+          console.log(response.data[1] + "is background")
+          updateDB(bio,response.data[0],response.data[1])
 
         }, (error) => {
           console.log(error);
