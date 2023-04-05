@@ -2,21 +2,27 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
 import matcha from './images/weights.jpg'
+import {
+    Link,
+    useNavigate,
+    useLocation,
+  } from "react-router-dom";
+  
 
 const Profile = (props) =>{
     let dynamicBackground = {
         backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url(${matcha})`
    }
-    
+   const navigate = useNavigate()
 
     return(
         <div class="bg2">
             <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
-                            <img class='home' onClick={() => props.onFormSwitch('home')} src={require("./images/home.png")}  />
+                            <img class='home' onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                            <img class='settings' onClick={() => props.onFormSwitch('settings')} src={require("./images/settings.png")} />
+                            <img class='settings' onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile/settings")} src={require("./images/settings.png")} />
                         </div>
                         <div class="imgbox">
                             

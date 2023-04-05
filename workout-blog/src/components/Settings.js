@@ -36,14 +36,14 @@ const Settings = (props) =>{
       
     }
 
-    const updateDB = (bio, profile, background) =>{
+    const updateDB = (id,bio, profile, background) =>{
       var formData = new FormData();
       formData.append("id", 14);
       formData.append("bio", bio);
       formData.append("pfp", profile);
       formData.append("background", background);
       axios({
-        method: 'put',
+        method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileDB.php",
         headers: {'Content-Type': 'multipart/form-data'}, 
         data: formData
