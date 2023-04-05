@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
-import matcha from './images/weights.jpg'
+import staticProfile from './images/profilepic.jpg'
+import staticBackground from './images/weights.jpg'
 import {
     Link,
     useNavigate,
@@ -10,10 +11,45 @@ import {
   
 
 const Profile = (props) =>{
+    const [bio, setBio] = useState('')
+    const [profile, setProfile] = useState('');
+    const [background, setBackground] = useState('');
+
+    useEffect(() => {
+        console.log(sessionStorage.getItem("bio"))
+        console.log(sessionStorage.getItem("pfp"))
+        console.log(sessionStorage.getItem("background"))
+
+
+        if((sessionStorage.getItem("bio") != null) && (sessionStorage.getItem("pfp")!= null) && (sessionStorage.getItem("background")!= null)){
+            setBio(sessionStorage.getItem("bio"))
+            setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
+            setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+
+        
+        }
+        else{
+            setBio("Go to settings to change info")
+            setProfile(staticProfile)
+            setBackground(staticBackground)
+
+           
+        }
+    }, [bio, profile, background]);
+
+
+
+ 
+
+
     let dynamicBackground = {
-        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url(${matcha})`
+        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url(${background})`
    }
    const navigate = useNavigate()
+
+   function isEmpty(value) {
+    return (value == null || (typeof value === "string" && value.trim().length === 0));
+  }
 
     return(
         <div class="bg2">
@@ -26,14 +62,14 @@ const Profile = (props) =>{
                         </div>
                         <div class="imgbox">
                             
-                            <img className='profile' src={require("./images/profilepic.jpg")} />
+                            <img className='profile' src={profile} />
                         
                         </div>
                     
                         <div class = "name">Mock User</div>
                             <div class="desc" >
                             
-                            Mock Bio
+                            {bio}
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>

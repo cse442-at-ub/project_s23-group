@@ -34,8 +34,11 @@ const Settings = (props) =>{
           data: formData
         })
         .then((response) => {
-
-          updateDB(bio,response.data[0],response.data[1])
+          sessionStorage.setItem("bio", bio)
+          sessionStorage.setItem("pfp", response.data[1])
+          sessionStorage.setItem("background", response.data[0])
+          
+          updateDB(bio,response.data[1],response.data[0])
 
         }, (error) => {
           console.log(error);
@@ -59,7 +62,7 @@ const Settings = (props) =>{
       })
       .then((response) => {
         console.log(response);
-        
+        navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile")
 
       }, (error) => {
         console.log(error);
@@ -109,7 +112,7 @@ const Settings = (props) =>{
       <button 
       onClick={() => {
         uploadServerImages(profile,background)
-        // navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile")
+        
 
 
       }}>
