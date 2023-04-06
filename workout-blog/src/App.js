@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Login from './login/login.js';
+import Login from './components/login.js';
 import Register from './components/Register';
-import Home from './home/Home_Page';
+import Home from './components/Home_Page';
 import Profile from './components/Profile';
 import './App.css';
 

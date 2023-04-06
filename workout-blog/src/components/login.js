@@ -73,11 +73,11 @@ function Login(props) {
 
         <div class="login-box"> 
 {/*  <a href="#" class="forgotpass" onClick={forgotPass}>Forgot your password?</a>  */}
-  <label for="remember-me-checkbox" class="remember-me-label">
+  {/* <label for="remember-me-checkbox" class="remember-me-label">
     <input type="checkbox" id="remember-me-checkbox" class="remember-me-checkbox"/>
     <span class="checkmark"></span>
     Remember me
-  </label>
+  </label> */}
   </div>
         <a href="#" class="create_account">
         <span class="noAccount">Not yet registered? <a href="#" class="signUp" onClick={() => props.onFormSwitch('register')}>Create an account</a></span>
@@ -89,4 +89,3 @@ function Login(props) {
 
 
 export default Login;
-
