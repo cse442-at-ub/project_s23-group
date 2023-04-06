@@ -23,7 +23,7 @@ const Profile = (props) =>{
 
 
         if((sessionStorage.getItem("bio") != null) && (sessionStorage.getItem("pfp")!= null) && (sessionStorage.getItem("background")!= null)){
-            console.log("1")
+            
             setBio(sessionStorage.getItem("bio"))
             setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
             setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
@@ -34,7 +34,7 @@ const Profile = (props) =>{
             setBio("Go to settings to change info")
             setProfile(staticProfile)
             setBackground(staticBackground)
-            console.log("2")
+            
             getImages()
             
             
@@ -71,7 +71,7 @@ const Profile = (props) =>{
           console.log(error);
         });
   
-      console.log("Success")
+      
     }
 
  
@@ -81,7 +81,7 @@ let dynamicBackground = {
         //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
    }
 
-   console.log(dynamicBackground)
+  
 
    
    

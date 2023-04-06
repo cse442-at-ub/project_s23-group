@@ -17,8 +17,8 @@ $username_err = "Username can only contain letters, numbers, and underscores.";
 */
 
 if (isset($email) && isset($username) && isset($password)) {
-    $userinfo = makeNewUser($email, $username, password_hash($password, PASSWORD_DEFAULT));
-    echo json_encode($userinfo);
+    $info = makeNewUser($email, $username, password_hash($password, PASSWORD_DEFAULT));
+    echo json_encode($info);
 }
 
 ?>
