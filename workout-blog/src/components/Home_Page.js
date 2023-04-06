@@ -26,10 +26,10 @@ const Home_Page = (props) => {
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <Link class="nav-item nav-link" to ="profile">Profile</Link>
-                        <Link class="nav-item nav-link" to ="posts">Posts</Link>
-                        <Link class="nav-item nav-link" to ="register">Sign Up</Link>
-                        <Link class="nav-item nav-link" to ="login">Sign In</Link>
+                        <Link class="nav-item nav-link" to ="/profile">Profile</Link>
+                        <Link class="nav-item nav-link" to ="/posts">Posts</Link>
+                        <Link class="nav-item nav-link" to ="/register">Sign Up</Link>
+                        <Link class="nav-item nav-link" to ="/login">Sign In</Link>
                         
                         </div>
                 </div>

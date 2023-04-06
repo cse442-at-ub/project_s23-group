@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Settings.css'
+import ImageCropper from "./ImageCropper.js";
 import {
   Link,
   useNavigate,
@@ -65,7 +66,7 @@ const Settings = (props) =>{
       })
       .then((response) => {
         console.log(response);
-        navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile")
+        navigate("/profile")
 
       }, (error) => {
         console.log(error);
@@ -76,7 +77,7 @@ const Settings = (props) =>{
     
     return(
     <div className="bg3">
-        <div onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/profile", { replace: true })}> Back </div>   
+        <div onClick={() => navigate("/profile", { replace: true })}> Back </div>   
         <div className="biobox">
         <input type="text"
             placeholder="Update Bio"
@@ -120,7 +121,7 @@ const Settings = (props) =>{
 
       }}>
         Done</button>
-
+        {/* <ImageCropper/> */}
     </div>
         )
 }
