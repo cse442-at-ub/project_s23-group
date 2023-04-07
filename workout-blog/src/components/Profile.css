@@ -63,7 +63,7 @@
   }
   
   .popup-remove {
-    background-color: #e74c3c;
+    background-color: #a5bfcf;
     border: none;
     color: #fff;
     padding: 8px 16px;
@@ -75,7 +75,7 @@
   
   
   .popup-remove:hover {
-    background-color: #c0392b;
+    background-color: #2b77db;
   }
 
   .popup-close {
