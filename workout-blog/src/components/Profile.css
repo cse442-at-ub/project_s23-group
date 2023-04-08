@@ -55,12 +55,12 @@
       font-size: 24px;
       
     }
-  
+  */
     .settings{
       height: 50px;
       width: 50px;
       margin-top: -10px;
-    } */
+    } 
   
     .bg2 .imgbox{
       position: relative;
@@ -76,6 +76,7 @@
       width: 150px;
       height: 150px;
       object-fit: cover;
+      
     }
   
   
@@ -235,7 +236,11 @@
     font-weight: 1;
   }
 
+<<<<<<< HEAD
   /* .bg2 .gallery{
+=======
+  .bg2 .gallery{
+>>>>>>> origin/settings
     position: relative;
     z-index: 100;
     background-color: transparent;
@@ -250,7 +255,11 @@
     
   } */
   
+<<<<<<< HEAD
   /* .bg2 .gallery img{
+=======
+  .bg2 .gallery img{
+>>>>>>> origin/settings
     height: 500px;
     margin-top: 10px;
     margin-left: 10px;
@@ -277,16 +286,16 @@
     
     
   }
+<<<<<<< HEAD
   /* .bg2::after {
       content: '';
+=======
+ 
+    .bg2abs{
+>>>>>>> origin/settings
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-size: fill;
+      background-size:cover;
       background-position: center; 
-      background-image: linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("./images/matcha.jpg");
       margin: auto;
       background-repeat: no-repeat;
       width: 100vw;
@@ -323,13 +332,13 @@
       font-size: 12px;
       margin-top: auto;
       
-    }
+    }*/
   
     .settings{
       height: 5%;
       width: 5%;
       
-    } */
+    } 
   
     .bg2 .imgbox{
       position: relative;
@@ -503,7 +512,11 @@
     font-size: 32px;
   }
   
+<<<<<<< HEAD
   /* .bg2 .gallery{
+=======
+  .bg2 .gallery{
+>>>>>>> origin/settings
     
     position: relative;
     z-index: 100;
@@ -525,5 +538,10 @@
     
   }
 
+<<<<<<< HEAD
   */
 } 
+=======
+  
+}
+>>>>>>> origin/settings

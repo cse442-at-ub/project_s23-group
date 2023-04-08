@@ -1,12 +1,28 @@
 import React from "react";
 import image from "./images/cbum.jpg"
 import './Home_Page.css'
+<<<<<<< HEAD
 import Posts from "../components/FeedPage";
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
+=======
+>>>>>>> origin/settings
 
+import { useState, useEffect, useRef } from 'react';
+import FeedPage from "../components/FeedPage";
+import {
+    Link,
+    Route,
+    Routes,
+    useNavigate,
+    useLocation,
+    Navigate
+  } from "react-router-dom";
 
 const Home_Page = (props) => {
+    const navigate = useNavigate()
+
+
     return (
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light col-12">
@@ -16,10 +32,11 @@ const Home_Page = (props) => {
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('profile')}>Profile</a>
-                        <a class="nav-item nav-link" href="#">Post</a>
-                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('register')}>Sign up</a>
-                        <a href="#" class="nav-item nav-link" onClick={() => props.onFormSwitch('login')}>Sign in</a>
+                        <Link class="nav-item nav-link" to ="/profile">Profile</Link>
+                        <Link class="nav-item nav-link" to ="/posts">Posts</Link>
+                        <Link class="nav-item nav-link" to ="/register">Sign Up</Link>
+                        <Link class="nav-item nav-link" to ="/login">Sign In</Link>
+                        
                         </div>
                 </div>
             </nav>
@@ -27,9 +44,13 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
+<<<<<<< HEAD
             <div class="container-fluid">
                 <FeedPage/>
             </div>
+=======
+            <FeedPage/>
+>>>>>>> origin/settings
 
             
 

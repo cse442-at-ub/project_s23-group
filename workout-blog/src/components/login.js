@@ -4,9 +4,23 @@ import downloadImage from './Signin.png';
 import React,{Fragment}  from 'react';
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+<<<<<<< HEAD
 
 function Login(props) {
   
+=======
+import {
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+  Navigate
+} from "react-router-dom";
+
+function Login(props) {
+  const navigate = useNavigate()
+>>>>>>> origin/settings
   const [email,setEmail] = useState('');
   const [password,setPass] = useState('');
     
@@ -27,7 +41,13 @@ function Login(props) {
         })
         .then((response) => {
           console.log(response);
+<<<<<<< HEAD
           props.onFormSwitch('homepage')
+=======
+          sessionStorage.setItem("id", response.data[0])
+          sessionStorage.setItem("name", response.data[2])
+          navigate("/", { replace: true })
+>>>>>>> origin/settings
 
         }, (error) => {
           console.log(error);
@@ -79,7 +99,11 @@ function Login(props) {
   </label> */}
   </div>
         <a href="#" class="create_account">
+<<<<<<< HEAD
         <span class="noAccount">Not yet registered? <a href="#" class="signUp" onClick={() => props.onFormSwitch('register')}>Create an account</a></span>
+=======
+        <span class="noAccount">Not yet registered? <a href="#" class="signUp" onClick={() => navigate("/register")}>Create an account</a></span>
+>>>>>>> origin/settings
         </a>
       </div> {/* close "Sign in" div here */}
     </div>

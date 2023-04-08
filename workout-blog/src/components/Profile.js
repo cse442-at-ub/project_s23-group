@@ -1,30 +1,121 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
+<<<<<<< HEAD
 import Timeline from './Timeline.js'
 
+=======
+import staticProfile from './images/profilepic.jpg'
+import staticBackground from './images/weights.jpg'
+import {
+    Link,
+    useNavigate,
+    useLocation,
+  } from "react-router-dom";
+  
+>>>>>>> origin/settings
 
 const Profile = (props) =>{
-   
+    const [bio, setBio] = useState('')
+    const [profile, setProfile] = useState('');
+    const [background, setBackground] = useState('');
     
+   
+
+
+
+    useEffect(() => {
+
+
+        if((sessionStorage.getItem("bio") != null) && (sessionStorage.getItem("pfp")!= null) && (sessionStorage.getItem("background")!= null)){
+            
+            setBio(sessionStorage.getItem("bio"))
+            setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
+            setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+            
+        
+        }
+        else if ((sessionStorage.getItem("bio") == null) && (sessionStorage.getItem("pfp")== null) && (sessionStorage.getItem("background")== null)){
+            setBio("Go to settings to change info")
+            setProfile(staticProfile)
+            setBackground(staticBackground)
+            
+            getImages()
+            
+            
+        }
+        else{
+            setBio("Go to settings to change info")
+            setProfile(staticProfile)
+            setBackground(staticBackground)
+        }
+    }, []);
+
+    const getImages = () =>{
+        var formData = new FormData();
+        formData.append("id", parseInt(sessionStorage.getItem("id")));
+    
+        axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+          headers: {}, 
+          data: formData
+        })
+        .then((response) => {
+          console.log(response);
+          sessionStorage.setItem("bio",response.data[2])
+          sessionStorage.setItem("background",response.data[3])
+          sessionStorage.setItem("pfp",response.data[4])
+
+        setBio(sessionStorage.getItem("bio"))
+        setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
+        setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+        
+        
+        }, (error) => {
+          console.log(error);
+        });
+  
+      
+    }
+
+ 
+let dynamicBackground = {
+        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("${background}")`
+        
+        //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
+   }
+
+  
+
+   
+   
+   const navigate = useNavigate()
+
+   
 
     return(
         <div class="bg2">
+            <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
-                            <img class='home' onClick={() => props.onFormSwitch('home')} src={require("./images/home.png")}  />
+                            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
-                            <button class='message'>Message</button>
-                            <img class='settings' onclick={()=>{console.log("home")}} src={require("./images/settings.png")} /> */}
+                            <button class='message'>Message</button> */}
+                            <img class='settings' onClick={() => navigate("/profile/settings")} src={require("./images/settings.png")} />
                         </div>
                         <div class="imgbox">
                             
-                            <img className='profile' src={require("./images/profilepic.jpg")} />
+                            <img className='profile' src={profile} />
                         
                         </div>
                     
                         <div class = "name">Mock User</div>
                             <div class="desc" >
                             
+<<<<<<< HEAD
+=======
+                            {bio}
+>>>>>>> origin/settings
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>
