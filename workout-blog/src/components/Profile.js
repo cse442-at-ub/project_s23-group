@@ -14,7 +14,7 @@ const Profile = (props) =>{
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState('');
     const [background, setBackground] = useState('');
-    // const [name, setName] = useState('');
+    const [name, setName] = useState('');
    
 
 
@@ -27,6 +27,7 @@ const Profile = (props) =>{
             setBio(sessionStorage.getItem("bio"))
             setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
             setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+            setName(sessionStorage.getItem("name"))
             
         
         }
@@ -34,7 +35,7 @@ const Profile = (props) =>{
             setBio("Go to settings to change info")
             setProfile(staticProfile)
             setBackground(staticBackground)
-            
+            setName("Mock User")
             getImages()
             
             
@@ -65,7 +66,7 @@ const Profile = (props) =>{
         setBio(sessionStorage.getItem("bio"))
         setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
         setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
-        
+        setName(sessionStorage.getItem("name"))
         
         }, (error) => {
           console.log(error);
@@ -104,7 +105,7 @@ let dynamicBackground = {
                         
                         </div>
                     
-                        <div class = "name">{sessionStorage.getItem("name")}</div>
+                        <div class = "name">{name}</div>
                             <div class="desc" >
                             
                             {bio}
