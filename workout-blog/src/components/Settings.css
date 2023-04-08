@@ -1,0 +1,15 @@
+.bg3 .animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 50vh;
+    width: 100vw;
+
+}
+
+.bg3 .circle{
+
+    height: 500px;
+    width: 500px;
+}

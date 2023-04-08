@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import axios from 'axios'
 import './Settings.css'
-import ImageCropper from "./ImageCropper.js";
+import Lottie from "lottie-react";
+import loading from "./lotties/loading.json"
 import {
   Link,
   useNavigate,
@@ -11,17 +12,25 @@ import {
 
 //userid - background- profilepic - status
 const Settings = (props) =>{
-
+  
+  
     const navigate = useNavigate()
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState(null);
     const [background, setBackground] = useState(null);
     // const [profileName, setProfileName] = useState('');
     // const [backgroundName, setBackgroundName] = useState('');
+    const [load, setLoad] = useState(false)
+    
+  
+  
 
     useEffect(() => {
    
       }, [profile,background]);
+    
+
+
     
 
     const uploadServerImages = (profile, background) =>{
@@ -42,7 +51,9 @@ const Settings = (props) =>{
           console.log("checking")
           console.log(response.data[0] + "is pfp")
           console.log(response.data[1] + "is background")
+         
           updateDB(bio,response.data[0],response.data[1])
+         
 
         }, (error) => {
           console.log(error);
@@ -66,6 +77,7 @@ const Settings = (props) =>{
       })
       .then((response) => {
         console.log(response);
+        setLoad(false)
         navigate("/profile")
 
       }, (error) => {
@@ -99,6 +111,7 @@ const Settings = (props) =>{
           
         }}
       />
+     
       </div>
       <div className="backgroundbox">
         <div>Background Image</div>    
@@ -112,16 +125,29 @@ const Settings = (props) =>{
         }}
       />
       </div>
-
+      
+           
+          
       <button 
       onClick={() => {
-        uploadServerImages(profile,background)
         
-
-
+        if((bio != '') && (profile != null)&& (background != null) ){
+          setLoad(true)
+          uploadServerImages(profile,background)
+          
+        }
+        else{
+          navigate("/profile")
+        }
       }}>
         Done</button>
-        {/* <ImageCropper/> */}
+        {load && (<div className='animation'>
+          <Lottie className='circle' animationData={loading} loop={true} />
+          </div>)}
+          
+        
+        
+        
     </div>
         )
 }

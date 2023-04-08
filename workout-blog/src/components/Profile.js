@@ -14,7 +14,7 @@ const Profile = (props) =>{
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState('');
     const [background, setBackground] = useState('');
-    
+    // const [name, setName] = useState('');
    
 
 
@@ -104,7 +104,7 @@ let dynamicBackground = {
                         
                         </div>
                     
-                        <div class = "name">Mock User</div>
+                        <div class = "name">{sessionStorage.getItem("name")}</div>
                             <div class="desc" >
                             
                             {bio}
