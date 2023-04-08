@@ -1,6 +1,9 @@
 import React from "react";
 import image from "./images/cbum.jpg"
 import './Home_Page.css'
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import postBody from "./images/tennis.jpg"
 
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
@@ -15,6 +18,13 @@ import {
 
 const Home_Page = (props) => {
     const navigate = useNavigate()
+    const [likes, setLikes] = useState(0);
+
+    const handleLike = () => {
+        setLikes(likes + 1);
+      }
+   
+ 
 
 
     return (
@@ -38,9 +48,41 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
-            <FeedPage/>
-
+            <Popup 
+            position="center" 
+            trigger= {<div><FeedPage/></div>}
+            modal
+            nested
+            >
+                {close => (
+                <div className="moda">
+                    <button className="close" onClick={close}>
+                        &times;
+                    </button>
+                        <div className="postPop">
+                            <div className="post-headerPop">
+                                <img src={image} alt="post author" className="post-author-avatarPop" />
+                            <div className="post-author-namePop">Username</div>
+                                </div>
+                            <div className="post-descriptionPop">
+                                Title
+                            </div>
+                            <div className="post-bodyPop">
+                                <img src={postBody} alt="post image" className="post-imagePop" />
+                            </div>
+                            <div className="post-actionsPop">
+                                <button className="like-buttonPop" onClick={handleLike}>{likes} Likes</button>
+                                {/* <button className="comment-button">Comment</button> */}
+                                <button className="share-buttonPop">Share</button>
+                            </div>
+                        </div>
+                    
+                </div>
+    )}
+            </Popup>
             
+            {/* <FeedPage/> */}
+   
 
             
 

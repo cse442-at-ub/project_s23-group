@@ -121,7 +121,8 @@ const Register = (props) =>{
                         Incomplete fields or password does not match.
                             </div>)}
                         
-            </div>
+                    </div>
+                    
         </div>
       );
     
