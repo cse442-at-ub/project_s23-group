@@ -26,15 +26,12 @@ const Profile = (props) =>{
     useEffect(() => {
         if(sessionStorage.getItem("id") == null){
             console.log("1")
-            navigate("/")
+            navigate("/CSE442-542/2023-Spring/cse-442w/test2/")
             
         }
         else{
             console.log("2")
-            setBio("Go to settings to change info")
-            setProfile(staticProfile)
-            setBackground(staticBackground)
-            setName("Mock User")
+           
             getImages()
         }
        
@@ -61,6 +58,7 @@ const Profile = (props) =>{
           sessionStorage.setItem("bio",response.data[2])
           sessionStorage.setItem("background",response.data[3])
           sessionStorage.setItem("pfp",response.data[4])
+          sessionStorage.setItem("name",response.data[1])
 
         setBio(sessionStorage.getItem("bio"))
         setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("pfp"))
@@ -69,6 +67,10 @@ const Profile = (props) =>{
         
         
         }, (error) => {
+            setBio("Go to settings to change info")
+            setProfile(staticProfile)
+            setBackground(staticBackground)
+            setName("Mock User")
           console.log(error);
         });
   
@@ -94,10 +96,10 @@ let dynamicBackground = {
         <div class="bg2">
             <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
-                            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
+                            <img class='home' onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                            <img class='settings' onClick={() => navigate("/settings")} src={require("./images/settings.png")} />
+                            <img class='settings' onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/settings")} src={require("./images/settings.png")} />
                         </div>
                         <div class="imgbox">
                             
