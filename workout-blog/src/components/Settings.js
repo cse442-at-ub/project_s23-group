@@ -18,12 +18,11 @@ const Settings = (props) =>{
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState(null);
     const [background, setBackground] = useState(null);
-    // const [profileName, setProfileName] = useState('');
-    // const [backgroundName, setBackgroundName] = useState('');
+
     const [load, setLoad] = useState(false)
     
   
-  
+    let back = "/profile/" + sessionStorage.getItem("id")
 
     useEffect(() => {
    
@@ -89,8 +88,8 @@ const Settings = (props) =>{
     
     return(
     <div className="bg3">
-        <div onClick={() => navigate("/profile", { replace: true })}> Back </div>   
-        <div className="biobox">
+        <div onClick={() => navigate(back, { replace: true })}> Back </div>   
+        <div className="bioBox">
         <input type="text"
             placeholder="Update Bio"
             class="bio" 
@@ -99,7 +98,7 @@ const Settings = (props) =>{
             }} required />
         </div>
 
-        <div className="profilebox">
+        <div className="profileBox">
         <div>Profile Picture</div>    
         <input
         type="file"
@@ -113,7 +112,7 @@ const Settings = (props) =>{
       />
      
       </div>
-      <div className="backgroundbox">
+      <div className="backgroundBox">
         <div>Background Image</div>    
         <input
         type="file"
@@ -127,7 +126,7 @@ const Settings = (props) =>{
       </div>
       
            
-          
+          <div className="doneBox">
       <button 
       onClick={() => {
         
@@ -137,14 +136,14 @@ const Settings = (props) =>{
           
         }
         else{
-          navigate("/profile:id")
+          navigate(back)
         }
       }}>
         Done</button>
         {load && (<div className='animation'>
           <Lottie className='circle' animationData={loading} loop={true} />
           </div>)}
-          
+          </div>
         
         
         

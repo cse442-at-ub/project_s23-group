@@ -6,50 +6,49 @@ import staticBackground from './images/weights.jpg'
 import {
     Link,
     useNavigate,
-    useLocation,
+    useParams,
   } from "react-router-dom";
   
 
 const Profile = (props) =>{
+    const navigate = useNavigate()
+    const params = useParams()
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState('');
     const [background, setBackground] = useState('');
     const [name, setName] = useState('');
    
+    const searchId = params.id
+   
 
 
 
     useEffect(() => {
-
-
-        if((sessionStorage.getItem("bio") != null) && (sessionStorage.getItem("pfp")!= null) && (sessionStorage.getItem("background")!= null)){
+        if(sessionStorage.getItem("id") == null){
+            console.log("1")
+            navigate("/")
             
-            setBio(sessionStorage.getItem("bio"))
-            setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("pfp"))
-            setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
-            setName(sessionStorage.getItem("name"))
-            
-        
         }
-        else if ((sessionStorage.getItem("bio") == null) && (sessionStorage.getItem("pfp")== null) && (sessionStorage.getItem("background")== null)){
+        else{
+            console.log("2")
             setBio("Go to settings to change info")
             setProfile(staticProfile)
             setBackground(staticBackground)
             setName("Mock User")
             getImages()
-            
-            
         }
-        else{
-            setBio("Go to settings to change info")
-            setProfile(staticProfile)
-            setBackground(staticBackground)
-        }
+       
+
+
+       
+           
+            
+  
     }, []);
 
     const getImages = () =>{
         var formData = new FormData();
-        formData.append("id", parseInt(sessionStorage.getItem("id")));
+        formData.append("id", searchId);
     
         axios({
           method: 'post',
@@ -67,6 +66,7 @@ const Profile = (props) =>{
         setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("pfp"))
         setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
         setName(sessionStorage.getItem("name"))
+        
         
         }, (error) => {
           console.log(error);
@@ -86,7 +86,7 @@ let dynamicBackground = {
 
    
    
-   const navigate = useNavigate()
+   
 
    
 

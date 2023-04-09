@@ -1,3 +1,10 @@
+.bg3{
+    background-color: rgba(27,27,27,1);
+    height: 100vh;
+    width: 100vw;
+    
+}
+
 .bg3 .animation {
     display: flex;
     justify-content: center;
@@ -6,6 +13,13 @@
     height: 50vh;
     width: 100vw;
 
+}
+
+.bioBox, .profileBox, .backgroundBox, .doneBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: antiquewhite;
 }
 
 .bg3 .circle{

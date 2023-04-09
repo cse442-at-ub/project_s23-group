@@ -2,11 +2,14 @@ import React,{Fragment}  from 'react';
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Register.css'
+import Lottie from "lottie-react";
+import check from "./lotties/check.json"
 import {
     Link,
     useNavigate,
     useLocation,
   } from "react-router-dom";
+
 
 
 
@@ -120,6 +123,8 @@ const Register = (props) =>{
                             {error && (<div class="row" id='error'>
                         Incomplete fields or password does not match.
                             </div>)}
+
+                            
                         
             </div>
         </div>
