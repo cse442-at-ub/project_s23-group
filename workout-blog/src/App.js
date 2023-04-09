@@ -18,10 +18,9 @@ function App() {
           <Route index element={<Home />}/>
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="profile">
-            <Route index element={<ProfilePage />}/>
-            <Route path="settings" element={<Settings />} />
-          </Route> 
+          <Route path="profile/:id" element={<ProfilePage />}/>
+          <Route path="settings" element={<Settings />} />
+          
           <Route path="*" element={<NotFound />} />
           </Route>
        

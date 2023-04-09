@@ -25,8 +25,8 @@ const Profile = (props) =>{
         if((sessionStorage.getItem("bio") != null) && (sessionStorage.getItem("pfp")!= null) && (sessionStorage.getItem("background")!= null)){
             
             setBio(sessionStorage.getItem("bio"))
-            setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
-            setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+            setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("pfp"))
+            setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
             setName(sessionStorage.getItem("name"))
             
         
@@ -64,8 +64,8 @@ const Profile = (props) =>{
           sessionStorage.setItem("pfp",response.data[4])
 
         setBio(sessionStorage.getItem("bio"))
-        setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("pfp"))
-        setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/" + sessionStorage.getItem("background"))
+        setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("pfp"))
+        setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
         setName(sessionStorage.getItem("name"))
         
         }, (error) => {
@@ -97,7 +97,7 @@ let dynamicBackground = {
                             <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                            <img class='settings' onClick={() => navigate("/profile/settings")} src={require("./images/settings.png")} />
+                            <img class='settings' onClick={() => navigate("/settings")} src={require("./images/settings.png")} />
                         </div>
                         <div class="imgbox">
                             

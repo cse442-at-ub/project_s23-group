@@ -78,7 +78,7 @@ const Settings = (props) =>{
       .then((response) => {
         console.log(response);
         setLoad(false)
-        navigate("/profile")
+        navigate("/profile:id")
 
       }, (error) => {
         console.log(error);
@@ -137,7 +137,7 @@ const Settings = (props) =>{
           
         }
         else{
-          navigate("/profile")
+          navigate("/profile:id")
         }
       }}>
         Done</button>

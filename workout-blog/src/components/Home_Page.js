@@ -15,8 +15,24 @@ import {
 
 const Home_Page = (props) => {
     const navigate = useNavigate()
+    const [id, setId] = useState('')
+    const [name, setName] = useState('')
 
+    const signOut = () => {
+        sessionStorage.clear();
+        setId('')
+        setName('')
+    }
 
+    useEffect(() => {
+        if(sessionStorage.getItem("id")!= null){
+            setId(sessionStorage.getItem("id"))
+            setName(sessionStorage.getItem("name"))
+            console.log("non null")
+        }
+        console.log("entered")
+    }, [id,name]);
+    
     return (
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light col-12">
@@ -26,12 +42,12 @@ const Home_Page = (props) => {
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                        <Link class="nav-item nav-link" to ="/profile">Profile</Link>
-                        <Link class="nav-item nav-link" to ="/posts">Posts</Link>
-                        <Link class="nav-item nav-link" to ="/register">Sign Up</Link>
-                        <Link class="nav-item nav-link" to ="/login">Sign In</Link>
-                        
-                        </div>
+                    {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
+                    {(id && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
+                    {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
+                    {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
+                    {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }
+                    </div>
                 </div>
             </nav>
             <div class="card col-8 ml-auto mr-auto">
