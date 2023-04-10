@@ -61,7 +61,7 @@ function Login(props) {
       <h1>Sign in</h1>
         <div class='usernames'>
           <input type="text"
-            placeholder='Username'
+            placeholder='Email'
             class='username'
             onChange={event => {
               setEmail(event.target.value)

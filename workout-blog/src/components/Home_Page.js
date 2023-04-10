@@ -43,7 +43,7 @@ const Home_Page = (props) => {
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                     {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
-                    {(id && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
+                    {(id && (<Link class="nav-item nav-link" to ="/makePost">Make a Post</Link>))}
                     {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
                     {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
                     {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }
