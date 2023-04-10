@@ -34,7 +34,9 @@ function Login(props) {
         .then((response) => {
           console.log("shouldnt be error ")
           console.log(response);
-          props.onFormSwitch('homepage')
+          sessionStorage.setItem("id", response.data[0])
+          sessionStorage.setItem("name", response.data[2])
+          navigate("/")
 
         }, (error) => {
           console.log("error")
