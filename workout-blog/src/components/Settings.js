@@ -88,7 +88,10 @@ const Settings = (props) =>{
     
     return(
     <div className="bg3">
-        <div onClick={() => navigate(back, { replace: true })}> Back </div>   
+        <div class='home' onClick={() => navigate(back, { replace: true })}/> 
+        
+        <div className="box">
+        <div className="settings">Settings</div>
         <div className="bioBox">
         <input type="text"
             placeholder="Update Bio"
@@ -97,24 +100,30 @@ const Settings = (props) =>{
             setBio(event.target.value)
             }} required />
         </div>
+        <div className='profileTitle'>Set Profile Picture</div>   
 
         <div className="profileBox">
-        <div>Profile Picture</div>    
-        <input
-        type="file"
-        name="myImage"
-        accept="image/x-png,image/gif,image/jpeg"
-        onChange={(event) => {
-        
-          setProfile(event.target.files[0]);
+           
+          <input
+          className='profile'
+          type="file"
+      
+          name="myImage"
+          accept="image/x-png,image/gif,image/jpeg"
+          onChange={(event) => {
           
-        }}
+            setProfile(event.target.files[0]);
+            
+          }}
       />
      
       </div>
+
+      <div className='backgroundTitle'>Set Background</div> 
       <div className="backgroundBox">
-        <div>Background Image</div>    
+          
         <input
+        className='background'
         type="file"
         name="myImage"
         onChange={(event) => {
@@ -128,11 +137,15 @@ const Settings = (props) =>{
            
           <div className="doneBox">
       <button 
+      className='done'
       onClick={() => {
         
         if((bio != '') && (profile != null)&& (background != null) ){
           setLoad(true)
           uploadServerImages(profile,background)
+          setBio('')
+          setProfile(null)
+          setBackground(null)
           
         }
         else{
@@ -146,7 +159,7 @@ const Settings = (props) =>{
           </div>
         
         
-        
+          </div>
     </div>
         )
 }

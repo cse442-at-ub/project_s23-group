@@ -11,6 +11,7 @@ import {
   
 
 const Profile = (props) =>{
+    
     const navigate = useNavigate()
     const params = useParams()
     const [bio, setBio] = useState('')
@@ -21,13 +22,13 @@ const Profile = (props) =>{
    
     const searchId = params.id
    
-    function refreshPage(){ 
-        window.location.reload(); 
-    }
+   
 
 
 
     useEffect(() => {
+    
+
         if(sessionStorage.getItem("id") == null){
             console.log("1")
             navigate("/")
@@ -35,12 +36,13 @@ const Profile = (props) =>{
         }
         else{
             console.log("2")
-           
+         
             getImages()
+            
         }
        
-
-
+   
+        
        
            
             
@@ -99,13 +101,14 @@ let dynamicBackground = {
 
     return(
         <div class="bg2">
+            
             <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
                             <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                            <button type="button" onClick={ refreshPage }> <span>Reload</span> </button> 
-                            <img class='settings' onClick={() => navigate("/settings")} src={require("./images/settings.png")} />
+                           
+                            {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
                         </div>
                         <div class="imgbox">
                             

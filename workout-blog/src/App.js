@@ -15,15 +15,16 @@ function App() {
    
       <Routes>
           <Route path="/" >
-          <Route index element={<Home />}/>
+            <Route index element={<Home />}/>
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
-            <Route path="profile/:id" element={<ProfilePage />}/>
-            
-            <Route path="settings" element={<Settings />} />
+            <Route path="profile">
+              <Route path=":id" element={<ProfilePage />} />
+              <Route path=":id/settings" element={<Settings />} />
+              </Route>
             <Route path="*" element={<NotFound />} />
           
-            </Route>
+          </Route>
       </Routes>
    
 
