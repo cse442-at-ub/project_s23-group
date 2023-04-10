@@ -60,7 +60,9 @@ const Home_Page = (props) => {
 
             
 
-
+        <button
+        onClick={()=>navigate("profile/137")}
+        >click me</button>
 
         </div>
 

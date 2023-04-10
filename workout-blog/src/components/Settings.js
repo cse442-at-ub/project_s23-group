@@ -22,7 +22,7 @@ const Settings = (props) =>{
     const [load, setLoad] = useState(false)
     
   
-    let back = "/CSE442-542/2023-Spring/cse-442w/test2/profile/" + sessionStorage.getItem("id")
+    let back = "/profile/" + sessionStorage.getItem("id")
 
     useEffect(() => {
    

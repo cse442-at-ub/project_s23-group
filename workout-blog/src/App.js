@@ -14,16 +14,16 @@ function App() {
   return (
    
       <Routes>
-          <Route path="/CSE442-542/2023-Spring/cse-442w/test2/">
-            <Route index element={<Home />}/>
+          <Route path="/" >
+          <Route index element={<Home />}/>
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
             <Route path="profile/:id" element={<ProfilePage />}/>
+            
             <Route path="settings" element={<Settings />} />
-          
             <Route path="*" element={<NotFound />} />
-          </Route>
-       
+          
+            </Route>
       </Routes>
    
 

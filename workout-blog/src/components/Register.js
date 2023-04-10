@@ -67,7 +67,7 @@ const Register = (props) =>{
 
     return (
         <div class="bg">
-            <div class='home' onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/")}/>   
+            <div class='home' onClick={() => navigate("/")}/>   
             
             <div class="accountwrap">
                 <div class="sign">Sign Up</div>
@@ -117,7 +117,7 @@ const Register = (props) =>{
                         
                     </div>
                         <div class="col">
-                            <div class="row">Already have an account? <button className="signin" onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/login")}>Sign In</button></div>
+                            <div class="row">Already have an account? <button className="signin" onClick={() => navigate("/login")}>Sign In</button></div>
                         </div>
                         
                             {error && (<div class="row" id='error'>

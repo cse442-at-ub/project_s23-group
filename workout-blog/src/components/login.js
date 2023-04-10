@@ -35,7 +35,7 @@ function Login(props) {
           console.log(response);
           sessionStorage.setItem("id", response.data[0])
           sessionStorage.setItem("name", response.data[2])
-          navigate("/CSE442-542/2023-Spring/cse-442w/test2/")
+          navigate("/")
            
 
           
@@ -90,9 +90,9 @@ function Login(props) {
     Remember me
   </label> */}
   </div>
-        <a href="#" class="create_account">
-        <span class="noAccount">Not yet registered? <a href="#" class="signUp" onClick={() => navigate("/CSE442-542/2023-Spring/cse-442w/test2/register")}>Create an account</a></span>
-        </a>
+        
+        <span >Not yet registered? <button class="noAccount" onClick={() => navigate("/register")}>Create an account</button></span>
+        
       </div> {/* close "Sign in" div here */}
 
 
