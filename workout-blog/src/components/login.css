@@ -1,5 +1,6 @@
 .Login {
   display: flex;
+ 
   }
  
   .Login button {
@@ -19,6 +20,7 @@
   font-weight: 300;
   line-height: 35px;
   margin-left: 5px;
+
   }
   .Login .username {
   margin-top: 20px;
@@ -124,6 +126,8 @@
   color: #010100;
   text-decoration: underline;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 .login-box {
   display: flex;

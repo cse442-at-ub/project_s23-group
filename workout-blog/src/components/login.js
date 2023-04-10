@@ -4,13 +4,19 @@ import downloadImage from './Signin.png';
 import React,{Fragment}  from 'react';
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import {
+  useNavigate,
+} from "react-router-dom";
+import Lottie from "lottie-react";
+import check from "./lotties/check.json"
 
 function Login(props) {
-  
+  const navigate = useNavigate()
   const [email,setEmail] = useState('');
   const [password,setPass] = useState('');
+
     
-  const loginUser = async (email, password) => {
+  const loginUser =  (email, password) => {
     console.log(email)
     console.log(password)
     var bodyFormData = new FormData();
@@ -29,6 +35,7 @@ function Login(props) {
           console.log("shouldnt be error ")
           console.log(response);
           props.onFormSwitch('homepage')
+
         }, (error) => {
           console.log("error")
           console.log(error);
@@ -44,7 +51,7 @@ function Login(props) {
 
   return (
     <div className="Login">
-    <div class='home' onClick={() => props.onFormSwitch('home')}/>   
+    {/* <div class='home' onClick={() => props.onFormSwitch('home')}/>    */}
 
       <img id="myImage" src={downloadImage} alt="Login Image"/>
      
@@ -69,7 +76,7 @@ function Login(props) {
         </div>
         <div>
         </div> 
-        <a href="#" class="log_but"onClick={() => loginUser(email,password)}>Sign in</a>  
+        <button  class="log_but"onClick={() => loginUser(email,password)}>Sign in</button>  
 
         <div class="login-box"> 
 {/*  <a href="#" class="forgotpass" onClick={forgotPass}>Forgot your password?</a>  */}
@@ -79,10 +86,12 @@ function Login(props) {
     Remember me
   </label> */}
   </div>
-        <a href="#" class="create_account">
-        <span class="noAccount">Not yet registered? <a href="#" class="signUp" onClick={() => props.onFormSwitch('register')}>Create an account</a></span>
-        </a>
+        
+        <span >Not yet registered? <button class="noAccount" onClick={() => navigate("/register")}>Create an account</button></span>
+        
       </div> {/* close "Sign in" div here */}
+
+
     </div>
   );
 }
