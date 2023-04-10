@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import './FeedPage.css';
 import image from "./images/cbum.jpg"
 import postBody from "./images/tennis.jpg"
+import {
+  useNavigate,
+} from "react-router-dom";
 
 
 function FeedPage() {
+  const navigate = useNavigate()
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   
@@ -24,7 +28,7 @@ function FeedPage() {
       {/* Post 1 */}
       <div className="post">
         <div className="post-header">
-          <img src={image} alt="post author" className="post-author-avatar" />
+          <img onClick={()=>navigate("profile/137")} src={image} alt="post author" className="post-author-avatar" />
           <div className="post-author-name">Username</div>
         </div>
         <div className="post-description">

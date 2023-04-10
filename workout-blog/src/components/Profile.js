@@ -1,30 +1,125 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
-
+import staticProfile from './images/profilepic.jpg'
+import staticBackground from './images/weights.jpg'
+import {
+    Link,
+    useNavigate,
+    useParams,
+  } from "react-router-dom";
+  
 
 const Profile = (props) =>{
-   
     
+    const navigate = useNavigate()
+    const params = useParams()
+    const [bio, setBio] = useState('')
+    const [profile, setProfile] = useState('');
+    const [background, setBackground] = useState('');
+    const [name, setName] = useState('');
+    const [refresh, setRefresh] = useState(false);
+   
+    const searchId = params.id
+   
+   
+
+
+
+    useEffect(() => {
+    
+
+        if(sessionStorage.getItem("id") == null){
+            console.log("1")
+            navigate("/")
+            
+        }
+        else{
+            console.log("2")
+         
+            getImages()
+            
+        }
+       
+   
+        
+       
+           
+            
+  
+    }, []);
+
+    const getImages = () =>{
+        var formData = new FormData();
+        formData.append("id", searchId);
+    
+        axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+          headers: {}, 
+          data: formData
+        })
+        .then((response) => {
+          console.log(response);
+          sessionStorage.setItem("bio",response.data[2])
+          sessionStorage.setItem("background",response.data[3])
+          sessionStorage.setItem("pfp",response.data[4])
+          sessionStorage.setItem("name",response.data[1])
+
+        setBio(sessionStorage.getItem("bio"))
+        setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("pfp"))
+        setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
+        setName(sessionStorage.getItem("name"))
+       
+        
+        }, (error) => {
+            setBio("Go to settings to change info")
+            setProfile(staticProfile)
+            setBackground(staticBackground)
+            setName("Mock User")
+            
+          console.log(error);
+        });
+  
+      
+    }
+
+ 
+let dynamicBackground = {
+        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("${background}")`
+        
+        //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
+   }
+
+  
+
+   
+   
+   
+
+   
 
     return(
         <div class="bg2">
+            
+            <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
-                            <img class='home' onClick={() => props.onFormSwitch('home')} src={require("./images/home.png")}  />
+                            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
-                            <button class='message'>Message</button>
-                            <img class='settings' onclick={()=>{console.log("home")}} src={require("./images/settings.png")} /> */}
+                            <button class='message'>Message</button> */}
+                           
+                            {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
                         </div>
                         <div class="imgbox">
                             
-                            <img className='profile' src={require("./images/profilepic.jpg")} />
+                            <img className='profile' src={profile} />
                         
                         </div>
                     
-                        <div class = "name">Mock User</div>
+                        <div class = "name">{name}</div>
                             <div class="desc" >
                             
-                            Mock Bio
+                            {bio}
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>
