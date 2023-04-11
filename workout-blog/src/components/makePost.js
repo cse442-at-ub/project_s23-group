@@ -1,9 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import "./makePost.css";
-
+import {
+    useNavigate,
+  } from "react-router-dom";
+  import Lottie from "lottie-react";
+  import check from "./lotties/check.json"
 
 function MakePost() {
+const navigate = useNavigate()
   const [myFile, setMyFile] = useState(null);
   const [msg, setMsg] = useState('');
   const [messageText, setMessageText] = useState('');
@@ -39,6 +44,7 @@ function MakePost() {
       .then(response => {
         sessionStorage.setItem("myFile", response.data[0]);
         updatePostDB(title, response.data[0], messageText);
+        navigate("/")
       })
       .catch(error => {
         console.log(error);

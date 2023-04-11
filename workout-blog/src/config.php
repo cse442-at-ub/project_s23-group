@@ -101,3 +101,19 @@ function getTimeline($id){
     return $data;
 
 }
+function getPost(){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $stmt = $conn->prepare("SELECT * FROM posts");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $posts = array();
+    while ($row = $result->fetch_assoc()) {
+        $posts[] = $row;
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    return $posts;
+}
