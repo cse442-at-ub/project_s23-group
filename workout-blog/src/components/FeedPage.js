@@ -48,7 +48,7 @@ function FeedPage() {
 
   return (
     <div className="feed">
-      {posts.map(post => (
+      {posts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={post.img} alt="post author" className="post-author-avatar" />
@@ -58,7 +58,7 @@ function FeedPage() {
             {post.title}
           </div>
           <div className="post-body">
-            {post.img && <img src={`/uploads/${post.img}`} alt="post image" className="post-image" />}
+            {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
             {post.text && <p className="post-text">{post.text}</p>}
           </div>
           <div className="post-actions">
@@ -74,6 +74,7 @@ function FeedPage() {
             <form className="comment-form" onSubmit={(e) => handleComment(e, post.postid)}>
               <input type="text" name="comment" placeholder="Add a comment..." />
               <button type="submit">Post</button>
+              <div className="post-timestamp">{post.created_at}</div>
             </form>
           </div>
         </div>
