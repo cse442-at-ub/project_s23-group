@@ -77,6 +77,8 @@ function FeedPage() {
               <div className="post-timestamp">{post.created_at}</div>
             </form>
           </div>
+
+          
         </div>
       ))}
     </div>

@@ -53,7 +53,7 @@ function Login(props) {
 
   return (
     <div className="Login">
-    {/* <div class='home' onClick={() => props.onFormSwitch('home')}/>    */}
+      <div class='home' onClick={() => navigate("/")}/>   
 
       <img id="myImage" src={downloadImage} alt="Login Image"/>
      
