@@ -6,6 +6,15 @@ import {
   } from "react-router-dom";
   import Lottie from "lottie-react";
   import check from "./lotties/check.json"
+  import { useEffect, useRef } from 'react';
+import FeedPage from "../components/FeedPage";
+import {
+    Link,
+    Route,
+    Routes,
+    useLocation,
+    Navigate
+  } from "react-router-dom";
 
 function MakePost() {
 const navigate = useNavigate()
@@ -13,10 +22,15 @@ const navigate = useNavigate()
   const [msg, setMsg] = useState('');
   const [messageText, setMessageText] = useState('');
   const [title, setTitle] = useState('');
-
+  const [id, setId] = useState('')
+  const [name, setName] = useState('')
 
  
-
+  const signOut = () => {
+    sessionStorage.clear();
+    setId('')
+    setName('')
+}
   function setFile(event) {
     setMyFile(event.target.files[0]);
   }
@@ -75,7 +89,14 @@ const navigate = useNavigate()
 
   console.log("Success")
 }
-
+useEffect(() => {
+  if(sessionStorage.getItem("id")!= null){
+      setId(sessionStorage.getItem("id"))
+      setName(sessionStorage.getItem("name"))
+      console.log("non null")
+  }
+  console.log("entered")
+}, [id,name]);
 
   function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -84,6 +105,20 @@ const navigate = useNavigate()
 
   return (
     <div className="mPost">
+         <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light col-12">
+                <a class="navbar-brand" href="#">Gym Blog</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                    {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
+                    {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
+                    </div>
+                </div>
+            </nav>
+        </div>
       <form onSubmit={handleSubmit}>
         <div className="form-group files">
           <label>Choose your Photo </label>
@@ -118,3 +153,7 @@ const navigate = useNavigate()
 }
 
 export default MakePost;
+
+
+
+     

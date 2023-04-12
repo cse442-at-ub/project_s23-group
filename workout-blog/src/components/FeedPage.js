@@ -11,9 +11,13 @@ function FeedPage() {
   const [likes, setLikes] = useState({});
   const [comments, setComments] = useState({});
   const [posts, setPosts] = useState([]);
+  const [profilePic, setProfilePic] = useState([]);
+  const [username, setUsername] = useState([]);
+
 
   useEffect(() => {
     givePost();
+    giveProfilePic();
   }, []);
 
   const handleLike = (postId) => {
@@ -45,14 +49,31 @@ function FeedPage() {
         console.log(error);
       });
   }
+  function giveProfilePic() {
+    var formData = new FormData();   
+    formData.append("id", parseInt(sessionStorage.getItem("id")));//should be user  id 
+    axios({
+      method: 'post',
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+      data: formData
+    })
+      .then(response => {
+        setProfilePic(response.data.pfp);
+        setUsername(response.data.username)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   return (
+    
     <div className="feed">
       {posts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
-            <img onClick={()=>navigate(`profile/${post.userid}`)} src={post.img} alt="post author" className="post-author-avatar" />
-            <div className="post-author-name">{post.username}</div>
+            <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${profilePic}`} alt="post author" className="post-author-avatar" />
+            <div className="post-author-name">{username}</div>
           </div>
           <div className="post-description">
             {post.title}
@@ -77,8 +98,6 @@ function FeedPage() {
               <div className="post-timestamp">{post.created_at}</div>
             </form>
           </div>
-
-          
         </div>
       ))}
     </div>

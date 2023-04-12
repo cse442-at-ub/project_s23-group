@@ -92,7 +92,7 @@
   text-decoration: none;
   border: none;
   background-color: transparent;
-  margin-top: 20px;
+  margin-top: 20px; 
   display: flex;
   align-items: center;
   gap: 5px;
@@ -102,7 +102,7 @@
   display: inline-block;
   position: absolute;
   top: 205px;
-  right: 190px;
+  right: 270px;
   width: 300px;
   font-family: 'Titillium Web', sans-serif;
   height: 35px;
