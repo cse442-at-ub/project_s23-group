@@ -1,9 +1,11 @@
 import React from "react";
 import image from "./images/cbum.jpg"
 import './Home_Page.css'
-
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
+import postBody from "./images/tennis.jpg"
 import {
     Link,
     Route,
@@ -17,6 +19,11 @@ const Home_Page = (props) => {
     const navigate = useNavigate()
     const [id, setId] = useState('')
     const [name, setName] = useState('')
+    const [likes, setLikes] = useState(0);
+
+    const handleLike = () => {
+        setLikes(likes + 1);
+      }
 
     const signOut = () => {
         sessionStorage.clear();
@@ -43,7 +50,7 @@ const Home_Page = (props) => {
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                     {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
-                    {(id && (<Link class="nav-item nav-link" to ="/makePost">Make a Post</Link>))}
+                    {(id && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
                     {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
                     {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
                     {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }
@@ -54,8 +61,8 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
+           
             <FeedPage/>
-
             
 
             
@@ -66,10 +73,11 @@ const Home_Page = (props) => {
 
         
         
-    );
+    );  
         
 
 }
 
 
 export default Home_Page;
+

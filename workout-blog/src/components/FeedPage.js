@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './FeedPage.css';
+import image from "./images/cbum.jpg"
+import postBody from "./images/tennis.jpg"
+import axios from 'axios'
 import {
   useNavigate,
 } from "react-router-dom";
-import axios from 'axios';
 
 
 function FeedPage() {
@@ -77,6 +79,8 @@ function FeedPage() {
               <div className="post-timestamp">{post.created_at}</div>
             </form>
           </div>
+
+          
         </div>
       ))}
     </div>

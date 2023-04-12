@@ -6,7 +6,6 @@
  
     overflow-x: hidden;
   }
-
   .popup {
     position: fixed;
     top: 0;
@@ -95,7 +94,6 @@
   .popup-close:hover {
     background-color: #499fd8;
   }
-  
   
   .bg2{
     background-color: rgba(27,27,27,1);
@@ -349,8 +347,6 @@
     object-fit: cover;
     
   }
-
-
   
 
 

@@ -32,14 +32,16 @@ function Login(props) {
           data: bodyFormData
         })
         .then((response) => {
-          console.log("shouldnt be error ")
           console.log(response);
           sessionStorage.setItem("id", response.data[0])
           sessionStorage.setItem("name", response.data[2])
           navigate("/")
+           
+
+          
+          
 
         }, (error) => {
-          console.log("error")
           console.log(error);
         });
         
@@ -61,7 +63,7 @@ function Login(props) {
       <h1>Sign in</h1>
         <div class='usernames'>
           <input type="text"
-            placeholder='Email'
+            placeholder='Username'
             class='username'
             onChange={event => {
               setEmail(event.target.value)
