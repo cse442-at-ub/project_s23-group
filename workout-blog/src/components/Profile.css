@@ -236,7 +236,7 @@
   
  
   .bg2 .postwrap{
-
+    margin-left: 4%;
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -471,6 +471,7 @@
   
 
   .bg2 .postwrap{
+    margin-left: 15%;
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -479,16 +480,19 @@
   }
   
   .bg2 .post{
+    
     color: aliceblue;
     font-weight: 400;
   }
   
   .bg2 .postbutton{
+    
     color: gray;
     font-weight: 1;
   }
   
   .bg2 .followingwrap{
+    
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -506,6 +510,7 @@
     font-weight: 1;
   }
   .bg2 .followerwrap{
+    
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;

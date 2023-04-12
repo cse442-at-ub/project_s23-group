@@ -75,10 +75,7 @@ const Profile = (props) =>{
 
     const signOut = () => {
         sessionStorage.clear();
-        setBio('')
-        setProfile(null)
-        setBackground(null)
-        navigate("/")
+        console.log("exit")
     }
 
     const getImages = () =>{
@@ -146,7 +143,7 @@ let dynamicBackground = {
                     
                     {(sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
                     {(searchId == sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`settings`}>Settings</Link>))}
-                    {(sessionStorage.getItem("id") && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
+                    {(sessionStorage.getItem("id") && (<Link to={"/"} onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
                   
                     </div>
                 </div>
