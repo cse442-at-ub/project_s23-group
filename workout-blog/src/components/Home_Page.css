@@ -18,3 +18,101 @@
     left: 10px;
   }
 
+  .popup-content {
+   
+    padding: 0 !important;
+   
+ 
+  }
+
+  .moda .postPop{
+    height: 80vh;
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+  }
+
+  .moda .post-headerPop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 12%;
+    padding: 5px;
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .moda .post-author-avatarPop {
+    width: 16%;
+    height: 100%;
+    border-radius: 50%;
+    margin-right: 2%;
+    
+  }
+  
+  .moda .post-author-namePop {
+    font-size: 32px;
+    font-weight: 600;
+    height: 50%;
+    vertical-align: text-top;
+    
+  }
+
+  .moda .post-descriptionPop {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    font-size: 48px;
+   
+  }
+  
+  .moda .post-bodyPop {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    
+  }
+  
+  .moda .post-imagePop {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  
+  
+  .moda .post-actionsPop {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    /* padding: 10px; */
+  }
+  
+  .moda .like-buttonPop,
+  .moda .comment-button,
+  .moda .share-buttonPop {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    color: 000;
+    transition: color 0.3s ease;
+  }
+  
+  .moda .like-buttonPop:hover,
+  .moda .comment-buttonPop:hover,
+  .moda .share-buttonPop:hover {
+    color: #000000;
+  }
+  
+  .moda .like-button svg,
+  .moda .comment-button svg,
+  .moda .share-button svg {
+    margin-right: 5px;
+  }
