@@ -43,7 +43,7 @@ const Home_Page = (props) => {
     return (
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light col-12">
-                <a class="navbar-brand" href="#">Gym Blog</a>
+                <div class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -51,15 +51,15 @@ const Home_Page = (props) => {
                     <div class="navbar-nav ml-auto">
                     {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
                     {(id && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
-                    {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
+                    {(id && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
                     {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
                     {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }
                     </div>
                 </div>
             </nav>
-            <div class="card col-8 ml-auto mr-auto">
+            {!id && (<div class="card col-8 ml-auto mr-auto">
                 <img src = {image}/>
-            </div>
+            </div>)}
 
            
             <FeedPage/>
