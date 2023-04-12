@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './FeedPage.css';
-import {
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-
 
 function FeedPage() {
   const navigate = useNavigate();
@@ -13,12 +10,42 @@ function FeedPage() {
   const [posts, setPosts] = useState([]);
   const [profilePic, setProfilePic] = useState([]);
   const [username, setUsername] = useState([]);
-
+  const [selectedState, setSelectedState] = useState('all');
 
   useEffect(() => {
     givePost();
     giveProfilePic();
   }, []);
+
+  function givePost() {
+    axios({
+      method: 'post',
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPost.php",
+    })
+      .then(response => {
+        setPosts(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  function giveProfilePic() {
+    var formData = new FormData();   
+    formData.append("id", parseInt(sessionStorage.getItem("id")));//should be user  id 
+    axios({
+      method: 'post',
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+      data: formData
+    })
+      .then(response => {
+        setProfilePic(response.data.pfp);
+        setUsername(response.data.username)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   const handleLike = (postId) => {
     setLikes(prevLikes => ({
@@ -37,39 +64,25 @@ function FeedPage() {
     e.target.elements.comment.value = '';
   };
 
-  function givePost() {
-    axios({
-      method: 'post',
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPost.php",
-    })
-      .then(response => {
-        setPosts(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-  function giveProfilePic() {
-    var formData = new FormData();   
-    formData.append("id", parseInt(sessionStorage.getItem("id")));//should be user  id 
-    axios({
-      method: 'post',
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
-      data: formData
-    })
-      .then(response => {
-        setProfilePic(response.data.pfp);
-        setUsername(response.data.username)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  const handleStateChange = (e) => {
+    setSelectedState(e.target.value);
+  };
+
+  const filteredPosts = selectedState === 'all'
+    ? posts
+    : posts.filter(post => post.state === selectedState);
 
   return (
-    
     <div className="feed">
-      {posts.slice().reverse().map(post => (
+      <div className="filter">
+        <select value={selectedState} onChange={handleStateChange}>
+          <option value="all">All</option>
+          <option value="diet">Diet</option>
+          <option value="progress">Progress</option>
+          <option value="max weight">Max Weight</option>
+        </select>
+      </div>
+      {filteredPosts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${profilePic}`} alt="post author" className="post-author-avatar" />

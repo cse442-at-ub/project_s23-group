@@ -54,11 +54,12 @@ function Login(props) {
   return (
     <div className="Login">
       <div class='home' onClick={() => navigate("/")}/>   
-
       <img id="myImage" src={downloadImage} alt="Login Image"/>
      
       <div className="Signin info">
+        <div class="signInTitle">
       <h1>Sign in</h1>
+      </div>
         <div class='usernames'>
           <input type="text"
             placeholder='Email'

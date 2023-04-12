@@ -24,7 +24,11 @@ const navigate = useNavigate()
   const [title, setTitle] = useState('');
   const [id, setId] = useState('')
   const [name, setName] = useState('')
+  const [selectedOption, setSelectedOption] = useState('Progress');
 
+  function handleOptionChange(event) {
+    setSelectedOption(event.target.value);
+  }
  
   const signOut = () => {
     sessionStorage.clear();
@@ -72,7 +76,8 @@ const navigate = useNavigate()
     formData.append("title",title);
     formData.append("caption",caption);
     formData.append("myFile",picture);
-    //need something for created at
+    //formData.append("filter",selectedOption)   //new
+   // formData.append("username", sessionStorage.getItem("name"));//new 
     axios({
       method: 'post',
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePostDB.php",
@@ -132,6 +137,14 @@ useEffect(() => {
         <div className="form-group2">
           <label htmlFor="message-text2" className="col-form-label2">Message:</label>
           <textarea className="form-control2" id="message-text2" value={messageText} onChange={handleMessageText}></textarea>
+        </div>
+        <div className="form-group3">
+          <label htmlFor="dropdown" className="col-form-label3">Select an option:</label>
+          <select id="dropdown" className="form-control3" value={selectedOption} onChange={handleOptionChange}>
+            <option value="Progress">Progress</option>
+            <option value="Diet">Diet</option>
+            <option value="Max Weight">Max Weight</option>
+          </select>
         </div>
         <button
           style={{

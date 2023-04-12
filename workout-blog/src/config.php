@@ -18,7 +18,9 @@ function checkLogin($email)
 
     return $result->fetch_array(MYSQLI_NUM);
 }
-function makeNewPost($id, $title, $caption, $picture){
+//function makeNewPost($id, $title, $caption, $picture,$filter,$username);{
+    function makeNewPost($id, $title, $caption, $picture,$filter,$username);{
+
         $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
         $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
