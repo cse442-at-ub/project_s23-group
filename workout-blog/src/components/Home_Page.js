@@ -1,12 +1,6 @@
 import React from "react";
 import image from "./images/cbum.jpg"
 import './Home_Page.css'
-<<<<<<< HEAD
-import Posts from "../components/FeedPage";
-import { useState, useEffect, useRef } from 'react';
-import FeedPage from "../components/FeedPage";
-=======
->>>>>>> origin/settings
 
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
@@ -44,13 +38,7 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
-<<<<<<< HEAD
-            <div class="container-fluid">
-                <FeedPage/>
-            </div>
-=======
             <FeedPage/>
->>>>>>> origin/settings
 
             
 

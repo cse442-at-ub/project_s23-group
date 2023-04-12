@@ -4,7 +4,7 @@ import image from "./images/cbum.jpg"
 import postBody from "./images/tennis.jpg"
 
 
-function FeedPage() {
+function FeedPage(props) {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   
@@ -18,20 +18,21 @@ function FeedPage() {
     setComments([...comments, comment]);
     e.target.elements.comment.value = '';
   }
+  console.log(props.profile_picture)
 
   return (
     <div className="feed">
       {/* Post 1 */}
       <div className="post">
         <div className="post-header">
-          <img src={image} alt="post author" className="post-author-avatar" />
+          <img src={props.profile_picture} alt="post author" className="post-author-avatar" />
           <div className="post-author-name">Username</div>
         </div>
         <div className="post-description">
           Title
         </div>
         <div className="post-body">
-          <img src={postBody} alt="post image" className="post-image" />
+          <img src={props.post_image} alt="post image" className="post-image" />
         </div>
         <div className="post-actions">
           <button className="like-button" onClick={handleLike}>{likes} Likes</button>
@@ -51,42 +52,8 @@ function FeedPage() {
           </form>
         </div> */}
       </div>
-<<<<<<< HEAD
     </div>
 
-=======
-
-      {/*Post 2*/}
-      {/* <div className="post">
-        <div className="post-header">
-          <img src="post-author-avatar.jpg" alt="post author" className="post-author-avatar" />
-          <div className="post-author-name">Post Author</div>
-        </div>
-        <div className="post-body">
-          <img src="post-image.jpg" alt="post image" className="post-image" />
-        </div>
-        <div className="post-actions">
-          <button className="like-button" onClick={handleLike2}>{likes} Likes</button>
-          <button className="comment-button">Comment</button>
-          <button className="share-button">Share</button>
-        </div>
-        <div className="post-description">
-          I'm here
-          </div>
-        <div className="comments-section">
-          <ul className="comment-list">
-            {comments.map((comment, index) => (
-              <li key={index} className="comment">{comment}</li>
-            ))}
-          </ul>
-          <form className="comment-form" onSubmit={handleComment}>
-            <input type="text" name="comment" placeholder="Add a comment..." />
-            <button type="submit">Post</button>
-          </form>
-        </div>
-      </div> */}
-    </div>
->>>>>>> origin/settings
   );
 }
 

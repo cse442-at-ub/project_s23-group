@@ -236,11 +236,7 @@
     font-weight: 1;
   }
 
-<<<<<<< HEAD
   /* .bg2 .gallery{
-=======
-  .bg2 .gallery{
->>>>>>> origin/settings
     position: relative;
     z-index: 100;
     background-color: transparent;
@@ -255,11 +251,7 @@
     
   } */
   
-<<<<<<< HEAD
   /* .bg2 .gallery img{
-=======
-  .bg2 .gallery img{
->>>>>>> origin/settings
     height: 500px;
     margin-top: 10px;
     margin-left: 10px;
@@ -286,13 +278,8 @@
     
     
   }
-<<<<<<< HEAD
   /* .bg2::after {
       content: '';
-=======
- 
-    .bg2abs{
->>>>>>> origin/settings
       position: absolute;
       background-size:cover;
       background-position: center; 
@@ -512,11 +499,7 @@
     font-size: 32px;
   }
   
-<<<<<<< HEAD
   /* .bg2 .gallery{
-=======
-  .bg2 .gallery{
->>>>>>> origin/settings
     
     position: relative;
     z-index: 100;
@@ -538,10 +521,5 @@
     
   }
 
-<<<<<<< HEAD
   */
 } 
-=======
-  
-}
->>>>>>> origin/settings

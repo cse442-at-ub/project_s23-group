@@ -1,19 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
-<<<<<<< HEAD
-import Timeline from './Timeline.js'
-
-=======
 import staticProfile from './images/profilepic.jpg'
 import staticBackground from './images/weights.jpg'
+import Timeline from "./Timeline"
 import {
     Link,
     useNavigate,
     useLocation,
   } from "react-router-dom";
   
->>>>>>> origin/settings
 
 const Profile = (props) =>{
     const [bio, setBio] = useState('')
@@ -112,10 +108,7 @@ let dynamicBackground = {
                         <div class = "name">Mock User</div>
                             <div class="desc" >
                             
-<<<<<<< HEAD
-=======
                             {bio}
->>>>>>> origin/settings
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>

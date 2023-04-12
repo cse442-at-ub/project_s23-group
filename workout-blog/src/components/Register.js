@@ -17,17 +17,10 @@ const Register = (props) =>{
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
     const [error, setError] = useState(false)
-<<<<<<< HEAD
-
-    
-    useEffect(() => {
-
-=======
     const navigate = useNavigate()
     
     useEffect(() => {
 
->>>>>>> origin/settings
     }, [error]);
     
     
@@ -48,11 +41,6 @@ const Register = (props) =>{
                 url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
                 headers: {}, 
                 data: bodyFormData
-<<<<<<< HEAD
-            })
-            setError(false)
-            props.onFormSwitch('home')
-=======
               })
               .then((response) => {
                 console.log(response);
@@ -64,7 +52,6 @@ const Register = (props) =>{
                 console.log(error);
               });
            
->>>>>>> origin/settings
         }
         else{
             setError(true)
@@ -127,17 +114,11 @@ const Register = (props) =>{
                         
                     </div>
                         <div class="col">
-<<<<<<< HEAD
-                            <div class="srow row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
-                        </div>
-                        
-                            {error && (<div class="srow row" id='error'>
-=======
+            
                             <div class="row">Already have an account? <button className="signin" onClick={() => navigate("/login")}>Sign In</button></div>
                         </div>
                         
                             {error && (<div class="row" id='error'>
->>>>>>> origin/settings
                         Incomplete fields or password does not match.
                             </div>)}
                         

@@ -2,20 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-<<<<<<< HEAD
   width:100;
 }
 
 .feed .post {
   width: 30%;
   margin: 3%;
-=======
-}
-
-.feed .post {
-  width: 500px;
-  margin: 50px;
->>>>>>> origin/settings
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -161,14 +153,11 @@
   transform: translate(-50%, -50%);
   transition: width 0.3s ease, height 0.
 }
-<<<<<<< HEAD
 @media screen and (max-width: 992px) {
   .feed .post {
 width: 70%;
   }
 }
-=======
->>>>>>> origin/settings
 .feed .comment-form button[type="submit"]:hover:before {
   width: 200%;
   height: 200%;
