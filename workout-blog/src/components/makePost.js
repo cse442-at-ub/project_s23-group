@@ -30,6 +30,7 @@ const navigate = useNavigate()
     sessionStorage.clear();
     setId('')
     setName('')
+    navigate("/")
 }
   function setFile(event) {
     setMyFile(event.target.files[0]);
@@ -113,7 +114,7 @@ useEffect(() => {
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                    {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
+                    {(id && (<Link class="nav-item nav-link" to ={`/profile/${id}`}>Profile</Link>))}
                     {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
                     </div>
                 </div>
