@@ -1,9 +1,11 @@
 import React from "react";
 import image from "./images/cbum.jpg"
 import './Home_Page.css'
-
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
+import postBody from "./images/tennis.jpg"
 import {
     Link,
     Route,
@@ -17,6 +19,11 @@ const Home_Page = (props) => {
     const navigate = useNavigate()
     const [id, setId] = useState('')
     const [name, setName] = useState('')
+    const [likes, setLikes] = useState(0);
+
+    const handleLike = () => {
+        setLikes(likes + 1);
+      }
 
     const signOut = () => {
         sessionStorage.clear();
@@ -54,8 +61,8 @@ const Home_Page = (props) => {
                 <img src = {image}/>
             </div>
 
+           
             <FeedPage/>
-
             
 
             
@@ -66,7 +73,7 @@ const Home_Page = (props) => {
 
         
         
-    );
+    );  
         
 
 }
