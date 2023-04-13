@@ -95,11 +95,14 @@ function FeedPage() {
             {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
             {post.text && <p className="post-text">{post.text}</p>}
           </div>
-          <div className="post-actions">
+          <div className="post-timestamp">{post.created_at}</div>
+
+          {/* <div className="post-actions">
             <button className="like-button" onClick={() => handleLike(post.postid)}>{likes[post.postid] || 0} Likes</button>
             <button className="share-button">Share</button>
           </div>
-          <div className="comments-section">
+   */}
+          {/* <div className="comments-section">
             <ul className="comment-list">
               {comments[post.postid] && comments[post.postid].map((comment, index) => (
                 <li key={index} className="comment">{comment}</li>
@@ -108,10 +111,9 @@ function FeedPage() {
             <form className="comment-form" onSubmit={(e) => handleComment(e, post.postid)}>
               <input type="text" name="comment" placeholder="Add a comment..." />
               <button type="submit">Post</button>
-              <div className="post-timestamp">{post.created_at}</div>
-            </form>
+              </form> */}
           </div>
-        </div>
+      //  </div>
       ))}
     </div>
   );
