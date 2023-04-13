@@ -2,4 +2,5 @@
     width:100vw;
     margin: 0 15% 0 15%;
     margin-top: 5%;
+    z-index: 100;
 }   

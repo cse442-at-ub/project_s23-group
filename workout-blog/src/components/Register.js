@@ -2,6 +2,13 @@ import React,{Fragment}  from 'react';
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Register.css'
+import Lottie from "lottie-react";
+import check from "./lotties/check.json"
+import {
+    Link,
+    useNavigate,
+    useLocation,
+  } from "react-router-dom";
 
 
 
@@ -12,7 +19,7 @@ const Register = (props) =>{
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
     const [error, setError] = useState(false)
-
+    const navigate = useNavigate()
     
     useEffect(() => {
 
@@ -30,15 +37,23 @@ const Register = (props) =>{
             bodyFormData.append("name", name)
             bodyFormData.append("email",email)
             bodyFormData.append("password",password)
-       
+
             axios({
                 method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register2.php",
+                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
                 headers: {}, 
                 data: bodyFormData
-            })
-            setError(false)
-            props.onFormSwitch('home')
+              })
+              .then((response) => {
+                console.log(response);
+                sessionStorage.setItem("id", response.data[0])
+                sessionStorage.setItem("name", response.data[2])
+                navigate("/", { replace: true })
+      
+              }, (error) => {
+                console.log(error);
+              });
+           
         }
         else{
             setError(true)
@@ -51,7 +66,7 @@ const Register = (props) =>{
 
     return (
         <div class="bg">
-            <div class='home' onClick={() => props.onFormSwitch('home')}/>   
+            <div class='home' onClick={() => navigate("/")}/>   
             
             <div class="accountwrap">
                 <div class="sign">Sign Up</div>
@@ -101,12 +116,14 @@ const Register = (props) =>{
                         
                     </div>
                         <div class="col">
-                            <div class="srow row">Already have an account? <button className="signin" onClick={() => props.onFormSwitch('login')}>Sign In</button></div>
+                            <div class="row">Already have an account? <button className="signin" onClick={() => navigate("/login")}>Sign In</button></div>
                         </div>
                         
-                            {error && (<div class="srow row" id='error'>
+                            {error && (<div class="row" id='error'>
                         Incomplete fields or password does not match.
                             </div>)}
+
+                            
                         
             </div>
         </div>
