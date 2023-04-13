@@ -73,6 +73,11 @@ const Profile = (props) =>{
        
     }, []);
 
+    const signOut = () => {
+        sessionStorage.clear();
+        console.log("exit")
+    }
+
     const getImages = () =>{
         var formData = new FormData();
         formData.append("id", searchId);
@@ -128,11 +133,26 @@ let dynamicBackground = {
             
             <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
-                            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
+                        <nav class="navbar navbar-expand-lg navbar-dark col-12">
+                <button class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                    
+                    {(sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
+                    {(searchId == sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`settings`}>Settings</Link>))}
+                    {(sessionStorage.getItem("id") && (<Link to={"/"} onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
+                  
+                    </div>
+                </div>
+            </nav>
+                           
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
                            
-                            {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
+                           
                         </div>
                         <div class="imgbox">
                             
@@ -147,12 +167,8 @@ let dynamicBackground = {
                         </div>
                         <div class="buttons">
                             <button className='postwrap' onClick={() =>{console.log("posts")}}>
-                                <div className="post">
-                                    1290 
-                                </div>
-                                <div className="postbutton">
-                                    Posts
-                                </div>
+                            <div className="post">12</div>
+                                <div className="postbutton">Posts</div>
                             </button>
                             <button className='followingwrap' onClick={toggleFollowingPopup}>
                                 <div className="following">{followingUsers.length}</div>
@@ -168,13 +184,15 @@ let dynamicBackground = {
                             Timeline
                         </div>
                         <div className='gallery'>
-                        <img  src={require("./images/bike.jpg")} />
-                        <img  src={require("./images/basketball.jpg")} />
-                        <img  src={require("./images/weights.jpg")} />
-                        <img  src={require("./images/box.jpg")} />
-                        <img  src={require("./images/run.jpg")} />
-                        <img  src={require("./images/tennis.jpg")} />
-                        <img  src={require("./images/weights2.jpg")} />
+                            <div className="innerGallery">
+                            <img  src={require("./images/bike.jpg")} />
+                            <img  src={require("./images/basketball.jpg")} />
+                            <img  src={require("./images/weights.jpg")} />
+                            <img  src={require("./images/box.jpg")} />
+                            <img  src={require("./images/run.jpg")} />
+                            <img  src={require("./images/tennis.jpg")} />
+                            <img  src={require("./images/weights2.jpg")} />
+                            </div>
                         </div>
                         {showFollowing && (
                         <div className="popup">

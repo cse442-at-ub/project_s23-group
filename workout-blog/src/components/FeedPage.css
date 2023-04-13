@@ -162,29 +162,3 @@
   width: 100%;
   }
   }
-  .feed .post {
-    /* existing styles */
-    position: relative; /* add position relative to parent */
-  }
-  
-  .feed .post-timestamp {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 12px;
-    color: #999;
-  }
-  
-  /* Add the following style to post-body if you want the timestamp to be above the image or text */
-  .feed .post-body {
-    /* existing styles */
-    position: relative;
-  }
-  
-  .feed .post-timestamp {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    font-size: 12px;
-    color: #999;
-  }

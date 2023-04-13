@@ -21,7 +21,7 @@ function checkLogin($email)
 function makeNewPost($id, $title, $caption, $picture){
         $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-        $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO posts (userid,username,title,text,img,tag) VALUES (?,'',?,?,?,'')");
         $stmt->bind_param("isss", $id, $title, $caption, $picture);
         $stmt->execute(); // insert new user profile
         $stmt->close();
