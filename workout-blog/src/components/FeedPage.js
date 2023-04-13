@@ -87,7 +87,7 @@ function FeedPage() {
         <div className="post" key={post.postid}>
           <div className="post-header">
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${profilePic}`} alt="post author" className="post-author-avatar" />
-            <div className="post-author-name">{username}</div>
+            <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
           </div>
           <div className="post-description">
             {post.title}
