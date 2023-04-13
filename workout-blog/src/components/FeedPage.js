@@ -54,7 +54,10 @@ function FeedPage() {
       {posts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
-            <img onClick={()=>navigate(`profile/${post.userid}`)} src={post.img} alt="post author" className="post-author-avatar" />
+            <img onClick={()=>{
+              navigate(`profile/${post.userid}`)
+              window.scrollTo(0, 0);
+            }} src={post.img} alt="post author" className="post-author-avatar" />
             <div className="post-author-name">{post.username}</div>
           </div>
           <div className="post-description">

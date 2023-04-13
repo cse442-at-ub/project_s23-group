@@ -17,14 +17,16 @@ const Timeline = (props) => {
     getTimeline();
   }, []);
 
-
+  var formData = new FormData();
+  formData.append("userid", props.userid);
   function getTimeline() {
     axios({
       method: 'post',
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPost.php",
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getTimeline.php",
+      headers:{},
+      data: formData,
     })
       .then(response => {
-        console.log(response)
         setPosts(response.data);
       })
       .catch(error => {
@@ -36,9 +38,9 @@ const Timeline = (props) => {
   return (
     <div className="timeline-gallery">
     {posts.slice().reverse().map(post => (
-        <TimelinePosts postid = {post.postid} userid = {post.userid} title = {post.title} />
+      <TimelinePosts title={post.title} img = {post.img} />
     ))}
-  </div>
+    </div>
 
   );
 }

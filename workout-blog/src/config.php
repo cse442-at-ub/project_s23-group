@@ -90,7 +90,7 @@ function getTimeline($id){
     $stmt->bind_param("i",$id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $data[] = array();
+    $data = array();
     while ($row = $result->fetch_assoc()) {
     	$data[] = $row;
     }

@@ -29,6 +29,7 @@
     
     }
     
+
     .bg3 .settings{
         padding-top: 20px;
         display: flex;
@@ -161,7 +162,8 @@
       }
     
     .bg3 .circle{
-    
+        position: absolute;
+        margin-bottom:15%;
         height: 500px;
         width: 500px;
     }
@@ -198,7 +200,6 @@
     
     }
     
-
     .bg3 .settings{
         padding-top: 20px;
         display: flex;
@@ -372,7 +373,13 @@
        
     
     }
-
+    
+    .bg3 .box{
+       
+        
+       
+    
+    }
     .bg3 .settings{
         padding-top: 20px;
         display: flex;

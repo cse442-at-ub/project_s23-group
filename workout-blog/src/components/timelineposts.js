@@ -9,23 +9,18 @@ import {
 
 
 const TimelinePosts = (props) => {
-    const navigate = useNavigate();
+    console.log(props)
   return (
     <div class = "feed">
         <div className="posts" key={props.postid}>
-            <div className="post-header">
-            <img onClick={()=>navigate(`profile/${props.userid}`)} src={props.img} alt="post author" className="post-author-avatar" />
-            <div className="post-author-name">{props.username}</div>
+            <div className="post-title">
+              {props.title}
             </div>
-            <div className="post-description">
-            {props.title}
-            </div>
-            <div className="post-body">
-            {props.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${props.img}`} alt="post image" className="post-image" />}
-            {props.text && <p className="post-text">{props.text}</p>}
+            <div className="image-body">
+              <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${props.img}`} alt="post image" className="post-image" />
             </div>
         </div>
-    </div>
+      </div>
   );
 }
 

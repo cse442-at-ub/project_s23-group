@@ -1,8 +1,17 @@
 .posts{
-    width: 30%;
+    width: 100%;
     margin: 3%;
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+}
+
+.post-title{
+    background-color: white;
+    text-align: center;
+    margin:0;
+}
+.image-body img{
+    width: 100%;
 }

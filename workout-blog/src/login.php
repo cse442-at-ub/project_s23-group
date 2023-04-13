@@ -5,6 +5,7 @@ header('Access-Control-Allow-Origin: *');
 $email = $_POST["email"];
 $password = $_POST["password"];
 
+<<<<<<< HEAD
 
 if(isset($email) && isset($password)){
     $userinfo = checkLogin($email);
@@ -20,6 +21,8 @@ if(isset($email) && isset($password)){
         exit;
     }
 
+=======
+>>>>>>> d8b3e3bfea5eb137c502e385addb56317408153d
 if (isset($email) && isset($password)) {
 	$userinfo = checkLogin($email);
 	$login = false;

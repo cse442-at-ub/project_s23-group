@@ -18,6 +18,7 @@ const Register = (props) =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
+    const [load, setLoad] = useState(false)
     const [error, setError] = useState(false)
     const navigate = useNavigate()
     
@@ -48,7 +49,10 @@ const Register = (props) =>{
                 console.log(response);
                 sessionStorage.setItem("id", response.data[0])
                 sessionStorage.setItem("name", response.data[2])
-                navigate("/", { replace: true })
+                setLoad(true)
+                setTimeout(()=>{navigate("/")}, 1700);
+               
+                
       
               }, (error) => {
                 console.log(error);
@@ -120,8 +124,12 @@ const Register = (props) =>{
                         </div>
                         
                             {error && (<div class="row" id='error'>
-                        Incomplete fields or password does not match.
+                                Incomplete fields or password does not match.
                             </div>)}
+                            {load && (<div className='checkAnim'>
+                                <Lottie className='check' animationData={check} loop={false} />
+                            </div>)}
+          
 
                             
                         

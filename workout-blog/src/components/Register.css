@@ -6,6 +6,8 @@ html, body {
   }
  
 @media only screen and (min-width: 901px) {
+
+
     .bg {
         background-image: url("./images/sports.jpg");
         background-repeat: no-repeat;
@@ -146,9 +148,12 @@ html, body {
         border: none;
         background-color: transparent;
     }
-    .srow{
+    .row{
+        display: flex;
         margin-top: 10px;
-        margin-left: 20%;
+        margin-left: 22%;
+        justify-content: start;
+        /* margin-left: 25%; */
         font-weight: 300;
     }
 
@@ -159,6 +164,21 @@ html, body {
         font-size: large;
         z-index: 10;
         color: red;
+    }
+
+    .bg .checkAnim{
+        width: 100%;
+        display: flex;
+        
+        justify-content: center;
+        
+
+    }
+    .bg .check{
+        height: 200px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
     }
     
 }
@@ -284,5 +304,19 @@ html, body {
         color: red;
     }
 
+    .bg .checkAnim{
+        width: 100%;
+        display: flex;
+        position: absolute;
+        justify-content: center;
+        
+
+    }
+    .bg .check{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 300px;
+    }
 
 }
