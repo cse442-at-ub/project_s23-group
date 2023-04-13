@@ -4,7 +4,7 @@ import Register from './components/Register.js';
 import Home from './components/Home_Page.js';
 import ProfilePage from './components/Profile.js';
 import Settings from './components/Settings.js';
-import Post from './components/MakePost.js';
+import Post from './components/makePost.js';
 import { NotFound } from './components/NotFound.js';
 import {
   BrowserRouter, Link,Router,Routes,Route,
