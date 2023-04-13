@@ -35,12 +35,12 @@ function FeedPage() {
     formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
     axios({
       method: 'post',
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profilePic.php",
       data: formData
     })
       .then(response => {
+        console.log(response.data)
         setProfilePic(response.data.pfp);
-        setUsername(response.data.username)
       })
       .catch(error => {
         console.log(error);
@@ -113,8 +113,7 @@ function FeedPage() {
               <input type="text" name="comment" placeholder="Add a comment..." />
               <button type="submit">Post</button>
               </form> */}
-          </div>
-      //  </div>
+        </div>
       ))}
     </div>
   );

@@ -11,6 +11,7 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 .feed .post-header {
@@ -84,10 +85,15 @@
 .feed .share-button svg {
   margin-right: 5px;
 }
+.feed .filter{
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 100%;
 
+}
 .feed .post-description {
   padding: 5px;
-  font-size: 16px;
+  font-size: 28px;
   line-height: 1.5;
   text-align: center;
 }
