@@ -4,3 +4,8 @@
     margin-top: 5%;
     z-index: 100;
 }   
+.timeline-gallery{
+    height: 100vh;
+    z-index: 101;
+    background-color: white;
+}

@@ -8,7 +8,8 @@ import {
     useNavigate,
     useParams,
   } from "react-router-dom";
-  
+
+import Timeline from './Timeline.js'
 
 const Profile = (props) =>{
     
@@ -125,116 +126,110 @@ let dynamicBackground = {
 
     return(
         <div class="bg2">
+        <div class="headers">
+            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
+            {/* <button class='follow'>Follow</button>
+            <button class='message'>Message</button> */}
             
-            <div className="bg2abs" style={dynamicBackground}/> 
-                        <div class="headers">
-                            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
-                            {/* <button class='follow'>Follow</button>
-                            <button class='message'>Message</button> */}
-                           
-                            {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
-                        </div>
-                        <div class="imgbox">
-                            
-                            <img className='profile' src={profile} />
-                        
-                        </div>
-                    
-                        <div class = "name">{name}</div>
-                            <div class="desc" >
-                            
-                            {bio}
-                        </div>
-                        <div class="buttons">
-                            <button className='postwrap' onClick={() =>{console.log("posts")}}>
-                                <div className="post">
-                                    1290 
-                                </div>
-                                <div className="postbutton">
-                                    Posts
-                                </div>
-                            </button>
-                            <button className='followingwrap' onClick={toggleFollowingPopup}>
-                                <div className="following">{followingUsers.length}</div>
-                                <div className="followingbutton">Following</div>
-                            </button>
-                            <button className="followerwrap" onClick={toggleFollowersPopup}>
-                                <div className="follower">{followers.length}</div>
-                                <div className="followerbutton">Follower</div>
-                            </button>
-                           
-                        </div>
-                        <div className="timeline">
-                            Timeline
-                        </div>
-                        <div className='gallery'>
-                        <img  src={require("./images/bike.jpg")} />
-                        <img  src={require("./images/basketball.jpg")} />
-                        <img  src={require("./images/weights.jpg")} />
-                        <img  src={require("./images/box.jpg")} />
-                        <img  src={require("./images/run.jpg")} />
-                        <img  src={require("./images/tennis.jpg")} />
-                        <img  src={require("./images/weights2.jpg")} />
-                        </div>
-                        {showFollowing && (
-                        <div className="popup">
-                        <div className="popup-inner">
-                            <h2>Following</h2>
-                            <ul>
-                            {followingUsers.map((user) => (
-                                <li key={user.id}>
-                                <img src={user.profilePic} alt={`${user.name}'s profile`} />
-                                    <span className="popup-username">{user.name}</span>
-                                    
-                    
-                            <button
-                            className="popup-remove"
-                            onClick={() => handleRemoveUser(user.id)}
-                            >
-                            Remove
-                            </button>
-                            </li>
-                            ))}
-                            </ul>
-                            <button className="popup-close" onClick={toggleFollowingPopup}>
-                            Close
-                            </button>
-                            </div>
-                            </div>
-                            )}
+            {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
+        </div>
+        <div className="bg2abs" style={dynamicBackground}/> 
+        <div class="imgbox">
             
-                            {/* Followers popup */}
-                            {showFollowers && (
-                            <div className="popup">
-                                <div className="popup-inner">
-                                <h2>Followers</h2>
-                                <ul>
-                                    {followers.map((follower) => (
-                                    <li key={follower.id}>
-                                    <img
-                                        src={follower.profilePic}
-                                        alt={`${follower.name}'s profile`}
-                                        />
-                                    <span className="popup-username">{follower.name}</span>
-                                    <button
-                                    className="popup-remove"
-                                    onClick={() => handleRemoveFollower(follower.id)}
-                                    >
-                                    Remove
-                                    </button>
-                                    </li>
-                                    ))}
-                                    </ul>
-                                    <button className="popup-close" onClick={toggleFollowersPopup}>
-                                    Close
-                                    </button>
-                                    </div>
-                                    </div>
-                                    )}
-                                            
+            <img className='profile' src={profile} />
+        
+        </div>
 
-                                
-                            </div>
+        <div class = "name">{name}</div>
+            <div class="desc" >
+            
+            {bio}
+        </div>
+        <div class="buttons">
+            <button className='postwrap' onClick={() =>{console.log("posts")}}>
+                <div className="post">
+                    1290 
+                </div>
+                <div className="postbutton">
+                    Posts
+                </div>
+            </button>
+            <button className='followingwrap' onClick={toggleFollowingPopup}>
+                <div className="following">{followingUsers.length}</div>
+                <div className="followingbutton">Following</div>
+            </button>
+            <button className="followerwrap" onClick={toggleFollowersPopup}>
+                <div className="follower">{followers.length}</div>
+                <div className="followerbutton">Follower</div>
+            </button>
+            
+        </div>
+        <div className="timeline">
+            Timeline
+        </div>\
+        <div>
+        <Timeline />
+        </div>
+        <p>Hello</p>
+        {showFollowing && (
+        <div className="popup">
+        <div className="popup-inner">
+            <h2>Following</h2>
+            <ul>
+            {followingUsers.map((user) => (
+                <li key={user.id}>
+                <img src={user.profilePic} alt={`${user.name}'s profile`} />
+                    <span className="popup-username">{user.name}</span>
+                    
+
+            <button
+            className="popup-remove"
+            onClick={() => handleRemoveUser(user.id)}
+            >
+            Remove
+            </button>
+            </li>
+            ))}
+            </ul>
+            <button className="popup-close" onClick={toggleFollowingPopup}>
+            Close
+            </button>
+            </div>
+            </div>
+            )}
+
+            {/* Followers popup */}
+            {showFollowers && (
+            <div className="popup">
+                <div className="popup-inner">
+                <h2>Followers</h2>
+                <ul>
+                    {followers.map((follower) => (
+                    <li key={follower.id}>
+                    <img
+                        src={follower.profilePic}
+                        alt={`${follower.name}'s profile`}
+                        />
+                    <span className="popup-username">{follower.name}</span>
+                    <button
+                    className="popup-remove"
+                    onClick={() => handleRemoveFollower(follower.id)}
+                    >
+                    Remove
+                    </button>
+                    </li>
+                    ))}
+                    </ul>
+                    <button className="popup-close" onClick={toggleFollowersPopup}>
+                    Close
+                    </button>
+                    </div>
+                    </div>
+                    )}
+                            
+
+                
+            </div>
 
     )
 

@@ -100,14 +100,16 @@
     
     
   }
+  .home-text{
+    color: white;
+  }
   .bg2abs{
-    position: absolute;
     background-size:cover;
     background-position: center; 
     margin: auto;
     background-repeat: no-repeat;
     width: 100vw;
-    height: 100vh;
+    height: 30vh;
     z-index: 10;
   }
   
