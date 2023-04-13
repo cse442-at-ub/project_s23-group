@@ -18,17 +18,17 @@ function checkLogin($email)
 
     return $result->fetch_array(MYSQLI_NUM);
 }
-//function makeNewPost($id, $title, $caption, $picture,$filter,$username);{
-    function makeNewPost($id, $title, $caption, $picture,$filter,$username);{
+function makeNewPost($id, $title, $caption, $picture)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-        $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
+    $stmt->bind_param("isss", $id, $title, $caption, $picture);
+    $stmt->execute(); // insert new user profile
+    $stmt->close();
+    $conn->close();
+}
 
-        $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
-        $stmt->bind_param("isss", $id, $title, $caption, $picture);
-        $stmt->execute(); // insert new user profile
-        $stmt->close();
-        $conn->close();
-    }
 function makeNewUser($email, $username, $password)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -71,6 +71,35 @@ function makeNewProfile($id, $username, $bio, $pfp, $background)
     $conn->close();
 }
 
+function makeNewFollow($follower, $following)
+{
+
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("INSERT INTO follows (follower, following) VALUES (?, ?)");
+    $stmt->bind_param("ii", $follower, $following);
+    $stmt->execute(); // insert new user follow
+    $stmt->close();
+
+    $stmt2 = $conn->prepare("SELECT * FROM follows WHERE follower = ?");
+    $stmt2->bind_param("i", $follower);
+    $stmt2->execute(); // insert new user follow
+
+    $result = $stmt2->get_result();
+    $data[] = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    mysqli_close($conn);
+    $stmt2->close();
+
+
+    return $data;
+}
+
+
+
+
 function getImages($id)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -85,16 +114,17 @@ function getImages($id)
     return $result->fetch_array(MYSQLI_NUM);
 }
 
-function getTimeline($id){
+function getTimeline($id)
+{
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
     $stmt = $conn->prepare("SELECT * FROM posts WHERE userid = ?");
-    $stmt->bind_param("i",$id);
+    $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     $data[] = array();
     while ($row = $result->fetch_assoc()) {
-    	$data[] = $row;
+        $data[] = $row;
     }
     mysqli_close($conn);
     $stmt->close();
@@ -103,7 +133,8 @@ function getTimeline($id){
     return $data;
 
 }
-function getPost(){
+function getPost()
+{
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
     $stmt = $conn->prepare("SELECT * FROM posts");
     $stmt->execute();
