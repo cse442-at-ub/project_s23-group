@@ -1,4 +1,4 @@
-ort { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './Profile.css'
 import staticProfile from './images/profilepic.jpg'
@@ -20,18 +20,9 @@ const Profile = (props) =>{
     const [name, setName] = useState('');
     const [showFollowing, setShowFollowing] = useState(false);
     const [showFollowers, setShowFollowers] = useState(false);
-    const [followingUsers, setFollowingUsers] = useState([
-        { id: 1, name: 'Mock User 1', profilePic: require('./images/profilepic.jpg') },
-        { id: 2, name: 'Mock User 2', profilePic: require('./images/profilepic.jpg') },
-        { id: 3, name: 'Mock User 3', profilePic: require('./images/profilepic.jpg') },
-        { id: 4, name: 'Mock User 4', profilePic: require('./images/profilepic.jpg') },
-    ]);
-
-    const [followers, setFollowers] = useState([
-        { id: 1, name: 'Mock User 4', profilePic: require('./images/profilepic.jpg') },
-        { id: 2, name: 'Mock User 5', profilePic: require('./images/profilepic.jpg') },
-        { id: 3, name: 'Mock User 6', profilePic: require('./images/profilepic.jpg') },
-      ]);
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [followingUsers, setFollowingUsers] = useState([]);
+    const [followers, setFollowers] = useState([]);
   
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
@@ -108,12 +99,65 @@ const Profile = (props) =>{
       
     }
 
+    // follow feature
+    const handleFollowUser = () => {
+        const formData = new FormData();
+        formData.append("follower_id", sessionStorage.getItem("id"));
+        formData.append("following_id", searchId);
+
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/follow.php",
+            headers: {},
+            data: formData
+        })
+        .then((response) => {
+            const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
+            setFollowingUsers(newFollowingUsers);
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    const getFollowingUsers = () => {
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/following.php",
+            headers: {},
+            data: { id: searchId }
+        })
+        .then((response) => {
+            setFollowingUsers(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    const getFollowers = () => {
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/followers.php",
+            headers: {},
+            data: { id: searchId }
+        })
+        .then((response) => {
+            setFollowers(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    useEffect(() => {
+        getFollowingUsers();
+        getFollowers();
+    }, []);
+
  
-let dynamicBackground = {
-        backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("${background}")`
-        
-        //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
-   }
+    let dynamicBackground = {
+            backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("${background}")`
+            
+            //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
+    }
 
   
 
@@ -131,7 +175,9 @@ let dynamicBackground = {
                             <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                           
+                           <button className='follow' onClick={() => {handleFollowUser(); setIsFollowing(!isFollowing)}}>
+                            {isFollowing ? "Unfollow" : "Follow"}
+                            </button>
                             {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
                         </div>
                         <div class="imgbox">
@@ -184,6 +230,7 @@ let dynamicBackground = {
                             {followingUsers.map((user) => (
                                 <li key={user.id}>
                                 <img src={user.profilePic} alt={`${user.name}'s profile`} />
+                                <Link to={`/profile/${user.id}`}>{user.name}</Link>
                                     <span className="popup-username">{user.name}</span>
                                     
                     
@@ -215,6 +262,7 @@ let dynamicBackground = {
                                         src={follower.profilePic}
                                         alt={`${follower.name}'s profile`}
                                         />
+                                    <Link to={`/profile/${follower.id}`}>{follower.name}</Link>
                                     <span className="popup-username">{follower.name}</span>
                                     <button
                                     className="popup-remove"
