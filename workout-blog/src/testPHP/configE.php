@@ -18,12 +18,12 @@ function checkLogin($email)
 
     return $result->fetch_array(MYSQLI_NUM);
 }
-function makeNewPost($id, $username, $title, $caption, $picture)
+function makeNewPost($id, $username, $title, $caption, $picture, $tag)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-    $stmt = $conn->prepare("INSERT INTO posts (userid, username, title,text,img) VALUES (?,?,?,?,?)");
-    $stmt->bind_param("issss", $id, $username, $title, $caption, $picture);
+    $stmt = $conn->prepare("INSERT INTO posts (userid, username, title,text,img, tag) VALUES (?,?,?,?,?,?)");
+    $stmt->bind_param("isssss", $id, $username, $title, $caption, $picture, $tag);
     $stmt->execute(); // insert new user profile
     $stmt->close();
     $conn->close();

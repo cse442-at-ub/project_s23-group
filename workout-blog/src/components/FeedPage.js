@@ -70,7 +70,7 @@ function FeedPage() {
 
   const filteredPosts = selectedState === 'all'
     ? posts
-    : posts.filter(post => post.state === selectedState);
+    : posts.filter(post => post.tag === selectedState);
 
   return (
     <div className="feed">

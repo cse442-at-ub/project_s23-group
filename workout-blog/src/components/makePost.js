@@ -76,7 +76,7 @@ const navigate = useNavigate()
     formData.append("title",title);
     formData.append("caption",caption);
     formData.append("myFile",picture);
-    //formData.append("tag",selectedOption)   //new
+    formData.append("tag",selectedOption)   //new
     formData.append("username", sessionStorage.getItem("name"));//new 
     axios({
       method: 'post',

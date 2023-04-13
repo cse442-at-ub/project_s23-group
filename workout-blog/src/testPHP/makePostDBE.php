@@ -7,14 +7,14 @@ $title = $_POST["title"];
 $caption = $_POST["caption"];
 $picture = $_POST["myFile"];
 $username = $_POST["username"];
-//$tag = $_POST["tag"];
+$tag = $_POST["tag"];
 
 
 echo "0";
 
-if (isset($id) && isset($title) && isset($caption) && isset($picture) && isset($username)) {
+if (isset($id) && isset($title) && isset($caption) && isset($picture) && isset($username) && isset($tag)) {
 
     echo "1";
-    makeNewPost($id, $username, $title, $caption, $picture);
+    makeNewPost($id, $username, $title, $caption, $picture, $tag);
     echo "here";}
 ?>
