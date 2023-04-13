@@ -10,7 +10,7 @@ function FeedPage() {
   const [posts, setPosts] = useState([]);
   const [profilePic, setProfilePic] = useState([]);
   const [username, setUsername] = useState([]);
-  const [selectedState, setSelectedState] = useState('all');
+  const [selectedTag, setSelectedTag] = useState('');
 
   useEffect(() => {
     givePost();
@@ -32,7 +32,7 @@ function FeedPage() {
 
   function giveProfilePic() {
     var formData = new FormData();   
-    formData.append("id", parseInt(sessionStorage.getItem("id")));//should be user  id 
+    formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
     axios({
       method: 'post',
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
@@ -65,23 +65,24 @@ function FeedPage() {
   };
 
   const handleStateChange = (e) => {
-    setSelectedState(e.target.value);
+    setSelectedTag(e.target.value);
   };
 
-  const filteredPosts = selectedState === 'all'
-    ? posts
-    : posts.filter(post => post.tag === selectedState);
+  const filteredPosts = selectedTag
+    ? posts.filter(post => post.tag === selectedTag)
+    : posts;
 
   return (
     <div className="feed">
       <div className="filter">
-        <select value={selectedState} onChange={handleStateChange}>
-          <option value="all">All</option>
-          <option value="diet">Diet</option>
-          <option value="progress">Progress</option>
-          <option value="max weight">Max Weight</option>
+        <select value={selectedTag} onChange={handleStateChange}>
+          <option value="">All</option>
+          <option value="Diet">Diet</option>
+          <option value="Progress">Progress</option>
+          <option value="Max Weight">Max Weight</option>
         </select>
       </div>
+
       {filteredPosts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
