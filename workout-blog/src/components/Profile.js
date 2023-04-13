@@ -102,29 +102,29 @@ const Profile = (props) =>{
     // follow feature
     const handleFollowUser = () => {
         const formData = new FormData();
-        formData.append("follower_id", sessionStorage.getItem("id"));
-        formData.append("following_id", searchId);
+        formData.append("follower", sessionStorage.getItem("id"));
+        formData.append("following", searchId);
 
         axios({
             method: 'post',
-            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/follow.php",
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollow.php",
             headers: {},
             data: formData
         })
         .then((response) => {
-            const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
-            setFollowingUsers(newFollowingUsers);
+            setIsFollowing(!isFollowing)
+            getFollowingUsers();
         }, (error) => {
             console.log(error);
         });
     }
 
+    // get following list from the database
     const getFollowingUsers = () => {
         axios({
-            method: 'post',
-            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/following.php",
+            method: 'get',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollow.php?id=" + sessionStorage.getItem("id"),
             headers: {},
-            data: { id: searchId }
         })
         .then((response) => {
             setFollowingUsers(response.data);
@@ -133,9 +133,10 @@ const Profile = (props) =>{
         });
     }
 
+    // get followers list from the database
     const getFollowers = () => {
         axios({
-            method: 'post',
+            method: 'get',
             url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/followers.php",
             headers: {},
             data: { id: searchId }
@@ -147,10 +148,10 @@ const Profile = (props) =>{
         });
     }
 
-    useEffect(() => {
-        getFollowingUsers();
-        getFollowers();
-    }, []);
+    // useEffect(() => {
+    //     getFollowingUsers();
+    //     getFollowers();
+    // }, []);
 
  
     let dynamicBackground = {
@@ -178,6 +179,7 @@ const Profile = (props) =>{
                            <button className='follow' onClick={() => {handleFollowUser(); setIsFollowing(!isFollowing)}}>
                             {isFollowing ? "Unfollow" : "Follow"}
                             </button>
+                            
                             {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
                         </div>
                         <div class="imgbox">
@@ -200,27 +202,16 @@ const Profile = (props) =>{
                                     Posts
                                 </div>
                             </button>
-                            <button className='followingwrap' onClick={toggleFollowingPopup}>
+                            {(searchId == sessionStorage.getItem("id")) && (<button className='followingwrap' onClick={toggleFollowingPopup}>
                                 <div className="following">{followingUsers.length}</div>
                                 <div className="followingbutton">Following</div>
-                            </button>
-                            <button className="followerwrap" onClick={toggleFollowersPopup}>
+                            </button>)}
+                            {(searchId == sessionStorage.getItem("id")) && (<button className="followerwrap" onClick={toggleFollowersPopup}>
                                 <div className="follower">{followers.length}</div>
                                 <div className="followerbutton">Follower</div>
-                            </button>
+                            </button>)}
+                            
                            
-                        </div>
-                        <div className="timeline">
-                            Timeline
-                        </div>
-                        <div className='gallery'>
-                        <img  src={require("./images/bike.jpg")} />
-                        <img  src={require("./images/basketball.jpg")} />
-                        <img  src={require("./images/weights.jpg")} />
-                        <img  src={require("./images/box.jpg")} />
-                        <img  src={require("./images/run.jpg")} />
-                        <img  src={require("./images/tennis.jpg")} />
-                        <img  src={require("./images/weights2.jpg")} />
                         </div>
                         {showFollowing && (
                         <div className="popup">
