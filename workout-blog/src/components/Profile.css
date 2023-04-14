@@ -471,7 +471,6 @@
   
 
   .bg2 .postwrap{
-    margin-left: 15%;
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -486,7 +485,6 @@
   }
   
   .bg2 .postbutton{
-    
     color: gray;
     font-weight: 1;
   }

@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+include "configE.php";
 //header('Access-Control-Allow-Origin: *');
 
 $id = $_POST["id"];

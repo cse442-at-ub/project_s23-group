@@ -28,4 +28,3 @@ if ((!move_uploaded_file($_FILES["myFile"]["tmp_name"], $destination))){
 }
 echo json_encode(array($filename));
 ?>
-
