@@ -309,6 +309,7 @@
 
   .bg2 .innerGallery{
     width: 80%;
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -320,7 +321,7 @@
     height: 400px;
     margin-top: 10px;
     margin-left: 10px;
-    width: 31.81%;
+    /* width: 31.81%; */
     object-fit: cover;
     
   }

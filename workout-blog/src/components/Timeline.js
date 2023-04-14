@@ -1,10 +1,7 @@
 import React from "react";
-import FeedPage from "../components/FeedPage";
 import image from "./images/cbum.jpg"
-
 import "./Timeline.css"
 import { useState, useEffect, useRef } from 'react';
-import './FeedPage.css';
 import axios from 'axios'
 import TimelinePosts from "./timelineposts";
 import {
