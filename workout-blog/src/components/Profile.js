@@ -125,17 +125,12 @@ let dynamicBackground = {
 
    
    
-<<<<<<< HEAD
    
-=======
-   const navigate = useNavigate()
->>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 
    
 
     return(
         <div class="bg2">
-<<<<<<< HEAD
             
             <div className="bg2abs" style={dynamicBackground}/> 
                         <div class="headers">
@@ -159,14 +154,6 @@ let dynamicBackground = {
                             <button class='message'>Message</button> */}
                            
                            
-=======
-            <div className="bg2abs" style={dynamicBackground}/> 
-                        <div class="headers">
-                            <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
-                            {/* <button class='follow'>Follow</button>
-                            <button class='message'>Message</button> */}
-                            <img class='settings' onClick={() => navigate("/profile/settings")} src={require("./images/settings.png")} />
->>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
                         </div>
                         <div class="imgbox">
                             

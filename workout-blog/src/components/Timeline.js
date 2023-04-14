@@ -13,20 +13,7 @@ import {
 
 
 const Timeline = (props) => {
-<<<<<<< HEAD
   const [posts, setPosts] = useState([]);
-=======
-
-    return (
-        <div class = "gallery container-fluid row">
-            {
-
-            }
-            <FeedPage profile_picture = {image}  post_image = {image} class ="col-sm-4 "/>
-        </div>
-    );
-        
->>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 
   useEffect(() => {
     getTimeline();

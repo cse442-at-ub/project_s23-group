@@ -1,17 +1,11 @@
 import React from "react";
 import image from "./images/cbum.jpg"
 import './Home_Page.css'
-<<<<<<< HEAD
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
 import postBody from "./images/tennis.jpg"
-=======
-
-import { useState, useEffect, useRef } from 'react';
-import FeedPage from "../components/FeedPage";
->>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 import {
     Link,
     Route,

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .timeline-gallery{
     width: 100%;
     z-index: 101;
@@ -9,11 +8,3 @@
 .images1{
     width:500px;
 }
-=======
-.gallery{
-    width:100vw;
-    margin: 0 15% 0 15%;
-    margin-top: 5%;
-    z-index: 100;
-}   
->>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
