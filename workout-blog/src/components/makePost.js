@@ -107,8 +107,8 @@ const navigate = useNavigate()
     formData.append("username", sessionStorage.getItem("name"));//new 
     axios({
       method: 'post',
-      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePostDB.php",
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePostDBE.php",
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePostDB.php",
+      //url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePostDBE.php",
       headers: {'Content-Type': 'multipart/form-data'}, 
       data: formData
     })
