@@ -5,10 +5,20 @@ import React,{Fragment}  from 'react';
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import {
+<<<<<<< HEAD
   useNavigate,
 } from "react-router-dom";
 import Lottie from "lottie-react";
 import check from "./lotties/check.json"
+=======
+  Link,
+  Route,
+  Routes,
+  useNavigate,
+  useLocation,
+  Navigate
+} from "react-router-dom";
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 
 function Login(props) {
   const navigate = useNavigate()
@@ -35,11 +45,15 @@ function Login(props) {
           console.log(response);
           sessionStorage.setItem("id", response.data[0])
           sessionStorage.setItem("name", response.data[2])
+<<<<<<< HEAD
           navigate("/")
            
 
           
           
+=======
+          navigate("/", { replace: true })
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 
         }, (error) => {
           console.log(error);

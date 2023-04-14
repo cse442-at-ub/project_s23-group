@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import { useState, useEffect, Suspense } from 'react'
 import axios from 'axios'
 import './Settings.css'
 import Lottie from "lottie-react";
 import loading from "./lotties/loading.json"
+=======
+import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
+import './Settings.css'
+import ImageCropper from "./ImageCropper.js";
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 import {
   Link,
   useNavigate,
@@ -12,26 +19,38 @@ import {
 
 //userid - background- profilepic - status
 const Settings = (props) =>{
+<<<<<<< HEAD
   
   
+=======
+
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
     const navigate = useNavigate()
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState(null);
     const [background, setBackground] = useState(null);
+<<<<<<< HEAD
 
     const [load, setLoad] = useState(false)
     
   
     let back = "/profile/" + sessionStorage.getItem("id")
+=======
+    // const [profileName, setProfileName] = useState('');
+    // const [backgroundName, setBackgroundName] = useState('');
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 
     useEffect(() => {
    
       }, [profile,background]);
     
 
+<<<<<<< HEAD
 
     
 
+=======
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
     const uploadServerImages = (profile, background) =>{
         var formData = new FormData();
         formData.append("pfp", profile);
@@ -50,9 +69,13 @@ const Settings = (props) =>{
           console.log("checking")
           console.log(response.data[0] + "is pfp")
           console.log(response.data[1] + "is background")
+<<<<<<< HEAD
          
           updateDB(bio,response.data[0],response.data[1])
          
+=======
+          updateDB(bio,response.data[0],response.data[1])
+>>>>>>> cc8a46149be90aa858e1bbe511273a1c118af758
 
         }, (error) => {
           console.log(error);
