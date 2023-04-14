@@ -86,7 +86,7 @@ function FeedPage() {
       {filteredPosts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
-            <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${profilePic}`} alt="post author" className="post-author-avatar" />
+            <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
             <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
           </div>
           <div className="post-description">

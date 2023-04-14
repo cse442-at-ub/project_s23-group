@@ -25,6 +25,8 @@ const navigate = useNavigate()
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [selectedOption, setSelectedOption] = useState('Progress');
+  const [profilePic, setProfilePic] = useState([]);
+
 
   function handleOptionChange(event) {
     setSelectedOption(event.target.value);
@@ -47,32 +49,57 @@ const navigate = useNavigate()
     setTitle(event.target.value);
   }
 
-  function uploadPhoto() {
-    console.log("starting to upload photo");
-    var bodyFormData = new FormData();
-    //let name=sessionStorage.getItem("name")
-    bodyFormData.append("myFile", myFile);
-    //bodyFormData.append("name", name);
-    //bodyFormData.append("messageText", messageText);
-    axios({
-      method: 'post',
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePost.php", //change this php name
-      headers: {'Content-Type': 'multipart/form-data'}, 
-      data: bodyFormData
+  function giveProfilePic(userId) {
+    var formData = new FormData();
+    formData.append("id", parseInt(sessionStorage.getItem("id")));
+    return axios({
+      method: "post",
+      url:
+        "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+      data: formData,
     })
-      .then(response => {
-        sessionStorage.setItem("myFile", response.data[0]);
-        updatePostDB(title, response.data[0], messageText);
-        navigate("/")
+      .then((response) => {
+        console.log("before");
+        console.log(response.data);
+        setProfilePic(response.data[4]); // use the 4th index to set the profile pic
+        console.log("after");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
+  
+  function uploadPhoto() {
+    console.log("starting to upload photo");
+    var bodyFormData = new FormData();
+    bodyFormData.append("myFile", myFile);
+    axios({
+      method: "post",
+      url:
+        "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePost.php",
+      headers: { "Content-Type": "multipart/form-data" },
+      data: bodyFormData,
+    })
+      .then((response) => {
+        
+        sessionStorage.setItem("myFile", response.data[0]);
+        giveProfilePic(sessionStorage.getItem("id")).then(() => {
+          console.log("before");
+          console.log(profilePic);
+          updatePostDB(title, response.data[0], messageText,profilePic);
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  
 
-  const updatePostDB = (title, picture, caption) =>{//Post: postid,userid,title,text,img,created_at    postid and timestamp is auto, dont need to send
+  const updatePostDB = (title, picture, caption, pfp) =>{//Post: postid,userid,title,text,img,created_at    postid and timestamp is auto, dont need to send
     var formData = new FormData();   
     formData.append("id", parseInt(sessionStorage.getItem("id")));//should be user  id 
+    formData.append("pfp", pfp);//should be user  id 
     formData.append("title",title);
     formData.append("caption",caption);
     formData.append("myFile",picture);
@@ -97,13 +124,15 @@ const navigate = useNavigate()
   console.log("Success")
 }
 useEffect(() => {
-  if(sessionStorage.getItem("id")!= null){
-      setId(sessionStorage.getItem("id"))
-      setName(sessionStorage.getItem("name"))
-      console.log("non null")
+  if (sessionStorage.getItem("id") !== null) {
+    setId(sessionStorage.getItem("id"));
+    setName(sessionStorage.getItem("name"));
+    console.log("non null");
+    giveProfilePic(sessionStorage.getItem("id")); // add this line to retrieve the user's profile picture
   }
-  console.log("entered")
-}, [id,name]);
+
+  console.log("entered");
+}, [id, name]);
 
   function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission behavior
