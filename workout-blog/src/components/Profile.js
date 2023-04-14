@@ -42,15 +42,7 @@ const Profile = (props) =>{
         setFollowers(updatedFollowers);
       };
 
-    const handleGetFollowing = () => {
-        setShowFollowing(true); 
-        getFollowingUsers(); 
-    }
-    
-    const handleGetFollowers = () => {
-        setShowFollowers(true); // Show the followers list popup
-        getFollowers(); // Retrieve the followers list
-    }
+
 
     const searchId = params.id
    
@@ -74,6 +66,80 @@ const Profile = (props) =>{
         }
        
     }, []);
+        // follow feature
+        const handleFollowUser = () => {
+            const formData = new FormData();
+            formData.append("follower", sessionStorage.getItem("id"));
+            formData.append("following", searchId);
+    
+            axios({
+                method: 'post',
+                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeFollow.php",
+                headers: {},
+                data: formData
+            })
+            .then((response) => {
+                setIsFollowing(!isFollowing)
+                // const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
+                // setFollowingUsers(newFollowingUsers);
+                getFollowingUsers();
+                getFollowers();
+            }, (error) => {
+                console.log(error);
+            });
+        }
+    
+        // get following list from the database
+        const getFollowingUsers = () => {
+            var formData = new FormData();
+            formData.append("id", searchId);
+            axios({
+                method: 'post',
+                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowing.php",
+                headers: {},
+                data: formData
+            })
+            .then((response) => {
+                console.log(response)
+                for (let i = 0; i < response.data.length; i++) {
+                    if (response.data[i].length === 0) {
+                      response.data.splice(i, 1);
+                      i--;
+                    }
+                  }
+                
+                    
+                setFollowingUsers(response.data);
+            }, (error) => {
+                console.log(error);
+            });
+        }
+    
+        // get followers list from the database
+        const getFollowers = () => {
+            var formData = new FormData();
+            formData.append("id", searchId);
+            axios({
+                method: 'post',
+                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowers.php",
+                headers: {},
+                data: formData
+            })
+            .then((response) => {
+                console.log(response.data)
+                for (let i = 0; i < response.data.length; i++) {
+                    if (response.data[i].length === 0) {
+                      response.data.splice(i, 1);
+                      i--;
+                    }
+                  }
+                
+                    
+                setFollowers(response.data);
+            }, (error) => {
+                console.log(error);
+            });
+        }
 
     const getImages = () =>{
         var formData = new FormData();
@@ -110,65 +176,22 @@ const Profile = (props) =>{
       
     }
 
-    // follow feature
-    const handleFollowUser = () => {
-        const formData = new FormData();
-        formData.append("follower", sessionStorage.getItem("id"));
-        formData.append("following", searchId);
 
-        axios({
-            method: 'post',
-            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeFollow.php",
-            headers: {},
-            data: formData
-        })
-        .then((response) => {
-            setIsFollowing(!isFollowing)
-            // const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
-            // setFollowingUsers(newFollowingUsers);
-            getFollowingUsers();
-            getFollowers();
-        }, (error) => {
-            console.log(error);
-        });
-    }
-
-    // get following list from the database
-    const getFollowingUsers = () => {
-        axios({
-            method: 'post',
-            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowing.php",
-            headers: {},
-            data: { id: searchId}
-        })
-        .then((response) => {
-            const followingUsersData = response.data.map(({following}) => ({id: following}));
-            setFollowingUsers(followingUsersData);
-        }, (error) => {
-            console.log(error);
-        });
-    }
-
-    // get followers list from the database
-    const getFollowers = () => {
-        axios({
-            method: 'post',
-            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowers.php",
-            headers: {},
-            data: { id: searchId }
-        })
-        .then((response) => {
-            const followerData = response.data.map(({follower}) => ({id: follower}));
-            setFollowers(followerData);
-        }, (error) => {
-            console.log(error);
-        });
-    }
 
     useEffect(() => {
         getFollowingUsers();
         getFollowers();
     }, []);
+
+    const handleGetFollowing = () => {
+        getFollowingUsers(); 
+        setShowFollowing(true); 
+    }
+    
+    const handleGetFollowers = () => {
+        setShowFollowers(true); 
+        getFollowers(); 
+    }
 
  
     let dynamicBackground = {
@@ -193,15 +216,19 @@ const Profile = (props) =>{
                             <img class='home' onClick={() => navigate("/")} src={require("./images/home.png")}  />
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                           {(searchId === sessionStorage.getItem("id")) && (
-                            <button className='follow' onClick={() => {
-                                if (!isFollowing) {
-                                    handleFollowUser();
-                                }
-                                setIsFollowing(!isFollowing);
-                            }}>
-                                {isFollowing ? "Following" : "Follow"}
-                            </button>
+                           {(searchId !== sessionStorage.getItem("id")) && (
+                            <button
+                            className='follow'
+                            onClick={() => {
+                              if (!isFollowing) {
+                                handleFollowUser();
+                              }
+                              setIsFollowing(!isFollowing);
+                            }}
+                            disabled={isFollowing}
+                          >
+                            {isFollowing ? "Following" : "Follow"}
+                          </button>
                         )}
                             
                             {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
@@ -226,35 +253,50 @@ const Profile = (props) =>{
                                     Posts
                                 </div>
                             </button>
-                            <button className='followingwrap' onClick= {handleGetFollowing}>
+                            {(searchId == sessionStorage.getItem("id")) && (<button className='followingwrap' onClick= {handleGetFollowing}>
                                 <div className="following">{followingUsers.length}</div>
                                 <div className="followingbutton">Following</div>
-                            </button>
-                            <button className="followerwrap" onClick={handleGetFollowers}>
+                            </button>)}
+                            {(searchId == sessionStorage.getItem("id")) && (<button className="followerwrap" onClick={handleGetFollowers}>
                                 <div className="follower">{followers.length}</div>
                                 <div className="followerbutton">Follower</div>
-                            </button>
-                            
-                           
+                            </button>)}
+                            </div>
+                            <div className="timeline">
+                            Timeline
                         </div>
+                        <div className='gallery'>
+                            <div className="innerGallery">
+                            <img  src={require("./images/bike.jpg")} />
+                            <img  src={require("./images/basketball.jpg")} />
+                            <img  src={require("./images/weights.jpg")} />
+                            <img  src={require("./images/box.jpg")} />
+                            <img  src={require("./images/run.jpg")} />
+                            <img  src={require("./images/tennis.jpg")} />
+                            <img  src={require("./images/weights2.jpg")} />
+                            </div>
+                        </div>
+                           
+                        
                         {showFollowing && (
                         <div className="popup">
                         <div className="popup-inner">
                             <h2>Following</h2>
                             <ul>
-                            {followingUsers.map((user) => (
-                                <li key={user.id}>
+                            {Array.isArray(followingUsers) && followingUsers.map((user) => (
+                                <li key={user.following}>{user.following}
                                 <img src={user.profilePic} alt={`${user.name}'s profile`} />
-                                <Link to={`/profile/${user.id}`}>{user.name}</Link>
+                                <img onClick={()=>navigate(`profile/${user.following}`)} src={user.following} alt="post author" className="post-author-avatar" />
+                                <Link to={`/profile/${user.following}`}>{user.following}</Link>
                                     
                                     
                     
-                            <button
+                            {/* <button
                             className="popup-remove"
                             onClick={() => handleRemoveUser(user.id)}
                             >
                             Remove
-                            </button>
+                            </button> */}
                             </li>
                             ))}
                             </ul>
