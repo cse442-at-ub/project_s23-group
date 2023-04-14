@@ -186,7 +186,7 @@ let dynamicBackground = {
                         </div>
                         <div className='gallery'>
                             <div className="innerGallery">
-                                <Timeline userid = {sessionStorage.getItem("id")}/>]
+                                <Timeline userid = {searchId}/>]
                             </div>
                         </div>
                         {showFollowing && (
