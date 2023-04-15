@@ -51,7 +51,6 @@ const Home_Page = (props) => {
                     <div class="navbar-nav ml-auto">
                     {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
                     {(id && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
-                    {(id && (<button onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</button>))}
                     {(id && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
                     {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
                     {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }

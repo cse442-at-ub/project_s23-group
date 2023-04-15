@@ -58,9 +58,9 @@ const Postpage = (props) => {
             </nav>
             <div className="page">
                 <div className="blogpost_header">
-                    <div>
+                    <div onClick = {()=>navigate(`../../profile/${post.userid}`)}>
                         <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
-                        <a  className="post-author-name">{post.username}</a>
+                        <a className="post-author-name">{post.username}</a>
                         <p className="date">Date Created: {post.created_at}</p>
                     </div>
                 </div>
@@ -73,6 +73,8 @@ const Postpage = (props) => {
                 <div class="post_body">
                     <p>{post.text}</p>
                 </div>
+                <div><button onClick={navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
+}>Share</button></div>
             </div>
         </div>
 

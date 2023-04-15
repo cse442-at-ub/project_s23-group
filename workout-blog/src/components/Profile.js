@@ -310,8 +310,6 @@ const Profile = (props) =>{
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
-                    
-                    {(sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
                     {(searchId == sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`settings`}>Settings</Link>))}
                     {(sessionStorage.getItem("id") && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
                   
@@ -344,8 +342,6 @@ const Profile = (props) =>{
                         ) : (
                             <button className="follow-btn following" onClick={toggleFollowingPopup} disabled>Following</button>
                         ))} */}
-                            
-                            {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
                         </div>
                         <div class="imgbox">
                             
