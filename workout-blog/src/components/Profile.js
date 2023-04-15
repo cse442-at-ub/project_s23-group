@@ -71,17 +71,13 @@ const Profile = (props) =>{
 
 
     useEffect(() => {
-        if(sessionStorage.getItem("id") == null){
-            console.log("1")
-            navigate("/")
-        }
-        else{
+      
             console.log("2")
             getImages()
             getFollowingUsers();
             getFollowers();
             getNumPosts();
-        }
+        
     }, []);
 
     const signOut = () => {

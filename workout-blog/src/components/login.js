@@ -36,11 +36,6 @@ function Login(props) {
           sessionStorage.setItem("id", response.data[0])
           sessionStorage.setItem("name", response.data[2])
           navigate("/")
-           
-
-          
-          
-
         }, (error) => {
           console.log(error);
         });
