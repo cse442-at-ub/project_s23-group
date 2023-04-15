@@ -116,6 +116,7 @@ function FeedPage() {
         </div>
       ))}
     </div>
+
   );
 }
 

@@ -12,7 +12,6 @@ import {
 
 
 
-
 const Register = (props) =>{
 
     const [name, setName] = useState('')
