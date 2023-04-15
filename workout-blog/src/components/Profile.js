@@ -28,21 +28,33 @@ const Profile = (props) =>{
 
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
+      getUsernames();
     };
   
     const toggleFollowersPopup = () => {
       setShowFollowers(!showFollowers);
+      getUsernames_for_Followers();
     };
 
-    const handleRemoveUser = (id) => {
-        const updatedUsers = followingUsers.filter(user => user.id !== id);
-        setFollowingUsers(updatedUsers);
-    };
+    // const handleGetFollowing = () => {
+    //     getFollowingUsers(); 
+    //     setShowFollowing(true); 
+    // }
+    
+    // const handleGetFollowers = () => {
+    //     setShowFollowers(true); 
+    //     getFollowers(); 
+    // }
 
-    const handleRemoveFollower = (id) => {
-        const updatedFollowers = followers.filter(follower => follower.id !== id);
-        setFollowers(updatedFollowers);
-      };
+    // const handleRemoveUser = (id) => {
+    //     const updatedUsers = followingUsers.filter(user => user.id !== id);
+    //     setFollowingUsers(updatedUsers);
+    // };
+
+    // const handleRemoveFollower = (id) => {
+    //     const updatedFollowers = followers.filter(follower => follower.id !== id);
+    //     setFollowers(updatedFollowers);
+    //   };
 
 
 
@@ -60,6 +72,8 @@ const Profile = (props) =>{
         else{
             console.log("2")
             getImages()
+            getFollowingUsers();
+            getFollowers();
         }
     }, []);
 
@@ -94,6 +108,7 @@ const Profile = (props) =>{
             // setFollowingUsers(newFollowingUsers);
             getFollowingUsers();
             getFollowers();
+            getUsernames();
             
         }, (error) => {
             console.log(error);
@@ -122,7 +137,6 @@ const Profile = (props) =>{
             data: formData
         })
         .then((response) => {
-            console.log(response)
             for (let i = 0; i < response.data.length; i++) {
                 if (response.data[i].length === 0) {
                     response.data.splice(i, 1);
@@ -132,7 +146,7 @@ const Profile = (props) =>{
             
                 
             setFollowingUsers(response.data);
-            getUsernames();
+            
         }, (error) => {
             console.log(error);
         });
@@ -149,7 +163,6 @@ const Profile = (props) =>{
             data: formData
         })
         .then((response) => {
-            console.log(response.data)
             for (let i = 0; i < response.data.length; i++) {
                 if (response.data[i].length === 0) {
                     response.data.splice(i, 1);
@@ -172,24 +185,49 @@ const Profile = (props) =>{
     const getUsernames = async () => {
         const requests = followingUsers.map(user => {
           const formData = new FormData();
-          formData.append("id", user.following);
-          return axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php", formData);
+          formData.append("userid", user.following);
+          return axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getUserInfo.php", formData);
         });
       
         try {
           const responses = await Promise.all(requests);
-          console.log(responses[1].data);
           const updatedFollowingUsers = followingUsers.map((user, index) => {
             const data = responses[index].data;
-            console.log(data);
-            if (data && data[1]) {
-              return { ...user, username: data[1] };
+            // console.log(data);
+            if (data && data.username) {
+              return { ...user, username: data.username, pfp: data.pfp};
             } else {
               console.log(`Invalid response data for user ${user.following}: ${data}`);
               return user;
             }
           });
           setFollowingUsers(updatedFollowingUsers);
+          console.log(updatedFollowingUsers);
+        } catch (error) {
+          console.log("Error fetching usernames:", error);
+        }
+      };
+
+      const getUsernames_for_Followers = async () => {
+        const requests = followers.map(user => {
+          const formData = new FormData();
+          formData.append("userid", user.follower);
+          return axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getUserInfo.php", formData);
+        });
+      
+        try {
+          const responses = await Promise.all(requests);
+          const updatedFollowingUsers = followers.map((user, index) => {
+            const data = responses[index].data;
+            // console.log(data);
+            if (data && data.username) {
+              return { ...user, username: data.username, pfp: data.pfp};
+            } else {
+              console.log(`Invalid response data for user ${user.follower}: ${data}`);
+              return user;
+            }
+          });
+          setFollowers(updatedFollowingUsers);
           console.log(updatedFollowingUsers);
         } catch (error) {
           console.log("Error fetching usernames:", error);
@@ -237,23 +275,11 @@ const Profile = (props) =>{
 
     // useEffect(() => {
     //     getUsernames();
-    // }, [followingUsers]);
+    // },[]);
 
-    useEffect(() => {
-        getFollowingUsers();
-        getFollowers();
-        isFollowingUser();
-    }, []);
 
-    const handleGetFollowing = () => {
-        getFollowingUsers(); 
-        setShowFollowing(true); 
-    }
-    
-    const handleGetFollowers = () => {
-        setShowFollowers(true); 
-        getFollowers(); 
-    }
+
+
 
  
     let dynamicBackground = {
@@ -317,11 +343,11 @@ const Profile = (props) =>{
                                     Posts
                                 </div>
                             </button>
-                            {(searchId == sessionStorage.getItem("id")) && (<button className='followingwrap' onClick= {handleGetFollowing}>
+                            {(searchId == sessionStorage.getItem("id")) && (<button className='followingwrap' onClick= {toggleFollowingPopup}>
                                 <div className="following">{followingUsers.length}</div>
                                 <div className="followingbutton">Following</div>
                             </button>)}
-                            {(searchId == sessionStorage.getItem("id")) && (<button className="followerwrap" onClick={handleGetFollowers}>
+                            {(searchId == sessionStorage.getItem("id")) && (<button className="followerwrap" onClick={toggleFollowersPopup}>
                                 <div className="follower">{followers.length}</div>
                                 <div className="followerbutton">Follower</div>
                             </button>)}
@@ -350,14 +376,14 @@ const Profile = (props) =>{
                             {Array.isArray(followingUsers) && followingUsers.map((user) => (
                                 <li key={user.following}>
                                 
-                                    {/* <img onClick={()=> {
+                                    <img onClick={()=> {
                                         navigate(`/profile/${user.following}`); 
                                         window.location.reload();
-                                    }}src={user.following} alt={`${user.following}'s profile`}  /> */}
+                                    }}src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + user.pfp} alt={`${user.username}'s profile`}  />
                                     <span onClick={()=> {
                                         navigate(`/profile/${user.following}`); 
                                         window.location.reload();
-                                    }}className="popup-username">{`${user.following}'s profile`}</span>
+                                    }}className="popup-username">{user.username}</span>
                                     
                                     
                                 
@@ -385,17 +411,17 @@ const Profile = (props) =>{
                                 <div className="popup-inner">
                                 <h2>Followers</h2>
                                 <ul>
-                                {Array.isArray(followingUsers) && followers.map((user) => (
+                                {Array.isArray(followers) && followers.map((user) => (
                                 <li key={user.follower}>
                                 
-                                    {/* <img onClick={()=> {
-                                        navigate(`/profile/${user.following}`); 
+                                    <img onClick={()=> {
+                                        navigate(`/profile/${user.follower}`); 
                                         window.location.reload();
-                                    }}src={user.following} alt={`${user.following}'s profile`}  /> */}
+                                    }}src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + user.pfp} alt={`${user.username}'s profile`}  />
                                     <span onClick={()=> {
                                         navigate(`/profile/${user.follower}`); 
                                         window.location.reload();
-                                    }}className="popup-username">{`${user.follower}'s profile`}</span>
+                                    }}className="popup-username">{user.username}</span>
                                     {/* <button
                                     className="popup-remove"
                                     onClick={() => handleRemoveFollower(follower.id)}
