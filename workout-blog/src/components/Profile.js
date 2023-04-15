@@ -3,6 +3,7 @@ import axios from 'axios'
 import './Profile.css'
 import staticProfile from './images/profilepic.jpg'
 import staticBackground from './images/weights.jpg'
+import Timeline from './Timeline'
 import {
     Link,
     useNavigate,
@@ -141,7 +142,7 @@ let dynamicBackground = {
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                     
-                    {(sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
+                    {/* {(sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))} */}
                     {(searchId == sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`settings`}>Settings</Link>))}
                     {(sessionStorage.getItem("id") && (<Link to={"/"} onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
                   
@@ -185,13 +186,7 @@ let dynamicBackground = {
                         </div>
                         <div className='gallery'>
                             <div className="innerGallery">
-                            <img  src={require("./images/bike.jpg")} />
-                            <img  src={require("./images/basketball.jpg")} />
-                            <img  src={require("./images/weights.jpg")} />
-                            <img  src={require("./images/box.jpg")} />
-                            <img  src={require("./images/run.jpg")} />
-                            <img  src={require("./images/tennis.jpg")} />
-                            <img  src={require("./images/weights2.jpg")} />
+                            <Timeline userid = {searchId}/>
                             </div>
                         </div>
                         {showFollowing && (

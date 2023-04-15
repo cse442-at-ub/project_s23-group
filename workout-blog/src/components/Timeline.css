@@ -1,0 +1,11 @@
+.timeline-gallery{
+    width: 100%;
+    margin: 0 auto;
+    z-index: 101;
+    min-height: 500px;
+    max-width: 800px;
+    background-color: transparent;
+}
+.images1{
+    width:500px;
+}

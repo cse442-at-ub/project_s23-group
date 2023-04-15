@@ -21,6 +21,7 @@ const Register = (props) =>{
     const [confirmPassword, setconfirmPassword] = useState('')
     const [load, setLoad] = useState(false)
     const [error, setError] = useState(false)
+    const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -35,34 +36,62 @@ const Register = (props) =>{
         console.log(password)
         var bodyFormData = new FormData();
         if(name&&email&&password&&confirmPassword &&(password===confirmPassword)){
-            
-            bodyFormData.append("name", name)
-            bodyFormData.append("email",email)
-            bodyFormData.append("password",password)
+            if(!/[^a-z]/i.test(name)){
+                if(email.includes("@")){
+                    if(password.length >=6){
+ 
+                        bodyFormData.append("name", name)
+                        bodyFormData.append("email",email)
+                        bodyFormData.append("password",password)
 
-            axios({
-                method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
-                headers: {}, 
-                data: bodyFormData
-              })
-              .then((response) => {
-                console.log(response);
-                sessionStorage.setItem("id", response.data[0])
-                sessionStorage.setItem("name", response.data[2])
-                setLoad(true)
-                setTimeout(()=>{navigate("/")}, 1700);
-               
+                        axios({
+                            method: 'post',
+                            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/register.php",
+                            headers: {}, 
+                            data: bodyFormData
+                        })
+                        .then((response) => {
+                            console.log(response);
+                            sessionStorage.setItem("id", response.data[0])
+                            sessionStorage.setItem("name", response.data[2])
+                            setError(false)
+                            setLoad(true)
+                            setTimeout(()=>{navigate("/")}, 1700);
+                        
+                            
                 
-      
-              }, (error) => {
-                console.log(error);
-              });
+                        }, (error) => {
+                            console.log(error);
+                            console.log("user already exists")
+                            setError(true)
+                            setErrMessage("User already exists")
+                        });
+                    }
+                    else{
+                        setError(true)
+                        setErrMessage("Password too short")
+                    }
+                }
+                else{
+                    
+                    setError(true)
+                    setErrMessage("Not a valid email")
+                }
+              }
+              else{
+                console.log(!/[^a-z]/i.test(name))
+                setError(true)
+                console.log("special char")
+                setErrMessage("Name contains special characters")
+
+              }
            
         }
         else{
+            
             setError(true)
             console.log("missing field or password does not match")
+            setErrMessage("Missing field or password does not match")
         }
 
     };
@@ -125,7 +154,7 @@ const Register = (props) =>{
                         </div>
                         
                             {error && (<div class="row" id='error'>
-                                Incomplete fields or password does not match.
+                                {errMessage}
                             </div>)}
                             {load && (<div className='checkAnim'>
                                 <Lottie className='check' animationData={check} loop={false} />
