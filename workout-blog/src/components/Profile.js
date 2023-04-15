@@ -8,10 +8,10 @@ import {
     useNavigate,
     useParams,
   } from "react-router-dom";
+
   
 
 const Profile = (props) =>{
-    
     const navigate = useNavigate()
     const params = useParams()
     const [bio, setBio] = useState('')
@@ -23,6 +23,7 @@ const Profile = (props) =>{
     const [isFollowing, setIsFollowing] = useState(false);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followers, setFollowers] = useState([]);
+    const [usernameFollowing, setUserFollowing] = useState([]);
   
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
@@ -45,7 +46,8 @@ const Profile = (props) =>{
 
 
     const searchId = params.id
-   
+    const userIds = followingUsers.map(user => user.following);
+
    
 
 
@@ -66,80 +68,124 @@ const Profile = (props) =>{
         }
        
     }, []);
-        // follow feature
-        const handleFollowUser = () => {
-            const formData = new FormData();
-            formData.append("follower", sessionStorage.getItem("id"));
-            formData.append("following", searchId);
-    
-            axios({
-                method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeFollow.php",
-                headers: {},
-                data: formData
-            })
-            .then((response) => {
-                setIsFollowing(!isFollowing)
-                // const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
-                // setFollowingUsers(newFollowingUsers);
-                getFollowingUsers();
-                getFollowers();
-            }, (error) => {
-                console.log(error);
-            });
-        }
-    
-        // get following list from the database
-        const getFollowingUsers = () => {
-            var formData = new FormData();
-            formData.append("id", searchId);
-            axios({
-                method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowing.php",
-                headers: {},
-                data: formData
-            })
-            .then((response) => {
-                console.log(response)
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].length === 0) {
-                      response.data.splice(i, 1);
-                      i--;
-                    }
-                  }
+
+    // useEffect(() => {
+    //     setIsFollowing(isFollowingUser());
+    //   }, [followingUsers]);
+
+
+    // follow feature
+    const handleFollowUser = () => {
+        const formData = new FormData();
+        formData.append("follower", sessionStorage.getItem("id"));
+        formData.append("following", searchId);
+
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeFollow.php",
+            headers: {},
+            data: formData
+        })
+        .then((response) => {
+            setIsFollowing(!isFollowing)
+            // const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
+            // setFollowingUsers(newFollowingUsers);
+            getFollowingUsers();
+            getFollowers();
+            
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    // get following list from the database
+    const getFollowingUsers = () => {
+        var formData = new FormData();
+        formData.append("id", searchId);
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowing.php",
+            headers: {},
+            data: formData
+        })
+        .then((response) => {
+            console.log(response)
+            for (let i = 0; i < response.data.length; i++) {
+                if (response.data[i].length === 0) {
+                    response.data.splice(i, 1);
+                    i--;
+                }
+                }
+            
                 
-                    
-                setFollowingUsers(response.data);
-            }, (error) => {
-                console.log(error);
-            });
-        }
-    
-        // get followers list from the database
-        const getFollowers = () => {
-            var formData = new FormData();
-            formData.append("id", searchId);
-            axios({
-                method: 'post',
-                url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowers.php",
-                headers: {},
-                data: formData
-            })
-            .then((response) => {
-                console.log(response.data)
-                for (let i = 0; i < response.data.length; i++) {
-                    if (response.data[i].length === 0) {
-                      response.data.splice(i, 1);
-                      i--;
-                    }
-                  }
+            setFollowingUsers(response.data);
+            getUsernames();
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    // get followers list from the database
+    const getFollowers = () => {
+        var formData = new FormData();
+        formData.append("id", searchId);
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowers.php",
+            headers: {},
+            data: formData
+        })
+        .then((response) => {
+            console.log(response.data)
+            for (let i = 0; i < response.data.length; i++) {
+                if (response.data[i].length === 0) {
+                    response.data.splice(i, 1);
+                    i--;
+                }
+                }
+            
                 
-                    
-                setFollowers(response.data);
-            }, (error) => {
-                console.log(error);
-            });
+            setFollowers(response.data);
+        }, (error) => {
+            console.log(error);
+        });
+    }
+
+    const isFollowingUser = () => {
+        const followingID = followingUsers.map(user => user.following);
+        return followingID.includes((searchId))
+    }
+        
+    const getUsernames = async () => {
+        const requests = followingUsers.map(user => {
+          const formData = new FormData();
+          formData.append("id", user.following);
+          return axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php", formData);
+        });
+      
+        try {
+          const responses = await Promise.all(requests);
+          console.log(responses[1].data);
+          const updatedFollowingUsers = followingUsers.map((user, index) => {
+            const data = responses[index].data;
+            console.log(data);
+            if (data && data.username) {
+              return { ...user, username: data.username };
+            } else {
+              console.log(`Invalid response data for user ${user.following}: ${data}`);
+              return user;
+            }
+          });
+          setFollowingUsers(updatedFollowingUsers);
+          console.log(updatedFollowingUsers);
+        } catch (error) {
+          console.log("Error fetching usernames:", error);
         }
+      };
+
+
+
+
 
     const getImages = () =>{
         var formData = new FormData();
@@ -176,11 +222,14 @@ const Profile = (props) =>{
       
     }
 
-
+    // useEffect(() => {
+    //     getUsernames();
+    // }, [followingUsers]);
 
     useEffect(() => {
         getFollowingUsers();
         getFollowers();
+        isFollowingUser();
     }, []);
 
     const handleGetFollowing = () => {
@@ -200,13 +249,6 @@ const Profile = (props) =>{
             //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
     }
 
-  
-
-   
-   
-   
-
-   
 
     return(
         <div class="bg2">
@@ -230,6 +272,11 @@ const Profile = (props) =>{
                             {isFollowing ? "Following" : "Follow"}
                           </button>
                         )}
+                        {/* {(searchId !== sessionStorage.getItem("id")) && (!isFollowing ? (
+                            <button className="follow-btn" onClick={handleFollowUser}>Follow</button>
+                        ) : (
+                            <button className="follow-btn following" onClick={toggleFollowingPopup} disabled>Following</button>
+                        ))} */}
                             
                             {(searchId == sessionStorage.getItem("id")) && (<img class='settings' onClick={() => navigate("settings")} src={require("./images/settings.png")} />)}
                         </div>
@@ -284,14 +331,22 @@ const Profile = (props) =>{
                             <h2>Following</h2>
                             <ul>
                             {Array.isArray(followingUsers) && followingUsers.map((user) => (
-                                <li key={user.following}>{user.following}
-                                <img src={user.profilePic} alt={`${user.name}'s profile`} />
-                                <img onClick={()=>navigate(`profile/${user.following}`)} src={user.following} alt="post author" className="post-author-avatar" />
-                                <Link to={`/profile/${user.following}`}>{user.following}</Link>
+                                <li key={user.following}>
+                                
+                                    {/* <img onClick={()=> {
+                                        navigate(`/profile/${user.following}`); 
+                                        window.location.reload();
+                                    }}src={user.following} alt={`${user.following}'s profile`}  /> */}
+                                    <span onClick={()=> {
+                                        navigate(`/profile/${user.following}`); 
+                                        window.location.reload();
+                                    }}className="popup-username">{`${user.following}'s profile`}</span>
                                     
                                     
-                    
-                            {/* <button
+                                
+                                
+                                {/* <Link to={`profile/${user.following}`}>{user.following}</Link> */}
+                             {/* <button
                             className="popup-remove"
                             onClick={() => handleRemoveUser(user.id)}
                             >
@@ -313,20 +368,23 @@ const Profile = (props) =>{
                                 <div className="popup-inner">
                                 <h2>Followers</h2>
                                 <ul>
-                                    {followers.map((follower) => (
-                                    <li key={follower.id}>
-                                    <img
-                                        src={follower.profilePic}
-                                        alt={`${follower.name}'s profile`}
-                                        />
-                                    <Link to={`/profile/${follower.id}`}>{follower.name}</Link>
-                                    <span className="popup-username">{follower.name}</span>
-                                    <button
+                                {Array.isArray(followingUsers) && followers.map((user) => (
+                                <li key={user.follower}>
+                                
+                                    {/* <img onClick={()=> {
+                                        navigate(`/profile/${user.following}`); 
+                                        window.location.reload();
+                                    }}src={user.following} alt={`${user.following}'s profile`}  /> */}
+                                    <span onClick={()=> {
+                                        navigate(`/profile/${user.follower}`); 
+                                        window.location.reload();
+                                    }}className="popup-username">{`${user.follower}'s profile`}</span>
+                                    {/* <button
                                     className="popup-remove"
                                     onClick={() => handleRemoveFollower(follower.id)}
                                     >
                                     Remove
-                                    </button>
+                                    </button> */}
                                     </li>
                                     ))}
                                     </ul>
