@@ -92,7 +92,7 @@ function FeedPage() {
           <div className="post-description">
             {post.title}
           </div>
-          <div className="post-body">
+          <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
             {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
             {post.text && <p className="post-text">{post.text}</p>}
           </div>

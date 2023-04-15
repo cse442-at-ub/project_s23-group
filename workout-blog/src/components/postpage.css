@@ -1,0 +1,42 @@
+.whole_page{
+    padding-bottom: 10%;
+}
+.page{
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5%;
+}
+.blogpost_header{
+    border-bottom: 1px solid black;
+    padding: 10px;
+}
+.blogpost_header img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
+    
+}
+.blogpost_header a{
+    font-size: 30px;
+}
+.post_title{
+    text-align: center;
+    font-size: 24px;
+    padding: 20px
+}
+.post_image{
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+}
+.post_image img{
+    height: 100%;
+    width: 100%;
+}
+.post_body{
+    padding:5%;
+}
