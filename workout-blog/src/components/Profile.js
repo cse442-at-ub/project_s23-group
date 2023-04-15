@@ -24,6 +24,7 @@ const Profile = (props) =>{
     const [isFollowing, setIsFollowing] = useState(false);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followers, setFollowers] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
     const [showAlreadyFollowingPopup, setShowAlreadyFollowingPopup] = useState(false);
 
@@ -36,6 +37,10 @@ const Profile = (props) =>{
       setShowFollowers(!showFollowers);
       getUsernames_for_Followers();
     };
+
+    const getPosts = () => {
+        getNumPosts();
+    }
 
     // const handleGetFollowing = () => {
     //     getFollowingUsers(); 
@@ -75,6 +80,7 @@ const Profile = (props) =>{
             getImages()
             getFollowingUsers();
             getFollowers();
+            getNumPosts();
         }
     }, []);
 
@@ -94,7 +100,24 @@ const Profile = (props) =>{
         setIsFollowing(isAlreadyFollowing);
     },[isAlreadyFollowing]);
 
+    //number of posts on database
+    const getNumPosts = () => {
+        const formData = new FormData();
+        formData.append("userid", searchId)
 
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getTimeline.php",
+            headers:{},
+            data: formData,
+        })
+            .then(response => {
+            setPosts(response.data);
+            })
+            .catch(error => {
+            console.log(error);
+            });
+    }
     // follow feature
     const handleFollowUser = () => {
         const formData = new FormData();
@@ -243,6 +266,8 @@ const Profile = (props) =>{
         }
       };
 
+      
+
 
 
 
@@ -355,18 +380,18 @@ const Profile = (props) =>{
                             {bio}
                         </div>
                         <div class="buttons">
-                            <button className='postwrap' onClick={() =>{console.log("posts")}}>
-                            <div className="post">12</div>
+                            <button className='postwrap' onClick={getPosts}>
+                            <div className="post">{posts.length}</div>
                                 <div className="postbutton">Posts</div>
                             </button>
-                            {(searchId == sessionStorage.getItem("id")) && (<button className='followingwrap' onClick= {toggleFollowingPopup}>
+                            (<button className='followingwrap' onClick= {toggleFollowingPopup}>
                                 <div className="following">{followingUsers.length}</div>
                                 <div className="followingbutton">Following</div>
-                            </button>)}
-                            {(searchId == sessionStorage.getItem("id")) && (<button className="followerwrap" onClick={toggleFollowersPopup}>
+                            </button>)
+                            (<button className="followerwrap" onClick={toggleFollowersPopup}>
                                 <div className="follower">{followers.length}</div>
                                 <div className="followerbutton">Follower</div>
-                            </button>)}
+                            </button>)
                             </div>
                             <div className="timeline">
                             Timeline

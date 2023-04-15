@@ -19,13 +19,13 @@ function checkLogin($email)
     return $result->fetch_array(MYSQLI_NUM);
 }
 
-function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
+function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp){
         $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
         $stmt->bind_param("isss", $id, $title, $caption, $picture);
         $stmt->execute(); // insert new user profile
         $stmt->close();
         $conn->close();
-    }
+}
 
 function makeNewUser($email, $username, $password)
 {
