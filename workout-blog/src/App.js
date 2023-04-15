@@ -25,7 +25,8 @@ function App() {
             <Route path="profile">
               <Route path=":id" element={<ProfilePage />} />
               <Route path=":id/settings" element={<Settings />} />
-              </Route>
+            </Route>
+              
             <Route path="*" element={<NotFound />} />
             <Route path="postpage"> 
               <Route path=":id" element= {<Postpage />} />

@@ -58,9 +58,6 @@ const Home_Page = (props) => {
                     </div>
                 </div>
             </nav>
-            {!id && (<div class="card col-8 ml-auto mr-auto">
-                <img src = {image}/>
-            </div>)}
 
            
             <FeedPage/>

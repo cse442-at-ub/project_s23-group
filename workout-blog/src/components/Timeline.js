@@ -26,6 +26,7 @@ const Timeline = (props) => {
       data: formData,
     })
       .then(response => {
+        console.log(response.data)
         setPosts(response.data);
       })
       .catch(error => {
@@ -37,7 +38,7 @@ const Timeline = (props) => {
   return (
     <div className="timeline-gallery">
     {posts.slice().reverse().map(post => (
-      <TimelinePosts title={post.title} img = {post.img} />
+        <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} />
     ))}
     </div>
 
