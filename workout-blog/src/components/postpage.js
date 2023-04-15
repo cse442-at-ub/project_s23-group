@@ -68,8 +68,8 @@ const Postpage = (props) => {
                     <div>
                         <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
                         <a  className="post-author-name">{post.username}</a>
+                        <p className="date">Date Created: {post.created_at}</p>
                     </div>
-                    <div></div>
                 </div>
                 <div class="post_title">
                     <h1>{post.title}</h1>
