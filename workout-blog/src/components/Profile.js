@@ -23,8 +23,9 @@ const Profile = (props) =>{
     const [isFollowing, setIsFollowing] = useState(false);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followers, setFollowers] = useState([]);
-    const [usernameFollowing, setUserFollowing] = useState([]);
-  
+    const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
+    const [showAlreadyFollowingPopup, setShowAlreadyFollowingPopup] = useState(false);
+
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
     };
@@ -48,30 +49,27 @@ const Profile = (props) =>{
     const searchId = params.id
     const userIds = followingUsers.map(user => user.following);
 
-   
 
 
 
     useEffect(() => {
-    
-
         if(sessionStorage.getItem("id") == null){
             console.log("1")
             navigate("/")
-            
         }
         else{
             console.log("2")
-         
             getImages()
-            
         }
-       
     }, []);
 
-    // useEffect(() => {
-    //     setIsFollowing(isFollowingUser());
-    //   }, [followingUsers]);
+    useEffect(() => {
+        setIsAlreadyFollowing(userIds.includes(searchId));
+      }, [followingUsers]);
+
+    useEffect(() => {
+        setIsFollowing(isAlreadyFollowing);
+    },[isAlreadyFollowing]);
 
 
     // follow feature
@@ -80,6 +78,10 @@ const Profile = (props) =>{
         formData.append("follower", sessionStorage.getItem("id"));
         formData.append("following", searchId);
 
+        if (userIds.includes(searchId)) {
+            setShowAlreadyFollowingPopup(true);
+            return;
+        }
         axios({
             method: 'post',
             url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeFollow.php",
@@ -87,7 +89,7 @@ const Profile = (props) =>{
             data: formData
         })
         .then((response) => {
-            setIsFollowing(!isFollowing)
+            setIsAlreadyFollowing(true);
             // const newFollowingUsers = [...followingUsers, {id: searchId, name: name}];
             // setFollowingUsers(newFollowingUsers);
             getFollowingUsers();
@@ -98,6 +100,17 @@ const Profile = (props) =>{
         });
     }
 
+    const AlreadyFollowingPopup = ({ onClose }) => {
+        return (
+            <div className="popup">
+                <div className="popup-content">
+                    <h3>Already following this user</h3>
+                    <button onClick={onClose}>OK</button>
+                </div>
+            </div>
+        );
+    };
+    
     // get following list from the database
     const getFollowingUsers = () => {
         var formData = new FormData();
@@ -169,8 +182,8 @@ const Profile = (props) =>{
           const updatedFollowingUsers = followingUsers.map((user, index) => {
             const data = responses[index].data;
             console.log(data);
-            if (data && data.username) {
-              return { ...user, username: data.username };
+            if (data && data[1]) {
+              return { ...user, username: data[1] };
             } else {
               console.log(`Invalid response data for user ${user.following}: ${data}`);
               return user;
@@ -259,19 +272,23 @@ const Profile = (props) =>{
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
                            {(searchId !== sessionStorage.getItem("id")) && (
+                            
                             <button
                             className='follow'
                             onClick={() => {
-                              if (!isFollowing) {
+                                if (!isFollowing) {
                                 handleFollowUser();
-                              }
-                              setIsFollowing(!isFollowing);
+                                }
+                                setIsFollowing(!isFollowing);
                             }}
-                            disabled={isFollowing}
-                          >
-                            {isFollowing ? "Following" : "Follow"}
-                          </button>
+                            disabled={isFollowing || isAlreadyFollowing}
+                            >
+                            {isAlreadyFollowing ? "Follow" : isFollowing ? "Follow" : "Follow"}
+                            </button>
+                            
                         )}
+                        {showAlreadyFollowingPopup && <AlreadyFollowingPopup onClose={() => setShowAlreadyFollowingPopup(false)} />}
+
                         {/* {(searchId !== sessionStorage.getItem("id")) && (!isFollowing ? (
                             <button className="follow-btn" onClick={handleFollowUser}>Follow</button>
                         ) : (
