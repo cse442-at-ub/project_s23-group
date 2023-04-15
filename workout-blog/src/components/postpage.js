@@ -55,13 +55,6 @@ const Postpage = (props) => {
         <div class="container whole_page">
             <nav class="navbar navbar-expand-lg navbar-light col-12">
                 <div class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ml-auto">
-                    </div>
-                </div>
             </nav>
             <div className="page">
                 <div className="blogpost_header">
