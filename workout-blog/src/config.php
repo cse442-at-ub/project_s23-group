@@ -18,7 +18,16 @@ function checkLogin($email)
 
     return $result->fetch_array(MYSQLI_NUM);
 }
+
 function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
+        $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
+        $stmt->bind_param("isss", $id, $title, $caption, $picture);
+        $stmt->execute(); // insert new user profile
+        $stmt->close();
+        $conn->close();
+    }
+
+function makeNewUser($email, $username, $password)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
@@ -43,6 +52,7 @@ function makeNewProfile($id, $username, $bio, $pfp, $background)
 
 function makeNewFollow($follower, $following)
 {
+<<<<<<< HEAD
 
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
@@ -56,12 +66,38 @@ function makeNewFollow($follower, $following)
     $stmt2->execute(); // insert new user follow
 
     $result = $stmt2->get_result();
+=======
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT following FROM follows WHERE follower = ? AND following = ?");
+    $stmt->bind_param("ii", $follower, $following);
+    $stmt->execute();
+
+    $oldFollow = $stmt->get_result();
+    $stmt->close();
+
+    if( mysqli_num_rows($oldFollow) == 0){
+        $stmt2 = $conn->prepare("INSERT INTO follows (follower, following) VALUES (?, ?)");
+        $stmt2->bind_param("ii", $follower, $following);
+        $stmt2->execute(); // insert new user follow
+        $stmt2->close();
+    }
+    $stmt3 = $conn->prepare("SELECT * FROM follows WHERE follower = ?");
+    $stmt3->bind_param("i", $follower);
+    $stmt3->execute(); // insert new user follow
+
+    $result = $stmt3->get_result();
+>>>>>>> follow_users
     $data[] = array();
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;
     }
     mysqli_close($conn);
+<<<<<<< HEAD
     $stmt2->close();
+=======
+    $stmt3->close();
+>>>>>>> follow_users
 
 
     return $data;
@@ -120,6 +156,7 @@ function getPost()
 
     return $posts;
 }
+<<<<<<< HEAD
 
 function makeNewUser($email, $username, $password)
 {
@@ -180,3 +217,41 @@ function getImages($id)
 
 ?>
 
+=======
+function getFollowers($userid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT * FROM follows WHERE following = ?");
+    $stmt->bind_param("i", $userid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data[] = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    mysqli_close($conn);
+    $stmt->close();
+
+    return $data;
+}
+function getFollowing($userid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT * FROM follows WHERE follower = ?");
+    $stmt->bind_param("i", $userid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data[] = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    mysqli_close($conn);
+    $stmt->close();
+
+    return $data;
+}
+>>>>>>> follow_users
