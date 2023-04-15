@@ -31,4 +31,7 @@
     display: block;
     transition: transform 0.3s ease;
   }
+.date{
+    font-size: 16px;
+}
   

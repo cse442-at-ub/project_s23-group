@@ -14,6 +14,7 @@ const TimelinePosts = (props) => {
         <div className="posts" key={props.postid}>
             <div className="post-title">
               {props.title}
+              <p className="date">Date Created: {props.created_at}</p>
             </div>
             <div className="image-body">
               <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${props.img}`} alt="post image" className="post-image" />
