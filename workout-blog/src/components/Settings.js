@@ -76,8 +76,32 @@ const Settings = (props) =>{
       })
       .then((response) => {
         console.log(response);
-        setLoad(false)
-        navigate(back)
+        
+        updatePost(parseInt(sessionStorage.getItem("id")),profileName)
+
+
+      }, (error) => {
+        console.log(error);
+      });
+
+    console.log("Success")
+  }
+
+
+  const updatePost = (userid, profileName) =>{
+    var formData = new FormData();
+    formData.append("userid", userid);
+    formData.append("pfp",profileName);
+    axios({
+      method: 'post',
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/updatePost.php",
+      headers: {'Content-Type': 'multipart/form-data'}, 
+      data: formData
+    })
+    .then((response) => {
+      console.log(response);
+      setLoad(false)
+      navigate(back)
 
       }, (error) => {
         console.log(error);
