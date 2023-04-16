@@ -7,14 +7,19 @@ import "./postpage.css"
 import {
     useNavigate,
     useParams,
+    Link,
   } from "react-router-dom";
 
 const Postpage = (props) => {
     const navigate = useNavigate()
     const [post, setPost] = useState("");
     const [profilePic,setProfilePic] = ("");
+    const [id,setid] = useState(sessionStorage.getItem("id"))
     const params = useParams()
     const searchId = params.id
+    function signOut() {
+      sessionStorage.clear()
+    }
     function getProfilePic() {
         var formData = new FormData();   
         formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
@@ -55,6 +60,25 @@ const Postpage = (props) => {
         <div class="container whole_page">
             <nav class="navbar navbar-expand-lg navbar-light col-12">
                 <div class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ml-auto">
+                      <div onClick={()=>navigate(`../../profile/${id}`)}>
+                        {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
+                      </div>
+                      <div onClick={()=>navigate(`../../`)}>
+                        {(id && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
+                      </div>
+                      <div onClick={()=>navigate(`../../register`)}>
+                        {(!id && (<Link class="nav-item nav-link">Sign Up</Link>)) } 
+                      </div>
+                      <div onClick={()=>navigate(`../../login`)}>
+                        {(!id && (<Link class="nav-item nav-link">Sign In</Link>)) }
+                      </div>
+                    </div>
+                </div>
             </nav>
             <div className="page">
                 <div className="blogpost_header">

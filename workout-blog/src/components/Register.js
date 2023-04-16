@@ -36,7 +36,7 @@ const Register = (props) =>{
         console.log(password)
         var bodyFormData = new FormData();
         if(name&&email&&password&&confirmPassword &&(password===confirmPassword)){
-            if(!/[^a-z]/i.test(name)){
+            
                 if(email.includes("@")){
                     if(password.length >=6){
  
@@ -77,14 +77,7 @@ const Register = (props) =>{
                     setError(true)
                     setErrMessage("Not a valid email")
                 }
-              }
-              else{
-                console.log(!/[^a-z]/i.test(name))
-                setError(true)
-                console.log("special char")
-                setErrMessage("Name contains special characters")
-
-              }
+              
            
         }
         else{

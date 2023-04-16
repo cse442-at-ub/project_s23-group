@@ -82,10 +82,6 @@ const Profile = (props) =>{
 
     const signOut = () => {
         sessionStorage.clear();
-        setBio('')
-        setProfile(null)
-        setBackground(null)
-        navigate("/")
     }
 
     useEffect(() => {
@@ -323,8 +319,8 @@ const Profile = (props) =>{
         <div class="bg2">
             
             <div className="bg2abs" style={dynamicBackground}/> 
-                        <div class="headers">
-                        <nav class="navbar navbar-expand-lg navbar-dark col-12">
+                <div class="headers">
+                <nav class="navbar navbar-expand-lg navbar-dark col-12">
                 <button class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</button>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -332,7 +328,9 @@ const Profile = (props) =>{
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                     {(searchId == sessionStorage.getItem("id") && (<Link class="nav-item nav-link" to ={`settings`}>Settings</Link>))}
-                    {(sessionStorage.getItem("id") && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
+                    <div onClick={()=>navigate(`../../`)}>
+                        {(sessionStorage.getItem("id") && (<Link onClick={()=>{signOut()}} class="nav-item nav-link" >Sign Out</Link>))}
+                    </div>
                   
                     </div>
                 </div>
