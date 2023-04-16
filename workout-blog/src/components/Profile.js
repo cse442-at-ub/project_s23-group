@@ -338,7 +338,7 @@ const Profile = (props) =>{
                            
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                           {(searchId !== sessionStorage.getItem("id")) && (
+                           {(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
                             
                             <button
                             className='follow'
