@@ -18,6 +18,8 @@ const Postpage = (props) => {
     const params = useParams()
     const searchId = params.id
     const [comment, setComment] = useState("");
+    const [com, setCom] = useState([]);
+    const [postComments, setPostComments] = useState([]);
 
     function handleChange(event) {
       setComment(event.target.value);
@@ -37,6 +39,8 @@ const Postpage = (props) => {
       })
       .then(response => {
         console.log(response);
+        setComment("");
+        giveComment();
         // Add logic to update the UI with the new comment
       })
       .catch(error => {
@@ -62,6 +66,29 @@ const Postpage = (props) => {
             console.log(error);
           });
       }
+      function giveComment() {
+        console.log("giveComments branch")
+        axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getComments.php",
+        })
+          .then(response => {
+            console.log(response.data)
+            const comments = response.data;
+            const filteredComments = comments.filter(
+              (comment) => parseInt(comment.post_id) === parseInt(searchId)
+            );
+            console.log(comments)
+            console.log(filteredComments)
+            console.log(searchId)
+            setCom(comments);
+            setPostComments(filteredComments);
+           // setCom(filteredComments);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
     function getBlogPost() {
         var formData = new FormData();   
         formData.append("postid", searchId); 
@@ -80,6 +107,7 @@ const Postpage = (props) => {
       }
     useEffect(() => {
         getBlogPost();
+        giveComment();
       }, []);
     
     return (
@@ -123,10 +151,23 @@ const Postpage = (props) => {
                 <div class="post_body">
                     <p>{post.text}</p>
                 </div>
+                <div class="post_comments">
                 <form onSubmit={updateCommentDB}>
                       <textarea value={comment} onChange={handleChange} />
                       <button type="submit">Post Comment</button>
-                    </form>
+                </form>
+                </div>
+                {postComments.map((comment) => (
+                <div key={comment.id} className="comment">
+                  <div className="comment-header">
+                    <div className="comment-header-text">
+                      <p className="comment-username">{comment.username}</p>
+                      <p className="comment-date">{comment.created_at}</p>
+                    </div>
+                  </div>
+                  <p className="comment-text">{comment.comment}</p>
+                </div>
+              ))}
                 <div><button onClick={navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
 }>Share</button></div>
             </div>
