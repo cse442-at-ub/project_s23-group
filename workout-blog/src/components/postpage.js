@@ -177,10 +177,11 @@ const Postpage = (props) => {
                 {postComments.map((comment) => (
                   <div key={comment.id} className="comment">
                   <div className="comment-header">
-                    <div className="comment-header-text">
+                    <div className="comment-header-text" onClick={()=>navigate(`/profile/${comment.user_id}`)}>
                         {comment.pfp && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${comment.pfp}`} alt="comment image" className="comment-image"     style={{ width: "50px", height: "50px" }}
- />}
-                      <p className="comment-username">{comment.username}</p>
+ />}              <div>{()=>navigate(`/profile/${comment.user_id}`)}
+                      <p className="comment-username"> {comment.username}</p>
+                      </div>
                       <p className="comment-date">{comment.created_at}</p>
                     </div>
                   </div>
