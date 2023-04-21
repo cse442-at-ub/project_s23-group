@@ -17,6 +17,32 @@ const Postpage = (props) => {
     const [id,setid] = useState(sessionStorage.getItem("id"))
     const params = useParams()
     const searchId = params.id
+    const [comment, setComment] = useState("");
+
+    function handleChange(event) {
+      setComment(event.target.value);
+    }
+    function updateCommentDB(event) {
+      event.preventDefault();
+      var formData = new FormData();   
+      formData.append("u_id", parseInt(sessionStorage.getItem("id")));//should be user  id 
+      formData.append("p_id", post.id);//should be user  id 
+      formData.append("comment",comment)   //new
+      formData.append("username", sessionStorage.getItem("name"));//new 
+      axios({
+        method: 'post',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeCommentDB.php", //fix 
+        headers: {'Content-Type': 'multipart/form-data'}, 
+        data: formData
+      })
+      .then(response => {
+        console.log(response);
+        // Add logic to update the UI with the new comment
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
     function signOut() {
       sessionStorage.clear()
     }
@@ -97,6 +123,10 @@ const Postpage = (props) => {
                 <div class="post_body">
                     <p>{post.text}</p>
                 </div>
+                <form onSubmit={updateCommentDB}>
+                      <textarea value={comment} onChange={handleChange} />
+                      <button type="submit">Post Comment</button>
+                    </form>
                 <div><button onClick={navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
 }>Share</button></div>
             </div>
