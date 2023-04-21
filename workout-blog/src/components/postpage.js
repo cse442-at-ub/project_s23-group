@@ -26,7 +26,7 @@ const Postpage = (props) => {
       event.preventDefault();
       var formData = new FormData();   
       formData.append("u_id", parseInt(sessionStorage.getItem("id")));//should be user  id 
-      formData.append("p_id", post.id);//should be user  id 
+      formData.append("p_id", searchId);//should be user  id 
       formData.append("comment",comment)   //new
       formData.append("username", sessionStorage.getItem("name"));//new 
       axios({

@@ -19,13 +19,27 @@ function checkLogin($email)
     return $result->fetch_array(MYSQLI_NUM);
 }
 
-function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp){
-        $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
-        $stmt->bind_param("isss", $id, $title, $caption, $picture);
-        $stmt->execute(); // insert new user profile
-        $stmt->close();
-        $conn->close();
+function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("INSERT INTO posts (userid, username, title,text,img, tag, pfp) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param("issssss", $id, $username, $title, $caption, $picture, $tag, $pfp);
+    $stmt->execute(); // insert new user profile
+    $stmt->close();
+    $conn->close();
 }
+
+function makeNewComment($p_id, $u_id, $username, $comment){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("INSERT INTO comments (post_id, user_id, comment, username) VALUES (?,?,?,?)");
+    $stmt->bind_param("iiss", $p_id, $u_id, $comment, $username);
+    $stmt->execute(); // insert new user profile
+    $stmt->close();
+    $conn->close();
+}
+
 
 function makeNewUser($email, $username, $password)
 {
