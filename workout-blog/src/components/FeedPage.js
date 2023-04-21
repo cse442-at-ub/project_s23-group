@@ -97,7 +97,7 @@ function FeedPage() {
             {post.text && <p className="post-text">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
-          {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Settings</button>)}
+          {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
           
           {/* <div className="post-actions">
             <button className="like-button" onClick={() => handleLike(post.postid)}>{likes[post.postid] || 0} Likes</button>

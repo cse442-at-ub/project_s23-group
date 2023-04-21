@@ -87,6 +87,7 @@ const Postpage = (props) => {
                         <a className="post-author-name">{post.username}</a>
                         <p className="date">Date Created: {post.created_at}</p>
                     </div>
+                    {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`/postSettings/${post.postid}`)}>Edit</button>)}
                 </div>
                 <div class="post_title">
                     <h1>{post.title}</h1>

@@ -392,7 +392,7 @@ const Profile = (props) =>{
                         </div>
                         <div className='gallery'>
                             <div className="innerGallery">
-                                <Timeline userid = {searchId}/>]
+                                <Timeline userid = {searchId}/>
                             </div>
                         </div>
                            
