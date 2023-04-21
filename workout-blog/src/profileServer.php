@@ -62,8 +62,8 @@ $base2 = preg_replace("/[^\w-]/", "_", $base2);
 $filename = $base . "." . $pathinfo["extension"];
 $filename2 = $base2 . "." . $pathinfo2["extension"];
 
-$destination = __DIR__ . "/images/" . $filename;
-$destination2 = __DIR__ . "/images/" . $filename2;
+$destination = __DIR__ . "/uploads/" . $filename;
+$destination2 = __DIR__ . "/uploads/" . $filename2;
 
 
 // Add a numeric suffix if the file already exists
@@ -73,11 +73,11 @@ $j = 1;
 while (file_exists($destination) || file_exists($destination2)) {
     if (file_exists($destination)) {
         $filename = $base . "($i)." . $pathinfo["extension"];
-        $destination = __DIR__ . "/images/" . $filename;
+        $destination = __DIR__ . "/uploads/" . $filename;
         $i++;
     } else {
         $filename2 = $base2 . "($j)." . $pathinfo2["extension"];
-        $destination2 = __DIR__ . "/images/" . $filename2;
+        $destination2 = __DIR__ . "/uploads/" . $filename2;
         $j++;
     }
 }

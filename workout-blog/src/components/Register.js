@@ -69,7 +69,7 @@ const Register = (props) =>{
                     }
                     else{
                         setError(true)
-                        setErrMessage("Password too short")
+                        setErrMessage("Password length must be greater than 6 characters")
                     }
                 }
                 else{

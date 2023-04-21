@@ -136,17 +136,7 @@
     }
   
   
-    /* .follow{
-      height: 50px;
-      width: 150px;
-      border-radius: 10px;
-      margin-left: 76%;
-      border-color: transparent;
-      font-size: 24px;
-      margin-top: auto;
-    }
-    
-  */
+ 
   
     .bg2 .imgbox{
       padding-top: 3%;
@@ -236,7 +226,7 @@
   
  
   .bg2 .postwrap{
-    margin-left: 4%;
+    margin-left: 14%;
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;
@@ -547,17 +537,7 @@
       width: 5%;
       margin-left: 3%;
     } 
-  /*
-    .follow{
-      height: 5%;
-      width: 15%;
-      border-radius: 10px;
-      margin-left: 50%;
-      border-color: transparent;
-      font-size: 12px;
-      margin-top: auto;
-    }
-   */
+
   
      .settings{
       height: 5%;
@@ -637,6 +617,7 @@
   
 
   .bg2 .postwrap{
+    margin-left: 14%;
     background-color: transparent;
     border-color: transparent;
     color: aliceblue;

@@ -97,7 +97,7 @@ const Postpage = (props) => {
                 <div class="post_body">
                     <p>{post.text}</p>
                 </div>
-                <div><button onClick={navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
+                <div><button onClick={()=>navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
 }>Share</button></div>
             </div>
         </div>

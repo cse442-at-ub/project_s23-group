@@ -111,7 +111,7 @@
         color: #fff;
         
     }    
-     input[type=file] {
+    .bg3 input[type=file] {
         width: 350px;
         max-width: 100%;
         color: azure;
@@ -120,7 +120,7 @@
         border: 1px solid #555;
       }
     
-       input[type=file]::file-selector-button {
+      .bg3 input[type=file]::file-selector-button {
         margin-right: 20px;
         width: 40%;
         border: none;
@@ -132,7 +132,7 @@
         transition: background .2s ease-in-out;
       }
       
-       input[type=file]::file-selector-button:hover {
+      .bg3 input[type=file]::file-selector-button:hover {
         background: steelblue;
       }
     

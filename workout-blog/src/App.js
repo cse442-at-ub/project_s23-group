@@ -6,6 +6,7 @@ import ProfilePage from './components/Profile.js';
 import Settings from './components/Settings.js';
 import Post from './components/makePost.js';
 import Postpage from './components/postpage.js';
+import PostSettings from './components/PostSettings.js';
 import { NotFound } from './components/NotFound.js';
 import {
   BrowserRouter, Link,Router,Routes,Route,
@@ -22,6 +23,9 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="posts" element={<Post />} />
             <Route path="login" element={<Login />} />
+            <Route path="postSettings">
+              <Route path=":id" element={<PostSettings />} />
+            </Route> 
             <Route path="profile">
               <Route path=":id" element={<ProfilePage />} />
               <Route path=":id/settings" element={<Settings />} />
