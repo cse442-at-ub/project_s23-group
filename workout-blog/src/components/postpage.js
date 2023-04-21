@@ -13,12 +13,11 @@ import {
 const Postpage = (props) => {
     const navigate = useNavigate()
     const [post, setPost] = useState("");
-    const [profilePic,setProfilePic] = ("");
+    const [profilePic, setProfilePic] = useState("");
     const [id,setid] = useState(sessionStorage.getItem("id"))
     const params = useParams()
     const searchId = params.id
     const [comment, setComment] = useState("");
-    const [com, setCom] = useState([]);
     const [postComments, setPostComments] = useState([]);
 
     function handleChange(event) {
@@ -31,6 +30,7 @@ const Postpage = (props) => {
       formData.append("p_id", searchId);//should be user  id 
       formData.append("comment",comment)   //new
       formData.append("username", sessionStorage.getItem("name"));//new 
+      formData.append("pfp",profilePic)   //new
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeCommentDB.php", //fix 
@@ -50,22 +50,40 @@ const Postpage = (props) => {
     function signOut() {
       sessionStorage.clear()
     }
-    function getProfilePic() {
-        var formData = new FormData();   
-        formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
-        axios({
-          method: 'post',
-          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profilePic.php",
-          data: formData
+    function giveProfilePic(userId) {
+      var formData = new FormData();
+      formData.append("id", parseInt(sessionStorage.getItem("id")));
+      return axios({
+        method: "post",
+        url:
+          "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
+        data: formData,
+      })
+        .then((response) => {
+          console.log(response.data);
+          setProfilePic(response.data[4]); // use the 4th index to set the profile pic
+          console.log("t1.5")
         })
-          .then(response => {
-            console.log(response.data)
-            setProfilePic(response.data.pfp);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    // function getProfilePic() {
+    //     var formData = new FormData();   
+    //     formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
+    //     axios({
+    //       method: 'post',
+    //       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profilePic.php",
+    //       data: formData
+    //     })
+    //       .then(response => {
+    //         console.log(response.data)
+    //         setProfilePic(response.data.pfp);
+    //       })
+    //       .catch(error => {
+    //         console.log(error);
+    //       });
+    //   }
       function giveComment() {
         console.log("giveComments branch")
         axios({
@@ -81,9 +99,7 @@ const Postpage = (props) => {
             console.log(comments)
             console.log(filteredComments)
             console.log(searchId)
-            setCom(comments);
             setPostComments(filteredComments);
-           // setCom(filteredComments);
           })
           .catch(error => {
             console.log(error);
@@ -106,8 +122,9 @@ const Postpage = (props) => {
           });
       }
     useEffect(() => {
-        getBlogPost();
-        giveComment();
+      giveProfilePic(searchId);
+      getBlogPost();
+      giveComment();
       }, []);
     
     return (
@@ -158,9 +175,11 @@ const Postpage = (props) => {
                 </form>
                 </div>
                 {postComments.map((comment) => (
-                <div key={comment.id} className="comment">
+                  <div key={comment.id} className="comment">
                   <div className="comment-header">
                     <div className="comment-header-text">
+                        {comment.pfp && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${comment.pfp}`} alt="comment image" className="comment-image"     style={{ width: "50px", height: "50px" }}
+ />}
                       <p className="comment-username">{comment.username}</p>
                       <p className="comment-date">{comment.created_at}</p>
                     </div>
