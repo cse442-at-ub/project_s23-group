@@ -194,7 +194,7 @@ function getImages($id)
 }
 
 
-?>
+
 
 function getFollowers($userid)
 {
@@ -214,6 +214,17 @@ function getFollowers($userid)
 
     return $data;
 }
+function updateLikes($postid, $likes)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("UPDATE posts SET likes=? WHERE postid = ?");
+    $stmt->bind_param("ii", $likes, $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
 function getFollowing($userid)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -232,3 +243,5 @@ function getFollowing($userid)
 
     return $data;
 }
+
+?>
