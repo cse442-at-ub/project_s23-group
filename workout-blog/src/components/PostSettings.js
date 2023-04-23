@@ -15,9 +15,13 @@ const PostSettings = (props) =>{
   
     const navigate = useNavigate()
     const [title, setTitle] = useState(null)
-    const [image, setImage] = useState(null);
+    const [myFile, setMyFile] = useState(null);
     const [caption, setCaption] = useState(null);
-    const [tag, setTag] = useState('Diet');
+    const [tag, setTag] = useState(null);
+    const [backuptitle, setBackUpTitle] = useState(null)
+    const [changedimage, setChangedImage] = useState(false);
+    const [backupcaption, setBackUpCaption] = useState(null);
+    
     const params = useParams()
     const postid = params.id
     const [load, setLoad] = useState(false)
@@ -28,13 +32,40 @@ const PostSettings = (props) =>{
    
 
     useEffect(() => {
-        console.log(tag)
-      }, [tag]);
+        getBlogPost()
+      }, []);
+
+
+      function getBlogPost() {
+        var formData = new FormData();   
+        formData.append("postid", postid); 
+        axios({
+          method: 'POST',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getSinglePost.php",
+          data: formData,
+        })
+          .then(response => {
+            
+            setTitle(response.data.title)
+            setMyFile(response.data.img)
+            setCaption(response.data.text)
+            setTag(response.data.tag)
+            setBackUpTitle(response.data.title)
+            setBackUpCaption(response.data.text)
+        
+          
+            
+        })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    
 
     function uploadPhoto() {
         console.log("starting to upload photo");
         var bodyFormData = new FormData();
-        bodyFormData.append("myFile", image);
+        bodyFormData.append("myFile", myFile);
         axios({
           method: "post",
           url:
@@ -44,7 +75,8 @@ const PostSettings = (props) =>{
         })
           .then((response) => {
             
-            EditPost(title,image,caption,tag)
+            EditPost(title,response.data[0],caption,tag)
+           
           })
           .catch((error) => {
             console.log(error);
@@ -52,21 +84,22 @@ const PostSettings = (props) =>{
       }
 
     const EditPost = ( title, image, caption, tag) =>{
+      
         var formData = new FormData();
         formData.append("postid", postid);
         formData.append("title", title);
-        formData.append("image", image);
-        formData.append("caption",caption);
+        formData.append("img", image);
+        formData.append("text",caption);
         formData.append("tag",tag);
         axios({
           method: 'post',
-          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/",
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/editPost.php",
           headers: {'Content-Type': 'multipart/form-data'}, 
           data: formData
         })
         .then((response) => {
           console.log(response);
-          
+          navigate("/")
           
   
   
@@ -132,7 +165,12 @@ const PostSettings = (props) =>{
                     className='inpTitle'
                     type='text'
                     onChange={event => {
-                        setTitle(event.target.value)
+                        if(event.target.value.trim().length)
+                            {setTitle(event.target.value)}
+                        else{
+                          setTitle(backuptitle)
+                        }
+                          
                         }}
                     />
            </div>
@@ -141,7 +179,8 @@ const PostSettings = (props) =>{
                     className='inpImg'
                     type='file'
                     onChange={event => {
-                        setImage(event.target.value)
+                        setMyFile(event.target.files[0]);
+                        setChangedImage(true)
                         }}
                     />
            </div>
@@ -150,13 +189,26 @@ const PostSettings = (props) =>{
                     className='inpCaption'
                     type='text'
                     onChange={event => {
-                        setCaption(event.target.value)
+                      if(event.target.value.trim().length)
+                            {setCaption(event.target.value)}
+                        else{
+                          setCaption(backupcaption)
+                        }
                         }}
                     />
            </div>
            <div className="PSUpdateBox">
                 <button className="PSUpdate"
-                onClick={()=>{}}
+                onClick={()=>{
+                  if(changedimage){
+                    uploadPhoto()
+                  }
+                  else{
+                   
+                    EditPost(title, myFile, caption, tag)
+                  }
+                  
+                }}
                 >Update</button>
            </div>
            <div className="PSDeleteBox">

@@ -13,8 +13,6 @@ import {
   
 
 const Profile = (props) =>{
-    const navigate = useNavigate()
-    const params = useParams()
     const [bio, setBio] = useState('')
     const [profile, setProfile] = useState('');
     const [background, setBackground] = useState('');
@@ -27,6 +25,10 @@ const Profile = (props) =>{
     const [posts, setPosts] = useState([]);
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
     const [showAlreadyFollowingPopup, setShowAlreadyFollowingPopup] = useState(false);
+    const navigate = useNavigate()
+    const params = useParams()
+    const searchId = params.id
+    const userIds = followingUsers.map(user => user.following);
 
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
@@ -64,8 +66,7 @@ const Profile = (props) =>{
 
 
 
-    const searchId = params.id
-    const userIds = followingUsers.map(user => user.following);
+    
 
 
 
