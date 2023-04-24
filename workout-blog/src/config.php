@@ -18,16 +18,7 @@ function checkLogin($email)
 
     return $result->fetch_array(MYSQLI_NUM);
 }
-
-function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp){
-        $stmt = $conn->prepare("INSERT INTO posts (userid, title,text,img) VALUES (?,?,?,?)");
-        $stmt->bind_param("isss", $id, $title, $caption, $picture);
-        $stmt->execute(); // insert new user profile
-        $stmt->close();
-        $conn->close();
-}
-
-function makeNewUser($email, $username, $password)
+function makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
@@ -37,6 +28,47 @@ function makeNewUser($email, $username, $password)
     $stmt->close();
     $conn->close();
 }
+
+function makeNewUser($email, $username, $password)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+
+    $existingEmail = $stmt->get_result();
+    $stmt->close();
+
+    if (mysqli_num_rows($existingEmail) == 0) {
+        $stmt3 = $conn->prepare("INSERT INTO users (email, username, password) VALUES (?, ?, ?)");
+        $stmt3->bind_param("sss", $email, $username, $password);
+        $stmt3->execute(); // insert new user
+
+        $stmt3->close();
+
+        $prepared = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $prepared->bind_param("s", $username);
+        $prepared->execute();
+        $result = $prepared->get_result();
+
+        $userinfo = $result->fetch_array(MYSQLI_NUM);
+
+
+
+        $stmt = $conn->prepare("INSERT INTO `profile` (id, username, bio, background, pfp) VALUES (?, ?, '', '', '')");
+        $stmt->bind_param("is", $userinfo[0], $userinfo[2]);
+        $stmt->execute(); // insert new user profile
+
+        $stmt->close();
+        mysqli_close($conn);
+        return $userinfo;
+    } else {
+        return null;
+    }
+
+}
+
 
 function makeNewProfile($id, $username, $bio, $pfp, $background)
 {
@@ -61,7 +93,7 @@ function makeNewFollow($follower, $following)
     $oldFollow = $stmt->get_result();
     $stmt->close();
 
-    if( mysqli_num_rows($oldFollow) == 0){
+    if (mysqli_num_rows($oldFollow) == 0) {
         $stmt2 = $conn->prepare("INSERT INTO follows (follower, following) VALUES (?, ?)");
         $stmt2->bind_param("ii", $follower, $following);
         $stmt2->execute(); // insert new user follow
@@ -136,66 +168,20 @@ function getPost()
 
     return $posts;
 }
-
-function makeNewUser($email, $username, $password)
+function getSinglePost($postid)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE postid = ?");
+    $stmt->bind_param("i", $postid);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    $stmt = $conn->prepare("INSERT INTO users (email, username, password) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $email, $username, $password);
-    $stmt->execute(); // insert new user
-
-    $stmt->close();
-
-    $prepared = $conn->prepare("SELECT * FROM users WHERE username = ?");
-    $prepared->bind_param("s", $username);
-    $prepared->execute();
-    $result = $prepared->get_result();
-
-    $userinfo = $result->fetch_array(MYSQLI_NUM);
-
-
-
-    $stmt = $conn->prepare("INSERT INTO `profile` (id, username, bio, background, pfp) VALUES (?, ?, '', '', '')");
-    $stmt->bind_param("is", $userinfo[0], $userinfo[2]);
-    $stmt->execute(); // insert new user profile
-
-
-    $stmt->close();
-    mysqli_close($conn);
-    return $userinfo;
-}
-
-
-function makeNewProfile($id, $username, $bio, $pfp, $background)
-{
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-    $stmt = $conn->prepare("UPDATE profile SET bio=?, background=?, pfp=? WHERE id = ?");
-    $stmt->bind_param("sssi", $bio, $background, $pfp, $id);
-    $stmt->execute(); // insert new user profile
-
+    //echo $stmt;
     $stmt->close();
     $conn->close();
+
+    return $result->fetch_assoc();
 }
-
-function getImages($id)
-{
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-    $prepared = $conn->prepare("SELECT * FROM profile WHERE id = ?");
-    $prepared->bind_param("i", $id);
-    $prepared->execute();
-    $result = $prepared->get_result();
-
-    mysqli_close($conn);
-
-    return $result->fetch_array(MYSQLI_NUM);
-}
-
-
-
-
 function getFollowers($userid)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -213,17 +199,6 @@ function getFollowers($userid)
     $stmt->close();
 
     return $data;
-}
-function updateLikes($postid, $likes)
-{
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-    $stmt = $conn->prepare("UPDATE posts SET likes=? WHERE postid = ?");
-    $stmt->bind_param("ii", $likes, $postid);
-    $stmt->execute(); // insert new user profile
-
-    $stmt->close();
-    $conn->close();
 }
 function getFollowing($userid)
 {
@@ -243,5 +218,70 @@ function getFollowing($userid)
 
     return $data;
 }
+function getUserInfo($userid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
-?>
+    $stmt = $conn->prepare("SELECT * FROM profile WHERE id = ?");
+    $stmt->bind_param("i", $userid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    //echo $stmt;
+    $stmt->close();
+    $conn->close();
+
+    return $result->fetch_assoc();
+}
+function updateLikes($postid, $likes)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("UPDATE posts SET likes=? WHERE postid = ?");
+    $stmt->bind_param("ii", $likes, $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
+function updatePost($id, $pfp)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    echo $id;
+    echo $pfp;
+    $stmt = $conn->prepare("UPDATE posts SET pfp=? WHERE userid = ?");
+    $stmt->bind_param("si", $pfp, $id);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
+
+function editPost($postid, $title, $img, $text, $tag)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+
+
+    $stmt = $conn->prepare("UPDATE posts SET pfp=? WHERE postid = ?");
+    $stmt->bind_param("si", $pfp, $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
+
+function deletePost($postid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+
+
+    $stmt = $conn->prepare("DELETE FROM posts WHERE postid = ?");
+    $stmt->bind_param("i", $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}

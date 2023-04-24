@@ -1,3 +1,6 @@
+
+ 
+
 <?php
 header ('Access-Control-Allow-Origin: *');
 define('DB_SERVER', 'oceanus.cse.buffalo.edu');

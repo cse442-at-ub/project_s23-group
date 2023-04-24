@@ -317,14 +317,14 @@
 
   }
   
-  .bg2 .gallery img{
+  /* .bg2 .gallery img{
     height: 400px;
     margin-top: 10px;
     margin-left: 10px;
-    /* width: 31.81%; */
+    width: 31.81%; 
     object-fit: cover;
     
-  }
+  } */
   
   .follow {
     font-family: 'Titillium Web', sans-serif;

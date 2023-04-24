@@ -1,5 +1,6 @@
 import React from "react";
 import './timelinepost.css'
+import Likes_button from "./Likes_button";
 import { useState, useEffect, useRef } from 'react';
 import './FeedPage.css';
 import {
@@ -19,6 +20,7 @@ const TimelinePosts = (props) => {
             <div onClick = {()=>navigate(`../../postpage/${props.postid}`)} className="image-body">
               <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${props.img}`} alt="post image" className="post-image" />
             </div>
+            <Likes_button postid = {props.postid} likes = {props.likes}/>
         </div>
   );
 }

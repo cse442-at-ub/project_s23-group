@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import './FeedPage.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Likes_button from './Likes_button';
 
 function FeedPage() {
   const navigate = useNavigate();
@@ -97,6 +98,8 @@ function FeedPage() {
             {post.text && <p className="post-text">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
+          <div><Likes_button postid = {post.postid} likes = {post.likes}/></div>
+          
 
           {/* <div className="post-actions">
             <button className="like-button" onClick={() => handleLike(post.postid)}>{likes[post.postid] || 0} Likes</button>

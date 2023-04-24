@@ -1,5 +1,6 @@
 import React from "react";
 import Popup from 'reactjs-popup';
+import Likes_button from "./Likes_button";
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import "./postpage.css"
@@ -10,9 +11,10 @@ import {
     Link,
   } from "react-router-dom";
 
-const Postpage = (props) => {
+const Postpage = () => {
     const navigate = useNavigate()
     const [post, setPost] = useState("");
+    const [shared, setshared] = useState("Share Link")
     const [profilePic,setProfilePic] = ("");
     const [id,setid] = useState(sessionStorage.getItem("id"))
     const params = useParams()
@@ -20,22 +22,7 @@ const Postpage = (props) => {
     function signOut() {
       sessionStorage.clear()
     }
-    function getProfilePic() {
-        var formData = new FormData();   
-        formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
-        axios({
-          method: 'post',
-          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profilePic.php",
-          data: formData
-        })
-          .then(response => {
-            console.log(response.data)
-            setProfilePic(response.data.pfp);
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
+
     function getBlogPost() {
         var formData = new FormData();   
         formData.append("postid", searchId); 
@@ -46,6 +33,7 @@ const Postpage = (props) => {
         })
           .then(response => {
             setPost(response.data)
+            console.log(response.data)
 
         })
           .catch(error => {
@@ -97,8 +85,11 @@ const Postpage = (props) => {
                 <div class="post_body">
                     <p>{post.text}</p>
                 </div>
-                <div><button onClick={navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
-}>Share</button></div>
+                <div>
+                <Likes_button postid = {post.postid} likes = {post.likes}/>
+                <button onClick={()=>{navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`);setshared("Copied!")}}>{shared}</button>
+                </div>
+
             </div>
         </div>
 
