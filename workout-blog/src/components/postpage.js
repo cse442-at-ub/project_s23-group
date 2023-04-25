@@ -19,7 +19,7 @@ const Postpage = (props) => {
     const searchId = params.id
     const [comment, setComment] = useState("");
     const [postComments, setPostComments] = useState([]);
-
+    const [comAmount, setComAmount] = useState(0);
     function handleChange(event) {
       setComment(event.target.value);
     }
@@ -68,22 +68,6 @@ const Postpage = (props) => {
           console.log(error);
         });
     }
-    // function getProfilePic() {
-    //     var formData = new FormData();   
-    //     formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
-    //     axios({
-    //       method: 'post',
-    //       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profilePic.php",
-    //       data: formData
-    //     })
-    //       .then(response => {
-    //         console.log(response.data)
-    //         setProfilePic(response.data.pfp);
-    //       })
-    //       .catch(error => {
-    //         console.log(error);
-    //       });
-    //   }
       function giveComment() {
         console.log("giveComments branch")
         axios({
@@ -100,6 +84,7 @@ const Postpage = (props) => {
             console.log(filteredComments)
             console.log(searchId)
             setPostComments(filteredComments);
+            setComAmount(filteredComments.length)
           })
           .catch(error => {
             console.log(error);
@@ -173,6 +158,7 @@ const Postpage = (props) => {
                       <textarea value={comment} onChange={handleChange} />
                       <button type="submit">Post Comment</button>
                 </form>
+                <div><u>{comAmount} comments</u></div>
                 </div>
                 {postComments.map((comment) => (
                   <div key={comment.id} className="comment">

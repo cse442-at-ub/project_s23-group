@@ -13,6 +13,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-bottom: 1rem;
+  height: 375px;
 }
 
 .feed .post-header {
@@ -193,7 +194,6 @@ width: 70%;
     /* existing styles */
     position: relative;
   }
-  
   .feed .post-timestamp {
     position: absolute;
     top: 5px;
