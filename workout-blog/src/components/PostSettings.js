@@ -137,29 +137,33 @@ const PostSettings = (props) =>{
     
     return(
         <div className="PS">
-           <div className="PSHomeBox">
+          
             <button 
                 className="PSHome"
                 onClick={()=>navigate("/")}>
                     Home
                 
                 </button>
+          
+           <div className="PSHeader">Settings for Post</div>
+           <div className="PSFilterBox">
+            <div className="PSFilter">
+                  <select
+                      className="custom-select"
+                      value={tag}
+                      onChange={(e) => {
+                      const selected = e.target.value;
+                      setTag(selected);
+                      }}
+                  >
+                      <option value="Diet">Diet</option>
+                      <option value="Progress">Progress</option>
+                      <option value="Max Weight">Max Weight</option>
+                  </select>
+                  
+            </div>
            </div>
-           <div className="PSFilter">
-                <select
-                    className="custom-select"
-                    value={tag}
-                    onChange={(e) => {
-                    const selected = e.target.value;
-                    setTag(selected);
-                    }}
-                >
-                    <option value="Diet">Diet</option>
-                    <option value="Progress">Progress</option>
-                    <option value="Max Weight">Max Weight</option>
-                </select>
-                {tag}
-         </div>
+           <div className="PSTitle">Title</div>
            <div className="PSTitleBox">
                 <input
                     className='inpTitle'
@@ -184,6 +188,7 @@ const PostSettings = (props) =>{
                         }}
                     />
            </div>
+           <div className="PSCaption">Caption</div>
            <div className="PSCaptionBox">
                 <input
                     className='inpCaption'
