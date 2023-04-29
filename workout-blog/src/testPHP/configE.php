@@ -29,6 +29,16 @@ function  makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
     $conn->close();
 }
 
+function makeNewComment($p_id, $u_id, $username, $comment, $pfp){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("INSERT INTO comments (post_id, user_id, comment, username, pfp) VALUES (?,?,?,?,?)");
+    $stmt->bind_param("iisss", $p_id, $u_id, $comment, $username, $pfp);
+    $stmt->execute(); // insert new user profile
+    $stmt->close();
+    $conn->close();
+}
+
 function makeNewUser($email, $username, $password)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);

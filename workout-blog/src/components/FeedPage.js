@@ -48,7 +48,19 @@ function FeedPage() {
         console.log(error);
       });
   }
-
+  function getTagClassName(tag) {
+    switch (tag) {
+      case 'Diet':
+        return 'tag-diet';
+      case 'Progress':
+        return 'tag-progress';
+      case 'Max Weight':
+        return 'tag-max-weight';
+      default:
+        return '';
+    }
+  }
+  
   const handleLike = (postId) => {
     setLikes(prevLikes => ({
       ...prevLikes,
@@ -102,6 +114,9 @@ function FeedPage() {
           <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
           
 
+          <div className={`post-tag ${getTagClassName(post.tag)}`}>
+            {post.tag}
+          </div>
           {/* <div className="post-actions">
             <button className="like-button" onClick={() => handleLike(post.postid)}>{likes[post.postid] || 0} Likes</button>
             <button className="share-button">Share</button>

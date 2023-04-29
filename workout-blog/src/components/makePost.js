@@ -124,12 +124,12 @@ const navigate = useNavigate()
   console.log("Success")
 }
 useEffect(() => {
-  if (sessionStorage.getItem("id") !== null) {
+ // if (sessionStorage.getItem("id") !== null) {
     setId(sessionStorage.getItem("id"));
     setName(sessionStorage.getItem("name"));
     console.log("non null");
     giveProfilePic(sessionStorage.getItem("id")); // add this line to retrieve the user's profile picture
-  }
+ // }
 
   console.log("entered");
 }, [id, name]);
