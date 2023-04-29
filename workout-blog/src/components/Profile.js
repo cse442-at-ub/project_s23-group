@@ -79,52 +79,6 @@ const Profile = (props) =>{
         setIsFollowing(isAlreadyFollowing);
     },[isAlreadyFollowing]);
 
-
-    //sends message and stores it in database
-    // const sendDM = () => {
-    //     const data ={
-    //         sender: sessionStorage.getItem("id"),
-    //         receiver: searchId,
-    //         message: JustSent,
-    //     };
-    //     axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/sendDM.php", data)
-    //         .then(response => {
-    //             sentMessages('');
-            
-
-    //         })
-    //         .catch(error => console.error(error));
-    // }
-    // const sendDM = () => {
-    //     const formData = new FormData();
-    //     formData.append("sender", sessionStorage.getItem("id"));
-    //     formData.append("receiver", searchId);
-    //     formData.append("message", JustSent);
-        
-    //     axios({
-    //       method: 'post',
-    //       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/sendDM.php",
-    //       headers: {},
-    //       data: formData
-    //     })
-    //     .then((response) => {
-    //       sentMessages('');
-    //     })
-    //     .catch((error) => console.error(error));
-
-    //     axios({
-    //         method: 'post',
-    //         url: 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getDMs.php',
-    //         headers: {},
-    //         data: {
-    //           userid: sessionStorage.getItem("id"),
-    //           targetid: searchId
-    //         }
-    //       })
-    //       .then((response) => setAllMessages(response.data))
-    //       .catch((error) => console.error(error));
-        
-    //   }
     const getMessages = () => {
         const formData = new FormData();
         formData.append("userid", sessionStorage.getItem("id"));
@@ -172,27 +126,6 @@ const Profile = (props) =>{
       }, [sessionStorage.getItem("id"), searchId]);
 
 
-    //gets all of the old messages
-    // useEffect(() => {
-    //     const data ={
-    //         userid: sessionStorage.getItem("id"),
-    //         targetid: searchId
-    //     };
-    //     axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getDMs.php", data)
-    //         .then(response => {
-    //             for (let i = 0; i < response.data.length; i++) {
-    //                 if (response.data[i].length === 0) {
-    //                     response.data.splice(i, 1);
-    //                     i--;
-    //                 }
-    //                 }
-
-    //             setAllMessages(response.data);
-    //             console.log(response.data);
-    //         })
-    //         .catch(error => console.error(error));
-    // }, [sessionStorage.getItem("id"), searchId]);
-    //number of posts on database
     const getNumPosts = () => {
         const formData = new FormData();
         formData.append("userid", searchId)
