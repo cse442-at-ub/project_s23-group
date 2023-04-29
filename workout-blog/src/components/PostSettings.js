@@ -21,7 +21,7 @@ const PostSettings = (props) =>{
     const [backuptitle, setBackUpTitle] = useState(null)
     const [changedimage, setChangedImage] = useState(false);
     const [backupcaption, setBackUpCaption] = useState(null);
-    
+    const [preview, setPreview] = useState(null);
     const params = useParams()
     const postid = params.id
     const [load, setLoad] = useState(false)
@@ -32,8 +32,11 @@ const PostSettings = (props) =>{
    
 
     useEffect(() => {
+      if(title == null){
         getBlogPost()
-      }, []);
+      }
+        
+      }, [myFile]);
 
 
       function getBlogPost() {
@@ -52,7 +55,7 @@ const PostSettings = (props) =>{
             setTag(response.data.tag)
             setBackUpTitle(response.data.title)
             setBackUpCaption(response.data.text)
-        
+            setPreview(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${response.data.img}`)
           
             
         })
@@ -168,6 +171,7 @@ const PostSettings = (props) =>{
                 <input
                     className='inpTitle'
                     type='text'
+                    placeholder={title}
                     onChange={event => {
                         if(event.target.value.trim().length)
                             {setTitle(event.target.value)}
@@ -179,10 +183,13 @@ const PostSettings = (props) =>{
                     />
            </div>
            <div className="PSImgBox">
+                {/* <img  src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${myFile}`} alt="post image"  /> */}
+                <img  src={preview} alt="post image"  />
                 <input
                     className='inpImg'
                     type='file'
                     onChange={event => {
+                        setPreview(URL.createObjectURL(event.target.files[0]))
                         setMyFile(event.target.files[0]);
                         setChangedImage(true)
                         }}
@@ -193,6 +200,7 @@ const PostSettings = (props) =>{
                 <input
                     className='inpCaption'
                     type='text'
+                    placeholder={caption}
                     onChange={event => {
                       if(event.target.value.trim().length)
                             {setCaption(event.target.value)}
