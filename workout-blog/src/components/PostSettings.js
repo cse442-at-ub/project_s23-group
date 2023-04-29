@@ -19,6 +19,7 @@ const PostSettings = (props) =>{
     const [caption, setCaption] = useState(null);
     const [tag, setTag] = useState(null);
     const [backuptitle, setBackUpTitle] = useState(null)
+    const [backupFile, setBackUpFile] = useState(null)
     const [changedimage, setChangedImage] = useState(false);
     const [backupcaption, setBackUpCaption] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -55,6 +56,7 @@ const PostSettings = (props) =>{
             setTag(response.data.tag)
             setBackUpTitle(response.data.title)
             setBackUpCaption(response.data.text)
+            setBackUpFile(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${response.data.img}`)
             setPreview(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${response.data.img}`)
           
             
@@ -166,7 +168,7 @@ const PostSettings = (props) =>{
                   
             </div>
            </div>
-           <div className="PSTitle">Title</div>
+           {/* <div className="PSTitle">Title</div> */}
            <div className="PSTitleBox">
                 <input
                     className='inpTitle'
@@ -183,11 +185,17 @@ const PostSettings = (props) =>{
                     />
            </div>
            <div className="PSImgBox">
-                {/* <img  src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${myFile}`} alt="post image"  /> */}
-                <img  src={preview} alt="post image"  />
+                
+                
+                <label for="inpImg" className='PSIconBox'>
+                    <img className='PSPreview' src={preview} alt="File is too big" />
+                </label>        
+             
                 <input
-                    className='inpImg'
+                    id='inpImg'
                     type='file'
+                    className='inpImg'
+                    accept=".jpg, .jpeg, .png"
                     onChange={event => {
                         setPreview(URL.createObjectURL(event.target.files[0]))
                         setMyFile(event.target.files[0]);
@@ -195,7 +203,7 @@ const PostSettings = (props) =>{
                         }}
                     />
            </div>
-           <div className="PSCaption">Caption</div>
+           {/* <div className="PSCaption">Caption</div> */}
            <div className="PSCaptionBox">
                 <input
                     className='inpCaption'

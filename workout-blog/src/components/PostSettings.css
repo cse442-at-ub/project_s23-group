@@ -1,6 +1,10 @@
 @media only screen and (min-width: 1101px) {
 .PS{
-        width: 100%;
+        
+        width: 100vw;
+        height: 100vh;
+        
+        
 }    
 .PSHome{
     position: absolute;
@@ -13,6 +17,7 @@
     justify-content: center;
     font-size: 38px;
 }
+
 
 .PSFilterBox{
     margin-top: 5%;
@@ -29,11 +34,30 @@
 .PSTitleBox{
     display: flex;
     justify-content: center;
+    
+}
+
+.inpTitle{
+  
+    text-align: center;
 }
 
 .PSImgBox{
     display: flex;
     justify-content: center;
+}
+
+
+.inpImg{
+    display: none;
+
+}
+
+.PSPreview{
+    height: 300px;
+    width: 400px;
+    object-fit: cover;
+
 }
 
 .PSCaption{
@@ -45,6 +69,10 @@
 .PSCaptionBox{
     display: flex;
     justify-content: center;
+}
+
+.inpCaption{
+    text-align: center;
 }
 
 .PSUpdateBox{
