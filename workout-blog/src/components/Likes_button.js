@@ -3,49 +3,83 @@ import './Likes_button.css';
 import image from "./images/likes.png"
 import { useState, useEffect} from 'react';
 import axios from "axios";
+import { Form } from "react-router-dom";
 
 
 const Likes_button = (props) => {
-  const [liked,setLiked] = useState(false)
-  const [likeCount, setLikeCount] = useState(props.likes)
-  function like(){
-    
-    if(liked == false){
-      setLiked(true)
-      setLikeCount(likeCount + 1)
+  var userid = sessionStorage.getItem("id")
+  const [likeList, setlikeList] = useState('')
+  const [liked,setLiked] = useState('')
+  const [likeCount,setlikeCount] = useState('')
+  useEffect(()=>{
+    GetLikes();
+  },[])
+  function Like(){
+    setLiked(!liked)
+    console.log(liked)
+    UpdateLike(liked)
+  }
+
+  function UpdateLike(liked){
+    var formData = new FormData();
+    formData.append("postid",props.postid)
+    formData.append("userid",userid)
+    if(liked){
+      axios({
+        method: 'post',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeLike.php",
+        headers: {},
+        data: formData 
+      })
+      .then((response) => {
+          setlikeCount(likeCount+1)       
+      }, (error) => {
+          console.log(error);
+      });
     }else{
-      setLiked(false)
-      setLikeCount(likeCount - 1)
+      axios({
+        method: 'post',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/removeLike.php",
+        headers: {},
+        data: formData 
+      })
+      .then((response) => {
+          setlikeCount(likeCount-1)                
+      }, (error) => {
+          console.log(error);
+      });
     }
   }
-  useEffect(() => {
-    updateLikes();
-  },[liked]);
-
-  useEffect(()=>{
-    setLikeCount(props.likes);
-  },[props]);
-
-  function updateLikes() {
+  function GetLikes(){
     var formData = new FormData();
-    formData.append("postid", props.postid);
-    formData.append("likes",likeCount)
-    return axios({
-      method: "post",
-      url:
-        "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/updateLikes.php",
-      data: formData,
+    formData.append("postid",props.postid)
+    axios({
+      method: 'post',
+      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getLikes.php",
+      headers: {},
+      data: formData
     })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
+    .then((response) => {
+        var isSet;
+        setlikeCount(response.data.length - 1)
+        for (var post in response.data){
+          if(response.data[post].userid = userid){
+            isSet = true
+          }else{
+            isSet = false
+          }
+        }
+        setLiked(isSet)
+        
+    }, (error) => {
         console.log(error);
-      });
-  }
+    });
+}
+  
+
   return (
         <div className="like-container">
-          <img onClick ={() => like()} src= {image} alt="Like"/>
+          <img onClick = {()=>Like()} src= {image} alt="Like"/>
           <div className="like-count">{likeCount}</div>
         </div>
   );

@@ -76,10 +76,10 @@ const Postpage = () => {
                         <p className="date">Date Created: {post.created_at}</p>
                     </div>
                 </div>
-                <div class="post_title">
+                <div className="post_title">
                     <h1>{post.title}</h1>
                 </div>
-                <div class="post_image">
+                <div className="post_image">
                     {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
                 </div>
                 <div class="post_body">
