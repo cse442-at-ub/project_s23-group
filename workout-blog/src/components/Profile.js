@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
+import axios, { formToJSON } from 'axios'
 import './Profile.css'
 import staticProfile from './images/profilepic.jpg'
 import staticBackground from './images/weights.jpg'
@@ -9,6 +9,10 @@ import {
     useNavigate,
     useParams,
   } from "react-router-dom";
+
+
+
+
 
   
 
@@ -21,12 +25,17 @@ const Profile = (props) =>{
     const [name, setName] = useState('');
     const [showFollowing, setShowFollowing] = useState(false);
     const [showFollowers, setShowFollowers] = useState(false);
+    const [showChat, setChats] = useState(false);
     const [isFollowing, setIsFollowing] = useState(false);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [posts, setPosts] = useState([]);
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
     const [showAlreadyFollowingPopup, setShowAlreadyFollowingPopup] = useState(false);
+    const[messages, setAllMessages] = useState([]);
+    const[JustSent, sentMessages] = useState('');
+    
+    
 
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
@@ -42,33 +51,11 @@ const Profile = (props) =>{
         getNumPosts();
     }
 
-    // const handleGetFollowing = () => {
-    //     getFollowingUsers(); 
-    //     setShowFollowing(true); 
-    // }
-    
-    // const handleGetFollowers = () => {
-    //     setShowFollowers(true); 
-    //     getFollowers(); 
-    // }
-
-    // const handleRemoveUser = (id) => {
-    //     const updatedUsers = followingUsers.filter(user => user.id !== id);
-    //     setFollowingUsers(updatedUsers);
-    // };
-
-    // const handleRemoveFollower = (id) => {
-    //     const updatedFollowers = followers.filter(follower => follower.id !== id);
-    //     setFollowers(updatedFollowers);
-    //   };
-
-
-
+    const toggleMessagePopup = () => {
+        setChats(!showChat);
+    };
     const searchId = params.id
     const userIds = followingUsers.map(user => user.following);
-
-
-
 
     useEffect(() => {
       
@@ -92,6 +79,119 @@ const Profile = (props) =>{
         setIsFollowing(isAlreadyFollowing);
     },[isAlreadyFollowing]);
 
+
+    //sends message and stores it in database
+    // const sendDM = () => {
+    //     const data ={
+    //         sender: sessionStorage.getItem("id"),
+    //         receiver: searchId,
+    //         message: JustSent,
+    //     };
+    //     axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/sendDM.php", data)
+    //         .then(response => {
+    //             sentMessages('');
+            
+
+    //         })
+    //         .catch(error => console.error(error));
+    // }
+    // const sendDM = () => {
+    //     const formData = new FormData();
+    //     formData.append("sender", sessionStorage.getItem("id"));
+    //     formData.append("receiver", searchId);
+    //     formData.append("message", JustSent);
+        
+    //     axios({
+    //       method: 'post',
+    //       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/sendDM.php",
+    //       headers: {},
+    //       data: formData
+    //     })
+    //     .then((response) => {
+    //       sentMessages('');
+    //     })
+    //     .catch((error) => console.error(error));
+
+    //     axios({
+    //         method: 'post',
+    //         url: 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getDMs.php',
+    //         headers: {},
+    //         data: {
+    //           userid: sessionStorage.getItem("id"),
+    //           targetid: searchId
+    //         }
+    //       })
+    //       .then((response) => setAllMessages(response.data))
+    //       .catch((error) => console.error(error));
+        
+    //   }
+    const getMessages = () => {
+        const formData = new FormData();
+        formData.append("userid", sessionStorage.getItem("id"));
+        formData.append("targetid", searchId);  
+        
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getDMs.php",
+            headers: {},
+            data: formData
+        })
+          .then(response => {
+            for (let i = 0; i < response.data.length; i++) {
+                if (response.data[i].length === 0) {
+                    response.data.splice(i, 1);
+                    i--;
+                }
+                }
+            
+            setAllMessages(response.data);
+            console.log(response.data);
+          })
+          .catch(error => console.error(error));
+      };
+    const sendDM = () => {
+        const formData = new FormData();
+        formData.append("sender", sessionStorage.getItem("id"));
+        formData.append("receiver", searchId);
+        formData.append("message", JustSent);
+      
+        axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/sendDM.php",
+          headers: {},
+          data: formData
+        })
+        .then((response) => {
+          sentMessages('');
+          getMessages(); // call getMessages after sending a message
+        })
+        .catch((error) => console.error(error));
+      };
+      useEffect(() => {
+        getMessages();
+      }, [sessionStorage.getItem("id"), searchId]);
+
+
+    //gets all of the old messages
+    // useEffect(() => {
+    //     const data ={
+    //         userid: sessionStorage.getItem("id"),
+    //         targetid: searchId
+    //     };
+    //     axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getDMs.php", data)
+    //         .then(response => {
+    //             for (let i = 0; i < response.data.length; i++) {
+    //                 if (response.data[i].length === 0) {
+    //                     response.data.splice(i, 1);
+    //                     i--;
+    //                 }
+    //                 }
+
+    //             setAllMessages(response.data);
+    //             console.log(response.data);
+    //         })
+    //         .catch(error => console.error(error));
+    // }, [sessionStorage.getItem("id"), searchId]);
     //number of posts on database
     const getNumPosts = () => {
         const formData = new FormData();
@@ -286,7 +386,6 @@ const Profile = (props) =>{
         setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
         setName(sessionStorage.getItem("name"))
        
-        
         }, (error) => {
             setBio("Go to settings to change info")
             setProfile(staticProfile)
@@ -296,24 +395,13 @@ const Profile = (props) =>{
           console.log(error);
         });
   
-      
     }
 
-    // useEffect(() => {
-    //     getUsernames();
-    // },[]);
-
-
-
-
-
- 
     let dynamicBackground = {
             backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url("${background}")`
             
             //  backgroundImage: `linear-gradient(180deg,transparent, rgba(12,14,21,0.89) 30%, rgba(27,27,27,1) 43%),url( 'https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/images/basketball(1).jpg')`
     }
-
 
     return(
         <div class="bg2">
@@ -355,6 +443,24 @@ const Profile = (props) =>{
                             
                         )}
                         {showAlreadyFollowingPopup && <AlreadyFollowingPopup onClose={() => setShowAlreadyFollowingPopup(false)} />}
+                            
+                        
+
+                        {(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
+                            
+                            <button
+                            className='dm'
+                            onClick={toggleMessagePopup}>
+                            <div className='messageButton'>Message</div>
+                            </button>
+                            
+                        )}
+
+                        
+                        
+
+
+
 
                         {/* {(searchId !== sessionStorage.getItem("id")) && (!isFollowing ? (
                             <button className="follow-btn" onClick={handleFollowUser}>Follow</button>
@@ -362,6 +468,12 @@ const Profile = (props) =>{
                             <button className="follow-btn following" onClick={toggleFollowingPopup} disabled>Following</button>
                         ))} */}
                         </div>
+
+                        
+
+
+
+
                         <div class="imgbox">
                             
                             <img className='profile' src={profile} />
@@ -395,7 +507,33 @@ const Profile = (props) =>{
                                 <Timeline userid = {searchId}/>]
                             </div>
                         </div>
-                           
+
+                        
+                        
+                        {showChat && (
+                            <div className='chat-popup-container'>
+                                
+                                <ul className="message-list">
+                                  {Array.isArray(messages) && messages.map(message => (
+                                    <li key={message.dmid}>
+                                      {message.sender}: {message.message}
+                                    </li>
+                                  ))}
+                                </ul>
+                                <div className="input-container">
+                                  <input
+                                    type="text"
+                                    value={JustSent}
+                                    onChange={event => sentMessages(event.target.value)}
+                                  />
+                                  <button onClick={sendDM}>Send</button>
+                                  <button className="popup-close" onClick={toggleMessagePopup}>
+                                    Close
+                                    </button>
+                                </div>
+                              
+                              </div>
+                        )}
                         
                         {showFollowing && (
                         <div className="popup">
@@ -466,13 +604,10 @@ const Profile = (props) =>{
                                     </div>
                                     </div>
                                     )}
-                                            
-
-                                
                             </div>
 
+                            
     );
-
 };
 
 export default Profile;
