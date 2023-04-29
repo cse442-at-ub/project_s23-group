@@ -5,6 +5,7 @@ import axios from 'axios';
 import Likes_button from './Likes_button';
 
 function FeedPage() {
+  var userid = sessionStorage.getItem("id")
   const navigate = useNavigate();
   const [likes, setLikes] = useState({});
   const [comments, setComments] = useState({});
@@ -98,7 +99,7 @@ function FeedPage() {
             {post.text && <p className="post-text">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
-          <div><Likes_button postid = {post.postid} likes = {post.likes}/></div>
+          <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
           
 
           {/* <div className="post-actions">
