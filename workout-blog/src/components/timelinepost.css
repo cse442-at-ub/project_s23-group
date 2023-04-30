@@ -8,6 +8,12 @@
     padding: 3%;
 }
 
+.postSettings{
+    
+    background-color: transparent;
+    
+  }
+
 .post-title{
     background-color: white;
     font-size: 30px;

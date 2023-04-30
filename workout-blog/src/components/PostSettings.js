@@ -16,7 +16,7 @@ const PostSettings = (props) =>{
     const navigate = useNavigate()
     const [title, setTitle] = useState(null)
     const [myFile, setMyFile] = useState(null);
-    const [caption, setCaption] = useState(null);
+    const [text, setText] = useState(null);
     const [tag, setTag] = useState(null);
     const [backuptitle, setBackUpTitle] = useState(null)
     const [backupFile, setBackUpFile] = useState(null)
@@ -52,7 +52,7 @@ const PostSettings = (props) =>{
             
             setTitle(response.data.title)
             setMyFile(response.data.img)
-            setCaption(response.data.text)
+            setText(response.data.text)
             setTag(response.data.tag)
             setBackUpTitle(response.data.title)
             setBackUpCaption(response.data.text)
@@ -80,7 +80,7 @@ const PostSettings = (props) =>{
         })
           .then((response) => {
             
-            EditPost(title,response.data[0],caption,tag)
+            EditPost(title,text,response.data[0],tag)
            
           })
           .catch((error) => {
@@ -88,13 +88,13 @@ const PostSettings = (props) =>{
           });
       }
 
-    const EditPost = ( title, image, caption, tag) =>{
+    const EditPost = ( title, text, image, tag) =>{
       
         var formData = new FormData();
         formData.append("postid", postid);
         formData.append("title", title);
         formData.append("img", image);
-        formData.append("text",caption);
+        formData.append("text",text);
         formData.append("tag",tag);
         axios({
           method: 'post',
@@ -208,12 +208,12 @@ const PostSettings = (props) =>{
                 <input
                     className='inpCaption'
                     type='text'
-                    placeholder={caption}
+                    placeholder={text}
                     onChange={event => {
                       if(event.target.value.trim().length)
-                            {setCaption(event.target.value)}
+                            {setText(event.target.value)}
                         else{
-                          setCaption(backupcaption)
+                          setText(backupcaption)
                         }
                         }}
                     />
@@ -226,7 +226,7 @@ const PostSettings = (props) =>{
                   }
                   else{
                    
-                    EditPost(title, myFile, caption, tag)
+                    EditPost(title, text, myFile, tag)
                   }
                   
                 }}

@@ -18,6 +18,7 @@ function checkLogin($email)
 
     return $result->fetch_array(MYSQLI_NUM);
 }
+
 function makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -28,6 +29,19 @@ function makeNewPost($id, $username, $title, $caption, $picture, $tag, $pfp)
     $stmt->close();
     $conn->close();
 }
+
+function makeNewComment($p_id, $u_id, $username, $comment)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("INSERT INTO comments (post_id, user_id, comment, username) VALUES (?,?,?,?)");
+    $stmt->bind_param("iiss", $p_id, $u_id, $comment, $username);
+    $stmt->execute(); // insert new user profile
+    $stmt->close();
+    $conn->close();
+}
+
+
 
 function makeNewUser($email, $username, $password)
 {
@@ -233,7 +247,17 @@ function getUserInfo($userid)
 
     return $result->fetch_assoc();
 }
+function updateLikes($postid, $likes)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
+    $stmt = $conn->prepare("UPDATE posts SET likes=? WHERE postid = ?");
+    $stmt->bind_param("ii", $likes, $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
 function updatePost($id, $pfp)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -242,6 +266,34 @@ function updatePost($id, $pfp)
     echo $pfp;
     $stmt = $conn->prepare("UPDATE posts SET pfp=? WHERE userid = ?");
     $stmt->bind_param("si", $pfp, $id);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
+
+function editPost($title, $text, $img, $tag, $postid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    // $stmt = $conn->prepare("UPDATE profile SET bio=?, background=?, pfp=? WHERE id = ?");
+    // $stmt->bind_param("sssi", $bio, $background, $pfp, $id);
+    $stmt = $conn->prepare("UPDATE posts SET title=?, text=?,img=?,tag=? WHERE postid = ?");
+    $stmt->bind_param("ssssi", $title, $text, $img, $tag, $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+}
+
+function deletePost($postid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+
+
+    $stmt = $conn->prepare("DELETE FROM posts WHERE postid = ?");
+    $stmt->bind_param("i", $postid);
     $stmt->execute(); // insert new user profile
 
     $stmt->close();

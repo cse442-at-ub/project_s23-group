@@ -2,50 +2,41 @@ import { useState, useEffect, useRef } from 'react';
 import './FeedPage.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import staticProfile from './images/profilepic.jpg'
 
 function FeedPage() {
   const navigate = useNavigate();
   const [likes, setLikes] = useState({});
   const [comments, setComments] = useState({});
   const [posts, setPosts] = useState([]);
-  const [profilePic, setProfilePic] = useState([]);
+  const [pfp, setPfp] = useState([]);
   const [username, setUsername] = useState([]);
   const [selectedTag, setSelectedTag] = useState('');
 
   useEffect(() => {
     givePost();
-    giveProfilePic();
+    
   }, []);
 
+  useEffect(() => {
+    
+    
+  }, []);
   function givePost() {
     axios({
       method: 'post',
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPost.php",
     })
       .then(response => {
-        setPosts(response.data);
+        setPosts(response.data)
+         
+        
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  function giveProfilePic() {
-    var formData = new FormData();   
-    formData.append("id", parseInt(sessionStorage.getItem("id"))); // should be user id 
-    axios({
-      method: 'post',
-      url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profilePic.php",
-      data: formData
-    })
-      .then(response => {
-        console.log(response.data)
-        setProfilePic(response.data.pfp);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
 
   const handleLike = (postId) => {
     setLikes(prevLikes => ({
@@ -84,6 +75,7 @@ function FeedPage() {
       </div>
 
       {filteredPosts.slice().reverse().map(post => (
+        
         <div className="post" key={post.postid}>
           <div className="post-header">
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
