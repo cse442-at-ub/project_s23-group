@@ -7,6 +7,9 @@ import Likes_button from './Likes_button';
 function FeedPage() {
   var userid = sessionStorage.getItem("id")
   const navigate = useNavigate();
+  const [recent,setRecent] = useState(true)
+  const [mostLiked,setMostLiked] = useState(false)
+  const [following,setFollowing] = useState(false)
   const [likes, setLikes] = useState({});
   const [comments, setComments] = useState({});
   const [posts, setPosts] = useState([]);
@@ -88,13 +91,31 @@ function FeedPage() {
 
   return (
     <div className="feed">
-      <div className="filter">
+            <div OnClick ={()=>{
+        setRecent(true)
+        setFollowing(false)
+        setMostLiked(false)
+      }}className="filter">
         <select value={selectedTag} onChange={handleStateChange}>
           <option value="">All</option>
           <option value="Diet">Diet</option>
           <option value="Progress">Progress</option>
           <option value="Max Weight">Max Weight</option>
         </select>
+        <p onClick={
+          ()=>{
+            setRecent(false)
+            setFollowing(false)
+            setMostLiked(true)
+          }
+        }>Top Posts</p>
+        <p onClick={
+          ()=>{
+            setRecent(false)
+            setFollowing(true)
+            setMostLiked(false)
+          }
+        }>Following</p>
       </div>
 
       {filteredPosts.slice().reverse().map(post => (
