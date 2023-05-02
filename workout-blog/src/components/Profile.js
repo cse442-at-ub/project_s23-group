@@ -526,7 +526,9 @@ const Profile = (props) =>{
                         
                         {showChat && (
                             <div className='chat-popup-container'>
-                                
+                                <div className='message'>
+      <h3>Message</h3>
+    </div>
                                 <ul className="message-list">
                                   {Array.isArray(messages) && messages.map(message => (
                                     <li key={message.dmid} className={message.sender === sessionStorage.getItem("id") ? 'sent' : 'received'}>
