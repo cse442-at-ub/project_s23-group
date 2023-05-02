@@ -15,6 +15,7 @@ import {
     useLocation,
     Navigate
   } from "react-router-dom";
+  import img from './images/logo-white.png';
 
 function MakePost() {
 const navigate = useNavigate()
@@ -142,8 +143,8 @@ useEffect(() => {
   return (
     <div className="mPost">
          <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light col-12">
-                <a class="navbar-brand" href="#">Gym Blog</a>
+            <nav class="navbar navbar-expand-lg navbar-dark col-12">
+            <img class="navbar-brand" src={img} onClick={() =>navigate("/")} Gym Blog />
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -155,43 +156,45 @@ useEffect(() => {
                 </div>
             </nav>
         </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group files">
-          <label>Choose your Photo </label>
-          <input type="file" className="form-control" multiple="" onChange={setFile} />
-        </div>
-        <div className="form-group1">
-          <label htmlFor="message-text1" className="col-form-label1">Title:</label>
-          <textarea className="form-control1" id="message-text1" value={title} onChange={handleTitle}></textarea>
-        </div>
-        <div className="form-group2">
-          <label htmlFor="message-text2" className="col-form-label2">Message:</label>
-          <textarea className="form-control2" id="message-text2" value={messageText} onChange={handleMessageText}></textarea>
-        </div>
+
+      <div className="make-post-card">
+        <form onSubmit={handleSubmit}>
+        <label htmlFor="dropdown" className="col-form-label3">Select an option:</label>
+        
         <div className="form-group3">
-          <label htmlFor="dropdown" className="col-form-label3">Select an option:</label>
-          <select id="dropdown" className="form-control3" value={selectedOption} onChange={handleOptionChange}>
-            <option value="Progress">Progress</option>
-            <option value="Diet">Diet</option>
-            <option value="Max Weight">Max Weight</option>
-          </select>
+            
+            <select id="dropdown" className="form-control3" value={selectedOption} onChange={handleOptionChange}>
+              <option value="Progress">Progress</option>
+              <option value="Diet">Diet</option>
+              <option value="Max Weight">Max Weight</option>
+            </select>
+          </div>
+          <div className="form-group1">
+            <input className="form-control1" id="message-text1" placeholder='Title' value={title} onChange={handleTitle}></input>
+          </div>
+          <label>Choose your Photo </label>
+          <div className="form-group-files">
+            
+            <input type="file" className="form-control" multiple="" onChange={setFile} />
+          </div>
+        
+          <div className="form-group2">
+            <textarea className="form-control2" id="message-text2" placeholder='Caption' value={messageText} onChange={handleMessageText}></textarea>
+          </div>
+        
+          <div className="submit-post-box">
+            <button
+              className='submit-post'
+            
+              type="submit" // Set the button type to "submit"
+            >
+              Submit Post
+            </button>
+          </div>
+        </form>
+        <div style={{ marginTop: '10px' }}>
+          <p>{msg}</p>
         </div>
-        <button
-          className='submitPost'
-          style={{
-            background: '#150',
-            color: '#fff',
-            padding: "10px",
-            fontSize: '18px',
-            cursor: 'pointer'
-          }}
-          type="submit" // Set the button type to "submit"
-        >
-          Submit Post
-        </button>
-      </form>
-      <div style={{ marginTop: '10px' }}>
-        <p>{msg}</p>
       </div>
     </div>
   );

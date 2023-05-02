@@ -128,10 +128,65 @@ function makeNewFollow($follower, $following)
 
     return $data;
 }
+function makeNewLike($userid, $postid){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT * FROM likes WHERE userid = ? AND postid = ?");
+    $stmt->bind_param("ii", $userid , $postid );
+    $stmt->execute();
+
+    $oldLike = $stmt->get_result();
+    $stmt->close();
+
+    if (mysqli_num_rows($oldLike) == 0) {
+        $stmt2 = $conn->prepare("INSERT INTO likes (userid,postid) VALUES (?, ?)");
+        $stmt2->bind_param("ii", $userid, $postid);
+        $stmt2->execute(); // insert new user follow
+        $stmt2->close();
+    }
+    $stmt3 = $conn->prepare("SELECT * FROM likes WHERE postid = ?");
+    $stmt3->bind_param("i", $postid);
+    $stmt3->execute(); // insert new user follow
+
+    $result = $stmt3->get_result();
+    $data[] = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    mysqli_close($conn);
+    $stmt3->close();
 
 
+    return $data;
 
+}
+function makeDM($sender, $receiver, $message){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
+    $stmt = $conn->prepare("INSERT INTO dms (sender,receiver,message) VALUES (?, ?, ?)");
+    $stmt->bind_param("iii", $sender, $receiver, $message);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+
+}
+function getDMs($userid, $targetid){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT * FROM dms WHERE (sender = ? AND receiver = ?) OR (sender = ? AND receiver = ?)");
+    $stmt->bind_param("iiii", $userid, $targetid, $targetid, $userid);
+    $stmt->execute(); // insert new user profile
+    
+    $result = $stmt->get_result();
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    mysqli_close($conn);
+    $stmt->close();
+    return $data;
+}
 function getImages($id)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -146,6 +201,22 @@ function getImages($id)
     return $result->fetch_array(MYSQLI_NUM);
 }
 
+function getFavorites($userid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE postid IN (SELECT postid FROM likes WHERE userid = ?)");
+    $stmt->bind_param("i", $userid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    mysqli_close($conn);
+    $stmt->close();
+    return $data;
+}
 function getTimeline($id)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -161,6 +232,23 @@ function getTimeline($id)
     mysqli_close($conn);
     $stmt->close();
 
+
+    return $data;
+}
+function getLikes($postid){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("SELECT * FROM likes WHERE postid = ?");
+    $stmt->bind_param("i", $postid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = array();
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+
+    mysqli_close($conn);
+    $stmt->close();
 
     return $data;
 
@@ -182,6 +270,42 @@ function getPost()
 
     return $posts;
 }
+function getPostByLikes()
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $stmt = $conn->prepare("SELECT * FROM posts ORDER BY likes DESC");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $posts = array();
+    while ($row = $result->fetch_assoc()) {
+        $posts[] = $row;
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    return $posts;
+}
+function getPostByFollow($userid)
+{
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+    $stmt = $conn->prepare("SELECT * FROM posts WHERE userid IN (SELECT following FROM follows WHERE follower = ?)");
+    $stmt->bind_param("i", $userid);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $posts = array();
+    while ($row = $result->fetch_assoc()) {
+        $posts[] = $row;
+    }
+
+    $stmt->close();
+    $conn->close();
+
+    return $posts;
+}
+
 function getSinglePost($postid)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -247,17 +371,6 @@ function getUserInfo($userid)
 
     return $result->fetch_assoc();
 }
-function updateLikes($postid, $likes)
-{
-    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-
-    $stmt = $conn->prepare("UPDATE posts SET likes=? WHERE postid = ?");
-    $stmt->bind_param("ii", $likes, $postid);
-    $stmt->execute(); // insert new user profile
-
-    $stmt->close();
-    $conn->close();
-}
 function updatePost($id, $pfp)
 {
     $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
@@ -299,3 +412,26 @@ function deletePost($postid)
     $stmt->close();
     $conn->close();
 }
+function removeLike($userid, $postid){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("DELETE FROM likes WHERE userid = ? AND postid = ?");
+    $stmt->bind_param("ii", $userid, $postid);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+
+}
+function removeFollow($follower, $following){
+    $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+
+    $stmt = $conn->prepare("DELETE FROM follows WHERE follower = ? AND following = ?");
+    $stmt->bind_param("ii", $follower, $following);
+    $stmt->execute(); // insert new user profile
+
+    $stmt->close();
+    $conn->close();
+
+}
+?>

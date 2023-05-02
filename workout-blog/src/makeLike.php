@@ -11,4 +11,5 @@ if (isset($userid) && isset($postid)) {
     $result = makeNewLike($userid, $postid);
     echo json_encode($result);
 }
+
 ?>
