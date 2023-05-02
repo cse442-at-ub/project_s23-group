@@ -6,6 +6,13 @@
     max-width: 800px;
     background-color: transparent;
 }
+.timeline{
+    width:50vw;
+    text-align: center;
+}
+.profile-tabs{
+    margin: 0 auto;
+}
 .images1{
     width:500px;
 }

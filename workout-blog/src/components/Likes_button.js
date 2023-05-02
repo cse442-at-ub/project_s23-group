@@ -25,7 +25,6 @@ const Likes_button = (props) => {
     formData.append("postid",props.postid)
     formData.append("userid",userid)
     if(!liked){
-      console.log("added")
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeLike.php",
@@ -38,7 +37,6 @@ const Likes_button = (props) => {
           console.log(error);
       });
     }else{
-      console.log("removed")
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/removeLike.php",
@@ -65,7 +63,6 @@ const Likes_button = (props) => {
     .then((response) => {
         var isSet;
         setlikeCount(response.data.length)
-        console.log(response.data)
         for (var post in response.data){
           if(response.data[post].userid = userid){
             isSet = true

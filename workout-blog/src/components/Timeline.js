@@ -19,9 +19,10 @@ const Timeline = (props) => {
     getFavorties();
   }, []);
 
-  var formData = new FormData();
-  formData.append("userid", props.userid);
+
   function getFavorties(){
+    var formData = new FormData();
+    formData.append("userid", props.userid);
     axios({
       method: 'post',
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFavorites.php",
@@ -30,13 +31,15 @@ const Timeline = (props) => {
     })
       .then(response => {
         console.log(response.data)
-        var listofFavorites = response.data
+        setFavoritePosts(response.data)
       })
       .catch(error => {
         console.log(error);
       });
   } 
   function getTimeline() {
+    var formData = new FormData();
+    formData.append("userid", props.userid);
     axios({
       method: 'post',
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getTimeline.php",
@@ -54,18 +57,20 @@ const Timeline = (props) => {
 
 
   return (
-    <div className="timeline-gallery">
-    <div className="timeline">
-        <p onClick={()=>{setTimeline(true);setFavorites(false)}}>Timeline</p>
-        <p onClick={()=>{setTimeline(false);setFavorites(true)}}>Favorites</p>
+    <div>
+      <div className="timeline">
+        <p class = "profile-tabs" onClick={()=>{setTimeline(true);setFavorites(false)}}>Timeline</p>
+        <p class = "profile-tabs" onClick={()=>{setTimeline(false);setFavorites(true)}}>Favorites</p>
     </div>
+    <div className="timeline-gallery">
     {timeline && posts.slice().reverse().map(post => (
         <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
     ))}
-    
-    
+    {favorites && favoritePosts.slice().map(post => (
+        <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
+    ))}
     </div>
-
+  </div>
   );
 }
 
