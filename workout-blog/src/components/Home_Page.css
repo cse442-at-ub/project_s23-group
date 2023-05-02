@@ -7,6 +7,11 @@
     
     
 }
+
+.wrapper{
+  background-color: #ffffff;
+  /* background-color: #333533 */
+}
 .card{
     padding: 0
 }
@@ -25,6 +30,18 @@
   }
 .feed-gallery{
   width:100%
+}
+
+.navbar-collapse{
+  padding-right: 50px;
+}
+
+.navbar-brand{
+  position: relative;
+  height: 80px;
+  width: 120px;
+  z-index: 100;
+  margin-top: 1%;
 }
 
   .popup-content {

@@ -3,6 +3,8 @@ import axios from 'axios'
 import './PostSettings.css'
 import Lottie from "lottie-react";
 import loading from "./lotties/loading.json"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   useNavigate,
   useParams,
@@ -10,7 +12,7 @@ import {
 
 
 
-const PostSettings = (props) =>{
+const PostSettings = ({alert}) =>{
   
   
     const navigate = useNavigate()
@@ -138,19 +140,31 @@ const PostSettings = (props) =>{
       console.log("Success")
     }
 
+    const notify = () => {
+      console.log("called notify")
+        toast.warning('File size must be less than 2MB', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+    };
    
     
     return(
         <div className="PS">
           
             <button 
-                className="PSHome"
-                onClick={()=>navigate("/")}>
-                    Home
-                
-                </button>
+                className="home"
+                onClick={()=>navigate("/")}/>
           
-           <div className="PSHeader">Settings for Post</div>
+           <div className="PSHeader">Post Editor</div>
+
+           <div className="PSCard">
            <div className="PSFilterBox">
             <div className="PSFilter">
                   <select
@@ -197,9 +211,18 @@ const PostSettings = (props) =>{
                     className='inpImg'
                     accept=".jpg, .jpeg, .png"
                     onChange={event => {
+                      console.log(event.target.files[0].size)
+                      if(event.target.files[0].size <= 2000000){
+                        console.log(event.target.files[0])
                         setPreview(URL.createObjectURL(event.target.files[0]))
                         setMyFile(event.target.files[0]);
                         setChangedImage(true)
+                      }
+                      else{
+                       
+                       notify()
+                      }
+                       
                         }}
                     />
            </div>
@@ -237,6 +260,8 @@ const PostSettings = (props) =>{
                 onClick={()=>{deletePost()}}
                 >Delete</button>
            </div>
+           </div>
+           <ToastContainer />
         </div>
         )
 }

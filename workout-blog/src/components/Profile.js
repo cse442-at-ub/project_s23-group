@@ -9,7 +9,7 @@ import {
     useNavigate,
     useParams,
   } from "react-router-dom";
-
+  import img from './images/logo-white.png';
   
 
 const Profile = (props) =>{
@@ -322,7 +322,7 @@ const Profile = (props) =>{
             <div className="bg2abs" style={dynamicBackground}/> 
                 <div class="headers">
                 <nav class="navbar navbar-expand-lg navbar-dark col-12">
-                <button class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</button>
+                <img class="navbar-brand" src={img} onClick={() =>navigate("/")} Gym Blog />
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

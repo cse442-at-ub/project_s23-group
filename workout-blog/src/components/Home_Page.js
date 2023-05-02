@@ -1,11 +1,11 @@
 import React from "react";
-import image from "./images/cbum.jpg"
 import './Home_Page.css'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
-import postBody from "./images/tennis.jpg"
+
+import img from './images/logo-black.png';
 import {
     Link,
     Route,
@@ -41,13 +41,18 @@ const Home_Page = (props) => {
     }, [id,name]);
     
     return (
-        <div class="container">
+        <div className="wrapper">
+            <div class="container">
+           
             <nav class="navbar navbar-expand-lg navbar-light col-12">
-                <div class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</div>
+            <img class="navbar-brand" src={img} onClick={() =>navigate("/")} Gym Blog />
+                {/* <div class="navbar-brand"  onClick={() =>navigate("/")}>Gym Blog</div>  */}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
+               
                     <div class="navbar-nav ml-auto">
                     {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
                     {(id && (<Link class="nav-item nav-link" to ={`posts`}>Posts</Link>))}
@@ -64,7 +69,7 @@ const Home_Page = (props) => {
 
             
 
-   
+            </div>
 
         </div>
 
