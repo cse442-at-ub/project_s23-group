@@ -11,10 +11,12 @@ import {
 
 const Timeline = (props) => {
   const [posts, setPosts] = useState([]);
+  const [favoritePosts,setFavoritePosts] = useState([]);
   const [timeline,setTimeline] = useState(true)
   const [favorites,setFavorites] = useState(false)
   useEffect(() => {
     getTimeline();
+    getFavorties();
   }, []);
 
   var formData = new FormData();
@@ -60,6 +62,7 @@ const Timeline = (props) => {
     {timeline && posts.slice().reverse().map(post => (
         <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
     ))}
+    
     
     </div>
 
