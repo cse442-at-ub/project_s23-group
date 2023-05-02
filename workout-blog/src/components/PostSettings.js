@@ -228,10 +228,10 @@ const PostSettings = ({alert}) =>{
            </div>
            {/* <div className="PSCaption">Caption</div> */}
            <div className="PSCaptionBox">
-                <input
+                <textarea
                     className='inpCaption'
                     type='text'
-                    placeholder={text}
+                    value={text}
                     onChange={event => {
                       if(event.target.value.trim().length)
                             {setText(event.target.value)}

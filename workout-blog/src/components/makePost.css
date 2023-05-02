@@ -48,3 +48,8 @@
     text-align: center;
     
   }
+
+.form-group1,.form-group2,.form-group3,.submitPost{
+    display: flex;
+    justify-content: center;
+}

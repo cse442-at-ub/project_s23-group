@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width:100;
+  width:100%;
 }
 
 .feed .postSettings{
@@ -12,13 +12,29 @@
 }
 
 .feed .post {
-  width: 30%;
+  width: 70%;
+  height: 20%;
   margin: 3%;
-  background-color: #ffffff;
-  border-radius: 5px;
+  background-color: #eff1ed;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* border-radius: 25px; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin-bottom: 1rem;
+}
+
+.feed .post-description {
+  padding-left: 15px;
+  font-size: 28px;
+  
+  text-align: left;
+}
+.feed .post-text-box {
+  padding-left: 30px;
+  font-size: 14px;
+  
+  text-align: left;
 }
 
 .feed .post-header {
@@ -26,7 +42,7 @@
   align-items: center;
   
   padding: 5px;
-  background-color: #ffffff;
+  background-color: #eff1ed;
   color: #000000;
 }
 
@@ -47,18 +63,22 @@
 .feed .post-body {
   position: relative;
 }
-
-.feed .post-image {
+.feed .post-image-box{
   width: 100%;
-  height: 200px;
-  object-fit: contain;
+  height: 100%;
+}
+.feed .post-image {
+  /* height: 100%;
+  width: 100%; */
+  /* height: 200px; */
+  object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
 }
 
-.feed .post:hover .post-image {
+/* .feed .post:hover .post-image {
   transform: scale(1.1);
-}
+} */
 
 .feed .post-actions {
   display: flex;
@@ -98,12 +118,7 @@
   width: 100%;
 
 }
-.feed .post-description {
-  padding: 5px;
-  font-size: 28px;
-  line-height: 1.5;
-  text-align: center;
-}
+
 
 .feed .comments-section {
   padding: 10px;

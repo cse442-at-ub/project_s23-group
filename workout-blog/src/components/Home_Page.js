@@ -5,7 +5,7 @@ import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
 
-import img from './images/logo-black.png';
+import img from './images/logo-white.png';
 import {
     Link,
     Route,
@@ -44,7 +44,7 @@ const Home_Page = (props) => {
         <div className="wrapper">
             <div class="container">
            
-            <nav class="navbar navbar-expand-lg navbar-light col-12">
+            <nav class="navbar navbar-expand-lg navbar-dark col-12">
             <img class="navbar-brand" src={img} onClick={() =>navigate("/")} Gym Blog />
                 {/* <div class="navbar-brand"  onClick={() =>navigate("/")}>Gym Blog</div>  */}
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

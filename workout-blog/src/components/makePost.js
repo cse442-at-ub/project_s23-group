@@ -177,6 +177,7 @@ useEffect(() => {
           </select>
         </div>
         <button
+          className='submitPost'
           style={{
             background: '#150',
             color: '#fff',
