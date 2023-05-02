@@ -527,11 +527,11 @@ const Profile = (props) =>{
                         {showChat && (
                             <div className='chat-popup-container'>
                                 <div className='message'>
-      <h3>Message</h3>
-    </div>
+                                  <h3>Message</h3>
+                                </div>
                                 <ul className="message-list">
                                   {Array.isArray(messages) && messages.map(message => (
-                                    <li key={message.dmid} className={message.sender === sessionStorage.getItem("id") ? 'sent' : 'received'}>
+                                    <li key={message.dmid} className={message.sender === parseInt(sessionStorage.getItem("id")) ? 'sent' : 'received'}>
                                         <img src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + message.pfp} alt={`${message.username}'s profile`}  />
                                       {message.username}: {message.message}
                                     </li>
@@ -540,6 +540,7 @@ const Profile = (props) =>{
                                 <div className="input-container">
                                   <input
                                     type="text"
+                                    placeholder="Enter messages"
                                     value={JustSent}
                                     onChange={event => sentMessages(event.target.value)}
                                   />

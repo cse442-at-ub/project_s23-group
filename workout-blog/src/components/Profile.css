@@ -505,6 +505,7 @@
     .chat-popup-container .message {
       font-family: 'Titillium Web', sans-serif;
       color:rgb(221, 221, 221);
+      position: relative;
       }
     
     .chat-popup-container .message-list {
@@ -512,8 +513,26 @@
     height: 70%;
     overflow-y: scroll;
     margin: 5px;
+    
     padding: 5px;
     color: rgb(221, 221, 221);
+    }
+
+    
+    .chat-popup-container .message-list .sent {
+      margin-bottom: 5px;
+      background-color: #73889b;
+      color: white;
+      justify-content: flex-end;
+      border-radius: 10px;
+    }
+
+    .chat-popup-container .message-list .received {
+      margin-bottom: 5px;
+      background-color: #404f56;
+      color: white;
+      justify-content: flex-end;
+      border-radius: 10px;
     }
     
     .chat-popup-container li img {
@@ -547,7 +566,7 @@
     background-color: rgb(105, 97, 97);
     color: rgb(221, 221, 221);
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     cursor: pointer;
     font-size: 0.8rem;
@@ -557,12 +576,12 @@
     background-color: black;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: px;
     padding: 10px;
     cursor: pointer;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 0px;
+    right: 10px;
     font-size: 0.8rem;
     }
   .follow {
