@@ -29,18 +29,24 @@ const Profile = (props) =>{
     const [isFollowing, setIsFollowing] = useState(false);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followers, setFollowers] = useState([]);
+    const [mainfollowing, setMainfollowing] = useState([]);
     const [posts, setPosts] = useState([]);
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
     const [showAlreadyFollowingPopup, setShowAlreadyFollowingPopup] = useState(false);
     const[messages, setAllMessages] = useState([]);
     const[JustSent, sentMessages] = useState('');
+
+    const searchId = params.id
     
-    
+
 
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
       getUsernames();
     };
+    // useEffect(() => {
+    //   setIsFollowing(isAlreadyFollowing);
+    // }, [isAlreadyFollowing]);
   
     const toggleFollowersPopup = () => {
       setShowFollowers(!showFollowers);
@@ -53,31 +59,33 @@ const Profile = (props) =>{
 
     const toggleMessagePopup = () => {
         setChats(!showChat);
+        
+        getChatUsername();
     };
-    const searchId = params.id
-    const userIds = followingUsers.map(user => user.following);
+    
+    
 
     useEffect(() => {
       
             console.log("2")
             getImages()
+            getFollowingMainUser();
             getFollowingUsers();
             getFollowers();
+            
             getNumPosts();
         
     }, []);
+
+    useEffect(() => {
+      const userIds = mainfollowing.map(user => user.following);
+      setIsAlreadyFollowing(userIds.includes(parseInt(searchId)));
+    }, [mainfollowing, searchId]);
 
     const signOut = () => {
         sessionStorage.clear();
     }
 
-    useEffect(() => {
-        setIsAlreadyFollowing(userIds.includes(searchId));
-      }, [followingUsers]);
-
-    useEffect(() => {
-        setIsFollowing(isAlreadyFollowing);
-    },[isAlreadyFollowing]);
 
     const getMessages = () => {
         const formData = new FormData();
@@ -100,8 +108,34 @@ const Profile = (props) =>{
             
             setAllMessages(response.data);
             console.log(response.data);
+            
           })
           .catch(error => console.error(error));
+      };
+      const getChatUsername = async () => {
+        const requests = messages.map(user => {
+          const formData = new FormData();
+          formData.append("userid", user.sender);
+          return axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getUserInfo.php", formData);
+        });
+      
+        try {
+          const responses = await Promise.all(requests);
+          const updatedmessages = messages.map((message, index) => {
+            const data = responses[index].data;
+            // console.log(data);
+            if (data && data.username) {
+              return { ...message, username: data.username, pfp: data.pfp};
+            } else {
+              console.log(`Invalid response data for user ${message.sender}: ${data}`);
+              return message;
+            }
+          });
+          setAllMessages(updatedmessages);
+          console.log(updatedmessages);
+        } catch (error) {
+          console.log("Error fetching usernames:", error);
+        }
       };
     const sendDM = () => {
         const formData = new FormData();
@@ -117,14 +151,18 @@ const Profile = (props) =>{
         })
         .then((response) => {
           sentMessages('');
+          
           getMessages(); // call getMessages after sending a message
+          getChatUsername();
         })
         .catch((error) => console.error(error));
       };
       useEffect(() => {
         getMessages();
+        
       }, [sessionStorage.getItem("id"), searchId]);
 
+ 
 
     const getNumPosts = () => {
         const formData = new FormData();
@@ -149,10 +187,7 @@ const Profile = (props) =>{
         formData.append("follower", sessionStorage.getItem("id"));
         formData.append("following", searchId);
 
-        if (userIds.includes(searchId)) {
-            setShowAlreadyFollowingPopup(true);
-            return;
-        }
+        
         axios({
             method: 'post',
             url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeFollow.php",
@@ -172,16 +207,30 @@ const Profile = (props) =>{
         });
     }
 
-    const AlreadyFollowingPopup = ({ onClose }) => {
-        return (
-            <div className="popup">
-                <div className="popup-content">
-                    <h3>Already following this user</h3>
-                    <button onClick={onClose}>OK</button>
-                </div>
-            </div>
-        );
-    };
+    const getFollowingMainUser = () => {
+      var formData = new FormData();
+      formData.append("id", sessionStorage.getItem("id"));
+      axios({
+          method: 'post',
+          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getFollowing.php",
+          headers: {},
+          data: formData
+      })
+      .then((response) => {
+          for (let i = 0; i < response.data.length; i++) {
+              if (response.data[i].length === 0) {
+                  response.data.splice(i, 1);
+                  i--;
+              }
+              }
+          
+          console.log(response.data);
+          setMainfollowing(response.data);
+          
+      }, (error) => {
+          console.log(error);
+      });
+  }
     
     // get following list from the database
     const getFollowingUsers = () => {
@@ -232,11 +281,6 @@ const Profile = (props) =>{
         }, (error) => {
             console.log(error);
         });
-    }
-
-    const isFollowingUser = () => {
-        const followingID = followingUsers.map(user => user.following);
-        return followingID.includes((searchId))
     }
         
     const getUsernames = async () => {
@@ -292,7 +336,27 @@ const Profile = (props) =>{
       };
 
       
+    const removeFollower = () => {
+        var formData = new FormData();
+        formData.append("follower", sessionStorage.getItem("id"));
+        formData.append("following", searchId);
+        axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/removeFollow.php",
+            headers: {},
+            data: formData
+        })
+        .then((response) => {
 
+            getFollowingUsers();
+            getFollowers();
+            setIsAlreadyFollowing(false);
+            
+
+        }, (error) => {
+            console.log(error);
+        });
+    }
 
 
 
@@ -359,23 +423,40 @@ const Profile = (props) =>{
                            
                             {/* <button class='follow'>Follow</button>
                             <button class='message'>Message</button> */}
-                           {(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
+                           {/* {(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
                             
                             <button
                             className='follow'
-                            onClick={() => {
-                                if (!isFollowing) {
-                                handleFollowUser();
-                                }
-                                setIsFollowing(!isFollowing);
-                            }}
-                            disabled={isFollowing || isAlreadyFollowing}
-                            >
-                            {isAlreadyFollowing ? "Follow" : isFollowing ? "Follow" : "Follow"}
+                            onClick={handleFollowUser}>
+                              <div className='followButton'>follow</div>
                             </button>
                             
                         )}
-                        {showAlreadyFollowingPopup && <AlreadyFollowingPopup onClose={() => setShowAlreadyFollowingPopup(false)} />}
+
+{(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
+                            
+                            <button
+                            className='unfollow'
+                            onClick={removeFollower}>
+                              <div className='unfollowButton'>unfollow</div>
+                            </button>
+                            
+                        )} */}
+                        {(searchId !== sessionStorage.getItem("id")) && (sessionStorage.getItem("id")) && (
+  <>
+    {isAlreadyFollowing ? (
+      <button className='unfollow' onClick={removeFollower}>
+        <div className='unfollowButton'>Unfollow</div>
+      </button>
+    ) : (
+      <button className='follow' onClick={handleFollowUser}>
+        <div className='followButton'>Follow</div>
+      </button>
+    )}
+    
+    
+  </>
+)}
                             
                         
 
@@ -437,7 +518,7 @@ const Profile = (props) =>{
                         </div>
                         <div className='gallery'>
                             <div className="innerGallery">
-                                <Timeline userid = {searchId}/>]
+                                <Timeline userid = {searchId}/>
                             </div>
                         </div>
 
@@ -448,8 +529,9 @@ const Profile = (props) =>{
                                 
                                 <ul className="message-list">
                                   {Array.isArray(messages) && messages.map(message => (
-                                    <li key={message.dmid}>
-                                      {message.sender}: {message.message}
+                                    <li key={message.dmid} className={message.sender === sessionStorage.getItem("id") ? 'sent' : 'received'}>
+                                        <img src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + message.pfp} alt={`${message.username}'s profile`}  />
+                                      {message.username}: {message.message}
                                     </li>
                                   ))}
                                 </ul>
@@ -460,7 +542,7 @@ const Profile = (props) =>{
                                     onChange={event => sentMessages(event.target.value)}
                                   />
                                   <button onClick={sendDM}>Send</button>
-                                  <button className="popup-close" onClick={toggleMessagePopup}>
+                                  <button className="chatbox-close" onClick={toggleMessagePopup}>
                                     Close
                                     </button>
                                 </div>
