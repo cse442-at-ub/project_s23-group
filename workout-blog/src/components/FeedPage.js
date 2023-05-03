@@ -89,7 +89,7 @@ function FeedPage() {
             <div className="post-image-box">
               {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
             </div>
-            <div className="post-description">
+            <div className="post-title-box">
               {post.title}
             </div>
             <div className="post-text-box">
