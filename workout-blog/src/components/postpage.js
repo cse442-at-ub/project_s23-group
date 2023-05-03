@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import "./postpage.css"
-
+import img from './images/logo-white.png';
 import {
     useNavigate,
     useParams,
@@ -57,26 +57,22 @@ const Postpage = (props) => {
       }, []);
     
     return (
+      <div className="cover-page">
         <div class="container whole_page">
-            <nav class="navbar navbar-expand-lg navbar-light col-12">
-                <div class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</div>
+              <nav class="navbar navbar-expand-lg navbar-dark col-12">
+            <img class="navbar-brand" src={img} onClick={() =>navigate("/")} Gym Blog />
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse col-11" id="navbarNavAltMarkup">
+               
                     <div class="navbar-nav ml-auto">
-                      <div onClick={()=>navigate(`../../profile/${id}`)}>
-                        {(id && (<Link class="nav-item nav-link" to ={`profile/${id}`}>Profile</Link>))}
-                      </div>
-                      <div onClick={()=>navigate(`../../`)}>
-                        {(id && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
-                      </div>
-                      <div onClick={()=>navigate(`../../register`)}>
-                        {(!id && (<Link class="nav-item nav-link">Sign Up</Link>)) } 
-                      </div>
-                      <div onClick={()=>navigate(`../../login`)}>
-                        {(!id && (<Link class="nav-item nav-link">Sign In</Link>)) }
-                      </div>
+                    {(id && (<Link class="nav-item nav-link" to ={`..//profile/${id}`}>Profile</Link>))}
+                    {(id && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
+                    {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
+                    {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }
                     </div>
                 </div>
             </nav>
@@ -85,9 +81,10 @@ const Postpage = (props) => {
                     <div onClick = {()=>navigate(`../../profile/${post.userid}`)}>
                         <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
                         <a className="post-author-name">{post.username}</a>
+                        {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`/postSettings/${post.postid}`)}>Edit</button>)}
                         <p className="date">Date Created: {post.created_at}</p>
                     </div>
-                    {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`/postSettings/${post.postid}`)}>Edit</button>)}
+                    
                 </div>
                 <div class="post_title">
                     <h1>{post.title}</h1>
@@ -98,12 +95,12 @@ const Postpage = (props) => {
                 <div class="post_body">
                     <p>{post.text}</p>
                 </div>
-                <div><button onClick={()=>navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
+                <div><button className="share" onClick={()=>navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`)
 }>Share</button></div>
             </div>
         </div>
 
-        
+        </div>
         
     );  
         
