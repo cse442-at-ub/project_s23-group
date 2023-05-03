@@ -7,7 +7,8 @@ import { Form } from "react-router-dom";
 
 
 const Likes_button = (props) => {
-  var userid = sessionStorage.getItem("id")
+  var userid = Number(sessionStorage.getItem("id"))
+  const [postid,setPostid] = useState(props.postid)
   const [likeList, setlikeList] = useState('')
   const [liked,setLiked] = useState('')
   const [likeCount,setlikeCount] = useState('')
@@ -22,7 +23,7 @@ const Likes_button = (props) => {
 
   function UpdateLike(liked){
     var formData = new FormData();
-    formData.append("postid",props.postid)
+    formData.append("postid",postid)
     formData.append("userid",userid)
     if(!liked){
       axios({
@@ -49,11 +50,10 @@ const Likes_button = (props) => {
           console.log(error);
       });
     }
-    GetLikes()
   }
   function GetLikes(){
     var formData = new FormData();
-    formData.append("postid",props.postid)
+    formData.append("postid",postid)
     axios({
       method: 'post',
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getLikes.php",
@@ -61,10 +61,10 @@ const Likes_button = (props) => {
       data: formData
     })
     .then((response) => {
-        var isSet;
+        var isSet = false;
         setlikeCount(response.data.length)
-        for (var post in response.data){
-          if(response.data[post].userid = userid){
+        for (let i = 0; i < response.data.length; i++) {
+          if(response.data[i].userid == userid){
             isSet = true
           }else{
             isSet = false
