@@ -387,9 +387,9 @@ const Profile = (props) =>{
                                 <div className="followerbutton">Follower</div>
                             </button>)
                             </div>
-                            <div className="timeline">
+                        {/* <div className="timeline">
                             Timeline
-                        </div>
+                        </div> */}
                         <div className='gallery'>
                             <div className="innerGallery">
                                 <Timeline userid = {searchId}/>]

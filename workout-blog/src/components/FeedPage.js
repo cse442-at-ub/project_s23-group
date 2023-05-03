@@ -241,7 +241,7 @@ function FeedPage() {
             {post.text && <p className="post-text">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
-          <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
+          <div>{userid &&<Likes_button postid = {post.postid}/>}</div>
           
 
           <div className={`post-tag ${getTagClassName(post.tag)}`}>

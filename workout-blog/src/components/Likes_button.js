@@ -14,9 +14,9 @@ const Likes_button = (props) => {
   useEffect(()=>{
     GetLikes();
   },[])
+
   function Like(){
     setLiked(!liked)
-    console.log(liked)
     UpdateLike(liked)
   }
 
@@ -24,7 +24,7 @@ const Likes_button = (props) => {
     var formData = new FormData();
     formData.append("postid",props.postid)
     formData.append("userid",userid)
-    if(liked){
+    if(!liked){
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeLike.php",
@@ -32,7 +32,7 @@ const Likes_button = (props) => {
         data: formData 
       })
       .then((response) => {
-          setlikeCount(likeCount+1)       
+        setlikeCount(likeCount + 1)
       }, (error) => {
           console.log(error);
       });
@@ -43,12 +43,13 @@ const Likes_button = (props) => {
         headers: {},
         data: formData 
       })
-      .then((response) => {
-          setlikeCount(likeCount-1)                
+      .then((response) => { 
+        setlikeCount(likeCount - 1)
       }, (error) => {
           console.log(error);
       });
     }
+    GetLikes()
   }
   function GetLikes(){
     var formData = new FormData();
@@ -61,7 +62,7 @@ const Likes_button = (props) => {
     })
     .then((response) => {
         var isSet;
-        setlikeCount(response.data.length - 1)
+        setlikeCount(response.data.length)
         for (var post in response.data){
           if(response.data[post].userid = userid){
             isSet = true
