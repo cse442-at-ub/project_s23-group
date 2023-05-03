@@ -4,31 +4,7 @@ html, body {
  
     overflow-x: hidden;
   }
-  .coachBut {
-    font-family: 'Titillium Web', sans-serif;
-    width: 55%;
-    margin-top: 30px;
-    margin-left: 22%;
-    height: 10%;
-    border-radius: 15px;
-    background-color: #D4DCDF;
-    font-weight: 300;
 
-    display: inline-block;
-    padding: 8px 16px;
-    border: 2px solid #D4DCDF;
-    color: #858a8b;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  .coachBut:hover {
-    background-color: #032e2e;
-    color: #fff;
-  }
-  
 @media only screen and (min-width: 901px) {
 
 
@@ -40,6 +16,7 @@ html, body {
         width: 100vw;
     
     }
+    
     
     .bg .home{
         background: url("./images/next.png");
@@ -204,12 +181,61 @@ html, body {
         display: flex;
         justify-content: center;
     }
+  
+    .coachBut {
+        font-family: 'Titillium Web', sans-serif;
+        width: 55%;
+        margin-top: 30px;
+        margin-left: 22%;
+        height: 11%;
+        border-radius: 15px;
+        background-color: #D4DCDF;
+        font-weight: 300;
+    
+        display: inline-block;
+        padding: 8px 16px;
+        border: 2px solid #D4DCDF;
+        color: #858a8b;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+      
+      .coachBut:hover {
+        background-color: #032e2e;
+        color: #fff;
+      }
     
 }
 
 
 
 @media only screen and  (max-width: 900px) {
+    .coachBut {
+        font-family: 'Titillium Web', sans-serif;
+        width: 55%;
+        margin-top: 30px;
+        margin-left: 22%;
+        height: 17%;
+        border-radius: 15px;
+        background-color: #D4DCDF;
+        font-weight: 300;
+    
+        display: inline-block;
+        padding: 8px 16px;
+        border: 2px solid #D4DCDF;
+        color: #858a8b;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+      
+      .coachBut:hover {
+        background-color: #032e2e;
+        color: #fff;
+      }
     .bg {
         background-color: white;
     }
