@@ -4,7 +4,6 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
 import FeedPage from "../components/FeedPage";
-
 import img from './images/logo-white.png';
 import {
     Link,
@@ -42,6 +41,7 @@ const Home_Page = (props) => {
     
     return (
         <div className="wrapper">
+
             <div class="container">
            
             <nav class="navbar navbar-expand-lg navbar-dark col-12">

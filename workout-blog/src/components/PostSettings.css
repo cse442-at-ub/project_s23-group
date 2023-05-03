@@ -1,11 +1,15 @@
+html{
+    background-color: #202020;
+}
+
 @media only screen and (min-width: 1101px) {
 
 
 .PS{
     
     background-color: #202020;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
         
         
 }    
@@ -34,7 +38,7 @@
     box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);
 }
 
-.PSHeader{
+ .PSHeader{
     
     color: white;
     width: 100%;
@@ -45,13 +49,44 @@
 
 
 .PSFilterBox{
-    margin-top: 0;
+    
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-
+.PS select {
+    width: 100%;
+    height: 50px;
+    font-size: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0;
+    background-color: white;
+    border: transparent;
+    color: #202020;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;      
+    outline: none;
+    text-align: center;
+    transition: border-bottom-color .5s ease;
+  }
+  
+ 
+  
+  .PS select:hover,
+      select:focus {
+        
+        border-bottom: 2px solid #202020;
+      }
+    
+      option {
+        color:#202020;
+        background-color: #f5f5f5;
+        
+      }
 
 .PSTitleBox{
     margin-top: 10px;
@@ -62,11 +97,13 @@
 
 .inpTitle{
     
-    width: 400px;
+    width: fit-content;
     height: 40px;
     text-align: center;
-    transition: width .5s ease, background-color .5s ease;
-    border: none;
+    background-color: blue;
+    border: transparent;
+    transition: border-bottom-color .5s ease;
+    
     background-color: #fff;
     padding: 5px 10px;
     outline: none;
@@ -74,8 +111,9 @@
     
 }
 
-.inpTitle:hover{
-    border-bottom: 1px solid #202020;
+.inpTitle:hover, .inpTitle:focus{
+    
+    border-bottom: 2px solid #202020;
 }
 
 
@@ -89,14 +127,33 @@
 
 .inpImg{
     display: none;
+    
+}
+.PSIconBox{
+    display: flex;
+    justify-content: center;
+
+    
+}
+.PSPreview{
+    border: 2px solid #202020;
+    box-sizing: border-box;
+    /* height: 300px;
+    width: 400px; */
+    height: 50%;
+    width: 58%;
+    object-fit: contain;
 
 }
 
-.PSPreview{
-    height: 300px;
-    width: 400px;
-    object-fit: cover;
-
+.PSPreview:hover{
+    -webkit-filter: brightness(60%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    
 }
 
 
@@ -112,15 +169,17 @@
     
     width: 400px;
     height: 120px;
-    border: transparent;
+    
     background-color: #fff;
+    border: white;
     padding: 5px 10px;
-    outline: none;
+    outline: white;
     font-size: 14px;
+    transition: border-color .5s ease;
 }
 
-.inpCaption:hover{
-    border: 1px solid #202020;
+.inpCaption:hover, .inpCaption:focus {
+    border: 2px solid #202020;
 }
 
 
@@ -150,6 +209,7 @@
     display: flex;
     justify-content: center;
 }
+
 .PSDelete{
     margin-top: 15px;
     width: 400px;
@@ -163,19 +223,22 @@
     color: red;
     transition-duration: 0.4s;
 }
+
 .PSDelete:hover{
     background-color: red;
     color: white;
 }
+
 .PS input{
     color: #202020;  
 }  
+
 .PS ::placeholder{
        
     color: #202020;
     
-}
-}
+} 
+} 
 
 
 
@@ -185,8 +248,8 @@
 .PS{
     
     background-color: #202020;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
         
         
 }    
@@ -354,4 +417,4 @@
     
 }
    
-}
+} 

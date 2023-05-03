@@ -3,6 +3,7 @@ import './FeedPage.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import staticProfile from './images/profilepic.jpg'
+import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
 function FeedPage() {
   const navigate = useNavigate();
@@ -63,6 +64,9 @@ function FeedPage() {
     ? posts.filter(post => post.tag === selectedTag)
     : posts;
 
+
+
+
   return (
     <div className="feed">
       <div className="filter">
@@ -95,21 +99,6 @@ function FeedPage() {
           <div className="post-timestamp">{post.created_at}</div>
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
           
-          {/* <div className="post-actions">
-            <button className="like-button" onClick={() => handleLike(post.postid)}>{likes[post.postid] || 0} Likes</button>
-            <button className="share-button">Share</button>
-          </div>
-   */}
-          {/* <div className="comments-section">
-            <ul className="comment-list">
-              {comments[post.postid] && comments[post.postid].map((comment, index) => (
-                <li key={index} className="comment">{comment}</li>
-              ))}
-            </ul>
-            <form className="comment-form" onSubmit={(e) => handleComment(e, post.postid)}>
-              <input type="text" name="comment" placeholder="Add a comment..." />
-              <button type="submit">Post</button>
-              </form> */}
         </div>
       ))}
     </div>

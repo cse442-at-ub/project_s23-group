@@ -12,6 +12,7 @@ import {
 
 
 
+
 const PostSettings = ({alert}) =>{
   
   
@@ -152,8 +153,12 @@ const PostSettings = ({alert}) =>{
           progress: undefined,
           theme: "dark",
           });
+      
     };
-   
+
+  
+
+ 
     
     return(
         <div className="PS">
@@ -163,12 +168,13 @@ const PostSettings = ({alert}) =>{
                 onClick={()=>navigate("/")}/>
           
            <div className="PSHeader">Post Editor</div>
+   
 
-           <div className="PSCard">
+            <div className="PSCard">
            <div className="PSFilterBox">
             <div className="PSFilter">
                   <select
-                      className="custom-select"
+                      className="PSSelect"
                       value={tag}
                       onChange={(e) => {
                       const selected = e.target.value;
@@ -182,7 +188,7 @@ const PostSettings = ({alert}) =>{
                   
             </div>
            </div>
-           {/* <div className="PSTitle">Title</div> */}
+           
            <div className="PSTitleBox">
                 <input
                     className='inpTitle'
@@ -198,7 +204,7 @@ const PostSettings = ({alert}) =>{
                         }}
                     />
            </div>
-           <div className="PSImgBox">
+          
                 
                 
                 <label for="inpImg" className='PSIconBox'>
@@ -225,8 +231,8 @@ const PostSettings = ({alert}) =>{
                        
                         }}
                     />
-           </div>
-           {/* <div className="PSCaption">Caption</div> */}
+           
+          
            <div className="PSCaptionBox">
                 <textarea
                     className='inpCaption'
@@ -260,10 +266,11 @@ const PostSettings = ({alert}) =>{
                 onClick={()=>{deletePost()}}
                 >Delete</button>
            </div>
-           </div>
+           </div> 
+          
            <ToastContainer />
         </div>
-        )
+         )
 }
 
 export default PostSettings
