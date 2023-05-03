@@ -3,6 +3,8 @@ import axios from 'axios'
 import './Settings.css'
 import Lottie from "lottie-react";
 import loading from "./lotties/loading.json"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Link,
   useNavigate,
@@ -136,8 +138,23 @@ const Settings = (props) =>{
             name="myImage"
             accept="image/x-png,image/gif,image/jpeg"
             onChange={(event) => {
+              if(event.target.files[0].size <= 2000000){
+                setProfile(event.target.files[0]);
+              }
+              else{
+                toast.warning('File size must be less than 2MB', {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "dark",
+                  });
+              }
             
-              setProfile(event.target.files[0]);
+              
               
             }}
         />
@@ -152,8 +169,23 @@ const Settings = (props) =>{
           type="file"
           name="myImage"
           onChange={(event) => {
+            if(event.target.files[0].size <= 2000000){
+              setBackground(event.target.files[0]);
+            }
+            else{
+              toast.warning('File size must be less than 2MB', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+            }
           
-            setBackground(event.target.files[0]);
+            
             
           }}
         />
@@ -166,6 +198,7 @@ const Settings = (props) =>{
         onClick={() => {
           
           if((bio != '') && (profile != null)&& (background != null) ){
+            
             setLoad(true)
             uploadServerImages(profile,background)
             setBio('')
@@ -185,6 +218,7 @@ const Settings = (props) =>{
         
         
           </div>
+          <ToastContainer />
     </div>
         )
 }

@@ -16,6 +16,8 @@ import {
     Navigate
   } from "react-router-dom";
   import img from './images/logo-white.png';
+  import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MakePost() {
 const navigate = useNavigate()
@@ -40,7 +42,22 @@ const navigate = useNavigate()
     navigate("/")
 }
   function setFile(event) {
-    setMyFile(event.target.files[0]);
+    if(event.target.files[0].size <= 2000000){
+      setMyFile(event.target.files[0]);
+    }
+    else{
+      toast.warning('File size must be less than 2MB', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+    
   }
 
   function handleMessageText(event) {
@@ -156,7 +173,9 @@ useEffect(() => {
                 </div>
             </nav>
         </div>
-
+      <div className="make-post-title">
+        Make a post
+      </div>
       <div className="make-post-card">
         <form onSubmit={handleSubmit}>
         <label htmlFor="dropdown" className="col-form-label3">Select an option:</label>
@@ -196,6 +215,7 @@ useEffect(() => {
           <p>{msg}</p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
