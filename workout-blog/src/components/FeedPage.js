@@ -6,23 +6,22 @@ import staticProfile from './images/profilepic.jpg'
 import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
 function FeedPage() {
+  var userid = sessionStorage.getItem("id")
   const navigate = useNavigate();
-  const [likes, setLikes] = useState({});
-  const [comments, setComments] = useState({});
+  const [recent,setRecent] = useState(true)
+  const [mostLiked,setMostLiked] = useState(false)
+  const [following,setFollowing] = useState(false)
   const [posts, setPosts] = useState([]);
-  const [pfp, setPfp] = useState([]);
-  const [username, setUsername] = useState([]);
+  const [topPosts,setTopPosts] = useState([]);
+  const [followingPosts,setFollowingPost] = useState([]);
   const [selectedTag, setSelectedTag] = useState('');
-
+  const [displayTag, setDisplayTag] = useState('');
   useEffect(() => {
     givePost();
     
   }, []);
 
-  useEffect(() => {
-    
-    
-  }, []);
+
   function givePost() {
     axios({
       method: 'post',
@@ -43,28 +42,89 @@ function FeedPage() {
       .catch(error => {
         console.log(error);
       });
+      var formData = new FormData();
+      formData.append("userid", userid);
+      axios({
+        method: 'post',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPostByFollow.php",
+        headers:{},
+        data: formData,
+      })
+        .then(response => {
+          for (let p of response.data) {
+            if (p.text.length >=150) {
+                p.text = p.text.substring(0,150) + "...";
+            }
+            if(!p.pfp){
+              p.pfp = `profilepic.jpg`
+            }
+        }
+          setFollowingPost(response.data);
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      axios({
+        method: 'post',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPostByLikes.php",
+      })
+        .then(response => {
+          for (let p of response.data) {
+            if (p.text.length >=150) {
+                p.text = p.text.substring(0,150) + "...";
+            }
+            if(!p.pfp){
+              p.pfp = `profilepic.jpg`
+            }
+        }
+          setTopPosts(response.data);
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  }
+
+  function getTagClassName(tag) {
+    switch (tag) {
+      case 'Diet':
+        return 'tag-diet';
+      case 'Progress':
+        return 'tag-progress';
+      case 'Max Weight':
+        return 'tag-max-weight';
+      default:
+        return '';
+    }
   }
 
 
-  const handleLike = (postId) => {
-    setLikes(prevLikes => ({
-      ...prevLikes,
-      [postId]: (prevLikes[postId] || 0) + 1
-    }));
-  };
-
-  const handleComment = (e, postId) => {
-    e.preventDefault();
-    const comment = e.target.elements.comment.value;
-    setComments(prevComments => ({
-      ...prevComments,
-      [postId]: [...(prevComments[postId] || []), comment]
-    }));
-    e.target.elements.comment.value = '';
-  };
-
   const handleStateChange = (e) => {
-    setSelectedTag(e.target.value);
+    if(e.target.value == "" ||e.target.value == "Diet" ||e.target.value == "Progress" || e.target.value == "Max Weight" ){
+      setDisplayTag(e.target.value)
+      setSelectedTag(e.target.value);
+      setRecent(true)
+      setFollowing(false)
+      setMostLiked(false)
+    }
+    else{
+    
+      if(e.target.value == "Top Posts"){
+        setDisplayTag(e.target.value)
+        setRecent(false)
+            setFollowing(false)
+            setMostLiked(true)
+      }
+      else if(e.target.value == "Following"){
+        setDisplayTag(e.target.value)
+        setRecent(false)
+        setFollowing(true)
+        setMostLiked(false)
+      }
+      
+    }
+    
   };
 
   const filteredPosts = selectedTag
@@ -76,38 +136,91 @@ function FeedPage() {
 
   return (
     <div className="feed">
-      <div className="filter">
-        <select value={selectedTag} onChange={handleStateChange}>
+       <div className="filter">
+        <select value={displayTag} onChange={handleStateChange}>
           <option value="">All</option>
           <option value="Diet">Diet</option>
           <option value="Progress">Progress</option>
           <option value="Max Weight">Max Weight</option>
+          <option value="Top Posts">Top Posts</option>
+          <option value="Following">Following</option>
         </select>
       </div>
 
-      {filteredPosts.slice().reverse().map(post => (
-        
+      {recent && filteredPosts.slice().reverse().map(post => (
         <div className="post" key={post.postid}>
           <div className="post-header">
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
             <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
           </div>
+          <div className="post-description">
+            {post.title}
+          </div>
           <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
-            <div className="post-image-box">
-              {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
-            </div>
-            <div className="post-title-box">
-              {post.title}
-            </div>
-            <div className="post-text-box">
-              {post.text && <p className="post-text">{post.text}</p>}
-            </div>
+            {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
+            {post.text && <p className="post-text">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
+          
+          
+
+          <div className={`post-tag ${getTagClassName(post.tag)}`}>
+            {post.tag}
+          </div>
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
           
         </div>
       ))}
+
+      {following && followingPosts.slice().reverse().map(post => (
+        <div className="post" key={post.postid}>
+          <div className="post-header">
+            <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
+            <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
+          </div>
+          <div className="post-description">
+            {post.title}
+          </div>
+          <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
+            {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
+            {post.text && <p className="post-text">{post.text}</p>}
+          </div>
+          <div className="post-timestamp">{post.created_at}</div>
+          
+          
+
+          <div className={`post-tag ${getTagClassName(post.tag)}`}>
+            {post.tag}
+          </div>    
+          {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
+          </div>
+        ))}
+      {mostLiked && topPosts.slice().map(post => (
+        <div className="post" key={post.postid}>
+          <div className="post-header">
+            <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
+            <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
+          </div>
+          <div className="post-description">
+            {post.title}
+          </div>
+          <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
+            {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
+            {post.text && <p className="post-text">{post.text}</p>}
+          </div>
+          <div className="post-timestamp">{post.created_at}</div>
+          
+          
+
+          <div className={`post-tag ${getTagClassName(post.tag)}`}>
+            {post.tag}
+          </div>
+          {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
+          </div>
+      ))}
+
+
+
     </div>
 
   );
