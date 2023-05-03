@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300&display=swap');
-html, body {
-  
-    /* overflow-y: hidden; */
-}
+
     
   
   
@@ -60,7 +57,10 @@ html, body {
         justify-content: center;
     }
     
-    
+    .bgL .emailbox{
+      padding-top: 60px;
+
+    }
     .bgL .name {
         font-family: 'Titillium Web', sans-serif;
         width: 55%;

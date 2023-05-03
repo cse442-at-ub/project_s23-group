@@ -36,7 +36,7 @@ function Login(props) {
           console.log(response);
           sessionStorage.setItem("id", response.data[0])
           sessionStorage.setItem("name", response.data[2])
-          setTimeout(()=>{navigate("/")}, 1700);
+          setTimeout(()=>{navigate("/")}, 1000);
           toast.success('Welcome Back!', {
               position: "bottom-center",
               autoClose: 5000,
@@ -50,7 +50,7 @@ function Login(props) {
               
           
         }, (error) => {
-          toast.error("User does not exist or wrong password", {
+          toast.error("Wrong password or user does not exist", {
             position: "bottom-center",
             autoClose: 5000,
             hideProgressBar: true,
@@ -103,7 +103,7 @@ return (
                   
               </div>
                   <div class="col">
-                      <div class="row">Not a user? <button className="signup" onClick={() => navigate("/register")}>Register</button></div>
+                      <div class="row">Not a user? <button className="signup" onClick={() => navigate("/register")}>Sign up</button></div>
                   </div>
        
       </div>

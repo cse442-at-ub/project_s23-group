@@ -56,7 +56,7 @@ const Register = (props) =>{
                             sessionStorage.setItem("name", response.data[2])
                             
                             // setLoad(true)
-                            setTimeout(()=>{navigate("/")}, 1700);
+                            setTimeout(()=>{navigate("/")}, 1000);
                             toast.success('Welcome!', {
                                 position: "bottom-center",
                                 autoClose: 5000,
@@ -137,7 +137,7 @@ const Register = (props) =>{
             <div class='home' onClick={() => navigate("/")}/>   
             
             <div class="accountwrap">
-                <div class="sign">Sign Up</div>
+                <div class="sign">Sign up</div>
                     <div class='namebox'>
                         <input type="text"
                                     placeholder="Name"

@@ -287,7 +287,8 @@ const Profile = (props) =>{
         setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
         setName(sessionStorage.getItem("name"))
        
-        if(!profile){
+        if(!response.data[4]){
+            console.log("empty")
             setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/profilepic.jpg")
         }
         
