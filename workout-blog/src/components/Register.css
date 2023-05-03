@@ -31,7 +31,7 @@ html, body {
     
     }
 
-    .accountwrap{
+    .bg .accountwrap{
         right:0px;
         height: 100vh;
         width: 30vw;
@@ -42,7 +42,7 @@ html, body {
         z-index: 2;
     } 
     
-    .sign{
+    .bg .sign{
         margin-top: 50px;
         display: flex;
         justify-content: center;
@@ -54,7 +54,7 @@ html, body {
         z-index: 5;
     }
 
-    .namebox, .emailbox, .passwordbox, .cpasswordbox {
+    .bg .namebox, .emailbox, .passwordbox, .cpasswordbox {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -107,7 +107,7 @@ html, body {
         font-weight: 300;
     }
     
-    ::placeholder{
+    .bg ::placeholder{
         padding-left: 2px;
     
     }
@@ -118,12 +118,12 @@ html, body {
     }
     
 
-    .submitbox{
+    .bg .submitbox{
         width: 100%;
         display: flex;
         justify-content: center;
     }
-    .signup{
+    .bg .signup{
         font-family: 'Titillium Web', sans-serif;
         width: 55%;
         border: none;
@@ -138,13 +138,13 @@ html, body {
         
     }
 
-    .signup:hover{
+    .bg .signup:hover{
         background-color: white;
         color: black;
 
     }
     
-    .signin{
+    .bg .signin{
         
         font-weight: 400;
         border: none;
@@ -178,7 +178,7 @@ html, body {
         z-index: 11;
     }
 
-    .accountwrap{
+    .bg .accountwrap{
         position: relative;
         height: 100vh;
         width: 100%;
@@ -186,7 +186,7 @@ html, body {
         z-index: 10;
     } 
 
-      .sign{
+    .bg  .sign{
         margin-top: 50px;
         text-align: center;
         width: 100vw;
@@ -250,7 +250,7 @@ html, body {
     
     }
 
-    .signup{
+    .bg .signup{
         margin-left: 10%;
         margin-top: 5%;
         width:80%;
@@ -264,7 +264,7 @@ html, body {
     
     }
     
-    .signin{
+    .bg .signin{
         font-weight: 400;
         border: none;
         background-color: transparent;

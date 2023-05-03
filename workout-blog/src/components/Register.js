@@ -60,7 +60,7 @@ const Register = (props) =>{
                             toast.success('Welcome!', {
                                 position: "bottom-center",
                                 autoClose: 5000,
-                                hideProgressBar: false,
+                                hideProgressBar: true,
                                 closeOnClick: true,
                                 pauseOnHover: true,
                                 draggable: true,
@@ -194,9 +194,7 @@ const Register = (props) =>{
                             
                         
             </div>
-            { (<div className='checkAnim'>
-                                <Lottie className='check' animationData={check} loop={false} />
-                            </div>)}
+            
             <ToastContainer />
         </div>
       );
