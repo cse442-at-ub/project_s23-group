@@ -72,7 +72,7 @@ const Profile = (props) =>{
 
 
     useEffect(() => {
-      
+        window.scrollTo(0, 0)
             console.log("2")
             getImages()
             getFollowingUsers();
