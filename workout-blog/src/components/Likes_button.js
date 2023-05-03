@@ -8,23 +8,29 @@ import { Form } from "react-router-dom";
 
 const Likes_button = (props) => {
   var userid = sessionStorage.getItem("id")
-  const [likeList, setlikeList] = useState('')
   const [liked,setLiked] = useState('')
   const [likeCount,setlikeCount] = useState('')
   useEffect(()=>{
     GetLikes();
   },[])
 
+
+
+
   function Like(){
+    console.log(liked)
     setLiked(!liked)
     UpdateLike(liked)
+  
   }
-
+  
   function UpdateLike(liked){
+    console.log(liked)
     var formData = new FormData();
     formData.append("postid",props.postid)
     formData.append("userid",userid)
     if(!liked){
+      console.log("added")
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeLike.php",
@@ -37,6 +43,7 @@ const Likes_button = (props) => {
           console.log(error);
       });
     }else{
+      console.log("removed")
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/removeLike.php",
@@ -49,7 +56,6 @@ const Likes_button = (props) => {
           console.log(error);
       });
     }
-    GetLikes()
   }
   function GetLikes(){
     var formData = new FormData();
@@ -61,7 +67,8 @@ const Likes_button = (props) => {
       data: formData
     })
     .then((response) => {
-        var isSet;
+        var isSet = false;
+        console.log(response.data)
         setlikeCount(response.data.length)
         for (var post in response.data){
           if(response.data[post].userid = userid){

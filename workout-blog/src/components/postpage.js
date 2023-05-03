@@ -87,7 +87,7 @@ const Postpage = () => {
                     <p>{post.text}</p>
                 </div>
                 <div>
-                {userid && <Likes_button postid = {post.postid}/>} 
+                {userid && <Likes_button postid = {searchId}/>} 
                 <button onClick={()=>{navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`);setshared("Copied!")}}>{shared}</button>
                 </div>
 
