@@ -136,7 +136,8 @@ box-shadow: 0px 0px 10px 3px rgba(173,171,171,1);
 .feed select:hover,
     select:focus {
       
-      border-bottom: 2px solid #962d22;
+      /* border-bottom: 2px solid #962d22; */
+      border-bottom: 2px solid gray;
     }
   
 .feed option {

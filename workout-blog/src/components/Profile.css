@@ -98,20 +98,6 @@
   }
   
 
-  .bg2 {}
-
-  .bg2 .nav-link {
-
-    color: aliceblue !important;
-    text-shadow: 2px 2px rgba(27,27,27,1);
-  }
-
-  .bg2 .navbar-brand{
-    color: aliceblue !important;
-    text-shadow: 2px 2px rgba(27,27,27,1);
-    background-color: transparent;
-    border: none;
-  }
   .bg2{
     background-color: rgba(27,27,27,1);
     z-index: 0;
@@ -519,22 +505,7 @@
       position: relative;
       z-index: 100;
     }
-    .bg2 .nav-link {
 
-      color: aliceblue !important;
-      text-shadow: 2px 2px rgba(27,27,27,1);
-    }
-  
-    .bg2 .navbar-brand{
-      color: aliceblue !important;
-      text-shadow: 2px 2px rgba(27,27,27,1);
-      background-color: transparent;
-      border: none;
-    }
-
-    .bg2 .navbar-toggler-icon{
-      color: aliceblue !important;
-    }
   
     .bg2  .home{
       height: 5%;

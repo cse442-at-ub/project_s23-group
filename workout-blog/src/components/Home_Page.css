@@ -37,6 +37,17 @@
   padding-right: 50px;
 }
 
+.nav-item{
+  color:rgb(194, 193, 193) !important;
+  transition:  border-bottom-color 1s ease ;
+}
+
+.nav-item:hover{
+  
+  color: white !important;
+  border-bottom: 1px solid white;
+}
+
 .navbar-brand{
   position: relative;
   height: 80px;

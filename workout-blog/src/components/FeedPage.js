@@ -29,9 +29,16 @@ function FeedPage() {
       url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getPost.php",
     })
       .then(response => {
-        setPosts(response.data)
         
-        
+        for (let p of response.data) {
+          if (p.text.length >=150) {
+              p.text = p.text.substring(0,150) + "...";
+          }
+          if(!p.pfp){
+            p.pfp = `profilepic.jpg`
+          }
+      }
+      setPosts(response.data)
       })
       .catch(error => {
         console.log(error);

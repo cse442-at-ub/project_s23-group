@@ -287,6 +287,9 @@ const Profile = (props) =>{
         setBackground("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + sessionStorage.getItem("background"))
         setName(sessionStorage.getItem("name"))
        
+        if(!profile){
+            setProfile("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/profilepic.jpg")
+        }
         
         }, (error) => {
             setBio("Go to settings to change info")
