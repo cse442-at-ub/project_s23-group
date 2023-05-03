@@ -4,6 +4,8 @@ import axios from 'axios'
 import './Register.css'
 import Lottie from "lottie-react";
 import check from "./lotties/check.json"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
     Link,
     useNavigate,
@@ -19,15 +21,13 @@ const Register = (props) =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
-    const [load, setLoad] = useState(false)
-    const [error, setError] = useState(false)
-    const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
     
     useEffect(() => {
-
-    }, [error]);
+        
+    }, []);
     
+
     
   
     const registerUser = async (name, email, password, confirmPassword) => {
@@ -54,37 +54,78 @@ const Register = (props) =>{
                             console.log(response);
                             sessionStorage.setItem("id", response.data[0])
                             sessionStorage.setItem("name", response.data[2])
-                            setError(false)
-                            setLoad(true)
-                            setTimeout(()=>{navigate("/")}, 1700);
-                        
                             
+                            // setLoad(true)
+                            setTimeout(()=>{navigate("/")}, 1700);
+                            toast.success('Welcome!', {
+                                position: "bottom-center",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "colored",
+                                });
+                                
+                                   
                 
                         }, (error) => {
-                            console.log(error);
-                            console.log("user already exists")
-                            setError(true)
-                            setErrMessage("User already exists")
+                           
+                            toast.error("User already exists", {
+                                position: "bottom-center",
+                                autoClose: 5000,
+                                hideProgressBar: true,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "dark",
+                                });
                         });
                     }
                     else{
-                        setError(true)
-                        setErrMessage("Password length must be greater than 6 characters")
+                        
+                        
+                        toast.error("Password length must be greater than 6 characters", {
+                            position: "bottom-center",
+                            autoClose: 5000,
+                            hideProgressBar: true,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                            });
                     }
                 }
                 else{
-                    
-                    setError(true)
-                    setErrMessage("Not a valid email")
+
+                    toast.error("Not a valid email", {
+                        position: "bottom-center",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                        });
                 }
               
            
         }
         else{
-            
-            setError(true)
-            console.log("missing field or password does not match")
-            setErrMessage("Missing field or password does not match")
+            toast.error("Missing field or password does not match", {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
         }
 
     };
@@ -146,17 +187,17 @@ const Register = (props) =>{
                             <div class="row">Already have an account? <button className="signin" onClick={() => navigate("/login")}>Sign In</button></div>
                         </div>
                         
-                            {error && (<div class="row" id='error'>
-                                {errMessage}
-                            </div>)}
-                            {load && (<div className='checkAnim'>
-                                <Lottie className='check' animationData={check} loop={false} />
-                            </div>)}
+                            
+                          
           
 
                             
                         
             </div>
+            { (<div className='checkAnim'>
+                                <Lottie className='check' animationData={check} loop={false} />
+                            </div>)}
+            <ToastContainer />
         </div>
       );
     
