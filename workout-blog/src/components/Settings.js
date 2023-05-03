@@ -114,73 +114,74 @@ const Settings = (props) =>{
     <div className="bg3">
         <div class='home' onClick={() => navigate(back, { replace: true })}/> 
         
-        <div className="box">
+        
         <div className="settings">Settings</div>
-        <div className="bioBox">
-        <input type="text"
-            placeholder="Update Bio"
-            class="bio" 
-            onChange={event => {
-            setBio(event.target.value)
-            }} required />
-        </div>
-        <div className='profileTitle'>Set Profile Picture</div>   
+        <div className="box">
+          <div className="bioBox">
+          <input type="text"
+              placeholder="Update Bio"
+              class="bio" 
+              onChange={event => {
+              setBio(event.target.value)
+              }} required />
+          </div>
+          <div className='profileTitle'>Set Profile Picture</div>   
 
-        <div className="profileBox">
-           
-          <input
-          className='profile'
-          type="file"
+          <div className="profileBox">
+            
+            <input
+            className='profile'
+            type="file"
+        
+            name="myImage"
+            accept="image/x-png,image/gif,image/jpeg"
+            onChange={(event) => {
+            
+              setProfile(event.target.files[0]);
+              
+            }}
+        />
       
+        </div>
+
+        <div className='backgroundTitle'>Set Background</div> 
+        <div className="backgroundBox">
+            
+          <input
+          className='background'
+          type="file"
           name="myImage"
-          accept="image/x-png,image/gif,image/jpeg"
           onChange={(event) => {
           
-            setProfile(event.target.files[0]);
+            setBackground(event.target.files[0]);
             
           }}
-      />
-     
-      </div>
-
-      <div className='backgroundTitle'>Set Background</div> 
-      <div className="backgroundBox">
-          
-        <input
-        className='background'
-        type="file"
-        name="myImage"
-        onChange={(event) => {
+        />
+        </div>
         
-          setBackground(event.target.files[0]);
+            
+            <div className="doneBox">
+        <button 
+        className='done'
+        onClick={() => {
           
-        }}
-      />
-      </div>
-      
-           
-          <div className="doneBox">
-      <button 
-      className='done'
-      onClick={() => {
-        
-        if((bio != '') && (profile != null)&& (background != null) ){
-          setLoad(true)
-          uploadServerImages(profile,background)
-          setBio('')
-          setProfile(null)
-          setBackground(null)
-          
-        }
-        else{
-          navigate(back)
-        }
-      }}>
-        Done</button>
-        {load && (<div className='animation'>
-          <Lottie className='circle' animationData={loading} loop={true} />
-          </div>)}
-          </div>
+          if((bio != '') && (profile != null)&& (background != null) ){
+            setLoad(true)
+            uploadServerImages(profile,background)
+            setBio('')
+            setProfile(null)
+            setBackground(null)
+            
+          }
+          else{
+            navigate(back)
+          }
+        }}>
+          Done</button>
+          {load && (<div className='animation'>
+            <Lottie className='circle' animationData={loading} loop={true} />
+            </div>)}
+            </div>
         
         
           </div>

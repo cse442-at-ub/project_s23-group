@@ -5,16 +5,29 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    padding: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
-.postSettings{
-    
+.posts .postSettings{
+    float: right;
+    color: gray;
+    border: none;
     background-color: transparent;
+    font-size: 20px;
+   
     
   }
 
+  .posts .postSettings:hover {
+    color: black;
+  
+    
+  }
 .post-title{
+    padding-left: 50px;
+    padding-top: 3%;
     background-color: white;
     font-size: 30px;
     text-align: center;
