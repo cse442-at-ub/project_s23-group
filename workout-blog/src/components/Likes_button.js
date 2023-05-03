@@ -16,16 +16,23 @@ const Likes_button = (props) => {
     GetLikes();
   },[])
 
+
+
+
   function Like(){
+    console.log(liked)
     setLiked(!liked)
     UpdateLike(liked)
+  
   }
-
+  
   function UpdateLike(liked){
+    console.log(liked)
     var formData = new FormData();
     formData.append("postid",postid)
     formData.append("userid",userid)
     if(!liked){
+      console.log("added")
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeLike.php",
@@ -38,6 +45,7 @@ const Likes_button = (props) => {
           console.log(error);
       });
     }else{
+      console.log("removed")
       axios({
         method: 'post',
         url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/removeLike.php",

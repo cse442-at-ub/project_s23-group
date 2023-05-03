@@ -14,7 +14,7 @@ import {
 
 
 const Register = (props) =>{
-
+    const [checked, setChecked] = React.useState(false);
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -24,13 +24,17 @@ const Register = (props) =>{
     const [errMessage, setErrMessage] = useState("")
     const navigate = useNavigate()
     
+    const handleChange = () => {
+        setChecked(!checked);
+      };
+      
     useEffect(() => {
 
     }, [error]);
     
     
   
-    const registerUser = async (name, email, password, confirmPassword) => {
+    const registerUser = async (name, email, password, confirmPassword,checked) => {
         console.log(name)
         console.log(email)
         console.log(password)
@@ -43,6 +47,8 @@ const Register = (props) =>{
                         bodyFormData.append("name", name)
                         bodyFormData.append("email",email)
                         bodyFormData.append("password",password)
+                        bodyFormData.append("check",checked)
+
 
                         axios({
                             method: 'post',
@@ -132,12 +138,22 @@ const Register = (props) =>{
                                     }} required />
 
                     </div>
+
+                    <div class='coachBut'>
+                    <label>
+                        <input 
+                        type="checkbox"
+                        checked={checked}
+                        onChange={handleChange}></input>
+                        Register to be a coach?(This means your email can be viewed by all users)
+                    </label>
+                    </div>
                     
                     <div className="submitbox">
                         
                             <button 
                             class="signup"
-                            onClick={() => registerUser(name,email,password,confirmPassword)}
+                            onClick={() => registerUser(name,email,password,confirmPassword,checked)}
                             >Sign Up
                             </button>
                         
