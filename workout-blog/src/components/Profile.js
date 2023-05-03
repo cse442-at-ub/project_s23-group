@@ -44,25 +44,6 @@ const Profile = (props) =>{
         getNumPosts();
     }
 
-    // const handleGetFollowing = () => {
-    //     getFollowingUsers(); 
-    //     setShowFollowing(true); 
-    // }
-    
-    // const handleGetFollowers = () => {
-    //     setShowFollowers(true); 
-    //     getFollowers(); 
-    // }
-
-    // const handleRemoveUser = (id) => {
-    //     const updatedUsers = followingUsers.filter(user => user.id !== id);
-    //     setFollowingUsers(updatedUsers);
-    // };
-
-    // const handleRemoveFollower = (id) => {
-    //     const updatedFollowers = followers.filter(follower => follower.id !== id);
-    //     setFollowers(updatedFollowers);
-    //   };
 
 
 

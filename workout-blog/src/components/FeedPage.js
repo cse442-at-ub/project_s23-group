@@ -153,12 +153,13 @@ function FeedPage() {
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
             <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
           </div>
-          <div className="post-description">
-            {post.title}
-          </div>
+         
           <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
             {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
-            {post.text && <p className="post-text">{post.text}</p>}
+            <div className="post-title-box">
+            {post.title}
+          </div>
+            {post.text && <p className="post-text-box">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
           
@@ -178,12 +179,12 @@ function FeedPage() {
             <img onClick={()=>navigate(`profile/${post.userid}`)} src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
             <a onClick={()=>navigate(`profile/${post.userid}`)}  className="post-author-name">{post.username}</a>
           </div>
-          <div className="post-description">
-            {post.title}
-          </div>
           <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
             {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
-            {post.text && <p className="post-text">{post.text}</p>}
+            <div className="post-title-box">
+            {post.title}
+          </div>
+            {post.text && <p className="post-text-box">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
           
@@ -206,7 +207,10 @@ function FeedPage() {
           </div>
           <div className="post-body" onClick={()=>navigate(`postpage/${post.postid}`)}>
             {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
-            {post.text && <p className="post-text">{post.text}</p>}
+            <div className="post-title-box">
+            {post.title}
+          </div>
+            {post.text && <p className="post-text-box">{post.text}</p>}
           </div>
           <div className="post-timestamp">{post.created_at}</div>
           
