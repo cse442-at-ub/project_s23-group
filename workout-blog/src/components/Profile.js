@@ -10,12 +10,6 @@ import {
     useParams,
   } from "react-router-dom";
 
-
-
-
-
-  
-
 const Profile = (props) =>{
     const navigate = useNavigate()
     const params = useParams()
@@ -35,18 +29,11 @@ const Profile = (props) =>{
     const[JustSent, sentMessages] = useState('');
 
     const searchId = params.id
-    
-    
-    
-
 
     const toggleFollowingPopup = () => {
       setShowFollowing(!showFollowing);
       getUsernames();
     };
-    // useEffect(() => {
-    //   setIsFollowing(isAlreadyFollowing);
-    // }, [isAlreadyFollowing]);
   
     const toggleFollowersPopup = () => {
       setShowFollowers(!showFollowers);
@@ -63,9 +50,6 @@ const Profile = (props) =>{
         getMessages();
         
     };
-    
-
-    
 
     useEffect(() => {
       
@@ -81,8 +65,6 @@ const Profile = (props) =>{
         
     }, []);
 
-
-
     useEffect(() => {
       const userIds = mainfollowing.map(user => user.following);
       setIsAlreadyFollowing(userIds.includes(parseInt(searchId)));
@@ -91,7 +73,6 @@ const Profile = (props) =>{
     const signOut = () => {
         sessionStorage.clear();
     }
-
 
     const getMessages = () => {
         const formData = new FormData();
@@ -118,6 +99,7 @@ const Profile = (props) =>{
           })
           .catch(error => console.error(error));
       };
+
       const getChatUsername = async () => {
         const requests = messages.map(user => {
           const formData = new FormData();
@@ -144,6 +126,7 @@ const Profile = (props) =>{
           console.log("Error fetching usernames:", error);
         }
       };
+
       const sendDM = () => {
         const formData = new FormData();
         formData.append("sender", sessionStorage.getItem("id"));
@@ -163,9 +146,6 @@ const Profile = (props) =>{
           })
           .catch((error) => console.error(error));
       };
-
-
- 
 
     const getNumPosts = () => {
         const formData = new FormData();
@@ -361,9 +341,6 @@ const Profile = (props) =>{
         });
     }
 
-
-
-
     const getImages = () =>{
         var formData = new FormData();
         formData.append("id", searchId);
@@ -423,7 +400,6 @@ const Profile = (props) =>{
                     </div>
                 </div>
             </nav>
-
                         {(searchId !== sessionStorage.getItem("id")) && (sessionStorage.getItem("id")) && (
                             <>
                               {isAlreadyFollowing ? (
@@ -440,8 +416,6 @@ const Profile = (props) =>{
                             </>
                           )}
                             
-                        
-
                         {(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
                             
                             <button
@@ -488,8 +462,6 @@ const Profile = (props) =>{
                             </div>
                         </div>
 
-                        
-                        
                         {showChat && (
                             <div className='chat-popup-container'>
                                 <div className='message'>
@@ -500,7 +472,7 @@ const Profile = (props) =>{
                                     <li key={message.dmid} className={message.sender === parseInt(sessionStorage.getItem("id")) ? 'sent' : 'received'}>
                                        
                                       {message.message}
-                                      
+
                                     </li>
                                   ))}
                                 </ul>
@@ -537,16 +509,6 @@ const Profile = (props) =>{
                                         window.location.reload();
                                     }}className="popup-username">{user.username}</span>
                                     
-                                    
-                                
-                                
-                                {/* <Link to={`profile/${user.following}`}>{user.following}</Link> */}
-                             {/* <button
-                            className="popup-remove"
-                            onClick={() => handleRemoveUser(user.id)}
-                            >
-                            Remove
-                            </button> */}
                             </li>
                             ))}
                             </ul>
@@ -574,12 +536,6 @@ const Profile = (props) =>{
                                         navigate(`/profile/${user.follower}`); 
                                         window.location.reload();
                                     }}className="popup-username">{user.username}</span>
-                                    {/* <button
-                                    className="popup-remove"
-                                    onClick={() => handleRemoveFollower(follower.id)}
-                                    >
-                                    Remove
-                                    </button> */}
                                     </li>
                                     ))}
                                     </ul>
