@@ -68,7 +68,7 @@ html{
 }
 
 .mPost input[type=file] {
-    width: 60%;
+    width: 43%;
     max-width: 100%;
     color: #202020;
     padding: 5px;
@@ -85,7 +85,7 @@ html{
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
-    transition: background .2s ease-in-out;
+    transition: background .4s ease-in-out;
   }
   
   .mPost input[type=file]::file-selector-button:hover {
@@ -108,8 +108,9 @@ label,  .form-group1,.form-group2,.form-group3,.col-form-label3,.submit-post-box
 
 .form-control1{
     text-align: center;
-    border: none;
+    border: 2px solid white;
     font-size: 24px;
+    transition: border-bottom-color .5s ease;
 }
 
 .form-control1:hover{
@@ -121,11 +122,12 @@ label,  .form-group1,.form-group2,.form-group3,.col-form-label3,.submit-post-box
     
     width: 400px;
     height: 120px;
-    border: transparent;
+    border: 2px solid white;
     background-color: #fff;
     padding: 5px 10px;
     outline: none;
     font-size: 14px;
+    transition: border .5s ease;
 }
 
 .form-control2:hover{

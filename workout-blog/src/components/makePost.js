@@ -178,7 +178,6 @@ useEffect(() => {
       </div>
       <div className="make-post-card">
         <form onSubmit={handleSubmit}>
-        <label htmlFor="dropdown" className="col-form-label3">Select an option:</label>
         
         <div className="form-group3">
             
@@ -191,10 +190,10 @@ useEffect(() => {
           <div className="form-group1">
             <input className="form-control1" id="message-text1" placeholder='Title' value={title} onChange={handleTitle}></input>
           </div>
-          <label>Choose your Photo </label>
+          
           <div className="form-group-files">
             
-            <input type="file" className="form-control" multiple="" onChange={setFile} />
+            <input type="file" className="form-control" onChange={setFile} />
           </div>
         
           <div className="form-group2">
