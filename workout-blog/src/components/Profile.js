@@ -26,17 +26,17 @@ const Profile = (props) =>{
     const [showFollowing, setShowFollowing] = useState(false);
     const [showFollowers, setShowFollowers] = useState(false);
     const [showChat, setChats] = useState(false);
-    const [isFollowing, setIsFollowing] = useState(false);
     const [followingUsers, setFollowingUsers] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [mainfollowing, setMainfollowing] = useState([]);
     const [posts, setPosts] = useState([]);
     const [isAlreadyFollowing, setIsAlreadyFollowing] = useState(false);
-    const [showAlreadyFollowingPopup, setShowAlreadyFollowingPopup] = useState(false);
     const[messages, setAllMessages] = useState([]);
     const[JustSent, sentMessages] = useState('');
 
     const searchId = params.id
+    
+    
     
 
 
@@ -60,9 +60,11 @@ const Profile = (props) =>{
     const toggleMessagePopup = () => {
         setChats(!showChat);
         
-        getChatUsername();
+        getMessages();
+        
     };
     
+
     
 
     useEffect(() => {
@@ -73,9 +75,13 @@ const Profile = (props) =>{
             getFollowingUsers();
             getFollowers();
             
+            
+            
             getNumPosts();
         
     }, []);
+
+
 
     useEffect(() => {
       const userIds = mainfollowing.map(user => user.following);
@@ -106,16 +112,17 @@ const Profile = (props) =>{
                 }
                 }
             
-            setAllMessages(response.data);
-            console.log(response.data);
             
+                setAllMessages(response.data);
+              
           })
           .catch(error => console.error(error));
       };
       const getChatUsername = async () => {
         const requests = messages.map(user => {
           const formData = new FormData();
-          formData.append("userid", user.sender);
+          formData.append("userid", parseInt(user.sender));
+          
           return axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getUserInfo.php", formData);
         });
       
@@ -123,7 +130,7 @@ const Profile = (props) =>{
           const responses = await Promise.all(requests);
           const updatedmessages = messages.map((message, index) => {
             const data = responses[index].data;
-            // console.log(data);
+            
             if (data && data.username) {
               return { ...message, username: data.username, pfp: data.pfp};
             } else {
@@ -137,7 +144,7 @@ const Profile = (props) =>{
           console.log("Error fetching usernames:", error);
         }
       };
-    const sendDM = () => {
+      const sendDM = () => {
         const formData = new FormData();
         formData.append("sender", sessionStorage.getItem("id"));
         formData.append("receiver", searchId);
@@ -149,18 +156,14 @@ const Profile = (props) =>{
           headers: {},
           data: formData
         })
-        .then((response) => {
-          sentMessages('');
-          
-          getMessages(); // call getMessages after sending a message
-          getChatUsername();
-        })
-        .catch((error) => console.error(error));
+          .then((response) => {
+            sentMessages('');
+      
+            getMessages();
+          })
+          .catch((error) => console.error(error));
       };
-      useEffect(() => {
-        getMessages();
-        
-      }, [sessionStorage.getItem("id"), searchId]);
+
 
  
 
@@ -532,7 +535,9 @@ const Profile = (props) =>{
                                 <ul className="message-list">
                                   {Array.isArray(messages) && messages.map(message => (
                                     <li key={message.dmid} className={message.sender === parseInt(sessionStorage.getItem("id")) ? 'sent' : 'received'}>
+                                      
                                         <img src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + message.pfp} alt={`${message.username}'s profile`}  />
+                                        
                                       {message.username}: {message.message}
                                     </li>
                                   ))}
