@@ -17,7 +17,7 @@
     height: 500px;
     background-color: rgb(0, 0, 0);
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 999;
     
@@ -63,7 +63,7 @@
   
   .chat-popup-container .input-container button {
     
-    background-color: rgb(105, 97, 97);
+    background-color: rgb(16, 52, 100);
     color: rgb(221, 221, 221);
     border: none;
     border-radius: 10px;
@@ -479,24 +479,30 @@
     font-family: 'Titillium Web', sans-serif;
     color:rgb(221, 221, 221);
     position: relative;
+    font-weight: bold;
     }
     
     .chat-popup-container .message-list .sent {
+      font-family: 'Titillium Web', sans-serif;
       margin-bottom: 5px;
       margin-right: 5px;
-      background-color: #73889b;
+      background-color: #293f52;
       color: white;
       justify-content: flex-end;
-      border-radius: 10px;
+      border-radius: 5px;
+      font-size: large;
       text-align: right;
+      
     }
 
     .chat-popup-container .message-list .received {
+      font-family: 'Titillium Web', sans-serif;
       margin-bottom: 5px;
-      background-color: #404f56;
+      background-color: #64615c;
       color: white;
       justify-content: flex-end;
-      border-radius: 10px;
+      border-radius: 5px;
+      font-size: large;
     }
 
 
@@ -520,7 +526,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
+    width: 70%;
     height: 50%;
     background-color: rgb(0, 0, 0);
     border: 1px solid black;
@@ -549,10 +555,10 @@
     .chat-popup-container .message-list .sent {
       margin-bottom: 5px;
       
-      background-color: #73889b;
+      background-color: #293f52;
       color: white;
       justify-content: flex-end;
-      border-radius: 10px;
+      border-radius: 2px;
       text-align: right;
       
       flex-direction: row-reverse;
@@ -563,10 +569,10 @@
 
     .chat-popup-container .message-list .received {
       margin-bottom: 5px;
-      background-color: #404f56;
+      background-color: #64615c;
       color: white;
       justify-content: flex-end;
-      border-radius: 10px;
+      border-radius: 2px;
     }
     
     .chat-popup-container li img {
@@ -597,7 +603,7 @@
     }
     
     .chat-popup-container .input-container button {
-    background-color: rgb(105, 97, 97);
+      background-color: rgb(16, 52, 100);
     color: rgb(221, 221, 221);
     border: none;
     border-radius: 10px;

@@ -423,43 +423,22 @@ const Profile = (props) =>{
                     </div>
                 </div>
             </nav>
-                           
-                            {/* <button class='follow'>Follow</button>
-                            <button class='message'>Message</button> */}
-                           {/* {(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
-                            
-                            <button
-                            className='follow'
-                            onClick={handleFollowUser}>
-                              <div className='followButton'>follow</div>
-                            </button>
-                            
-                        )}
 
-{(searchId !== sessionStorage.getItem("id")) &&(sessionStorage.getItem("id")) && (
-                            
-                            <button
-                            className='unfollow'
-                            onClick={removeFollower}>
-                              <div className='unfollowButton'>unfollow</div>
-                            </button>
-                            
-                        )} */}
                         {(searchId !== sessionStorage.getItem("id")) && (sessionStorage.getItem("id")) && (
-  <>
-    {isAlreadyFollowing ? (
-      <button className='unfollow' onClick={removeFollower}>
-        <div className='unfollowButton'>Unfollow</div>
-      </button>
-    ) : (
-      <button className='follow' onClick={handleFollowUser}>
-        <div className='followButton'>Follow</div>
-      </button>
-    )}
-    
-    
-  </>
-)}
+                            <>
+                              {isAlreadyFollowing ? (
+                                <button className='unfollow' onClick={removeFollower}>
+                                  <div className='unfollowButton'>Unfollow</div>
+                                </button>
+                              ) : (
+                                <button className='follow' onClick={handleFollowUser}>
+                                  <div className='followButton'>Follow</div>
+                                </button>
+                              )}
+                              
+                              
+                            </>
+                          )}
                             
                         
 
@@ -473,23 +452,7 @@ const Profile = (props) =>{
                             
                         )}
 
-                        
-                        
-
-
-
-
-                        {/* {(searchId !== sessionStorage.getItem("id")) && (!isFollowing ? (
-                            <button className="follow-btn" onClick={handleFollowUser}>Follow</button>
-                        ) : (
-                            <button className="follow-btn following" onClick={toggleFollowingPopup} disabled>Following</button>
-                        ))} */}
                         </div>
-
-                        
-
-
-
 
                         <div class="imgbox">
                             
@@ -535,10 +498,9 @@ const Profile = (props) =>{
                                 <ul className="message-list">
                                   {Array.isArray(messages) && messages.map(message => (
                                     <li key={message.dmid} className={message.sender === parseInt(sessionStorage.getItem("id")) ? 'sent' : 'received'}>
+                                       
+                                      {message.message}
                                       
-                                        <img src={"https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/" + message.pfp} alt={`${message.username}'s profile`}  />
-                                        
-                                      {message.username}: {message.message}
                                     </li>
                                   ))}
                                 </ul>
