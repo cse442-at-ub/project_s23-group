@@ -11,9 +11,10 @@
 }
 
 .posts .postSettings{
-    float: right;
+   
     color: gray;
     border: none;
+    position: absolute;
     background-color: transparent;
     font-size: 20px;
    
@@ -26,7 +27,7 @@
     
   }
 .post-title{
-    padding-left: 50px;
+    
     padding-top: 3%;
     background-color: white;
     font-size: 30px;
