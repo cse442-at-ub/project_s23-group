@@ -158,6 +158,19 @@ html, body {
         font-weight: 300;
     }
 
+    .bg .acc{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        float: left;
+    }
+
+    .bg .coachButton{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        float: left;
+    }
   
 }
 

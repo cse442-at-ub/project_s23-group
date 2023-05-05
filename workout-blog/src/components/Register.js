@@ -21,19 +21,27 @@ const Register = (props) =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
+    const [checked, setChecked] = useState(false);
     const navigate = useNavigate()
     
+    const handleChange = () => {
+        setChecked(!checked);
+      };
+
     useEffect(() => {
         
     }, []);
     
 
+   
+
     
   
-    const registerUser = async (name, email, password, confirmPassword) => {
+    const registerUser = async (name, email, password, confirmPassword, checked) => {
         console.log(name)
         console.log(email)
         console.log(password)
+        console.log(checked)
         var bodyFormData = new FormData();
         if(name&&email&&password&&confirmPassword &&(password===confirmPassword)){
             
@@ -43,6 +51,7 @@ const Register = (props) =>{
                         bodyFormData.append("name", name)
                         bodyFormData.append("email",email)
                         bodyFormData.append("password",password)
+                        bodyFormData.append("check",+ checked)
 
                         axios({
                             method: 'post',
@@ -178,13 +187,22 @@ const Register = (props) =>{
                         
                             <button 
                             class="signup"
-                            onClick={() => registerUser(name,email,password,confirmPassword)}
+                            onClick={() => registerUser(name,email,password,confirmPassword, checked)}
                             >Sign Up
                             </button>
                         
                     </div>
-                        <div class="col">
-                            <div class="row">Already have an account? <button className="signin" onClick={() => navigate("/login")}>Sign In</button></div>
+                    <div class='coachButton'>
+                           
+                                <input 
+                                type="checkbox"
+                                checked={checked}
+                                onChange={()=>handleChange()}/>
+                                Register as a coach?
+                           
+                    </div>
+                        <div class="acc">
+                            <div >Already have an account? <button className="signin" onClick={() => navigate("/login")}>Sign In</button></div>
                         </div>
                         
                             
