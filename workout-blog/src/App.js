@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import postpage from './components/postpage.js';
+import Coachpage from './components/coach.js';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="postpage"> 
               <Route path=":id" element= {<Postpage />} />
             </Route>
+            <Route path="coaches" element={<Coachpage/>}/>
           </Route>
       </Routes>
    

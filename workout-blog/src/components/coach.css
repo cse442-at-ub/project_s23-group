@@ -1,0 +1,38 @@
+.coach-item{
+    width: 30%;
+    margin: 1% auto;
+    display: block;
+    background-color: #eff1ed;
+    padding: 1em;
+}
+.coach-connect{
+    border-radius: 5px;
+}
+.coach-title{
+    text-align: center;
+    font-size: 	3em;
+    color:white;
+    margin-bottom: 3%;
+}
+.coach-name-item{
+    width: 75%;
+}
+.coach-list{
+    width:30%;
+    font-size: 2em;
+    color:white;
+    margin: 0 auto;
+}
+.coach-name{
+    font-size: 1.3em;
+}
+.inline{
+    display: inline-block;
+}
+.reach-out-btn{
+    margin-left: auto;
+    margin-top: 1%;
+}
+.coach-container{
+    margin-top: 5%;
+}

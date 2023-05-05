@@ -1,48 +1,43 @@
 import React from "react";
-import image from "./images/cbum.jpg"
-import './Home_Page.css'
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 import { useState, useEffect, useRef } from 'react';
-import FeedPage from "../components/FeedPage";
-import postBody from "./images/tennis.jpg"
+import axios from 'axios';
+import "./coach.css"
+
+
 import {
-    Link,
-    Route,
-    Routes,
     useNavigate,
-    useLocation,
-    Navigate
+    useParams,
+    Link,
+    Navigate,
   } from "react-router-dom";
-import Coachpage from "./coach";
 
-const Home_Page = (props) => {
+const Coachpage = () => {
     const navigate = useNavigate()
-    const [id, setId] = useState('')
-    const [name, setName] = useState('')
-    const [likes, setLikes] = useState(0);
-
-    const handleLike = () => {
-        setLikes(likes + 1);
-      }
-
+    const id = sessionStorage.getItem("id")
+    const [pfp,setPfp] = useState([])
+    const [numberOfPosts,setNumberOfPosts] = useState([])
+    const [coach,setCoach] = useState([])
     const signOut = () => {
         sessionStorage.clear();
-        setId('')
-        setName('')
     }
-
-    useEffect(() => {
-        if(sessionStorage.getItem("id")!= null){
-            setId(sessionStorage.getItem("id"))
-            setName(sessionStorage.getItem("name"))
-            console.log("non null")
-        }
-        console.log("entered")
-    }, [id,name]);
-    
+    useEffect(()=>{
+        GetCoaches()
+    },[])
+    function GetCoaches(){
+    axios({
+        method: 'get',
+        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/getCoaches",
+        })
+        .then(response => {
+        setCoach(response.data)
+        })
+        .catch(error => {
+        console.log(error);
+        });
+    }
     return (
-        <div class="container">
+        <div>
             <nav class="navbar navbar-expand-lg navbar-light col-12">
                 <div class="navbar-brand" onClick={() =>navigate("/")}>Gym Blog</div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,18 +54,22 @@ const Home_Page = (props) => {
                     </div>
                 </div>
             </nav>
-
-           
-            <FeedPage/>
-            
-
-            
-
-   
-
+            <div class="coach-container">
+                <div className="coach-title"><strong>Coaching Center</strong></div>
+                <div className="coach-list">Coach List:</div>
+                {coach.slice().map(c => (
+                    <div class="coach-item">
+                        <div class="inline coach-name-item">
+                            <p className="coach-name">{c.username}</p>
+                        </div>
+                        <div class="inline reach-out-btn">
+                            <button class ="coach-connect" onClick={()=>navigate(`../../profile/${c.id}`)}>Reach Out</button>
+                        </div>
+                    </div>
+                    
+                ))}
+            </div> 
         </div>
-
-        
         
     );  
         
@@ -78,5 +77,4 @@ const Home_Page = (props) => {
 }
 
 
-export default Home_Page;
-
+export default Coachpage;
