@@ -32,8 +32,9 @@ const Postpage = (props) => {
     }
 
     function updateCommentDB(event) {
-
-      if(comment){
+      
+      if(comment.length > 0){
+        console.log("in")
           event.preventDefault();
           var formData = new FormData();   
           formData.append("u_id", parseInt(sessionStorage.getItem("id")));//should be user  id 
@@ -58,6 +59,7 @@ const Postpage = (props) => {
           });
     }
     else{
+      setTimeout(()=>{ 
       toast.error("Comments can't be empty", {
         position: "bottom-center",
         autoClose: 5000,
@@ -65,9 +67,9 @@ const Postpage = (props) => {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
         theme: "dark",
         });
+      }, 10);
     }
     }
 
@@ -130,8 +132,8 @@ const Postpage = (props) => {
                     <div class="navbar-nav ml-auto">
                     {(id && (<Link class="nav-item nav-link" to ={`..//profile/${id}`}>Profile</Link>))}
                     {(id && (<Link onClick={()=>signOut()} class="nav-item nav-link" >Sign Out</Link>))}
-                    {(!id && (<Link class="nav-item nav-link" to ="register">Sign Up</Link>)) } 
-                    {(!id && (<Link class="nav-item nav-link" to ="login">Sign In</Link>)) }
+                    {(!id && (<Link class="nav-item nav-link" to ="..//register">Sign Up</Link>)) } 
+                    {(!id && (<Link class="nav-item nav-link" to ="..//login">Sign In</Link>)) }
                     </div>
                 </div>
             </nav>
@@ -149,7 +151,7 @@ const Postpage = (props) => {
                     <h1>{post.title}</h1>
                 </div>
                 <div class="post_image">
-                    {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image" />}
+                    {post.img && <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.img}`} alt="post image" className="post-image-page" />}
                 </div>
                 <div class="post_body">
                     <p>{post.text}</p>
@@ -159,13 +161,13 @@ const Postpage = (props) => {
                 {userid && <Likes_button postid = {searchId}/>} 
                 <button className="share" onClick={()=>{navigator.clipboard.writeText(`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/dev/#/postpage/${post.postid}`);setshared("Copied!")}}>{shared}</button>
                 </div>
-                <div class="post_comments">
+                {id && (  <div class="post_comments">
                 <form onSubmit={updateCommentDB}>
                       <textarea value={comment} onChange={handleChange} />
                       <button className="submit-comment" type="submit">Post Comment</button>
                 </form>
                 <div><u>{comAmount} comments</u></div>
-                </div>
+                </div>)}
                 {postComments.map((comment) => (
                   <div key={comment.id} className="comment">
                   <div className="comment-header">
