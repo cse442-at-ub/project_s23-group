@@ -1,3 +1,8 @@
+.coach-container{
+    padding-top: 5%;
+    background-color: #202020;
+}
+
 .coach-item{
     width: 30%;
     margin: 1% auto;
@@ -33,6 +38,4 @@
     margin-left: auto;
     margin-top: 1%;
 }
-.coach-container{
-    margin-top: 5%;
-}
+
