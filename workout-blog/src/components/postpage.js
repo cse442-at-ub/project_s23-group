@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import "./postpage.css"
 import img from './images/logo-white.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
     useNavigate,
     useParams,
@@ -30,28 +32,43 @@ const Postpage = (props) => {
     }
 
     function updateCommentDB(event) {
-      event.preventDefault();
-      var formData = new FormData();   
-      formData.append("u_id", parseInt(sessionStorage.getItem("id")));//should be user  id 
-      formData.append("p_id", searchId);//should be user  id 
-      formData.append("comment",comment)   //new
-      formData.append("username", sessionStorage.getItem("name"));//new 
-      formData.append("pfp",profilePic)   //new
-      axios({
-        method: 'post',
-        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeCommentDB.php", //fix 
-        headers: {'Content-Type': 'multipart/form-data'}, 
-        data: formData
-      })
-      .then(response => {
-        console.log(response);
-        setComment("");
-        giveComment();
-        // Add logic to update the UI with the new comment
-      })
-      .catch(error => {
-        console.log(error);
-      });
+
+      if(comment){
+          event.preventDefault();
+          var formData = new FormData();   
+          formData.append("u_id", parseInt(sessionStorage.getItem("id")));//should be user  id 
+          formData.append("p_id", searchId);//should be user  id 
+          formData.append("comment",comment)   //new
+          formData.append("username", sessionStorage.getItem("name"));//new 
+          formData.append("pfp",profilePic)   //new
+          axios({
+            method: 'post',
+            url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makeCommentDB.php", //fix 
+            headers: {'Content-Type': 'multipart/form-data'}, 
+            data: formData
+          })
+          .then(response => {
+            console.log(response);
+            setComment("");
+            giveComment();
+            // Add logic to update the UI with the new comment
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    }
+    else{
+      toast.error("Comments can't be empty", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
     }
 
     function giveComment() {
@@ -165,7 +182,7 @@ const Postpage = (props) => {
               ))}
             </div>
         </div>
-
+        <ToastContainer />
         </div>
         
     );  

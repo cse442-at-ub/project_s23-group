@@ -1,6 +1,7 @@
 import React from "react";
 import './timelinepost.css'
 import { useState, useEffect, useRef } from 'react';
+import Likes_button from "./Likes_button";
 import './FeedPage.css';
 import {
   useNavigate,
@@ -9,6 +10,7 @@ import {
 
 
 const TimelinePosts = (props) => {
+  let userid = sessionStorage.getItem("id")
   const navigate = useNavigate();
   const params = useParams()
   const searchId = params.id
@@ -24,6 +26,7 @@ const TimelinePosts = (props) => {
             <div onClick = {()=>navigate(`../../postpage/${props.postid}`)} className="image-body">
               <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${props.img}`} alt="post image" className="post-image" />
             </div>
+            {userid &&<Likes_button postid = {props.postid} likes = {props.likes}/>}
         </div>
   );
 }

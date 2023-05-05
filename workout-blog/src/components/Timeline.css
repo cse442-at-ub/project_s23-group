@@ -1,3 +1,30 @@
+.timeline{
+    width:50vw;
+    text-align: center;
+}
+
+.timeline-tab{
+    margin: 0 auto;
+    color: white;
+    border-bottom: 2px solid white;
+    transition: all .2s ease;
+}
+
+.timeline-tab:hover{
+    color: white;
+}
+
+
+.favorites-tab{
+    margin: 0 auto;
+    color: gray;
+    transition: all .2s ease;
+}
+
+.favorites-tab:hover{
+    color: white;
+}
+
 .timeline-gallery{
     width: 100%;
     margin: 0 auto;
