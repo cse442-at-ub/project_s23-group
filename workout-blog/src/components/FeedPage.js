@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import staticProfile from './images/profilepic.jpg'
 import Likes_button from './Likes_button';
-import pen from './images/pen.png'
 function FeedPage() {
   var userid = sessionStorage.getItem("id")
   const navigate = useNavigate();
@@ -17,6 +16,10 @@ function FeedPage() {
   const [followingPosts,setFollowingPost] = useState([]);
   const [selectedTag, setSelectedTag] = useState('');
   const [displayTag, setDisplayTag] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [displayTags, setDisplayTags] = useState([]);
+
+
   useEffect(() => {
     givePost();
     
@@ -78,7 +81,6 @@ function FeedPage() {
             if(!p.pfp){
               p.pfp = `profilepic.jpg`
             }
-            
         }
           setTopPosts(response.data);
           console.log(response.data)
@@ -108,51 +110,95 @@ function FeedPage() {
     }));
   };
 
-  const handleStateChange = (e) => {
-    if(e.target.value == "" ||e.target.value == "Diet" ||e.target.value == "Progress" || e.target.value == "Max Weight" ){
-      setDisplayTag(e.target.value)
-      setSelectedTag(e.target.value);
-      setRecent(true)
-      setFollowing(false)
-      setMostLiked(false)
+ 
+  const handleTagCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedTags((prevTags) => [...prevTags, value]);
+    } else {
+      setSelectedTags((prevTags) => prevTags.filter((tag) => tag !== value));
     }
-    else{
-    
-      if(e.target.value == "Top Posts"){
-        setDisplayTag(e.target.value)
-        setRecent(false)
-            setFollowing(false)
-            setMostLiked(true)
-      }
-      else if(e.target.value == "Following"){
-        setDisplayTag(e.target.value)
-        setRecent(false)
-        setFollowing(true)
-        setMostLiked(false)
-      }
-      
-    }
-    
   };
 
-  const filteredPosts = selectedTag
-    ? posts.filter(post => post.tag === selectedTag)
+  const handleStateChange = (e) => {
+    const selectedOptions = Array.from(e.target.querySelectorAll('input[type="checkbox"]:checked'));
+    const selectedValues = selectedOptions.map((option) => option.value);
+
+    setSelectedTags(selectedValues);
+
+    const isRecentSelected = selectedValues.includes("");
+    const isMostLikedSelected = selectedValues.includes("Top Posts");
+    const isFollowingSelected = selectedValues.includes("Following");
+
+    setRecent(isRecentSelected);
+    setMostLiked(isMostLikedSelected);
+    setFollowing(isFollowingSelected);
+  };
+
+  const filteredPosts = selectedTags.length > 0
+    ? posts.filter((post) => selectedTags.includes(post.tag))
     : posts;
 
 
 
 
   return (
-    <div className="feed">
-       <div className="filter">
-        <select value={displayTag} onChange={handleStateChange}>
-          <option value="">All</option>
-          <option value="Diet">Diet</option>
-          <option value="Progress">Progress</option>
-          <option value="Max Weight">Max Weight</option>
-          <option value="Top Posts">Top Posts</option>
-          <option value="Following">Following</option>
-        </select>
+<div className="feed">
+      <div className="filter">
+        <label>
+          <input
+            type="checkbox"
+            value=""
+            checked={selectedTags.length === 0}
+            onChange={handleTagCheckboxChange}
+          />
+          All
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Diet"
+            checked={selectedTags.includes("Diet")}
+            onChange={handleTagCheckboxChange}
+          />
+          Diet
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Progress"
+            checked={selectedTags.includes("Progress")}
+            onChange={handleTagCheckboxChange}
+          />
+          Progress
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Max Weight"
+            checked={selectedTags.includes("Max Weight")}
+            onChange={handleTagCheckboxChange}
+          />
+          Max Weight
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Top Posts"
+            checked={selectedTags.includes("Top Posts")}
+            onChange={handleTagCheckboxChange}
+          />
+          Top Posts
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            value="Following"
+            checked={selectedTags.includes("Following")}
+            onChange={handleTagCheckboxChange}
+          />
+          Following
+        </label>
       </div>
 
       {recent && filteredPosts.slice().reverse().map(post => (
@@ -180,7 +226,7 @@ function FeedPage() {
             </div>
           </div>
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
-          {(post.edited == 1) && (<img className='edited' src={pen} />)}
+          
         </div>
       ))}
 
@@ -205,7 +251,6 @@ function FeedPage() {
             {post.tag}
           </div>    
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
-          {(post.edited == 1) && (<img className='edited' src={pen} />)}
           </div>
         ))}
       {mostLiked && topPosts.slice().map(post => (
@@ -224,14 +269,13 @@ function FeedPage() {
           </div>
           <div className="post-timestamp">{post.created_at}</div>
           
-          <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
+          
 
           <div className={`post-tag ${getTagClassName(post.tag)}`}>
-         
+          <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
             {post.tag}
           </div>
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
-          {(post.edited == 1) && (<img className='edited' src={pen} />)}
           </div>
       ))}
 
