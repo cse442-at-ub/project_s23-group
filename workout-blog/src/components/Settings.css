@@ -135,13 +135,19 @@ body{
     .SPreview{
         border: 2px solid #202020;
         box-sizing: border-box;
-        /* height: 300px;
-        width: 400px; */
-        
         width: 50%;
         object-fit: contain;
     
     }
+    .SPreview:hover{
+        -webkit-filter: brightness(60%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    
+    }
     
       .bg3 .doneBox{display: flex;
         padding-top: 50px;
@@ -177,199 +183,9 @@ body{
         width: 500px;
     }
   }
-  @media only screen and (min-width: 601px)and (max-width: 1100px)  {
-    .bg3{
-        background-color: rgba(32,32,32,1);
-        height: 100vh;
-        width: 100vw;
-        color: azure;
-        
-    }
-    
-    .bg3 .animation {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        height: 50vh;
-        width: 100vw;
-    
-    }
-    
-    .bg3 .home{
-        background: url("./images/next.png");
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: absolute;
-        margin-top: 5px;
-        height: 60px;
-        width: 60px;
-       
-    
-    }
+ 
 
-    .bg3 .box{
-        margin-top: 15%;
-        padding-top: 20px;
-        padding-bottom: 40px;
-        margin-left: 15%;
-        margin-right: 15%;
-        border-radius: 25px;
-        background-color: #fff;
-        box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);
-    }
-    
-
-    .bg3 .settings{
-        padding-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 36px;
-        width: 100%;
-    }
-    
-    
-    .bg3 .bioBox{
-        margin-top: 3%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-    
-    .bg3 .bio{
-        width: 30%;
-        height: 40px;
-        text-align: center;
-        background-color: white;
-        border:transparent;
-        padding: 5px 10px;
-        color: rgba(32,32,32,1);
-        outline: none;
-        transition: border-bottom-color .5s ease;
-    }
-
-    .bg3 .bio:hover, .bio:focus{
-        border-bottom: 2px solid #202020;
-    }
-    
-    .bg3 .profileTitle{
-        padding-top: 30px;
-        display: flex;
-        justify-content: center;
-        font-size: 17px;
-        color: #202020;
-    }
-    
-    .bg3 .profileBox{display: flex;
-        padding-top: 10px;
-        justify-content: center;
-        align-items: center;
-        
-        width: 100%;}
-    
-    .bg3 .profile{
-        width: 20%;
-        
-    }
-    
-    .bg3 .backgroundTitle{
-        padding-top: 30px;
-        display: flex;
-        justify-content: center;
-        font-size: 17px;
-        color: #202020;
-    }
-    
-    .bg3 .backgroundBox{display: flex;
-        padding-top: 10px;
-        justify-content: center;
-        align-items: center;
-        
-        width: 100%;}
-    
-    .bg3 .background{
-        width: 20%;
-    }    
-    
-    
-    
-     .bio::placeholder{
-       
-        color: #202020;
-        
-    }
-        
-    .bg3 input{
-        
-        color: #202020;
-        
-    }    
-    .bg3 input[type=file] {
-        width: 80%;
-        max-width: 100%;
-        color: #202020;
-        padding: 5px;
-        border-radius: 10px;
-        border: 1px solid #555;
-      }
-    
-      .bg3 input[type=file]::file-selector-button {
-        margin-right: 20px;
-        width: 50%;
-        border: 2px solid #202020;
-        background: #202020;
-        padding: 10px 20px;
-        border-radius: 10px;
-        color: #fff;
-        cursor: pointer;
-        transition: background .2s ease-in-out;
-        font-size: 8px;
-      }
-      
-      .bg3 input[type=file]::file-selector-button:hover {
-        background: white;
-        color: #202020;
-        border: 2px solid #202020;
-      }
-    
-      .bg3 .doneBox{display: flex;
-        padding-top: 50px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        
-        width: 100%;}
-      .bg3 .done{
-        width: 30%;
-        height: 50px;
-        border-radius: 10px;
-        background-color: transparent;
-        border-color: black;
-        background-color: white;
-        border-width: 1px;
-        color: green;
-        transition-duration: 0.4s;
-    
-      }
-    
-      .bg3 .done:hover{
-        background-color:green;
-        color: white;
-        border: transparent;
-        
-      }
-    
-    .bg3 .circle{
-        position: absolute;
-        margin-bottom:15%;
-        height: 500px;
-        width: 500px;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 1100px) {
     .bg3{
         background-color: rgba(32,32,32,1);
         height: 100vh;
@@ -498,33 +314,34 @@ body{
         color: #202020;
         
     }    
-    .bg3 input[type=file] {
-        width: 90%;
-        max-width: 100%;
-        color: #202020;
-        padding: 5px;
-        border-radius: 10px;
-        border: 1px solid #555;
-      }
-    
-      .bg3 input[type=file]::file-selector-button {
-        margin-right: 20px;
+
+    .profile{
+        display: none;
+    }
+    .background{
+        display: none;
+    }
+    .SIconBox{
+        display: flex;
+        justify-content: center;
+    }
+
+    .SPreview{
+        border: 2px solid #202020;
+        box-sizing: border-box;
         width: 50%;
-        border: 2px solid #202020;
-        background: #202020;
-        padding: 10px 20px;
-        border-radius: 10px;
-        color: #fff;
-        cursor: pointer;
-        transition: background .2s ease-in-out;
-        font-size: 12px;
-      }
-      
-      .bg3 input[type=file]::file-selector-button:hover {
-        background: white;
-        color: #202020;
-        border: 2px solid #202020;
-      }
+        object-fit: contain;
+    
+    }
+    .SPreview:hover{
+        -webkit-filter: brightness(60%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    
+    }
     
       .bg3 .doneBox{display: flex;
         padding-top: 50px;

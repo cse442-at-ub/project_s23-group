@@ -27,7 +27,7 @@ const Settings = () =>{
     const [changedimage2, setChangedImage2] = useState(false);
     const [file1, setFile1] = useState(false);
     const [file2, setFile2] = useState(false);
-    const [load, setLoad] = useState(false)
+    
     
   
     let back = "/profile/" + sessionStorage.getItem("id")
@@ -42,35 +42,7 @@ const Settings = () =>{
     }, [preview1, preview2]);
     
   
-    const getImages = () =>{
-      var formData = new FormData();
-      formData.append("id", parseInt(sessionStorage.getItem("id")));
-  
-      axios({
-        method: 'post',
-        url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileGet.php",
-        headers: {}, 
-        data: formData
-      })
-      .then((response) => {
-        
-        sessionStorage.setItem("bio",response.data[2])
-        sessionStorage.setItem("background",response.data[3])
-        sessionStorage.setItem("pfp",response.data[4])
-        sessionStorage.setItem("name",response.data[1])
-
-      setBio(response.data[2])
-      setProfile(response.data[4])
-      setBackground(response.data[3])
-      console.log("all set")
-      }, (error) => {
-          
-          
-        console.log(error);
-      });
-
     
-  }
 
 
     
@@ -139,8 +111,8 @@ const Settings = () =>{
     })
     .then((response) => {
       console.log(response);
-      setLoad(false)
-      // navigate(back)
+      
+      navigate(back)
 
       }, (error) => {
         console.log(error);
@@ -253,6 +225,7 @@ const Settings = () =>{
         <button 
         className='done'
         onClick={() => {
+          
             if(changedimage1 && changedimage2){
               console.log("both")
               uploadPhoto(file1)
@@ -272,9 +245,7 @@ const Settings = () =>{
             }
         }}>
           Done</button>
-          {load && (<div className='animation'>
-            <Lottie className='circle' animationData={loading} loop={true} />
-            </div>)}
+         
             </div>
         
         
