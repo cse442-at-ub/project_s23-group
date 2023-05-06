@@ -13,6 +13,12 @@
   
   
 }
+
+.home-feed{
+  justify-content: center;
+    display: flex;
+    
+}
 .card{
     padding: 0
 }

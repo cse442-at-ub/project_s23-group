@@ -6,6 +6,7 @@ import "./postpage.css"
 import img from './images/logo-white.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import pen from './images/pen.png'
 import {
     useNavigate,
     useParams,
@@ -142,6 +143,7 @@ const Postpage = (props) => {
                     <div onClick = {()=>navigate(`../../profile/${post.userid}`)}>
                         <img src={`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/${post.pfp}`} alt="post author" className="post-author-avatar" />
                         <a className="post-author-name">{post.username}</a>
+                        {(post.edited == 1) && (<img className='edited' src={pen} />)}
                         {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`/postSettings/${post.postid}`)}>Edit</button>)}
                         <p className="date">Date Created: {post.created_at}</p>
                     </div>

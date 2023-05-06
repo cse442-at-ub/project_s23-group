@@ -65,9 +65,9 @@ const Home_Page = (props) => {
                 </div>
             </nav>
 
-           
+           <div className="home-feed">
             <FeedPage/>
-            
+            </div>
 
             
 
