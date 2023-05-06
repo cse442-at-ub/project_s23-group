@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import staticProfile from './images/profilepic.jpg'
 import Likes_button from './Likes_button';
+import pen from './images/pen.png'
 function FeedPage() {
   var userid = sessionStorage.getItem("id")
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ function FeedPage() {
             if(!p.pfp){
               p.pfp = `profilepic.jpg`
             }
+            
         }
           setTopPosts(response.data);
           console.log(response.data)
@@ -178,7 +180,7 @@ function FeedPage() {
             </div>
           </div>
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
-          
+          {(post.edited == 1) && (<img className='edited' src={pen} />)}
         </div>
       ))}
 
@@ -203,6 +205,7 @@ function FeedPage() {
             {post.tag}
           </div>    
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
+          {(post.edited == 1) && (<img className='edited' src={pen} />)}
           </div>
         ))}
       {mostLiked && topPosts.slice().map(post => (
@@ -221,13 +224,14 @@ function FeedPage() {
           </div>
           <div className="post-timestamp">{post.created_at}</div>
           
-          
+          <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
 
           <div className={`post-tag ${getTagClassName(post.tag)}`}>
-          <div>{userid &&<Likes_button postid = {post.postid} likes = {post.likes}/>}</div>
+         
             {post.tag}
           </div>
           {(post.userid == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`postSettings/${post.postid}`)}>Edit</button>)}
+          {(post.edited == 1) && (<img className='edited' src={pen} />)}
           </div>
       ))}
 

@@ -66,10 +66,10 @@ const Timeline = (props) => {
     </div>
     <div className="timeline-gallery">
     {timeline && posts.slice().reverse().map(post => (
-        <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
+        <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes} edited = {post.edited}/>
     ))}
     {favorites && favoritePosts.slice().reverse().map(post => (
-        <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
+        <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes} edited = {post.edited}/>
     ))}
     </div>
   </div>

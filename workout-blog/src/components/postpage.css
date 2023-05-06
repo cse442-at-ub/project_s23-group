@@ -5,6 +5,12 @@
     color: #202020;
 }
 
+.cover-page .edited{
+  float: right;
+  height: 30px;
+  width: 30px;
+}
+
 .cover-page .postSettings{
     float: right;
     background-color: transparent;

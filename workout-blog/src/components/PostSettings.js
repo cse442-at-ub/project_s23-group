@@ -25,6 +25,7 @@ const PostSettings = ({alert}) =>{
     const [backupFile, setBackUpFile] = useState(null)
     const [changedimage, setChangedImage] = useState(false);
     const [backupcaption, setBackUpCaption] = useState(null);
+    const [edited, setEdited] = useState(0);
     const [preview, setPreview] = useState(null);
     const params = useParams()
     const postid = params.id
@@ -83,7 +84,7 @@ const PostSettings = ({alert}) =>{
         })
           .then((response) => {
             
-            EditPost(title,text,response.data[0],tag)
+            EditPost(title,text,response.data[0],tag,edited)
            
           })
           .catch((error) => {
@@ -91,7 +92,7 @@ const PostSettings = ({alert}) =>{
           });
       }
 
-    const EditPost = ( title, text, image, tag) =>{
+    const EditPost = ( title, text, image, tag, edited) =>{
       
         var formData = new FormData();
         formData.append("postid", postid);
@@ -99,6 +100,7 @@ const PostSettings = ({alert}) =>{
         formData.append("img", image);
         formData.append("text",text);
         formData.append("tag",tag);
+        formData.append("edited",edited);
         axios({
           method: 'post',
           url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/editPost.php",
@@ -179,6 +181,7 @@ const PostSettings = ({alert}) =>{
                       onChange={(e) => {
                       const selected = e.target.value;
                       setTag(selected);
+                      setEdited(1)
                       }}
                   >
                       <option value="Diet">Diet</option>
@@ -196,7 +199,9 @@ const PostSettings = ({alert}) =>{
                     placeholder={title}
                     onChange={event => {
                         if(event.target.value.trim().length)
-                            {setTitle(event.target.value)}
+                            {setTitle(event.target.value)
+                              setEdited(1)
+                            }
                         else{
                           setTitle(backuptitle)
                         }
@@ -223,6 +228,7 @@ const PostSettings = ({alert}) =>{
                         setPreview(URL.createObjectURL(event.target.files[0]))
                         setMyFile(event.target.files[0]);
                         setChangedImage(true)
+                        setEdited(1)
                       }
                       else{
                        
@@ -240,7 +246,9 @@ const PostSettings = ({alert}) =>{
                     value={text}
                     onChange={event => {
                       if(event.target.value.trim().length)
-                            {setText(event.target.value)}
+                            {setText(event.target.value)
+                              setEdited(1)
+                            }
                         else{
                           setText(backupcaption)
                         }
@@ -251,11 +259,13 @@ const PostSettings = ({alert}) =>{
                 <button className="PSUpdate"
                 onClick={()=>{
                   if(changedimage){
+                    
                     uploadPhoto()
+
                   }
                   else{
                    
-                    EditPost(title, text, myFile, tag)
+                    EditPost(title, text, myFile, tag, edited)
                   }
                   
                 }}
