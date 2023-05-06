@@ -50,6 +50,10 @@
 .coach-name{
     font-size: 1.3em;
 }
+.coach-name:hover{
+    text-decoration: underline;
+}
+
 .inline{
     display: inline-block;
 }
