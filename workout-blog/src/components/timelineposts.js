@@ -17,7 +17,7 @@ const TimelinePosts = (props) => {
 
   return (
         <div className="posts" key={props.postid}>
-          {(searchId == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`/postSettings/${props.postid}`)}>Edit</button>)}
+          {(searchId == sessionStorage.getItem("id")) && (<button className='postSettings' onClick={()=>navigate(`../../postSettings/${props.postid}`)}>Edit</button>)}
             <div className="post-title">
               {props.title}
               <p className="date">Date Created: {props.created_at}</p>
