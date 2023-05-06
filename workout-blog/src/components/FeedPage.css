@@ -2,28 +2,58 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width:100;
+  width:100%;
+}
+
+.feed .postSettings{
+  border: none;
+  background-color: transparent;
+  color: #999;
+}
+
+.feed .postSettings:hover{
+  color: black;
 }
 
 .feed .post {
-  width: 30%;
-  margin: 3%;
-  background-color: #ffffff;
+  width: 70%;
+  height: 20%;
+  margin-bottom: 5%;
+  background-color: #eff1ed;
+  padding-top: 0px;
+  padding-bottom: 8px;
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(173,171,171,1);
+-moz-box-shadow: 0px 0px 10px 3px rgba(173,171,171,1);
+box-shadow: 0px 0px 10px 3px rgba(173,171,171,1);
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  margin-bottom: 1rem;
-  height: 375px;
+  
+}
+
+
+
+.feed .post-title-box {
+  padding-left: 15px;
+  font-size: 28px;
+  
+  text-align: left;
+}
+.feed .post-text-box {
+  padding-left: 30px;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: left;
 }
 
 .feed .post-header {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   padding: 5px;
-  background-color: #ffffff;
+  background-color: #eff1ed;
   color: #000000;
 }
+
+
 
 .feed .post-author-avatar {
   width: 40px;
@@ -31,6 +61,15 @@
   border-radius: 50%;
   margin-right: 10px;
   
+}
+
+.feed .post-author-avatar:hover {
+  -webkit-filter: brightness(60%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
 .feed .post-author-name {
@@ -42,143 +81,74 @@
 .feed .post-body {
   position: relative;
 }
-
-.feed .post-image {
+.feed .post-image-box{
   width: 100%;
-  height: 200px;
-  object-fit: contain;
+  height: 100%;
+}
+.feed .post-image {
+
+  object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
 }
 
-.feed .post:hover .post-image {
-  transform: scale(1.1);
+.feed .post-image:hover {
+
+  -webkit-filter: brightness(60%);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
-.feed .post-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
 
-.feed .like-button,
-.feed .comment-button,
-.feed .share-button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 16px;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  transition: color 0.3s ease;
-}
 
-.feed .like-button:hover,
-.feed .comment-button:hover,
-.feed .share-button:hover {
-  color: #000000;
-}
 
-.feed .like-button svg,
-.feed .comment-button svg,
-.feed .share-button svg {
-  margin-right: 5px;
-}
+
 .feed .filter{
   margin-bottom: 1rem;
   text-align: center;
   width: 100%;
 
 }
-.feed .post-description {
-  padding: 5px;
-  font-size: 28px;
-  line-height: 1.5;
-  text-align: center;
-}
 
-.feed .comments-section {
-  padding: 10px;
-}
-
-.feed .comment-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.feed .comment {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.feed .comment-form {
-  display: flex;
-  margin-top: 10px;
-}
-
-.feed .comment-form input[type="text"] {
-  flex: 1;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  margin-right: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.feed .comment-form input[type="text"]:focus {
-  outline: none;
-  background-color: #fff;
-}
-
-.feed .comment-form button[type="submit"] {
-  border: none;
-  background-color: #7bed9f;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 16px;
+.feed select {
+  width: 30%;
+  height: 50px;
+  font-size: 100%;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
+  border-radius: 0;
+  background-color: #202020;
+  border: none;
+  color: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  outline: none;
+  text-align: center;
+  transition: border-bottom-color .5s ease;
 }
 
-.feed .comment-form button[type="submit"]:before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background-color: #fff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.
-}
-@media screen and (max-width: 992px) {
-  .feed .post {
-width: 70%;
-  }
-}
-.feed .comment-form button[type="submit"]:hover:before {
-  width: 200%;
-  height: 200%;
-  }
+
+.feed select:hover,
+    select:focus {
+      
+      /* border-bottom: 2px solid #962d22; */
+      border-bottom: 2px solid gray;
+    }
   
-  @media screen and (max-width: 768px) {
-    .feed .post {
-  width: 100%;
+.feed option {
+      color: white;
+      background-color: #202020;
+      
   }
-  }
+
   .feed .post {
-    /* existing styles */
-    position: relative; /* add position relative to parent */
+    
+    position: relative; 
   }
   
   .feed .post-timestamp {
@@ -188,12 +158,14 @@ width: 70%;
     font-size: 12px;
     color: #999;
   }
-  
-  /* Add the following style to post-body if you want the timestamp to be above the image or text */
+
+
+
   .feed .post-body {
-    /* existing styles */
+    
     position: relative;
   }
+  
   .feed .post-timestamp {
     position: absolute;
     top: 5px;
@@ -201,29 +173,29 @@ width: 70%;
     font-size: 12px;
     color: #999;
   }
-  .post-tag {
+
+  .feed .postSettings{
     position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 5px 10px;
-    background-color: #ccc;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #fff;
+    top: 25px;
+    right: 10px;
+  
   }
-  .tag-diet {
-    color: white;
-    background-color: green;
+
+  .post-tag{
+    color: gray;
+    float:right;
+    padding-right: 10px;
+  }
+
+  @media screen and (max-width: 992px) {
+    .feed .post {
+  width: 70%;
+    }
   }
   
-  .tag-progress {
-    color: white;
-    background-color: blue;
-  }
-  
-  .tag-max-weight {
-    color: red;
-    background-color: black;
-  }
-  
+    
+    @media screen and (max-width: 768px) {
+      .feed .post {
+    width: 100%;
+    }
+    }

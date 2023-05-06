@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300&display=swap');
 html, body {
   
+    /* overflow-y: hidden; */
+}
+    
+  
+  
  
-    overflow-x: hidden;
-  }
-
 @media only screen and (min-width: 901px) {
-
+    
 
     .bg {
         background-image: url("./images/sports.jpg");
@@ -14,9 +16,8 @@ html, body {
         background-size: cover;
         height: 100vh;
         width: 100vw;
-    
+       
     }
-    
     
     .bg .home{
         background: url("./images/next.png");
@@ -30,7 +31,7 @@ html, body {
     
     }
 
-    .accountwrap{
+    .bg .accountwrap{
         right:0px;
         height: 100vh;
         width: 30vw;
@@ -41,7 +42,7 @@ html, body {
         z-index: 2;
     } 
     
-    .sign{
+    .bg .sign{
         margin-top: 50px;
         display: flex;
         justify-content: center;
@@ -49,11 +50,11 @@ html, body {
         width: 100%;
         font-weight: bold;
         font-size: 40px;
-        margin-bottom: 80px;
+        margin-bottom: 15%;
         z-index: 5;
     }
 
-    .namebox, .emailbox, .passwordbox, .cpasswordbox {
+    .bg .namebox, .emailbox, .passwordbox, .cpasswordbox {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -106,7 +107,7 @@ html, body {
         font-weight: 300;
     }
     
-    ::placeholder{
+    .bg ::placeholder{
         padding-left: 2px;
     
     }
@@ -117,12 +118,12 @@ html, body {
     }
     
 
-    .submitbox{
+    .bg .submitbox{
         width: 100%;
         display: flex;
         justify-content: center;
     }
-    .signup{
+    .bg .signup{
         font-family: 'Titillium Web', sans-serif;
         width: 55%;
         border: none;
@@ -137,105 +138,45 @@ html, body {
         
     }
 
-    .signup:hover{
+    .bg .signup:hover{
         background-color: white;
         color: black;
 
     }
     
-    .signin{
+    .bg .signin{
         
         font-weight: 400;
         border: none;
         background-color: transparent;
     }
-    .row{
+    .bg .row{
         display: flex;
         margin-top: 10px;
-        margin-left: 22%;
+        margin-left: 22% !important;
         justify-content: start;
-        /* margin-left: 25%; */
         font-weight: 300;
     }
 
-    
-
-    #error{
-        
-        font-size: large;
-        z-index: 10;
-        color: red;
-    }
-
-    .bg .checkAnim{
+    .bg .acc{
+        display: flex;
+        justify-content: center;
         width: 100%;
-        display: flex;
-        
-        justify-content: center;
-        
-
+        float: left;
     }
-    .bg .check{
-        height: 200px;
-        align-items: center;
+
+    .bg .coachButton{
         display: flex;
         justify-content: center;
+        width: 100%;
+        float: left;
     }
   
-    .coachBut {
-        font-family: 'Titillium Web', sans-serif;
-        width: 55%;
-        margin-top: 30px;
-        margin-left: 22%;
-        height: 11%;
-        border-radius: 15px;
-        background-color: #D4DCDF;
-        font-weight: 300;
-    
-        display: inline-block;
-        padding: 8px 16px;
-        border: 2px solid #D4DCDF;
-        color: #858a8b;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-        transition: background-color 0.3s ease;
-      }
-      
-      .coachBut:hover {
-        background-color: #032e2e;
-        color: #fff;
-      }
-    
 }
 
 
 
 @media only screen and  (max-width: 900px) {
-    .coachBut {
-        font-family: 'Titillium Web', sans-serif;
-        width: 55%;
-        margin-top: 30px;
-        margin-left: 22%;
-        height: 17%;
-        border-radius: 15px;
-        background-color: #D4DCDF;
-        font-weight: 300;
-    
-        display: inline-block;
-        padding: 8px 16px;
-        border: 2px solid #D4DCDF;
-        color: #858a8b;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-        transition: background-color 0.3s ease;
-      }
-      
-      .coachBut:hover {
-        background-color: #032e2e;
-        color: #fff;
-      }
     .bg {
         background-color: white;
     }
@@ -250,7 +191,7 @@ html, body {
         z-index: 11;
     }
 
-    .accountwrap{
+    .bg .accountwrap{
         position: relative;
         height: 100vh;
         width: 100%;
@@ -258,7 +199,7 @@ html, body {
         z-index: 10;
     } 
 
-      .sign{
+    .bg  .sign{
         margin-top: 50px;
         text-align: center;
         width: 100vw;
@@ -322,7 +263,7 @@ html, body {
     
     }
 
-    .signup{
+    .bg .signup{
         margin-left: 10%;
         margin-top: 5%;
         width:80%;
@@ -336,36 +277,18 @@ html, body {
     
     }
     
-    .signin{
+    .bg .signin{
         font-weight: 400;
         border: none;
         background-color: transparent;
     }
-    .srow{
+    .bg .row{
         margin-top: 10px;
         margin-left: 7%;
         font-weight: 300;
     } 
 
-    #error{
-        
-        font-size: large;
-        z-index: 10;
-        color: red;
-    }
+   
 
-    .bg .checkAnim{
-        width: 100%;
-        display: flex;
-        position: absolute;
-        justify-content: center;
-        
 
-    }
-    .bg .check{
-        align-items: center;
-        display: flex;
-        justify-content: center;
-        height: 300px;
-    } 
 }

@@ -14,6 +14,8 @@ const Timeline = (props) => {
   const [favoritePosts,setFavoritePosts] = useState([]);
   const [timeline,setTimeline] = useState(true)
   const [favorites,setFavorites] = useState(false)
+  const [timelinetab,setTimelineTab] = useState("timeline-tab")
+  const [favoritestab,setFavoritesTab] = useState("favorites-tab")
   useEffect(() => {
     getTimeline();
     getFavorties();
@@ -59,14 +61,14 @@ const Timeline = (props) => {
   return (
     <div>
       <div className="timeline">
-        <p class = "profile-tabs" onClick={()=>{setTimeline(true);setFavorites(false)}}>Timeline</p>
-        <p class = "profile-tabs" onClick={()=>{setTimeline(false);setFavorites(true)}}>Favorites</p>
+        <p class = {timelinetab}onClick={()=>{setTimeline(true);setFavorites(false);setTimelineTab("timeline-tab");setFavoritesTab("favorites-tab")}}>Timeline</p>
+        <p class = {favoritestab} onClick={()=>{setTimeline(false);setFavorites(true);setTimelineTab("favorites-tab");setFavoritesTab("timeline-tab")}}>Favorites</p>
     </div>
     <div className="timeline-gallery">
     {timeline && posts.slice().reverse().map(post => (
         <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
     ))}
-    {favorites && favoritePosts.slice().map(post => (
+    {favorites && favoritePosts.slice().reverse().map(post => (
         <TimelinePosts postid = {post.postid} title={post.title} img = {post.img} created_at = {post.created_at} likes = {post.likes}/>
     ))}
     </div>
@@ -75,4 +77,3 @@ const Timeline = (props) => {
 }
 
 export default Timeline;
-

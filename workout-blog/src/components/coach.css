@@ -1,17 +1,33 @@
+.wrapper2{
+    background-color: #202020;
+    width: 100%;
+    height: 100%;
+}
 .coach-container{
     padding-top: 5%;
     background-color: #202020;
 }
 
 .coach-item{
+    border-radius: 5px;
     width: 30%;
-    margin: 1% auto;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 1%;
     display: block;
     background-color: #eff1ed;
     padding: 1em;
 }
 .coach-connect{
-    border-radius: 5px;
+    border :transparent;
+    border-bottom: 2px solid #eff1ed;
+    color: gray;
+}
+.coach-connect:hover{
+    transition: all .5s ease;
+    border-radius: 0;
+    border-bottom: 2px solid black;
+    color: black;
 }
 .coach-title{
     text-align: center;
@@ -20,7 +36,10 @@
     margin-bottom: 3%;
 }
 .coach-name-item{
-    width: 75%;
+    width: 100%;
+}
+.coach-email{
+    margin-right: auto;
 }
 .coach-list{
     width:30%;
@@ -35,6 +54,7 @@
     display: inline-block;
 }
 .reach-out-btn{
+    
     margin-left: auto;
     margin-top: 1%;
 }

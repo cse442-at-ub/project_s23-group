@@ -1,11 +1,16 @@
 <?php
+
 include("config.php");
+
 header('Access-Control-Allow-Origin: *');
+//header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
 
 $email = $_POST["email"];
 $password = $_POST["password"];
 
 if (isset($email) && isset($password)) {
+	
 	$userinfo = checkLogin($email);
 	$login = false;
 	if (isset($userinfo)) {
