@@ -3,6 +3,8 @@ import axios from 'axios'
 import './Settings.css'
 import Lottie from "lottie-react";
 import loading from "./lotties/loading.json"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Link,
   useNavigate,
@@ -11,57 +13,64 @@ import {
 
 
 //userid - background- profilepic - status
-const Settings = (props) =>{
+const Settings = () =>{
   
   
     const navigate = useNavigate()
-    const [bio, setBio] = useState('')
+    const [bio, setBio] = useState("")
     const [profile, setProfile] = useState(null);
     const [background, setBackground] = useState(null);
-
-    const [load, setLoad] = useState(false)
+    const [backupbio, setBackupBio] = useState(null)
+    const [preview1, setPreview1] = useState("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/"+sessionStorage.getItem("pfp"));
+    const [preview2, setPreview2] = useState("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/uploads/"+sessionStorage.getItem("background"));
+    const [changedimage1, setChangedImage1] = useState(false);
+    const [changedimage2, setChangedImage2] = useState(false);
+    const [file1, setFile1] = useState(false);
+    const [file2, setFile2] = useState(false);
+    
     
   
     let back = "/profile/" + sessionStorage.getItem("id")
 
     useEffect(() => {
-   
-      }, [profile,background]);
+      if(!profile){
+        setBio(sessionStorage.getItem("bio"))
+        setProfile(sessionStorage.getItem("pfp"))
+        setBackground(sessionStorage.getItem("background"))
+      }
+        
+    }, [preview1, preview2]);
+    
+  
     
 
 
     
 
-    const uploadServerImages = (profile, background) =>{
-        var formData = new FormData();
-        formData.append("pfp", profile);
-        formData.append("background", background);
-        axios({
-          method: 'post',
-          url: "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/profileServer.php",
-          headers: {'Content-Type': 'multipart/form-data'}, 
-          data: formData
-        })
-        .then((response) => {
-          sessionStorage.setItem("bio", bio)
-          sessionStorage.setItem("pfp", response.data[0])
-          sessionStorage.setItem("background", response.data[1])
-          
-          console.log("checking")
-          console.log(response.data[0] + "is pfp")
-          console.log(response.data[1] + "is background")
-         
-          updateDB(bio,response.data[0],response.data[1])
-         
-
-        }, (error) => {
-          console.log(error);
-        });
-
-      
-    }
+  function uploadPhoto(file) {
+    console.log("starting to upload photo");
+    var bodyFormData = new FormData();
+    bodyFormData.append("myFile", file);
+    axios({
+      method: "post",
+      url:
+        "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442w/makePost.php",
+      headers: { "Content-Type": "multipart/form-data" },
+      data: bodyFormData,
+    })
+      .then((response) => {
+        console.log("done uploading " + profile)
+        updateDB(bio, profile, background)
+       
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
     const updateDB = (bio, profileName, backgroundName) =>{
+      console.log("starting updateDB")
+
       var formData = new FormData();
       formData.append("id", parseInt(sessionStorage.getItem("id")));
       formData.append("username", sessionStorage.getItem("name"));
@@ -75,20 +84,22 @@ const Settings = (props) =>{
         data: formData
       })
       .then((response) => {
-        console.log(response);
         
-        updatePost(parseInt(sessionStorage.getItem("id")),profileName)
+        
+        updatePfp(parseInt(sessionStorage.getItem("id")),profileName)
+
 
 
       }, (error) => {
         console.log(error);
       });
 
-    console.log("Success")
+      return "success"
+    
   }
 
 
-  const updatePost = (userid, profileName) =>{
+  const updatePfp = (userid, profileName) =>{
     var formData = new FormData();
     formData.append("userid", userid);
     formData.append("pfp",profileName);
@@ -100,7 +111,7 @@ const Settings = (props) =>{
     })
     .then((response) => {
       console.log(response);
-      setLoad(false)
+      
       navigate(back)
 
       }, (error) => {
@@ -109,81 +120,137 @@ const Settings = (props) =>{
 
     console.log("Success")
   }
+
+  const notify = () => {
+    console.log("called notify")
+      toast.warning('File size must be less than 2MB', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    
+  };
     
     return(
     <div className="bg3">
         <div class='home' onClick={() => navigate(back, { replace: true })}/> 
         
-        <div className="box">
+        
         <div className="settings">Settings</div>
-        <div className="bioBox">
-        <input type="text"
-            placeholder="Update Bio"
-            class="bio" 
-            onChange={event => {
-            setBio(event.target.value)
-            }} required />
-        </div>
-        <div className='profileTitle'>Set Profile Picture</div>   
+        <div className="box">
+          <div className="bioBox">
+          <input type="text"
+              placeholder={bio}
+              class="bio" 
+              onChange={event => {
+                if(event.target.value.trim().length)
+                    {setBio(event.target.value)}
+                else{
+                  setBio(backupbio)
+                }
+                  
+                }}required />
+          </div>
+          <div className='profileTitle'>Click to change Profile Picture</div>   
 
-        <div className="profileBox">
-           
-          <input
-          className='profile'
-          type="file"
-      
-          name="myImage"
-          accept="image/x-png,image/gif,image/jpeg"
-          onChange={(event) => {
-          
-            setProfile(event.target.files[0]);
+          <div className="profileBox">
+
+          <label for="profile" className='SIconBox'>
+                    <img className='SPreview' src={preview1} alt="File is too big" />
+          </label>    
             
-          }}
-      />
-     
-      </div>
-
-      <div className='backgroundTitle'>Set Background</div> 
-      <div className="backgroundBox">
-          
-        <input
-        className='background'
-        type="file"
-        name="myImage"
-        onChange={(event) => {
-        
-          setBackground(event.target.files[0]);
-          
-        }}
-      />
-      </div>
+            <input
+            className='profile'
+            type="file"
+            id="profile"
+            name="myImage"
+            accept="image/x-png,image/gif,image/jpeg"
+            onChange={event => {
+              console.log(event.target.files[0].size)
+              if(event.target.files[0].size <= 2000000){
+                console.log(event.target.files[0])
+                setPreview1(URL.createObjectURL(event.target.files[0]))
+                setFile1(event.target.files[0])
+                setProfile(event.target.files[0].name);
+                setChangedImage1(true)
+              }
+              else{
+               
+               notify()
+              }
+               
+                }}
+        />
       
-           
-          <div className="doneBox">
-      <button 
-      className='done'
-      onClick={() => {
+        </div>
+
+        <div className='backgroundTitle'>Click to change Background</div> 
+        <div className="backgroundBox">
+            
+        <label for="background" className='SIconBox'>
+                    <img className='SPreview' src={preview2} alt="File is too big" />
+          </label>    
+
+
+          <input
+          className='background'
+          type="file"
+          id="background"
+          name="myImage"
+          onChange={event => {
+            console.log(event.target.files[0].size)
+            if(event.target.files[0].size <= 2000000){
+              console.log(event.target.files[0])
+              setPreview2(URL.createObjectURL(event.target.files[0]))
+              setFile2(event.target.files[0])
+              setBackground(event.target.files[0].name);
+              setChangedImage2(true)
+            }
+            else{
+             
+             notify()
+            }
+             
+              }}
+        />
+        </div>
         
-        if((bio != '') && (profile != null)&& (background != null) ){
-          setLoad(true)
-          uploadServerImages(profile,background)
-          setBio('')
-          setProfile(null)
-          setBackground(null)
+            
+            <div className="doneBox">
+        <button 
+        className='done'
+        onClick={() => {
           
-        }
-        else{
-          navigate(back)
-        }
-      }}>
-        Done</button>
-        {load && (<div className='animation'>
-          <Lottie className='circle' animationData={loading} loop={true} />
-          </div>)}
-          </div>
+            if(changedimage1 && changedimage2){
+              console.log("both")
+              uploadPhoto(file1)
+              uploadPhoto(file2)
+            }
+            else if(changedimage1){
+              console.log("prof")
+              uploadPhoto(file1)
+            }
+            else if(changedimage2){
+              console.log("back")
+              uploadPhoto(file2)
+            }
+            else{
+              console.log("text")
+              updateDB(bio,profile,background)
+            }
+        }}>
+          Done</button>
+         
+            </div>
         
         
           </div>
+          <ToastContainer />
     </div>
         )
 }

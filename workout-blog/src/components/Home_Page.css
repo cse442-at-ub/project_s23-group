@@ -1,5 +1,17 @@
 .container{
-    padding: 0
+    /* padding: 0 !important; */
+    /* margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100vw !important; */
+   /* background-color: gray; */
+    
+    
+}
+
+.wrapper{
+  background-color: #202020;
+  
+  
 }
 .card{
     padding: 0
@@ -19,6 +31,29 @@
   }
 .feed-gallery{
   width:100%
+}
+
+.navbar-collapse{
+  padding-right: 50px;
+}
+
+.nav-item{
+  color:rgb(194, 193, 193) !important;
+  transition:  border-bottom-color 1s ease ;
+}
+
+.nav-item:hover{
+  
+  color: white !important;
+  border-bottom: 1px solid white;
+}
+
+.navbar-brand{
+  position: relative;
+  height: 80px;
+  width: 120px;
+  z-index: 100;
+  margin-top: 1%;
 }
 
   .popup-content {
@@ -90,8 +125,7 @@
   .moda .post-actionsPop {
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
-    /* padding: 10px; */
+
   }
   
   .moda .like-buttonPop,

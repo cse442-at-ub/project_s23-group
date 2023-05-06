@@ -2,13 +2,16 @@
 include "config.php";
 header('Access-Control-Allow-Origin: *');
 
-$userid = $_POST["userid"];
-$pfp = $_POST["pfp"];
+$postid = $_POST["postid"];
+$title = $_POST["title"];
+$text = $_POST["text"];
+$img = $_POST["img"];
+$tag = $_POST["tag"];
 
-
-if (isset($userid) && isset($pfp)) {
-echo $userid;
-    updatePost($userid, $pfp);
+if (isset($title) && isset($text) && isset($img) && isset($tag) && isset($postid)) {
+   
+    editPost($title, $text, $img, $tag, $postid);
+ 
 }
 
 ?>
