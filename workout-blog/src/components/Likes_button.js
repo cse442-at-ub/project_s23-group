@@ -1,6 +1,7 @@
 import React from "react";
 import './Likes_button.css';
-import image from "./images/likes.png"
+import likedImg from "./images/likedImg.png"
+import unlikedImg from "./images/unlikedImg.png"
 import { useState, useEffect} from 'react';
 import axios from "axios";
 import { Form } from "react-router-dom";
@@ -88,9 +89,13 @@ const Likes_button = (props) => {
 
   return (
         <div className="like-container">
-          <img onClick = {()=>Like()} src= {image} alt="Like"/>
+          {liked && <img onClick = {()=>Like()} src= {likedImg} alt="Like"/>}
+          {!liked && <img onClick = {()=>Like()} src= {unlikedImg} alt="Like"/>}
           <div className="like-count">{likeCount}</div>
+          <a hidden href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by joalfa - Flaticon</a>
+          <a hidden href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Kiranshastry - Flaticon</a>
         </div>
+        
   );
 }
 
