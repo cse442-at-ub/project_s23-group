@@ -160,14 +160,14 @@ const Settings = () =>{
 
           <div className="profileBox">
 
-          <label for="Sprofile" className='SIconBox'>
+          <label for="profile" className='SIconBox'>
                     <img className='SPreview' src={preview1} alt="File is too big" />
           </label>    
             
             <input
-            className='Sprofile'
+            className='profile'
             type="file"
-            id="Sprofile"
+            id="profile"
             name="myImage"
             accept="image/x-png,image/gif,image/jpeg"
             onChange={event => {
@@ -192,15 +192,15 @@ const Settings = () =>{
         <div className='backgroundTitle'>Click to change Background</div> 
         <div className="backgroundBox">
             
-        <label for="Sbackground" className='SIconBox'>
+        <label for="background" className='SIconBox'>
                     <img className='SPreview' src={preview2} alt="File is too big" />
           </label>    
 
 
           <input
-          className='Sbackground'
+          className='background'
           type="file"
-          id="Sbackground"
+          id="background"
           name="myImage"
           onChange={event => {
             console.log(event.target.files[0].size)
